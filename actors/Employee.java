@@ -1,6 +1,8 @@
 package actors;
 
-public abstract class Employee extends Person implements CredentialDataHandler {
+import utility.Controller;
+
+public abstract class Employee extends Person {
 
 	// Attributes ---------------------------------
 	public enum RoleType {
@@ -47,5 +49,4 @@ public abstract class Employee extends Person implements CredentialDataHandler {
 	/**
 	 * Loads the username and password from etc/passwd file
 	 */
-
 }

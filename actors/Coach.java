@@ -17,10 +17,9 @@ public class Coach extends Employee {
 		in.print("Please enter a password: ");
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
-		loadCredentials();
 	}
 
-	public Coach(String name,String phoneNumber, String username, String password) {
+	public Coach(String name,String phoneNumber, String username) {
 		setName(name);
 		setRole(RoleType.COACHING);
 		setPrivilege(PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT);

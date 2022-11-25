@@ -9,11 +9,8 @@ public class Chairman extends Employee {
 		setRole(role);
 		setPrivilege(privilege);
 		setUsername("rootAdmin");
-		setPassword("Enigma123");
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
-		loadCredentials();
-
 	}
 
 
@@ -29,10 +26,4 @@ public class Chairman extends Employee {
 		throw new UnsupportedOperationException();
 	}
 
-
-	// Interface ------------------- unique username/password loader
-	@Override
-	public void loadCredentials() {
-
-	}
 }

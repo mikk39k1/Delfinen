@@ -8,10 +8,8 @@ public class Treasurer extends Employee {
 		setPrivilege(privilege);
 		setPhoneNumber("+45 01 23 58 13");
 		setUsername("Acc001");
-		setPassword("OnePlusTwoIs3");
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
-		loadCredentials();
 
 	}
 
@@ -29,8 +27,5 @@ public class Treasurer extends Employee {
 	}
 
 	// Interface ------------------- unique username/password loader
-	@Override
-	public void loadCredentials() {
 
-	}
 }

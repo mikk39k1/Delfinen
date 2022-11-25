@@ -1,7 +1,5 @@
 package actors;
 
-import utility.UI;
-
 public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------

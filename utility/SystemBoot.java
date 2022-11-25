@@ -3,49 +3,45 @@ package utility;
 import actors.*;
 import database.SwimmerCoachDatabase;
 
+import java.util.ArrayList;
+
 public class SystemBoot {
     //  Attributes -----------------------------------------------
-    private Employee.RoleType temporaryRole;
-    private Employee.PrivilegeType temporaryPrivilege;
+    // Utility / Controller ------------------
+    Controller controller = new Controller();
+    private Employee currentUser;
+    ArrayList<Employee> employees = new ArrayList<>();
 
     // Getter ----------------------------------
-    public Employee.RoleType getTemporaryRole() {
-        return temporaryRole;
+    public Employee getCurrentUser() {
+        return currentUser;
     }
 
-    public Employee.PrivilegeType getTemporaryPrivilege() {
-        return temporaryPrivilege;
+    // Setter -----------------------------------
+    public void setCurrentUser(Employee employee) {
+        this.currentUser = employee;
     }
 
-    // Setter ----------------------------------
-    public void setTemporaryRole(Employee.RoleType temporaryRole) {
-        this.temporaryRole = temporaryRole;
+    public void setRoleAndPrivilege(String username) {
+        // Switch statement set role and privilege based on correct username
+        for (Employee employee : employees) {
+            if (employee.getUsername().equals(username)) {
+                setCurrentUser(employee);
+            }
+        }
     }
 
-    public void setTemporaryPrivilege(Employee.PrivilegeType temporaryPrivilege) {
-        this.temporaryPrivilege = temporaryPrivilege;
-    }
-
-    public void setRoleAndPrivilege(String username, String password) {
-        // Switch statement set role and privilege based on correct password and username
-    }
 
     private void startSystem() {
-        // Utility / Controller ------------------
-        Controller controller = new Controller();
-
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
 
         // Staff -----------------
         employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         employees.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
-        employees.add(new Coach("Thomas", "+45 01 23 58 13",
-                "thomas123", "swimCoach123"));
-        employees.add(new Coach("Marry", "+45 01 23 58 13",
-                "Marry123", "swimCoach123"));
-        employees.add(new Coach("Jen", "+45 01 23 58 13",
-                "Jen123", "swimCoach123"));
+        employees.add(new Coach("Thomas", "+45 01 23 58 13",  "thomas123"));
+        employees.add(new Coach("Marry", "+45 01 23 58 13","Marry123"));
+        employees.add(new Coach("Jen", "+45 01 23 58 13","Jen123"));
 
         while (true) {
             String user = controller.isLoggedIn();
@@ -56,8 +52,6 @@ public class SystemBoot {
                 System.out.println(currentUser.getRole());
                 System.out.println(currentUser.getPrivilege());
             }
-            System.out.println(temporaryPrivilege);
-            System.out.println(temporaryRole);
         }
     }
 

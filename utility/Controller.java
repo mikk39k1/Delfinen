@@ -2,12 +2,12 @@ package utility;
 
 public class Controller {
     UI ui = new UI();
-    FileHandler fileHandler = new FileHandler();
+    public FileHandler fileHandler = new FileHandler();
 
     // loginstuff ----------------------------------
 
     public String isLoggedIn() {
-        String username = fileHandler.loadUsername(getUsername());
+        String username = fileHandler.checkUsername(getUsername());
 
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
@@ -26,14 +26,13 @@ public class Controller {
         return "0";
     }
 
-
-    public String getUsername() {
-        System.out.println("Please enter your username");
+    private String getUsername() {
+        System.out.print("Please enter your username: ");
         return ui.readLine();
     }
 
-    public String getPassword() {
-        System.out.println("Please enter your password");
+    private String getPassword() {
+        System.out.print("Please enter your password: ");
         return ui.readLine();
     }
 
