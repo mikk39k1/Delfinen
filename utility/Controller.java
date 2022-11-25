@@ -8,15 +8,13 @@ public class Controller {
         String username = getUsername();
         if (isPasswordCorrect(username)) {
             System.out.println("You entered a valid username and password, you're now signed in");
-        }
+        } else
+            System.out.println("Wrong username or password");
     }
 
     public String getUsername() {
-        while (true) {
-            System.out.println("Please enter your username");
-
-            return scan
-        }
+        System.out.println("Please enter your username");
+        return ui.readLine();
     }
 
     public boolean isPasswordCorrect(String userName) {
@@ -24,18 +22,20 @@ public class Controller {
             System.out.println("Please enter your password");
             switch (userName) {
                 case "thomas123":
-                    if (scan.nextLine.eguals("swimCoach123")) {
-                        set
+                    if (ui.readLine().equals("swimCoach123")) {
+                        System.out.println("you're");
                         return true;
                     }
                     break;
                 case "marry123":
-                    if (scan.nextLine.eguals("swimCoach123")) {
+                    if (ui.readLine().equals("swimCoach123")) {
                         return true;
                     }
                     break;
                 case "Jen123":
-
+                    if (ui.readLine().equals("swimCoach123")) {
+                        return true;
+                    }
                     break;
             }
             return false;
