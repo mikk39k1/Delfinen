@@ -38,13 +38,24 @@ public class SystemBoot {
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
 
         // Staff -----------------
-        Chairman chairman = new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR);
-        Treasurer treasurer = new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT);
-        Coach coachThomas = new Coach("Thomas", "+45 01 23 58 13", "thomas123", "swimCoach123");
-        Coach coachMarry = new Coach("Marry", "+45 01 23 58 13", "Marry123", "swimCoach123");
-        Coach coachJen = new Coach("Jen", "+45 01 23 58 13", "Jen123", "swimCoach123");
+        employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
+        employees.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
+        employees.add(new Coach("Thomas", "+45 01 23 58 13",
+                "thomas123", "swimCoach123"));
+        employees.add(new Coach("Marry", "+45 01 23 58 13",
+                "Marry123", "swimCoach123"));
+        employees.add(new Coach("Jen", "+45 01 23 58 13",
+                "Jen123", "swimCoach123"));
 
-        SwimmingDiscipline swimmingDiscipline = new SwimmingDiscipline(controller.ui);
+        while (true) {
+            String user = controller.isLoggedIn();
+            if (!user.equals("0")) {
+                setRoleAndPrivilege(user);
+            }
+            System.out.println(temporaryPrivilege);
+            System.out.println(temporaryRole);
+        }
+
     }
 
     public static void main(String[] args) {

@@ -6,12 +6,24 @@ public class Controller {
 
     // loginstuff ----------------------------------
 
-    public void login() {
+    public String isLoggedIn() {
         String username = fileHandler.loadUsername(getUsername());
-        if (!username.equals("0") && isPasswordCorrect(getPassword())) {
 
-            System.out.println("You're signed in");
+        if (!username.equals("0")) {
+            for (int i = 1; i < 4; i++) {
+
+                if (isPasswordCorrect(getPassword())) {
+
+                    System.out.println("You're signed in");
+                    return username;
+                } else if (i != 3) {
+                    System.out.println("You have " + (3 - i) + ((3 - i > 1) ? " tries " : " try " + "left."));
+                }
+            }
+        } else {
+            System.out.println("Invalid username");
         }
+        return "0";
     }
 
 
@@ -25,7 +37,7 @@ public class Controller {
         return ui.readLine();
     }
 
-    public boolean isPasswordCorrect(String password) {
+    private boolean isPasswordCorrect(String password) {
         return !fileHandler.loadPassword(password).equals("0");
     }
 }
