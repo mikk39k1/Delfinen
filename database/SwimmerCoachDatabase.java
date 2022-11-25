@@ -9,7 +9,7 @@ public class SwimmerCoachDatabase {
 	// Attributes ---------------------------------------------
 	private MemberList memberList = new MemberList();
 	private CoachList coachList = new CoachList();
-	private HashMap<Member, Coach> SwimmersCoachAssosiationList = new HashMap<>();
+	private HashMap<Member, Coach> SwimmersCoachAssociationList = new HashMap<>();
 
 
 	// Getters ------------------------------------------------
@@ -19,8 +19,8 @@ public class SwimmerCoachDatabase {
 	public CoachList getCoaches() {
 		return this.coachList;
 	}
-	public HashMap<Member, Coach> getSwimmersCoachAssosiationList() {
-		return this.SwimmersCoachAssosiationList;
+	public HashMap<Member, Coach> getSwimmersCoachAssociationList() {
+		return this.SwimmersCoachAssociationList;
 	}
 
 }
