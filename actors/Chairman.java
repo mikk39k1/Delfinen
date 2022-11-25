@@ -30,4 +30,9 @@ public class Chairman extends Employee {
 	}
 
 
+	// Interface ------------------- unique username/password loader
+	@Override
+	public void loadCredentials() {
+
+	}
 }

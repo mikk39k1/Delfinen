@@ -46,4 +46,9 @@ public class Coach extends Employee {
 
 	}
 
+	// Interface ------------------- unique username/password loader
+	@Override
+	public void loadCredentials() {
+
+	}
 }

@@ -28,4 +28,9 @@ public class Treasurer extends Employee {
 		throw new UnsupportedOperationException();
 	}
 
+	// Interface ------------------- unique username/password loader
+	@Override
+	public void loadCredentials() {
+
+	}
 }

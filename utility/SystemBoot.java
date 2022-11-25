@@ -1,6 +1,7 @@
 package utility;
 
 import actors.*;
+import database.SwimmerCoachDatabase;
 
 public class SystemBoot {
     //  Attributes -----------------------------------------------
@@ -32,7 +33,7 @@ public class SystemBoot {
 
     private void startSystem() {
         // Database ---------------
-        //SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
+        SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
 
         // Staff -----------------
         Chairman chairman = new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR);

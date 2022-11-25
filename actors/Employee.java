@@ -1,6 +1,6 @@
 package actors;
 
-public abstract class Employee extends Person {
+public abstract class Employee extends Person implements CredentialDataHandler {
 
 	// Attributes ---------------------------------
 	public enum RoleType {
@@ -54,8 +54,5 @@ public abstract class Employee extends Person {
 	/**
 	 * Loads the username and password from etc/passwd file
 	 */
-	protected void loadCredentials() {
-
-	}
 
 }
