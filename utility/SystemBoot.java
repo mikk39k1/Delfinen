@@ -5,7 +5,6 @@ import database.SwimmerCoachDatabase;
 
 public class SystemBoot {
     //  Attributes -----------------------------------------------
-    Controller controller = new Controller();
     private Employee.RoleType temporaryRole;
     private Employee.PrivilegeType temporaryPrivilege;
 
@@ -32,6 +31,9 @@ public class SystemBoot {
     }
 
     private void startSystem() {
+        // Utility / Controller ------------------
+        Controller controller = new Controller();
+
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
 
