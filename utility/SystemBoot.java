@@ -59,7 +59,6 @@ public class SystemBoot {
             System.out.println(temporaryPrivilege);
             System.out.println(temporaryRole);
         }
-
     }
 
     public static void main(String[] args) {

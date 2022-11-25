@@ -15,7 +15,6 @@ public abstract class Employee extends Person implements CredentialDataHandler {
 	private RoleType role;
 	private PrivilegeType privilege;
 	private String username;
-	private String password;
 
 
 	// Getters ------------------------------------
@@ -31,9 +30,6 @@ public abstract class Employee extends Person implements CredentialDataHandler {
 		return this.username;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
 
 	// Setters -------------------------------------
 	public void setRole(RoleType role) {
@@ -44,9 +40,6 @@ public abstract class Employee extends Person implements CredentialDataHandler {
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 

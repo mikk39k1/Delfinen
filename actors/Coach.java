@@ -15,7 +15,6 @@ public class Coach extends Employee {
 		in.print("Please enter a username: ");
 		setUsername(in.readLine());
 		in.print("Please enter a password: ");
-		setPassword(in.readLine());
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
 		loadCredentials();
@@ -27,7 +26,6 @@ public class Coach extends Employee {
 		setPrivilege(PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT);
 		setPhoneNumber(phoneNumber);
 		setUsername(username);
-		setPassword(password);
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
 	}
@@ -47,8 +45,4 @@ public class Coach extends Employee {
 	}
 
 	// Interface ------------------- unique username/password loader
-	@Override
-	public void loadCredentials() {
-
-	}
 }

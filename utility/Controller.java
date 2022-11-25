@@ -38,6 +38,6 @@ public class Controller {
     }
 
     private boolean isPasswordCorrect(String password) {
-        return !fileHandler.loadPassword(password).equals("0");
+        return !fileHandler.checkPassword(password).equals("0");
     }
 }
