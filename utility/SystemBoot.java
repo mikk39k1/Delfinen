@@ -51,6 +51,10 @@ public class SystemBoot {
             String user = controller.isLoggedIn();
             if (!user.equals("0")) {
                 setRoleAndPrivilege(user);
+
+                System.out.println(currentUser.getUsername());
+                System.out.println(currentUser.getRole());
+                System.out.println(currentUser.getPrivilege());
             }
             System.out.println(temporaryPrivilege);
             System.out.println(temporaryRole);
