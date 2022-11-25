@@ -40,12 +40,11 @@ public class SystemBoot {
         // Staff -----------------
         Chairman chairman = new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR);
         Treasurer treasurer = new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT);
-        Coach coachThomas = new Coach("Thomas","+45 01 23 58 13", "thomas123", "swimCoach123");
-        Coach coachMarry = new Coach("Marry","+45 01 23 58 13", "Marry123", "swimCoach123");
-        Coach coachJen = new Coach("Jen","+45 01 23 58 13", "Jen123", "swimCoach123");
+        Coach coachThomas = new Coach("Thomas", "+45 01 23 58 13", "thomas123", "swimCoach123");
+        Coach coachMarry = new Coach("Marry", "+45 01 23 58 13", "Marry123", "swimCoach123");
+        Coach coachJen = new Coach("Jen", "+45 01 23 58 13", "Jen123", "swimCoach123");
 
         SwimmingDiscipline swimmingDiscipline = new SwimmingDiscipline(controller.ui);
-
     }
 
     public static void main(String[] args) {
