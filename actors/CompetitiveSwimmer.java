@@ -13,8 +13,6 @@ public class CompetitiveSwimmer extends Member {
     private final ArrayList<SwimmingDiscipline> SwimmingDisciplineList = new ArrayList<>();
 
 
-    ArrayList<SwimmingResult> swimmingResultsList = new ArrayList<>();
-
 
 
 
@@ -30,6 +28,8 @@ public class CompetitiveSwimmer extends Member {
 
         // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
+
+
 
 
 

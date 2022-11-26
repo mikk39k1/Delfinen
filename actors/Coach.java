@@ -1,5 +1,6 @@
 package actors;
 
+import database.SwimmerCoachDatabase;
 import utility.Controller;
 import utility.UI;
 
@@ -82,13 +83,20 @@ public class Coach extends Employee {
 		CompetitiveSwimmer chosenSwimmer = findSwimmer(ui, swimmerCoachDatabase);
 
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
-			if (swimmerName.equalsIgnoreCase(swimmerCoachDatabase.getSwimmersCoachAssociationList()
-					.get().getName()));
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(chosenSwimmer)) {
+				chosenSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+			}
 		}
 
-
-		competitiveSwimmer.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
 	}
+
+	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
+		System.out.println(competitiveSwimmer.getSwimmingDisciplineList());
+		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
+			System.out.println(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults());
+		}
+	}
+
 
 	// Interface ------------------- unique username/password loader
 }
