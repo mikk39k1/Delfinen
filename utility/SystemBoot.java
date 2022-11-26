@@ -4,6 +4,7 @@ import actors.*;
 import database.SwimmerCoachDatabase;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.DoubleAdder;
 
 public class SystemBoot {
     //  Attributes -----------------------------------------------
@@ -11,6 +12,8 @@ public class SystemBoot {
     Controller controller = new Controller();
     private Employee currentUser;
     ArrayList<Employee> employees = new ArrayList<>();
+
+
 
     // Getter ----------------------------------
     public Employee getCurrentUser() {
@@ -32,9 +35,12 @@ public class SystemBoot {
     }
 
 
+
+
     private void startSystem() {
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
+
 
         // Staff -----------------
         employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
@@ -43,7 +49,24 @@ public class SystemBoot {
         employees.add(new Coach("Marry", "+45 01 23 58 13","Marry123"));
         employees.add(new Coach("Jen", "+45 01 23 58 13","Jen123"));
 
-        while (true) {
+        // TEMPORARY ADD MEMBER TO MEMBERLIST ----------------------------------
+
+        controller.memberList.swimmers.add(new CompetitiveSwimmer(controller.ui));
+
+
+
+        for (int i = 0; i < controller.memberList.swimmers.size(); i++){
+            controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
+        }
+
+
+
+
+
+
+
+
+       /*while (true) {
             String user = controller.isLoggedIn();
             if (!user.equals("0")) {
                 setRoleAndPrivilege(user);
@@ -52,7 +75,7 @@ public class SystemBoot {
                 System.out.println(currentUser.getRole());
                 System.out.println(currentUser.getPrivilege());
             }
-        }
+        }*/
     }
 
     public static void main(String[] args) {

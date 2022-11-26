@@ -1,8 +1,13 @@
 package utility;
 
+import database.MemberList;
+
 public class Controller {
     UI ui = new UI();
     public FileHandler fileHandler = new FileHandler();
+
+    MemberList memberList = new MemberList();
+
 
     // loginstuff ----------------------------------
 
@@ -37,4 +42,8 @@ public class Controller {
     private boolean isPasswordCorrect(String password) {
         return !fileHandler.checkPassword(password).equals("0");
     }
+
+
+
+
 }

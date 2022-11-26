@@ -2,6 +2,8 @@ package actors;
 
 import utility.UI;
 
+import java.lang.module.Configuration;
+
 public class SwimmingResult {
     // Attributes ---------------------------------------
     private final int distance;
@@ -9,6 +11,7 @@ public class SwimmingResult {
     private final String swimTime;
     private final boolean isCompetitive;
     private int rank;
+
 
     // Constructor --------------------------------------
     public SwimmingResult(UI ui) {
@@ -50,5 +53,6 @@ public class SwimmingResult {
     public int getRank() {
         return rank;
     }
+
 
 }

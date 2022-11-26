@@ -27,4 +27,6 @@ public abstract class Member extends Person {
 		this.isMembershipActive = isMembershipActive;
 	}
 
+
+
 }

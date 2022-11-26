@@ -1,8 +1,10 @@
 package actors;
 
+import utility.Controller;
 import utility.UI;
 
 public class Coach extends Employee {
+
 
 	// Constructor ---------------------------------
 	public Coach(UI in) {
