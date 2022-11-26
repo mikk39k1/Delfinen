@@ -20,9 +20,9 @@ public class FileHandler {
             }
 
         } catch (Exception e) {
-            System.out.println("File doesn't exist");
+            System.out.println("File doesn't exist\n");
         }
-        System.out.println("Username doesn't exist");
+        System.out.println("Username doesn't exist\n");
         return "0";
     }
 
@@ -38,9 +38,9 @@ public class FileHandler {
                 }
             }
         } catch (Exception e) {
-            System.out.println("File doesn't exist");
+            System.out.println("File doesn't exist\n");
         }
-        System.out.println("Password is incorrect");
+        System.out.println("Password is incorrect  ");
         return "0";
     }
 }

@@ -17,11 +17,9 @@ public class Controller {
                     System.out.println("You're signed in");
                     return username;
                 } else if (i != 3) {
-                    System.out.println("You have " + (3 - i) + ((3 - i > 1) ? " tries " : " try " + "left."));
+                    System.out.println("you have " + (3 - i) + ((3 - i > 1) ? " tries left\n" : " try left\n"));
                 }
             }
-        } else {
-            System.out.println("Invalid username");
         }
         return "0";
     }
