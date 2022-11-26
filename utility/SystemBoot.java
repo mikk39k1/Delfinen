@@ -51,19 +51,16 @@ public class SystemBoot {
 
         // TEMPORARY ADD MEMBER TO MEMBERLIST ----------------------------------
 
-        controller.memberList.swimmers.add(new CompetitiveSwimmer(controller.ui));
+        CompetitiveSwimmer test = new CompetitiveSwimmer(controller.ui);
+        test.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
+        System.out.println(test.getSwimmingDisciplineList().get(0).getSwimmingDiscipline());
 
+        test.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().add(new SwimmingResult(controller.ui));
+        System.out.println(test.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().get(0).getSwimTime());
 
-
-        for (int i = 0; i < controller.memberList.swimmers.size(); i++){
+        /*for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
-        }
-
-
-
-
-
-
+        }*/
 
 
        /*while (true) {

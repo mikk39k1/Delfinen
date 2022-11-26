@@ -18,13 +18,12 @@ public class SwimmingResult {
         ui.print("Please enter distance: ");
         this.distance = ui.readInt();
 
-        ui.print("Player enter date: ");
         this.date = ui.setDate();
 
         ui.print("Please the swim time: ");
         this.swimTime = ui.setTime();
 
-        ui.print("Please enter was this in a competition: ");
+        ui.print("Please enter was this in a competition - true/false: ");
         this.isCompetitive = ui.readBoolean();
 
         if (isCompetitive) {
@@ -55,4 +54,14 @@ public class SwimmingResult {
     }
 
 
+    @Override
+    public String toString() {
+        return "SwimmingResult{" +
+                "distance=" + distance +
+                ", date='" + date + '\'' +
+                ", swimTime='" + swimTime + '\'' +
+                ", isCompetitive=" + isCompetitive +
+                ", rank=" + rank +
+                '}';
+    }
 }

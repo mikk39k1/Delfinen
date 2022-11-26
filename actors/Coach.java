@@ -33,16 +33,26 @@ public class Coach extends Employee {
 
 
 	// Behaviors (Methods) --------------------------
-	private void checkTrainingResults() {
+	public void checkTrainingResults() {
 
 	}
 
-	private void checkCompetitionResults() {
+	public void checkCompetitionResults() {
 
 	}
 
-	private void addSwimResult() {
+	public void addSwimResult(CompetitiveSwimmer competitiveSwimmer, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+		System.out.println(swimmerCoachDatabase.getSwimmersCoachAssociationList());
 
+		ui.printLn("Please enter name of swimmer you wish to add result to: ");
+		String swimmerName = ui.readLine();
+		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
+			if (swimmerName.equalsIgnoreCase(swimmerCoachDatabase.getSwimmersCoachAssociationList()
+					.get().getName()));
+		}
+
+
+		competitiveSwimmer.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
 	}
 
 	// Interface ------------------- unique username/password loader

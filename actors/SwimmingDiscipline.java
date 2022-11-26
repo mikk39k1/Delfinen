@@ -2,6 +2,8 @@ package actors;
 
 import utility.UI;
 
+import java.util.ArrayList;
+
 public class SwimmingDiscipline {
 
     public enum SwimmingDisciplineTypes {
@@ -14,6 +16,7 @@ public class SwimmingDiscipline {
 
     // Attributes --------------------------------
     private final SwimmingDisciplineTypes swimmingDiscipline;
+    private final ArrayList<SwimmingResult> swimmingDisciplineResults = new ArrayList<>();
 
 
     // Constructor -------------------------------
@@ -24,5 +27,9 @@ public class SwimmingDiscipline {
     // Getter ------------------------------------
     public SwimmingDisciplineTypes getSwimmingDiscipline() {
         return swimmingDiscipline;
+    }
+
+    public ArrayList<SwimmingResult> getSwimmingDisciplineResults() {
+        return swimmingDisciplineResults;
     }
 }

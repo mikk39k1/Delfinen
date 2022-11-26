@@ -9,8 +9,7 @@ public class Controller {
     MemberList memberList = new MemberList();
 
 
-    // loginstuff ----------------------------------
-
+    // loginStuff ----------------------------------
     public String isLoggedIn() {
         String username = fileHandler.checkUsername(getUsername());
 
