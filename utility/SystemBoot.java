@@ -53,10 +53,18 @@ public class SystemBoot {
 
         CompetitiveSwimmer test = new CompetitiveSwimmer(controller.ui);
         test.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
-        System.out.println(test.getSwimmingDisciplineList().get(0).getSwimmingDiscipline());
 
-        test.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().add(new SwimmingResult(controller.ui));
-        System.out.println(test.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().get(0).getSwimTime());
+
+
+        // Testing purposes --------------------------
+        swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test, ((Coach)employees.get(3)));
+        swimmerCoachDatabase.getMemberList().swimmers.add(test);
+
+        ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
+        ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
+
+
+
 
         /*for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());

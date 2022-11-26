@@ -41,11 +41,46 @@ public class Coach extends Employee {
 
 	}
 
-	public void addSwimResult(CompetitiveSwimmer competitiveSwimmer, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
-		System.out.println(swimmerCoachDatabase.getSwimmersCoachAssociationList());
+
+
+	public CompetitiveSwimmer foundSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+
+		ui.printLn("Please enter name of swimmer you wish to get result of: ");
+		String swimmerName = ui.readLine();
+
+		for (Member memberNames : swimmerCoachDatabase.getMemberList().swimmers) {
+			if (memberNames instanceof CompetitiveSwimmer) {
+				if (memberNames.getName().equals(swimmerName)) {
+					return (CompetitiveSwimmer)memberNames;
+				}
+			}
+		}
+		return null;
+	}
+
+	public CompetitiveSwimmer findSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 
 		ui.printLn("Please enter name of swimmer you wish to add result to: ");
 		String swimmerName = ui.readLine();
+
+		for (Member memberNames : swimmerCoachDatabase.getMemberList().swimmers) {
+			if (memberNames instanceof CompetitiveSwimmer) {
+				if (memberNames.getName().equals(swimmerName)) {
+					 return (CompetitiveSwimmer)memberNames;
+				}
+			}
+		}
+		return null;
+	}
+
+
+
+	public void addSwimResult(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+
+		// Prints out the whole list of competitors
+		System.out.println(swimmerCoachDatabase.getSwimmersCoachAssociationList().toString());
+		CompetitiveSwimmer chosenSwimmer = findSwimmer(ui, swimmerCoachDatabase);
+
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
 			if (swimmerName.equalsIgnoreCase(swimmerCoachDatabase.getSwimmersCoachAssociationList()
 					.get().getName()));
