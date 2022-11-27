@@ -1,5 +1,8 @@
 package actors;
 
+import database.SwimmerCoachDatabase;
+import utility.UI;
+
 public class Chairman extends Employee {
 
 
@@ -15,16 +18,30 @@ public class Chairman extends Employee {
 
 
 	// Behaviors (Methods) ---------------------------------
-	public Member createMember() {
-		// TODO - implement Chairman.createMember
-		throw new UnsupportedOperationException();
+	public Member createMember(UI ui) {
+		ui.print("Tast venligst 1 - for motionist eller 2 - for Konkurrence Svømmer: ");
+		return (ui.readInt()) > 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
+
 	}
 
 
-	public void addMember(Member newMember) {
-		// TODO - implement Chairman.addMember
-		System.out.println("yueah");
-		throw new UnsupportedOperationException();
+	public void addMember(UI ui, Member newMember, SwimmerCoachDatabase swimmerCoachDatabase) {
+		swimmerCoachDatabase.getMemberList().swimmers.add(newMember);
+		swimmerCoachDatabase.getSwimmersCoachAssociationList().put(newMember,chooseCoach(ui, swimmerCoachDatabase));
+	}
+
+	// This method iterates through the Coach list after
+	public Coach chooseCoach(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+		ui.printLn(swimmerCoachDatabase.getCoachList().getCoaches().toString());
+		while (true) {
+			String coachName = ui.readLine();
+			for (Coach coach : swimmerCoachDatabase.getCoachList().getCoaches()) {
+				if (coach.getName().equalsIgnoreCase(coachName)) {
+					return coach;
+				}
+			}
+			ui.printLn("Træner eksisterer ikke, prøv venligst igen");
+		}
 	}
 
 }

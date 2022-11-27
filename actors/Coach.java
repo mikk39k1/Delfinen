@@ -1,7 +1,6 @@
 package actors;
 
 import database.SwimmerCoachDatabase;
-import utility.Controller;
 import utility.UI;
 
 public class Coach extends Employee {
@@ -59,7 +58,7 @@ public class Coach extends Employee {
 		return null;
 	}
 
-	public CompetitiveSwimmer findSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public CompetitiveSwimmer loadSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 
 		ui.printLn("Please enter name of swimmer you wish to add result to: ");
 		String swimmerName = ui.readLine();
@@ -80,11 +79,11 @@ public class Coach extends Employee {
 
 		// Prints out the whole list of competitors
 		System.out.println(swimmerCoachDatabase.getSwimmersCoachAssociationList().toString());
-		CompetitiveSwimmer chosenSwimmer = findSwimmer(ui, swimmerCoachDatabase);
+		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(chosenSwimmer)) {
-				chosenSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(swimmer)) {
+				swimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
 			}
 		}
 

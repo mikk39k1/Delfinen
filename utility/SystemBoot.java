@@ -4,7 +4,6 @@ import actors.*;
 import database.SwimmerCoachDatabase;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.DoubleAdder;
 
 public class SystemBoot {
     //  Attributes -----------------------------------------------
@@ -21,15 +20,11 @@ public class SystemBoot {
     }
 
     // Setter -----------------------------------
-    public void setCurrentUser(Employee employee) {
-        this.currentUser = employee;
-    }
-
     public void setRoleAndPrivilege(String username) {
         // Switch statement set role and privilege based on correct username
         for (Employee employee : employees) {
             if (employee.getUsername().equals(username)) {
-                setCurrentUser(employee);
+                currentUser = employee;
             }
         }
     }
@@ -38,7 +33,7 @@ public class SystemBoot {
     private void startSystem() {
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
-        /*
+
 
         // Staff -----------------
         employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
@@ -49,24 +44,27 @@ public class SystemBoot {
 
         // TEMPORARY ADD MEMBER TO MEMBERLIST ----------------------------------
 
+
+        /*
         CompetitiveSwimmer test = new CompetitiveSwimmer(controller.ui);
         test.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
 
 
 
         // Testing purposes --------------------------
-        swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test, ((Coach)employees.get(3)));
+        swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test, ((Coach) employees.get(3)));
         swimmerCoachDatabase.getMemberList().swimmers.add(test);
 
         ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
         ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
 
-        */
 
-        /*
+
+
         for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
         }*/
+
 
 
        while (true) {
