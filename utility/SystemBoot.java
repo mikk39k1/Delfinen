@@ -48,7 +48,7 @@ public class SystemBoot {
                 swimmerCoachDatabase.getCoachList().getCoaches().add((Coach) user);
             }
         }
-        // TEMPORARY ADD MEMBER TO MEMBERLIST ----------------------------------
+        // TEMPORARY ADD MEMBER TO MEMBER-LIST ----------------------------------
 
 
         /*

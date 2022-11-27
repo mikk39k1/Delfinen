@@ -59,10 +59,10 @@ public class MenuRun {
                         if (employee instanceof Chairman) {
                             Coach adminOverride = new Coach();
                             adminOverride.addSwimResult(ui, swimmerCoachDatabase);
-                        }
 
-                        assert employee instanceof Coach;
-                        ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase);
+                        } else {
+                            ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase);
+                        }
 
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
@@ -73,8 +73,14 @@ public class MenuRun {
                             employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
                         //Method reads input from user: swimDiscipline and period of time to get results
-                        ((Coach) employee).checkCompetitorSwimResults(
-                                ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));
+                        if (employee instanceof Chairman) {
+                            Coach adminOverride = new Coach();
+                            adminOverride.checkCompetitorSwimResults(
+                                    adminOverride.foundSwimmer(ui, swimmerCoachDatabase));
+                        } else {
+                            ((Coach) employee).checkCompetitorSwimResults(
+                                    ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));
+                        }
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }

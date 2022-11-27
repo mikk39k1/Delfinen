@@ -18,7 +18,7 @@ public class Chairman extends Employee {
 	// Behaviors (Methods) ---------------------------------
 	public Member createMember(UI ui) {
 		ui.print("Tast venligst 1 - for motionist eller 2 - for Konkurrence Svømmer: ");
-		return (ui.readInt()) > 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
+		return (ui.readInt()) < 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
 	}
 
 
@@ -26,7 +26,8 @@ public class Chairman extends Employee {
 		// ISSUE AT THE MOMENT ---------------- WE NEED TO MAKE SURE ONLY COMPETITIVE MEMBERS ARE ADDED TO SWIMMERCOACHASSOCIATION LIST.
 		swimmerCoachDatabase.getMemberList().swimmers.add(newMember);
 
-		if (newMember instanceof LeisureSwimmer) {
+		if (newMember instanceof CompetitiveSwimmer) {
+			((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
 			swimmerCoachDatabase.getSwimmersCoachAssociationList().put(newMember,chooseCoach(ui, swimmerCoachDatabase));
 		}
 		ui.printLn(newMember.getName() + " er blevet tilføjet som medlem");
