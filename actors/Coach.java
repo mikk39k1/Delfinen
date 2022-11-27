@@ -89,10 +89,14 @@ public class Coach extends Employee {
                 //second loop is iterate through swimmers list of discipline and get the right one to get needed
                 //swimresult list
                 for (int j = 0; j < swimmer.getSwimmingDisciplineList().size(); j++) {
-                    if (swimmer.getSwimmingDisciplineList().get(j).getSwimmingDiscipline().equals(swimmingDiscipline)) {
-                        swimmer.getSwimmingDisciplineList().get(j).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+                    if (swimmer.getSwimmingDisciplineList().get(j).getSwimmingDiscipline().
+                            equals(swimmingDiscipline)) {
+                        swimmer.getSwimmingDisciplineList().get(j).getSwimmingDisciplineResults()
+                                .add(new SwimmingResult(ui));
+                        i = swimmerCoachDatabase.getSwimmersCoachAssociationList().size();//just to get out of both loops
                     } else if (j == swimmer.getSwimmingDisciplineList().size() - 1){
                         ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
+                        i = swimmerCoachDatabase.getSwimmersCoachAssociationList().size();//just to get out of both loops
                     }
                 }
             }
