@@ -39,7 +39,7 @@ public class MenuRun {
                 }
                 case 2 -> {//a print of all members
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-                        //having all members printed goes here
+                        ((Chairman) employee).printMembers(swimmerCoachDatabase);
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }

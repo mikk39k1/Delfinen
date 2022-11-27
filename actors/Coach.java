@@ -65,7 +65,7 @@ public class Coach extends Employee {
 
 		for (Member memberNames : swimmerCoachDatabase.getMemberList().swimmers) {
 			if (memberNames instanceof CompetitiveSwimmer) {
-				if (memberNames.getName().equals(swimmerName)) {
+				if (memberNames.getName().equalsIgnoreCase(swimmerName)) {
 					 return (CompetitiveSwimmer)memberNames;
 				}
 			}

@@ -11,7 +11,7 @@ public class SystemBoot {
     Controller controller = new Controller();
     MenuRun menuRun = new MenuRun();
     private Employee currentUser;
-    ArrayList<Employee> employees = new ArrayList<>();
+    ArrayList<Employee> enigmaUsers = new ArrayList<>();
 
 
     // Getter ----------------------------------
@@ -22,9 +22,9 @@ public class SystemBoot {
     // Setter -----------------------------------
     public void setRoleAndPrivilege(String username) {
         // Switch statement set role and privilege based on correct username
-        for (Employee employee : employees) {
-            if (employee.getUsername().equals(username)) {
-                currentUser = employee;
+        for (Employee user : enigmaUsers) {
+            if (user.getUsername().equals(username)) {
+                currentUser = user;
             }
         }
     }
@@ -36,12 +36,18 @@ public class SystemBoot {
 
 
         // Staff -----------------
-        employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
-        employees.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
-        employees.add(new Coach("Thomas", "+45 01 23 58 13",  "thomas123"));
-        employees.add(new Coach("Marry", "+45 01 23 58 13","Marry123"));
-        employees.add(new Coach("Jen", "+45 01 23 58 13","Jen123"));
+        enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
+        enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
+        enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13",  "thomas123"));
+        enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13","Marry123"));
+        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13","Jen123"));
 
+        // Add coaches to coach list -------------------------------------------
+        for (Employee user : enigmaUsers) {
+            if (user instanceof Coach) {
+                swimmerCoachDatabase.getCoachList().getCoaches().add((Coach) user);
+            }
+        }
         // TEMPORARY ADD MEMBER TO MEMBERLIST ----------------------------------
 
 
