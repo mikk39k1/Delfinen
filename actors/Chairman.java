@@ -15,7 +15,7 @@ public class Chairman extends Employee {
 
 
 	// Behaviors (Methods) ---------------------------------
-	private Member createMember() {
+	public Member createMember() {
 		// TODO - implement Chairman.createMember
 		throw new UnsupportedOperationException();
 	}
@@ -23,6 +23,7 @@ public class Chairman extends Employee {
 
 	public void addMember(Member newMember) {
 		// TODO - implement Chairman.addMember
+		System.out.println("yueah");
 		throw new UnsupportedOperationException();
 	}
 

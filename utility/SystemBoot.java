@@ -10,9 +10,9 @@ public class SystemBoot {
     //  Attributes -----------------------------------------------
     // Utility / Controller ------------------
     Controller controller = new Controller();
+    MenuRun menuRun = new MenuRun();
     private Employee currentUser;
     ArrayList<Employee> employees = new ArrayList<>();
-
 
 
     // Getter ----------------------------------
@@ -35,12 +35,10 @@ public class SystemBoot {
     }
 
 
-
-
     private void startSystem() {
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
-
+        /*
 
         // Staff -----------------
         employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
@@ -63,15 +61,15 @@ public class SystemBoot {
         ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
         ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
 
+        */
 
-
-
-        /*for (int i = 0; i < controller.memberList.swimmers.size(); i++){
+        /*
+        for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
         }*/
 
 
-       /*while (true) {
+       while (true) {
             String user = controller.isLoggedIn();
             if (!user.equals("0")) {
                 setRoleAndPrivilege(user);
@@ -79,8 +77,10 @@ public class SystemBoot {
                 System.out.println(currentUser.getUsername());
                 System.out.println(currentUser.getRole());
                 System.out.println(currentUser.getPrivilege());
+
+                menuRun.menuLooping(currentUser, controller.ui, swimmerCoachDatabase);
             }
-        }*/
+        }
     }
 
     public static void main(String[] args) {
