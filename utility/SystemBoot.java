@@ -38,9 +38,9 @@ public class SystemBoot {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
-        enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13",  "thomas123"));
-        enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13","Marry123"));
-        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13","Jen123"));
+        enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
+        enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13", "Marry123"));
+        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));
 
         // Add coaches to coach list -------------------------------------------
         for (Employee user : enigmaUsers) {
@@ -64,16 +64,11 @@ public class SystemBoot {
         ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
         ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
 
-
-
-
         for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
         }*/
-
-
-
-       while (true) {
+        
+        while (true) {
             String user = controller.isLoggedIn();
             if (!user.equals("0")) {
                 setRoleAndPrivilege(user);

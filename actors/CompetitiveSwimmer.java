@@ -13,9 +13,6 @@ public class CompetitiveSwimmer extends Member {
     private final ArrayList<SwimmingDiscipline> SwimmingDisciplineList = new ArrayList<>();
 
 
-
-
-
     public CompetitiveSwimmer(UI in) {
         in.print("Please enter name: ");
         setName(in.readLine());
@@ -25,12 +22,8 @@ public class CompetitiveSwimmer extends Member {
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
 
-
         // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
-
-
-
 
 
     public ArrayList<SwimmingDiscipline> getSwimmingDisciplineList() {

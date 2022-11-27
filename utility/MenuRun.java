@@ -12,7 +12,8 @@ public class MenuRun {
             "2. Udprint af alle eksisterende medlemmer.",
             "3. Oversigt over medlemmer i restance.",
             "4. Tilføj nyt svømmeresultat.",
-            "5. Oversigt over konkurrerende svømmeres resultater.",
+            "5. Oversigt over en svømmers resultater.",
+            "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
             "9. Log ud."
     };
     private String leadtext = "Vælg en af nedenstående muligheder";
@@ -37,7 +38,7 @@ public class MenuRun {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }
                 }
-                case 2 -> {//a print of all members
+                case 2 -> {//print all members
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
                         ((Chairman) employee).printMembers(swimmerCoachDatabase);
                     } else {
@@ -77,6 +78,24 @@ public class MenuRun {
                             Coach adminOverride = new Coach();
                             adminOverride.checkCompetitorSwimResults(
                                     adminOverride.foundSwimmer(ui, swimmerCoachDatabase));
+                        } else {
+                            ((Coach) employee).checkCompetitorSwimResults(
+                                    ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));
+                        }
+                    } else {
+                        ui.printLn("Du har ikke login rettigheder til denne funktion");
+                    }
+                }
+                case 6 -> {//method for printing top 5 results for specific discipline
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        //Method reads input from user: swimDiscipline and period of time to get results
+                        if (employee instanceof Chairman) {
+                            Coach adminOverride = new Coach();
+                            /*adminOverride.checkCompetitorSwimResults(
+                                    adminOverride.foundSwimmer(ui, swimmerCoachDatabase));
+                             */
                         } else {
                             ((Coach) employee).checkCompetitorSwimResults(
                                     ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));

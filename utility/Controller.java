@@ -41,8 +41,4 @@ public class Controller {
     private boolean isPasswordCorrect(String password) {
         return !fileHandler.checkPassword(password).equals("0");
     }
-
-
-
-
 }
