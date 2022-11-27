@@ -31,6 +31,10 @@ public class Coach extends Employee {
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
 	}
 
+	public Coach() {
+
+	}
+
 
 	// Behaviors (Methods) --------------------------
 	public void checkTrainingResults() {

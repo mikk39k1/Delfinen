@@ -25,7 +25,10 @@ public class Chairman extends Employee {
 	public void addMember(UI ui, Member newMember, SwimmerCoachDatabase swimmerCoachDatabase) {
 		// ISSUE AT THE MOMENT ---------------- WE NEED TO MAKE SURE ONLY COMPETITIVE MEMBERS ARE ADDED TO SWIMMERCOACHASSOCIATION LIST.
 		swimmerCoachDatabase.getMemberList().swimmers.add(newMember);
-		swimmerCoachDatabase.getSwimmersCoachAssociationList().put(newMember,chooseCoach(ui, swimmerCoachDatabase));
+
+		if (newMember instanceof LeisureSwimmer) {
+			swimmerCoachDatabase.getSwimmersCoachAssociationList().put(newMember,chooseCoach(ui, swimmerCoachDatabase));
+		}
 		ui.printLn(newMember.getName() + " er blevet tilføjet som medlem");
 	}
 

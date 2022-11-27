@@ -56,7 +56,14 @@ public class MenuRun {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                             employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
+                        if (employee instanceof Chairman) {
+                            Coach adminOverride = new Coach();
+                            adminOverride.addSwimResult(ui, swimmerCoachDatabase);
+                        }
+
+                        assert employee instanceof Coach;
                         ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase);
+
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }
