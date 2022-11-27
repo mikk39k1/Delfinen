@@ -105,6 +105,7 @@ public class UI {
 
 	// ENUM READER ---------------------------------------------
 	public SwimmingDiscipline.SwimmingDisciplineTypes setSwimmingDisciplineType() {
+		printLn("Enter Swimming discipline: Crawl, Butterfly, Breaststroke, Backstroke or Freestyle: ");
 		while(true) {
 			try {
 				return SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(in.nextLine().toUpperCase());

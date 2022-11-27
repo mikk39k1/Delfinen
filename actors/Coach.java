@@ -84,7 +84,7 @@ public class Coach extends Employee {
 
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(chosenSwimmer)) {
-				chosenSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+				chosenSwimmer.getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().add(new SwimmingResult(ui));
 			}
 		}
 

@@ -38,7 +38,7 @@ public class SystemBoot {
     private void startSystem() {
         // Database ---------------
         SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
-        /*
+
 
         // Staff -----------------
         employees.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
@@ -52,23 +52,29 @@ public class SystemBoot {
         CompetitiveSwimmer test = new CompetitiveSwimmer(controller.ui);
         test.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
 
+        CompetitiveSwimmer test1 = new CompetitiveSwimmer(controller.ui);
+        test1.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
+
 
 
         // Testing purposes --------------------------
         swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test, ((Coach)employees.get(3)));
         swimmerCoachDatabase.getMemberList().swimmers.add(test);
+        swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test1, ((Coach)employees.get(3)));
+        swimmerCoachDatabase.getMemberList().swimmers.add(test1);
+
 
         ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
         ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
 
-        */
+
 
         /*
         for (int i = 0; i < controller.memberList.swimmers.size(); i++){
             controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
         }*/
 
-
+        /*
        while (true) {
             String user = controller.isLoggedIn();
             if (!user.equals("0")) {
@@ -81,6 +87,8 @@ public class SystemBoot {
                 menuRun.menuLooping(currentUser, controller.ui, swimmerCoachDatabase);
             }
         }
+        */
+
     }
 
     public static void main(String[] args) {
