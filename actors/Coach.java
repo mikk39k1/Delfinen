@@ -3,8 +3,6 @@ package actors;
 import database.SwimmerCoachDatabase;
 import utility.UI;
 
-import java.util.Iterator;
-
 public class Coach extends Employee {
 
 
@@ -48,21 +46,12 @@ public class Coach extends Employee {
 	}
 
 
-	public CompetitiveSwimmer foundSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public CompetitiveSwimmer lookupSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 
 		//Finds member name
-		ui.printLn("Please enter name of swimmer you wish to add result to: ");
-		String swimmerName = ui.readLine();
+		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
 
-		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
-			if (member instanceof CompetitiveSwimmer) {
-				if (member.getName().equalsIgnoreCase(swimmerName)) {
-					ui.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
-				}
-			}
-		}
-
-		System.out.println("Please enter ID on the member you wish to add result to:");
+		System.out.println("Please enter ID on the member: ");
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
 			if (member instanceof CompetitiveSwimmer) {
@@ -78,16 +67,7 @@ public class Coach extends Employee {
 	public CompetitiveSwimmer loadSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 
 		//Finds member name
-		ui.printLn("Please enter name of swimmer you wish to add result to: ");
-		String swimmerName = ui.readLine();
-
-		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
-			if (member instanceof CompetitiveSwimmer) {
-				if (member.getName().equalsIgnoreCase(swimmerName)) {
-					ui.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
-				}
-			}
-		}
+		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
 
 		System.out.println("Please enter ID on the member you wish to add result to:");
 		int swimmerID = ui.readInt();
@@ -143,7 +123,18 @@ public class Coach extends Employee {
 		}
 	}
 
+	public String findSwimmerByName(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 
+		ui.printLn("Please enter name of swimmer you wish lookup: ");
+		String swimmerName = ui.readLine();
 
-	// Interface ------------------- unique username/password loader
+		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
+			if (member instanceof CompetitiveSwimmer) {
+				if (member.getName().equalsIgnoreCase(swimmerName)) {
+					ui.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
+				}
+			}
+		}
+		return swimmerName;
+	}
 }

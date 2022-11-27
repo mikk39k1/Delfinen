@@ -52,9 +52,9 @@ public class UI {
 	}
 
 	public String setTime() {
-		print("Enter minutes: ");
+		print("minutes: ");
 		int minutes = in.nextInt();
-		print("Enter seconds: ");
+		print("Please enter seconds: ");
 		int seconds = in.nextInt();
 
 		return minutes + " minutes and " + seconds + " seconds";

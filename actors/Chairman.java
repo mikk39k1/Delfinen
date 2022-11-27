@@ -28,11 +28,17 @@ public class Chairman extends Employee {
         swimmerCoachDatabase.getMemberList().swimmers.add(newMember);
 
         if (newMember instanceof CompetitiveSwimmer) {
-            ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
+            ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
+            int disciplineAmount = ui.readInt();
+            for (int i = 0; i < disciplineAmount; i++) {
+                ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
+            }
             swimmerCoachDatabase.getSwimmersCoachAssociationList().
                     put(newMember, chooseCoach(ui, swimmerCoachDatabase));
+
+            ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
+                    " aktive svømme discipliner");
         }
-        ui.printLn(newMember.getName() + " er blevet tilføjet som medlem");
     }
 
     // This method iterates through the Coach list after

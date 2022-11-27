@@ -20,7 +20,7 @@ public class SwimmingResult {
 
         this.date = ui.setDate();
 
-        ui.print("Please the swim time: ");
+        ui.print("Please enter the swim time - ");
         this.swimTime = ui.setTime();
 
         ui.print("Please enter was this in a competition - true/false: ");

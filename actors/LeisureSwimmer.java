@@ -10,6 +10,7 @@ public class LeisureSwimmer extends Member {
         in.print("Please enter phone number: ");
         setPhoneNumber(in.readLine());
         in.print("Please enter age: ");
+        in.printLn("What is the members birthday");
         setAge(in.setDate());
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());

@@ -22,6 +22,7 @@ public class SwimmingDiscipline {
     // Constructor -------------------------------
     public SwimmingDiscipline(UI ui) {
         this.swimmingDiscipline = ui.setSwimmingDisciplineType();
+        ui.printLn("Swimming Discipline added");
     }
 
     // Getter ------------------------------------

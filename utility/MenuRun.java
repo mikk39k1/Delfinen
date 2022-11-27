@@ -3,8 +3,6 @@ package utility;
 import actors.*;
 import database.SwimmerCoachDatabase;
 
-import java.text.DateFormat;
-
 public class MenuRun {
     Menu menu;
     private String[] menuOptions = {
@@ -77,10 +75,10 @@ public class MenuRun {
                         if (employee instanceof Chairman) {
                             Coach adminOverride = new Coach();
                             adminOverride.checkCompetitorSwimResults(
-                                    adminOverride.foundSwimmer(ui, swimmerCoachDatabase));
+                                    adminOverride.lookupSwimmer(ui, swimmerCoachDatabase));
                         } else {
                             ((Coach) employee).checkCompetitorSwimResults(
-                                    ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));
+                                    ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase));
                         }
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
@@ -98,7 +96,7 @@ public class MenuRun {
                              */
                         } else {
                             ((Coach) employee).checkCompetitorSwimResults(
-                                    ((Coach) employee).foundSwimmer(ui, swimmerCoachDatabase));
+                                    ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase));
                         }
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
