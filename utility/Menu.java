@@ -1,9 +1,9 @@
 package utility;
 
 public class Menu {
-    private String menuHeader;
-    private String leadtext;
-    private String[] menuOptions;
+    private final String menuHeader;
+    private final String leadtext;
+    private final String[] menuOptions;
 
     public Menu(String menuHeader, String leadtext, String[] menuOptions){
         this.menuHeader = menuHeader;
