@@ -131,7 +131,7 @@ public class Coach extends Employee {
 	}
 
 	// Checks if a competitor has the swimming discipline, which we are requesting, returns -1 i false
-	public int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
+	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
 
 		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
 			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
