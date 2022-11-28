@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class CompetitiveSwimmer extends Member {
     // Attributes --------------------------------------
-
-    Controller controller = new Controller();
     private final ArrayList<SwimmingDiscipline> swimmingDisciplineList = new ArrayList<>();
 
 

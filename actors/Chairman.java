@@ -22,8 +22,8 @@ public class Chairman extends Employee {
     }
 
 
-    public void addMember(UI ui, Member newMember, SwimmerCoachDatabase swimmerCoachDatabase) {
-        swimmerCoachDatabase.getMemberList().swimmers.add(newMember);
+    public void addMember(UI ui, Member newMember, Database sdatabase) {
+        database.getMemberList().add(newMember);
 
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
