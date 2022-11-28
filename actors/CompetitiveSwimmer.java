@@ -10,7 +10,7 @@ public class CompetitiveSwimmer extends Member {
     // Attributes --------------------------------------
 
     Controller controller = new Controller();
-    private final ArrayList<SwimmingDiscipline> SwimmingDisciplineList = new ArrayList<>();
+    private final ArrayList<SwimmingDiscipline> swimmingDisciplineList = new ArrayList<>();
 
 
     public CompetitiveSwimmer(UI in) {
@@ -28,6 +28,14 @@ public class CompetitiveSwimmer extends Member {
 
 
     public ArrayList<SwimmingDiscipline> getSwimmingDisciplineList() {
-        return SwimmingDisciplineList;
+        return swimmingDisciplineList;
+    }
+
+    public void printSwimDisciplineList(){
+        for (int i = 0; i <swimmingDisciplineList.size(); i++){
+            System.out.print(swimmingDisciplineList.get(i).getSwimmingDiscipline() + ", ");
+
+        }
+        System.out.println();
     }
 }
