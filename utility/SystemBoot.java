@@ -1,37 +1,21 @@
 package utility;
 
 import actors.*;
-import database.SwimmerCoachDatabase;
+import database.Database;
 
 import java.util.ArrayList;
 
 public class SystemBoot {
 
     // Utility / Controller ------------------
-    Controller controller = new Controller();
+    UI ui = new UI();
+    public FileHandler fileHandler = new FileHandler();
     private Employee currentUser;
     ArrayList<Employee> enigmaUsers = new ArrayList<>();
-    SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
-
-    MenuRun menuRun = new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
-            "1. Tiljøj et nyt medlem.",
-            "2. Udprint af alle eksisterende medlemmer.",
-            "3. Oversigt over medlemmer i restance.",
-            "4. Tilføj nyt svømmeresultat.",
-            "5. Oversigt over en svømmers resultater.",
-            "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
-            "9. Log ud."
-    },currentUser, controller.ui, swimmerCoachDatabase);
-
-
-
-    // Getter ----------------------------------
-    public Employee getCurrentUser() {
-        return currentUser;
-    }
+    Database swimmerCoachDatabase = new Database();
 
     // Setter -----------------------------------
-    public void setRoleAndPrivilege(String username) {
+    private void setRoleAndPrivilege(String username) {
         // Switch statement set role and privilege based on correct username
         for (Employee user : enigmaUsers) {
             if (user.getUsername().equals(username)) {
@@ -51,12 +35,13 @@ public class SystemBoot {
         // Add coaches to coach list -------------------------------------------
         for (Employee user : enigmaUsers) {
             if (user instanceof Coach) {
-                swimmerCoachDatabase.getCoachList().getCoaches().add((Coach) user);
+                swimmerCoachDatabase.getCoachList().add((Coach) user);
             }
         }
     }
+
     private void loginSystem() {
-        String user = controller.isLoggedIn();
+        String user = isLoggedIn();
         if (!user.equals("0")) {
             setRoleAndPrivilege(user);
 
@@ -69,22 +54,58 @@ public class SystemBoot {
 
     private void startSystem() {
         loadAndSetUsers();
-        
+
         while (true) {
             loginSystem();
+
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tiljøj et nyt medlem.",
                     "2. Udprint af alle eksisterende medlemmer.",
                     "3. Oversigt over medlemmer i restance.",
                     "4. Tilføj nyt svømmeresultat.",
-                    "5. Oversigt over en svømmers resultater.",
-                    "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
+                    "5. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
+                    "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
                     "9. Log ud."
-            },currentUser, controller.ui, swimmerCoachDatabase);
+            },currentUser, swimmerCoachDatabase);
+
         }
     }
 
     public static void main(String[] args) {
         new SystemBoot().startSystem();
+    }
+
+
+    // loginStuff ----------------------------------
+    public String isLoggedIn() {
+        String username = fileHandler.checkUsername(getUsername());
+
+        if (!username.equals("0")) {
+            for (int i = 1; i < 4; i++) {
+
+                if (isPasswordCorrect(getPassword())) {
+
+                    System.out.println("You're signed in");
+                    return username;
+                } else if (i != 3) {
+                    System.out.println("you have " + (3 - i) + ((3 - i > 1) ? " tries left\n" : " try left\n"));
+                }
+            }
+        }
+        return "0";
+    }
+
+    private String getUsername() {
+        System.out.print("Please enter your username: ");
+        return ui.readLine();
+    }
+
+    private String getPassword() {
+        System.out.print("Please enter your password: ");
+        return ui.readLine();
+    }
+
+    private boolean isPasswordCorrect(String password) {
+        return !fileHandler.checkPassword(password).equals("0");
     }
 }

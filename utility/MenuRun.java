@@ -1,21 +1,28 @@
 package utility;
 
 import actors.*;
-import database.SwimmerCoachDatabase;
+import database.Database;
 
 public class MenuRun {
+    UI ui = new UI();
     private final String[] menuOptions;
     private final String menuHeader;
     private final String leadtext;
 
-    public MenuRun(String menuHeader,String leadtext ,String[] menuOptions, Employee employee, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+    public MenuRun(String menuHeader,String leadtext ,String[] menuOptions, Employee employee, Database swimmerCoachDatabase) {
         this.menuHeader = menuHeader;
         this.menuOptions = menuOptions;
         this.leadtext = leadtext;
-        menuLooping(employee,ui,swimmerCoachDatabase);
+        menuLooping(employee,swimmerCoachDatabase);
     }
 
-    public void menuLooping(Employee employee, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+    public MenuRun(String menuHeader, String leadtext, String[] menuOptions) {
+        this.menuHeader = menuHeader;
+        this.menuOptions = menuOptions;
+        this.leadtext = leadtext;
+    }
+
+    public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
         boolean isSignedIn = true;
 
         while (isSignedIn) {

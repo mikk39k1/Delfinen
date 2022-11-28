@@ -1,7 +1,5 @@
 package actors;
 
-import utility.Controller;
-
 public abstract class Employee extends Person {
 
 	// Attributes ---------------------------------

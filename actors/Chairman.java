@@ -1,6 +1,6 @@
 package actors;
 
-import database.SwimmerCoachDatabase;
+import database.Database;
 import utility.UI;
 
 public class Chairman extends Employee {
@@ -36,19 +36,35 @@ public class Chairman extends Employee {
 
             ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
                     " aktive svømme discipliner");
+
+        }
+    }
+
+
+    public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
+        for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
+            if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach))
+             System.out.println(key.getUniqueID() + key.getName());
+        }
+    }
+
+    public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
+        for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
+            if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values))
+            System.out.println(values.getName());
         }
     }
 
     // This method iterates through the Coach list after
-    public Coach chooseCoach(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
-        for (Coach coach : swimmerCoachDatabase.getCoachList().getCoaches()) {
+    public Coach chooseCoach(UI ui, Database swimmerCoachDatabase) {
+        for (Coach coach : swimmerCoachDatabase.getCoachList()) {
             ui.printLn("Træner: " + coach.getName());
         }
 
         ui.print("Hvilken Træner skal medlemmet have: ");
         while (true) {
             String coachName = ui.readLine();
-            for (Coach coach : swimmerCoachDatabase.getCoachList().getCoaches()) {
+            for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
                     return coach;
                 }
@@ -57,8 +73,8 @@ public class Chairman extends Employee {
         }
     }
 
-    public void printMembers(SwimmerCoachDatabase swimmerCoachDatabase) {
-        for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
+    public void printMembers(Database swimmerCoachDatabase) {
+        for (Member member : swimmerCoachDatabase.getMemberList()) {
             System.out.println(member.getName());
         }
     }

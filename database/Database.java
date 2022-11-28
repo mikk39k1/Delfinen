@@ -2,21 +2,22 @@ package database;
 
 import actors.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SwimmerCoachDatabase {
+public class Database {
 
 	// Attributes ---------------------------------------------
-	private final MemberList memberList = new MemberList();
-	private final CoachList coachList = new CoachList();
+	ArrayList<Member> memberList = new ArrayList<>();
+	ArrayList<Coach> coachList = new ArrayList<>();
 	private final HashMap<Member, Coach> SwimmersCoachAssociationList = new HashMap<>();
 
 
 	// Getters ------------------------------------------------
-	public MemberList getMemberList() {
+	public ArrayList<Member> getMemberList() {
 		return this.memberList;
 	}
-	public CoachList getCoachList() {
+	public ArrayList<Coach> getCoachList() {
 		return this.coachList;
 	}
 	public HashMap<Member, Coach> getSwimmersCoachAssociationList() {

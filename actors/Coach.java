@@ -1,6 +1,6 @@
 package actors;
 
-import database.SwimmerCoachDatabase;
+import database.Database;
 import utility.UI;
 
 public class Coach extends Employee {
@@ -46,14 +46,14 @@ public class Coach extends Employee {
 	}
 
 
-	public CompetitiveSwimmer lookupSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public CompetitiveSwimmer lookupSwimmer(UI ui, Database swimmerCoachDatabase) {
 
 		//Finds member name
 		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
 
 		System.out.println("Please enter ID on the member: ");
 		int swimmerID = ui.readInt();
-		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
+		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					return (CompetitiveSwimmer) member;
@@ -63,14 +63,14 @@ public class Coach extends Employee {
 		return null;
 	}
 
-	public CompetitiveSwimmer loadSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public CompetitiveSwimmer loadSwimmer(UI ui, Database swimmerCoachDatabase) {
 
 		//Finds member name
 		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
 
 		System.out.println("Please enter ID on the member you wish to add result to:");
 		int swimmerID = ui.readInt();
-		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
+		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					System.out.printf("|ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
@@ -84,7 +84,7 @@ public class Coach extends Employee {
 		return null;
 	}
 
-	public void addSwimResult(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public void addSwimResult(UI ui, Database swimmerCoachDatabase) {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
@@ -115,12 +115,12 @@ public class Coach extends Employee {
 		}
 	}
 
-	public String findSwimmerByName(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+	public String findSwimmerByName(UI ui, Database swimmerCoachDatabase) {
 
 		ui.printLn("Please enter name of swimmer you wish lookup: ");
 		String swimmerName = ui.readLine();
 
-		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
+		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName)) {
 					ui.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
