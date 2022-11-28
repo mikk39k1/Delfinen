@@ -74,10 +74,10 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList().swimmers) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
+					System.out.printf("|ID: %-15d Name: %-15s Phone Number: %-25s Age: %-25s State: %-25b Discipline: %-25s|\n",
 							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getAge(),
-							member.isIsMembershipActive());
-							((CompetitiveSwimmer) member).printSwimDisciplineList();
+							member.isIsMembershipActive(),
+							((CompetitiveSwimmer) member).getSwimmingDisciplineList().toString());
 					return (CompetitiveSwimmer) member;
 				}
 			}
@@ -91,22 +91,17 @@ public class Coach extends Employee {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
-
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(swimmer)) {
 				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
-				//second loop is iterate through swimmers list of discipline and get the right one to get needed
-				//swimresult list
-				for (int j = 0; j < swimmer.getSwimmingDisciplineList().size(); j++) {
-					if (swimmer.getSwimmingDisciplineList().get(j).getSwimmingDiscipline().
-							equals(swimmingDiscipline)) {
-						swimmer.getSwimmingDisciplineList().get(j).getSwimmingDisciplineResults()
-								.add(new SwimmingResult(ui));
-						i = swimmerCoachDatabase.getSwimmersCoachAssociationList().size();//just to get out of both loops
-					} else if (j == swimmer.getSwimmingDisciplineList().size() - 1){
-						ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
-						i = swimmerCoachDatabase.getSwimmersCoachAssociationList().size();//just to get out of both loops
-					}
+
+				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
+
+				if (hasSwimDiscipline > -1) {
+					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
+							.add(new SwimmingResult(ui));
+				} else {
+					ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
 				}
 			}
 		}
@@ -137,4 +132,17 @@ public class Coach extends Employee {
 		}
 		return swimmerName;
 	}
+
+	// Checks if a competitor has the swimming discipline, which we are requesting, returns -1 i false
+	public int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
+
+		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
+			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
+					equals(swimmingDiscipline)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 }

@@ -114,4 +114,16 @@ public class UI {
 			}
 		}
 	}
+
+	// PRINT FRAME ---------------------------------------------
+	public void printFrame(int length) {
+		for (int i = 0; i < 210; i++) {
+			print("´");
+		}
+		System.out.println();
+	}
+
+	public int countPrintfString(String msg) {
+		return msg.length();
+	}
 }

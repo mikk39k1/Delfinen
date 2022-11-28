@@ -33,4 +33,10 @@ public class SwimmingDiscipline {
     public ArrayList<SwimmingResult> getSwimmingDisciplineResults() {
         return swimmingDisciplineResults;
     }
+
+    @Override
+    public String toString() {
+        return "" + swimmingDiscipline +
+                " ";
+    }
 }
