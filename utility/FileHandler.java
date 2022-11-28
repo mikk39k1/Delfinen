@@ -57,52 +57,53 @@ public class FileHandler {
 
     public void writeToFullMembersList(ArrayList<Member> swimmers) {
         try {
+            //printToFile = new PrintStream(memberArrayListFile);
             printToFile = new PrintStream(memberArrayListFile);
-            appendPrintToFile = new PrintStream(new FileOutputStream(memberArrayListFile, true));
 
             for (Member swimmer : swimmers) {
                 if (swimmer instanceof CompetitiveSwimmer) {
-                    appendPrintToFile.print("true;");
+                    printToFile.print("true");
                 } else {
-                    appendPrintToFile.print("false;");
+                    appendPrintToFile.print("false");
                 }
 
-                appendPrintToFile.print(swimmer.getUniqueID() + ";");
-                appendPrintToFile.print(swimmer.getName() + ";");
-                appendPrintToFile.print(swimmer.getPhoneNumber() + ";");
-                appendPrintToFile.print(swimmer.getAge() + ";");
-                appendPrintToFile.print(swimmer.getName() + ";");
+                printToFile.print(";" + swimmer.getUniqueID());
+                printToFile.print(";" + swimmer.getName());
+                printToFile.print(";" + swimmer.getPhoneNumber());
+                printToFile.print(";" + swimmer.getAge());
 
                 if (swimmer instanceof CompetitiveSwimmer)
                     for (SwimmingDiscipline type : ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList()) {
-                        appendPrintToFile.print((type) + (";"));
-                        appendPrintToFile.println();
-                        for (int i = 0; i < type.getSwimmingDisciplineResults().size(); i++) {
-                            try {
-                                appendPrintToFile = new PrintStream(new FileOutputStream(memberResultFile,true));
-
-                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDistance() + ";");
-                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDate() + ";");
-                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getSwimTime() + ";");
-                                if (type.getSwimmingDisciplineResults().get(i).isCompetitive()) {
-                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
-                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getRank() + ";");
-                                    appendPrintToFile.println();
-                                } else {
-                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
-                                    appendPrintToFile.println();
-                                }
-                            } catch (Exception e) {
-                                System.out.println(e);
-                                System.out.println("Ingen resultater at hente");
-                            }
+                        printToFile.print((";") + (type));
                         }
-                    }
+                printToFile.println("");
             }
         } catch (FileNotFoundException e) {
             System.out.println("Noget gik galt");
         }
     }
+    /*public void writeToResults(ArrayList<>){
+        for (int i = 0; i < type.getSwimmingDisciplineResults().size(); i++) {
+            try {
+                appendPrintToFile = new PrintStream(new FileOutputStream(memberResultFile,true));
+
+                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDistance() + ";");
+                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDate() + ";");
+                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getSwimTime() + ";");
+                if (type.getSwimmingDisciplineResults().get(i).isCompetitive()) {
+                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
+                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getRank() + ";");
+                    appendPrintToFile.println();
+                } else {
+                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
+                    appendPrintToFile.println();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                System.out.println("Ingen resultater at hente");
+            }
+        }
+    } */
 
 /*
     public ArrayList loadMemberList() {

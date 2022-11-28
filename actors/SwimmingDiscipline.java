@@ -36,7 +36,6 @@ public class SwimmingDiscipline {
 
     @Override
     public String toString() {
-        return "" + swimmingDiscipline +
-                " ";
+        return "" + swimmingDiscipline;
     }
 }
