@@ -63,6 +63,8 @@ public class SystemBoot {
                     // Slet en burger
                     "2. Udprint af alle eksisterende medlemmer.",
                     "3. Oversigt over medlemmer i restance.",
+                    // Betalingsændringer
+                    //Årets resultat - måske også noget med at se kun for junior, senior...
                     "4. Tilføj nyt svømmeresultat.",
                     "5. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
                     "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,

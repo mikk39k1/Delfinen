@@ -111,6 +111,24 @@ public class MenuRun {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }
                 }
+                case 8 -> {// this method prints all members for specific coach
+
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        //Method reads input from user: swimDiscipline and period of time to get results
+                        if (employee instanceof Chairman) {
+                            Coach adminOverride = ((Chairman) employee).chooseCoach(ui,swimmerCoachDatabase);
+                            adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride);
+
+                        } else {
+                            ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee));
+                        }
+                    } else {
+                        ui.printLn("Du har ikke login rettigheder til denne funktion");
+                    }
+
+                }
                 case 9 -> {
                     ui.printLn("Logger ud");
                     isSignedIn = false;

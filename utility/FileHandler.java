@@ -10,7 +10,10 @@ import java.util.Scanner;
 
 public class FileHandler {
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
-    private PrintStream printMemberArrayListFile;
+    private final File memberResultFile = new File("files/results.txt");
+
+    private PrintStream printToFile;
+    private PrintStream appendPrintToFile;
     private Scanner readMemberArrayListFile;
 
     public String checkUsername(String username) {//reads from passwd file and gets usernames
@@ -54,7 +57,9 @@ public class FileHandler {
 
     public void writeToFullMembersList(ArrayList<Member> swimmers) {
         try {
-            printMemberArrayListFile = new PrintStream(memberArrayListFile);
+            printToFile = new PrintStream(memberArrayListFile);
+            appendPrintToFile = new PrintStream(new FileOutputStream(memberArrayListFile, true));
+
             for (Member swimmer : swimmers) {
                 if (swimmer instanceof CompetitiveSwimmer) {
                     appendPrintToFile.print("true;");
