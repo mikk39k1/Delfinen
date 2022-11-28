@@ -1,0 +1,13 @@
+200;0234-02-04;55 minutes and 40 seconds;true;1;
+BUTTERFLY ;
+FREESTYLE ;
+200;0234-02-04;55 minutes and 40 seconds;true;1;
+BUTTERFLY ;
+FREESTYLE ;
+true;1001;alex;12345;1993-02-01;alex;CRAWL ;
+200;0234-02-04;55 minutes and 40 seconds;true;1;
+BUTTERFLY ;
+FREESTYLE ;
+true;1001;alex;12345;1993-02-01;alex;CRAWL ;
+100;1003-12-01;2 minutes and 77 seconds;false;
+200;0001-03-02;20 minutes and 10 seconds;true;1;

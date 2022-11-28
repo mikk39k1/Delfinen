@@ -60,11 +60,13 @@ public class SystemBoot {
 
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tiljøj et nyt medlem.",
+                    // Slet en burger
                     "2. Udprint af alle eksisterende medlemmer.",
                     "3. Oversigt over medlemmer i restance.",
                     "4. Tilføj nyt svømmeresultat.",
                     "5. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
                     "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
+                    "8. Oversigt over alle members for en coach",
                     "9. Log ud."
             },currentUser, swimmerCoachDatabase);
 

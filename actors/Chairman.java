@@ -40,21 +40,6 @@ public class Chairman extends Employee {
         }
     }
 
-
-    public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
-        for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
-            if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach))
-             System.out.println(key.getUniqueID() + key.getName());
-        }
-    }
-
-    public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
-        for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
-            if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values))
-                System.out.println(values.getName());
-        }
-    }
-
     // This method iterates through the Coach list after
     public Coach chooseCoach(UI ui, Database swimmerCoachDatabase) {
         for (Coach coach : swimmerCoachDatabase.getCoachList()) {

@@ -5,6 +5,7 @@ import database.Database;
 
 public class MenuRun {
     UI ui = new UI();
+    FileHandler fileHandler = new FileHandler();
     private final String[] menuOptions;
     private final String menuHeader;
     private final String leadtext;
@@ -37,6 +38,7 @@ public class MenuRun {
                         ui.printLn(">> CREATE MEMBER <<");
                         ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
                                 swimmerCoachDatabase);
+                        fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
                     } else {
                         ui.printLn("Du har ikke login rettigheder til denne funktion");
                     }
@@ -63,9 +65,11 @@ public class MenuRun {
                         if (employee instanceof Chairman) {
                             Coach adminOverride = new Coach();
                             adminOverride.addSwimResult(ui, swimmerCoachDatabase);
+                            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
 
                         } else {
                             ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase);
+                            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
                         }
 
                     } else {

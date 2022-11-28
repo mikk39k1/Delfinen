@@ -2,10 +2,9 @@ package utility;
 
 import actors.CompetitiveSwimmer;
 import actors.Member;
+import actors.SwimmingDiscipline;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,17 +56,61 @@ public class FileHandler {
         try {
             printMemberArrayListFile = new PrintStream(memberArrayListFile);
             for (Member swimmer : swimmers) {
+                if (swimmer instanceof CompetitiveSwimmer) {
+                    appendPrintToFile.print("true;");
+                } else {
+                    appendPrintToFile.print("false;");
+                }
+
+                appendPrintToFile.print(swimmer.getUniqueID() + ";");
+                appendPrintToFile.print(swimmer.getName() + ";");
+                appendPrintToFile.print(swimmer.getPhoneNumber() + ";");
+                appendPrintToFile.print(swimmer.getAge() + ";");
+                appendPrintToFile.print(swimmer.getName() + ";");
+
                 if (swimmer instanceof CompetitiveSwimmer)
-                    printMemberArrayListFile.print(swimmer.getUniqueID() + " ");
-                    printMemberArrayListFile.print(swimmer.getName() + " ");
-                    printMemberArrayListFile.print(swimmer.getPhoneNumber() + " ");
-                    printMemberArrayListFile.print(swimmer.getAge() + " ");
-                    printMemberArrayListFile.print(swimmer.getName() + " ");
+                    for (SwimmingDiscipline type : ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList()) {
+                        appendPrintToFile.print((type) + (";"));
+                        appendPrintToFile.println();
+                        for (int i = 0; i < type.getSwimmingDisciplineResults().size(); i++) {
+                            try {
+                                appendPrintToFile = new PrintStream(new FileOutputStream(memberResultFile,true));
 
+                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDistance() + ";");
+                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDate() + ";");
+                                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getSwimTime() + ";");
+                                if (type.getSwimmingDisciplineResults().get(i).isCompetitive()) {
+                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
+                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getRank() + ";");
+                                    appendPrintToFile.println();
+                                } else {
+                                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
+                                    appendPrintToFile.println();
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e);
+                                System.out.println("Ingen resultater at hente");
+                            }
+                        }
+                    }
             }
-
         } catch (FileNotFoundException e) {
-            System.out.println("Noget gik galt ej mulig at loade medlemslisten");
+            System.out.println("Noget gik galt");
         }
     }
+
+/*
+    public ArrayList loadMemberList() {
+        ArrayList<Member> memberList = new ArrayList<>();
+        readMemberArrayListFile = new Scanner(memberArrayListFile);
+        while (readMemberArrayListFile.hasNextLine()) {
+            String s = readMemberArrayListFile.nextLine();
+            String[] arrOfStr = s.split(";");
+
+
+            return memberList;
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+*/
 }

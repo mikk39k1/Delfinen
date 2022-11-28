@@ -142,4 +142,20 @@ public class Coach extends Employee {
 		return -1;
 	}
 
+	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
+		System.out.println("Træner: " + this.getName() + "har følgende medlemmere");
+
+		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach))
+				System.out.println(key.getUniqueID() + ": " + key.getName());
+		}
+	}
+
+	public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
+		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values))
+				System.out.println(values.getName());
+		}
+	}
+
 }
