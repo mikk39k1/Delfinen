@@ -26,7 +26,4 @@ public abstract class Member extends Person {
 	public void setIsMembershipActive(boolean isMembershipActive) {
 		this.isMembershipActive = isMembershipActive;
 	}
-
-
-
 }

@@ -18,7 +18,7 @@ public class Chairman extends Employee {
     // Behaviors (Methods) ---------------------------------
     public Member createMember(UI ui) {
         ui.print("Tast venligst 1 - for motionist eller 2 - for Konkurrence Svømmer: ");
-        return (ui.readInt()) < 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
+        return (ui.readInt()) == 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
     }
 
 
