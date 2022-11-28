@@ -22,7 +22,7 @@ public class Chairman extends Employee {
     }
 
 
-    public void addMember(UI ui, Member newMember, Database sdatabase) {
+    public void addMember(UI ui, Member newMember, Database database) {
         database.getMemberList().add(newMember);
 
         if (newMember instanceof CompetitiveSwimmer) {
@@ -31,8 +31,8 @@ public class Chairman extends Employee {
             for (int i = 0; i < disciplineAmount; i++) {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
             }
-            swimmerCoachDatabase.getSwimmersCoachAssociationList().
-                    put(newMember, chooseCoach(ui, swimmerCoachDatabase));
+            database.getSwimmersCoachAssociationList().
+                    put(newMember, chooseCoach(ui, database));
 
             ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
                     " aktive svømme discipliner");
