@@ -51,7 +51,7 @@ public class Chairman extends Employee {
     public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
         for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
             if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values))
-            System.out.println(values.getName());
+                System.out.println(values.getName());
         }
     }
 
