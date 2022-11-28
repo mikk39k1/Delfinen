@@ -7,6 +7,7 @@ public abstract class Member extends Person {
 	private final int uniqueID = Member.ID++;
 	private String birthOfYear;
 	private boolean isMembershipActive;
+	private boolean hasPaid;
 
 	// Getters ----------------------------------------------
 	public int getUniqueID() {
@@ -18,11 +19,19 @@ public abstract class Member extends Person {
 	public boolean isIsMembershipActive() {
 		return this.isMembershipActive;
 	}
+	public boolean isHasPaid() {
+		return hasPaid;
+	}
 
 	// Setters ------------------------------------------------
 	public void setAge(String birthOfYear) {
 		this.birthOfYear = birthOfYear;
 	}
+
+	public void setHasPaid(boolean hasPaid) {
+		this.hasPaid = hasPaid;
+	}
+
 	public void setIsMembershipActive(boolean isMembershipActive) {
 		this.isMembershipActive = isMembershipActive;
 	}

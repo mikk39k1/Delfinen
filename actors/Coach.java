@@ -61,7 +61,6 @@ public class Coach extends Employee {
 			}
 		}
 		return null;
-
 	}
 
 	public CompetitiveSwimmer loadSwimmer(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
@@ -84,8 +83,6 @@ public class Coach extends Employee {
 		}
 		return null;
 	}
-
-
 
 	public void addSwimResult(UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
 

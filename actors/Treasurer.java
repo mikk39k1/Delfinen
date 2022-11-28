@@ -22,8 +22,7 @@ public class Treasurer extends Employee {
 	 */
 
 	private void setMemberArrears() {
-		// TODO - implement Treasure.setMemberArrears
-		throw new UnsupportedOperationException();
+
 	}
 
 	// Interface ------------------- unique username/password loader
