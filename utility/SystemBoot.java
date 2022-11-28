@@ -6,12 +6,23 @@ import database.SwimmerCoachDatabase;
 import java.util.ArrayList;
 
 public class SystemBoot {
-    //  Attributes -----------------------------------------------
+
     // Utility / Controller ------------------
     Controller controller = new Controller();
-    MenuRun menuRun = new MenuRun();
     private Employee currentUser;
     ArrayList<Employee> enigmaUsers = new ArrayList<>();
+    SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
+
+    MenuRun menuRun = new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
+            "1. Tiljøj et nyt medlem.",
+            "2. Udprint af alle eksisterende medlemmer.",
+            "3. Oversigt over medlemmer i restance.",
+            "4. Tilføj nyt svømmeresultat.",
+            "5. Oversigt over en svømmers resultater.",
+            "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
+            "9. Log ud."
+    },currentUser, controller.ui, swimmerCoachDatabase);
+
 
 
     // Getter ----------------------------------
@@ -29,12 +40,7 @@ public class SystemBoot {
         }
     }
 
-
-    private void startSystem() {
-        // Database ---------------
-        SwimmerCoachDatabase swimmerCoachDatabase = new SwimmerCoachDatabase();
-
-
+    private void loadAndSetUsers() {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
@@ -48,37 +54,33 @@ public class SystemBoot {
                 swimmerCoachDatabase.getCoachList().getCoaches().add((Coach) user);
             }
         }
-        // TEMPORARY ADD MEMBER TO MEMBER-LIST ----------------------------------
+    }
+    private void loginSystem() {
+        String user = controller.isLoggedIn();
+        if (!user.equals("0")) {
+            setRoleAndPrivilege(user);
+
+            System.out.println(currentUser.getUsername());
+            System.out.println(currentUser.getRole());
+            System.out.println(currentUser.getPrivilege());
+        }
+    }
 
 
-        /*
-        CompetitiveSwimmer test = new CompetitiveSwimmer(controller.ui);
-        test.getSwimmingDisciplineList().add(new SwimmingDiscipline(controller.ui));
-
-
-
-        // Testing purposes --------------------------
-        swimmerCoachDatabase.getSwimmersCoachAssociationList().put(test, ((Coach) employees.get(3)));
-        swimmerCoachDatabase.getMemberList().swimmers.add(test);
-
-        ((Coach) employees.get(3)).addSwimResult(controller.ui, swimmerCoachDatabase);
-        ((Coach) employees.get(3)).checkCompetitorSwimResults(((Coach) employees.get(3)).foundSwimmer(controller.ui, swimmerCoachDatabase));
-
-        for (int i = 0; i < controller.memberList.swimmers.size(); i++){
-            controller.ui.printLn(controller.memberList.swimmers.get(i).getName());
-        }*/
+    private void startSystem() {
+        loadAndSetUsers();
         
         while (true) {
-            String user = controller.isLoggedIn();
-            if (!user.equals("0")) {
-                setRoleAndPrivilege(user);
-
-                System.out.println(currentUser.getUsername());
-                System.out.println(currentUser.getRole());
-                System.out.println(currentUser.getPrivilege());
-
-                menuRun.menuLooping(currentUser, controller.ui, swimmerCoachDatabase);
-            }
+            loginSystem();
+            new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
+                    "1. Tiljøj et nyt medlem.",
+                    "2. Udprint af alle eksisterende medlemmer.",
+                    "3. Oversigt over medlemmer i restance.",
+                    "4. Tilføj nyt svømmeresultat.",
+                    "5. Oversigt over en svømmers resultater.",
+                    "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
+                    "9. Log ud."
+            },currentUser, controller.ui, swimmerCoachDatabase);
         }
     }
 

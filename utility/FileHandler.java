@@ -1,5 +1,6 @@
 package utility;
 
+import actors.CompetitiveSwimmer;
 import actors.Member;
 
 import java.io.File;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHandler {
-    private File memberArrayListFile = new File("files/fullMembersList.txt");
+    private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private PrintStream printMemberArrayListFile;
-    private Scanner readmemberArrayListFile;
+    private Scanner readMemberArrayListFile;
 
     public String checkUsername(String username) {//reads from passwd file and gets usernames
         try {
@@ -55,13 +56,13 @@ public class FileHandler {
     public void writeToFullMembersList(ArrayList<Member> swimmers) {
         try {
             printMemberArrayListFile = new PrintStream(memberArrayListFile);
-            for (int i = 0; i < swimmers.size(); i++) {
-                if (swimmers.get(i) instanceof )
-                printMemberArrayListFile.print(swimmers.get(i).getUniqueID() + " ");
-                printMemberArrayListFile.print(swimmers.get(i).getName() + " ");
-                printMemberArrayListFile.print(swimmers.get(i).getPhoneNumber() + " ");
-                printMemberArrayListFile.print(swimmers.get(i).getAge() + " ");
-                printMemberArrayListFile.print(swimmers.get(i).getName() + " ");
+            for (Member swimmer : swimmers) {
+                if (swimmer instanceof CompetitiveSwimmer)
+                    printMemberArrayListFile.print(swimmer.getUniqueID() + " ");
+                    printMemberArrayListFile.print(swimmer.getName() + " ");
+                    printMemberArrayListFile.print(swimmer.getPhoneNumber() + " ");
+                    printMemberArrayListFile.print(swimmer.getAge() + " ");
+                    printMemberArrayListFile.print(swimmer.getName() + " ");
 
             }
 

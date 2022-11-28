@@ -4,24 +4,22 @@ import actors.*;
 import database.SwimmerCoachDatabase;
 
 public class MenuRun {
-    Menu menu;
-    private String[] menuOptions = {
-            "1. Tiljøj et nyt medlem.",
-            "2. Udprint af alle eksisterende medlemmer.",
-            "3. Oversigt over medlemmer i restance.",
-            "4. Tilføj nyt svømmeresultat.",
-            "5. Oversigt over en svømmers resultater.",
-            "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.",
-            "9. Log ud."
-    };
-    private String leadtext = "Vælg en af nedenstående muligheder";
+    private final String[] menuOptions;
+    private final String menuHeader;
+    private final String leadtext;
+
+    public MenuRun(String menuHeader,String leadtext ,String[] menuOptions, Employee employee, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
+        this.menuHeader = menuHeader;
+        this.menuOptions = menuOptions;
+        this.leadtext = leadtext;
+        menuLooping(employee,ui,swimmerCoachDatabase);
+    }
 
     public void menuLooping(Employee employee, UI ui, SwimmerCoachDatabase swimmerCoachDatabase) {
-        menu = new Menu("DELFINEN", leadtext, menuOptions);
         boolean isSignedIn = true;
 
         while (isSignedIn) {
-            menu.printMenu();
+            printMenu();
             int userChoice = ui.readInt();
 
             switch (userChoice) {
@@ -111,11 +109,11 @@ public class MenuRun {
         }
     }
 
-    private void chooseWhichSwimResults(UI ui) {
-        ui.printLn("Hvilken svømme disciplin?");
-        SwimmingDiscipline swimmingDiscipline = new SwimmingDiscipline(ui);
-        ui.printLn("Der sammenlignes resultater fra dags dato til den dato der angives - " +
-                "skriv datoen du ønsker sammenlignet fra");
-        String date = ui.setDate();//Should probably not be saved as a string but good for now
+    private void printMenu() {
+        System.out.println(menuHeader);
+        System.out.println(leadtext);
+        for (String menuOption : menuOptions) {
+            System.out.println(menuOption);
+        }
     }
 }
