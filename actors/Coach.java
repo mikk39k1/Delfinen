@@ -46,10 +46,13 @@ public class Coach extends Employee {
 	}
 
 
+	/*
+	* This method looks up a swimmer from Database memberList
+	 */
 	public CompetitiveSwimmer lookupSwimmer(UI ui, Database swimmerCoachDatabase) {
 
 		//Finds member name
-		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
+		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase); // Stores temporary swimmer name in a String
 
 		System.out.println("Please enter ID on the member: ");
 		int swimmerID = ui.readInt();
@@ -57,12 +60,16 @@ public class Coach extends Employee {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					return (CompetitiveSwimmer) member;
-				}
-			}
-		}
+				} // End of inner if statement
+			} // End of outer if statement
+		} // End of for loop
 		return null;
-	}
+	} // End of method
 
+
+	/*
+	* This method
+	 */
 	public CompetitiveSwimmer loadSwimmer(UI ui, Database swimmerCoachDatabase) {
 
 		//Finds member name
@@ -78,12 +85,16 @@ public class Coach extends Employee {
 							member.isIsMembershipActive());
 							((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
-				}
-			}
-		}
+				} // End of inner if statement
+			} // End of outer if statement
+		} // End of for loop
 		return null;
-	}
+	} // End of method
 
+
+	/*
+	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
+	 */
 	public void addSwimResult(UI ui, Database swimmerCoachDatabase) {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
@@ -99,11 +110,16 @@ public class Coach extends Employee {
 							.add(new SwimmingResult(ui));
 				} else {
 					ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
-				}
-			}
-		}
-	}
+				} // End of inner if / else statement
+			} // End of if statement
+		} // End of for loop
+	} // End of method
 
+
+
+	/*
+	* This method prints a specific competitive swimmers results for each swimming discipline
+	 */
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
 
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
@@ -112,50 +128,73 @@ public class Coach extends Employee {
 					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getAge(), competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
 			System.out.println(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults());
-		}
-	}
+		} // End of for loop
+	} // End of method
 
+
+
+
+	/*
+	* This method verifies name of a competitive swimmer, by checking if it exists within the Database memberList
+	 */
 	public String findSwimmerByName(UI ui, Database swimmerCoachDatabase) {
 
 		ui.printLn("Please enter name of swimmer you wish lookup: ");
-		String swimmerName = ui.readLine();
+		String swimmerName = ui.readLine();		// Stores temporary swimmerName we are searching for
 
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName)) {
 					ui.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
-				}
-			}
-		}
+				} // End of inner if statement
+			} // End of outer if statement
+		} // End of for loop
 		return swimmerName;
-	}
+	} // End of method
 
-	// Checks if a competitor has the swimming discipline, which we are requesting, returns -1 i false
+
+
+
+	/*
+	* Checks if a competitor has the swimming discipline, which we are requesting, returns -1 if false
+	 */
 	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
 
 		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
 			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
 					equals(swimmingDiscipline)) {
 				return i;
-			}
-		}
+			} // End of if statement
+		} // End of for loop
 		return -1;
-	}
+	} // End of method
 
+
+
+	/*
+	* This method finds and prints all members belonging to the coach logged in.
+	 */
 	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
 		System.out.println("Træner: " + this.getName() + "har følgende medlemmere");
 
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach))
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
 				System.out.println(key.getUniqueID() + ": " + key.getName());
-		}
-	}
+			} // End of if statement
+		} // End of for loop
+	} // End of method
 
+
+
+	/*
+	* This method finds and prints the coach of a specific member
+	 */
 	public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
 		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values))
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values)) {
 				System.out.println(values.getName());
-		}
-	}
+			} // End of if statement
+		} // End of for loop
+	} // End of method
 
-}
+} // End of class

@@ -27,17 +27,6 @@ public abstract class Member extends Person {
 		return hasPaid;
 	}
 
-	public int getRealAge() {
-		String s = this.birthOfYear;
-		String[] arrOfStr = s.split("-");
-		int year = Integer.parseInt(arrOfStr[0]);
-		int month = Integer.parseInt(arrOfStr[1]);
-		int day = Integer.parseInt(arrOfStr[2]);
-		LocalDate dob = LocalDate.of(year,month,day);
-		LocalDate now = LocalDate.now();
-		return Period.between(dob, now).getYears();
-	}
-
 	// Setters -----------------------------------------------
 	public void setAge(String birthOfYear) {
 		this.birthOfYear = birthOfYear;
@@ -61,4 +50,22 @@ public abstract class Member extends Person {
 	public void setUniqueID(int uniqueID) {
 		this.uniqueID = uniqueID;
 	}
+
+	// Member Behavior (Method) ------------------------------
+
+	/*
+	* This method extracts the exact age based on the date of birth
+	 */
+	public int getRealAge() {
+		String s = this.birthOfYear;  // Stores the birthOfYear attribute temporary as a String
+		String[] arrOfStr = s.split("-");		// Splits and adds components to a temporary String array
+		int year = Integer.parseInt(arrOfStr[0]); 	// Stores first value in array as year
+		int month = Integer.parseInt(arrOfStr[1]);	// Stores second value in array as month
+		int day = Integer.parseInt(arrOfStr[2]);		// Stores third value in array as day
+		LocalDate dob = LocalDate.of(year,month,day); 	// Stores the format based on temporary attributes as a Local Date
+		LocalDate now = LocalDate.now();				// Stores the Date today
+		return Period.between(dob, now).getYears();		// Calculates the year difference based on inputs
+	} // End of method
+
+
 }
