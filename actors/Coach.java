@@ -6,7 +6,7 @@ import utility.UI;
 public class Coach extends Employee {
 
 
-	// Constructor ---------------------------------
+	// Constructors ---------------------------------
 	public Coach(UI in) {
 		in.print("Please enter name of Coach: ");
 		setName(in.readLine());
@@ -36,7 +36,7 @@ public class Coach extends Employee {
 	}
 
 
-	// Behaviors (Methods) --------------------------
+	// Coach Behaviors (Methods) --------------------------
 	public void checkTrainingResults() {
 
 	}

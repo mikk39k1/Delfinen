@@ -48,6 +48,7 @@ public class Chairman extends Employee {
     } // End of method
 
 
+
     /*
     * This method finds and deletes a member from the Database memberList
      */
@@ -103,7 +104,7 @@ public class Chairman extends Employee {
      */
     public void printMembers(UI ui, Database swimmerCoachDatabase) {
         for (Member member : swimmerCoachDatabase.getMemberList()) {
-            ui.printLn(member.getName());               // Prints all names of every member in Database memberList
+            ui.printLn(member.getName());       // Prints all names of every member in Database memberList
         } // End of for loop
     } // End of Method
 
