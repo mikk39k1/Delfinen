@@ -1,6 +1,7 @@
 package utility;
 
 import actors.CompetitiveSwimmer;
+import actors.LeisureSwimmer;
 import actors.Member;
 import actors.SwimmingDiscipline;
 
@@ -126,8 +127,15 @@ public class FileHandler {
                     for (int i = 0; i < disciplineAmount; i++) {
                         compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
                     }
-
                     membersList.add(compSwimmer);
+                } else {
+                    int id = Integer.parseInt(arrOfStr[1]);
+                    String name = arrOfStr[2];
+                    String phone = arrOfStr[3];
+                    String dob = arrOfStr[4];
+                    boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
+                    LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id,name,phone,dob,membershipActive);
+                    membersList.add(leisureSwimmer);
                 }
 
             }
