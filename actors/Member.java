@@ -4,7 +4,7 @@ public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------
 	private static int ID = 1000;
-	private final int uniqueID = Member.ID++;
+	private int uniqueID = Member.ID++;
 	private String birthOfYear;
 	private boolean isMembershipActive;
 	private boolean hasPaid;
@@ -23,7 +23,8 @@ public abstract class Member extends Person {
 		return hasPaid;
 	}
 
-	// Setters ------------------------------------------------
+	// Setters -----------------------------------------------
+	public static void s
 	public void setAge(String birthOfYear) {
 		this.birthOfYear = birthOfYear;
 	}

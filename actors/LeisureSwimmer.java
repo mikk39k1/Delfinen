@@ -17,7 +17,6 @@ public class LeisureSwimmer extends Member {
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
 
-        // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
 
 
