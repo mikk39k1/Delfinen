@@ -27,7 +27,7 @@ public abstract class Member extends Person {
 		return hasPaid;
 	}
 
-	public int getRealAge(){
+	public int getRealAge() {
 		String s = this.birthOfYear;
 		String[] arrOfStr = s.split("-");
 		int year = Integer.parseInt(arrOfStr[0]);
