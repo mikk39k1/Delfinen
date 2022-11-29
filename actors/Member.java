@@ -24,7 +24,6 @@ public abstract class Member extends Person {
 	}
 
 	// Setters -----------------------------------------------
-	public static void s
 	public void setAge(String birthOfYear) {
 		this.birthOfYear = birthOfYear;
 	}
