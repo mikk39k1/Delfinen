@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class FileHandler {
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
+    private final File sharksPrint = new File("files/sharksPrint.txt");
 
     private PrintStream printToFile;
     private PrintStream appendPrintToFile;
@@ -187,6 +188,16 @@ public class FileHandler {
             return idArray.get(idArray.size() - 1) + 1;
         } catch (IndexOutOfBoundsException | FileNotFoundException e) {
             return 1000;
+        }
+    }
+    public void printWelcomeSharks(){
+        try {
+            readFromFile = new Scanner(sharksPrint);
+            while (readFromFile.hasNextLine()){
+                System.out.println(readFromFile.nextLine());
+            }
+        }catch (FileNotFoundException e){
+            System.out.println(e);
         }
     }
 }

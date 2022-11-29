@@ -225,6 +225,5 @@ public class MenuRun {
         ui.printLn("Logger ud");
         System.exit(0);
         return false;
-
     }
 }
