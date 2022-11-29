@@ -123,13 +123,15 @@ public class FileHandler {
                     String phone = arrOfStr[3];
                     String dob = arrOfStr[4];
                     boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
+                    boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);
 
-                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id, name, phone, dob, membershipActive);
+                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id,
+                            name, phone, dob, membershipActive,hasPaid);
 
-                    int disciplineAmount = arrOfStr.length - 6;
+                    int disciplineAmount = arrOfStr.length - 7;
                     for (int i = 0; i < disciplineAmount; i++) {
                         compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline
-                                (arrOfStr[6 + i])); //magicnumber is to get the start pos enumSwimDisciplin in array
+                                (arrOfStr[7 + i])); //magicnumber is to get the start pos enumSwimDisciplin in array
                     }
                     membersList.add(compSwimmer);
                 } else {
@@ -138,7 +140,9 @@ public class FileHandler {
                     String phone = arrOfStr[3];
                     String dob = arrOfStr[4];
                     boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
-                    LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id, name, phone, dob, membershipActive);
+                    boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);
+                    LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id,
+                            name, phone, dob, membershipActive, hasPaid);
                     membersList.add(leisureSwimmer);
                 }
             }

@@ -31,7 +31,7 @@ public class MenuRun {
             switch (userChoice) {
                 case 1 -> {addMember(employee,swimmerCoachDatabase);/*add new member to all members lists */ }
                 case 2 -> {printAllMembers(employee,swimmerCoachDatabase);/*print all members */ }
-                case 3 -> {printMembersInDebt(employee); /*Prints list of members who hasn't paid */}
+                case 3 -> {printMembersInDebt(employee,swimmerCoachDatabase); /*Prints list of members who hasn't paid */}
                 case 4 -> {addSwimResult(employee,swimmerCoachDatabase);/*add swimResult*/}
                 case 5 -> {printCompetitiveSwimmersResult(employee,swimmerCoachDatabase); /*Prints 1 swimmers results*/}
                 case 6 -> {printTopFiveByDiscipline(employee,swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
@@ -68,9 +68,16 @@ public class MenuRun {
         ui.printLn("Du har ikke login rettigheder til denne funktion");
     }
     }
-    private void printMembersInDebt(Employee employee) {
+    private void printMembersInDebt(Employee employee,Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMYMANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman){
+                Treasurer adminOverride = new Treasurer();
+                adminOverride.checkMemberArrears(swimmerCoachDatabase);
+            } else {
+                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);
+            }
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         }
@@ -146,6 +153,8 @@ public class MenuRun {
     private boolean logOut(Boolean isSignedIn){
         ui.printLn("Logger ud");
         isSignedIn = false;
+        System.exit(0);
         return isSignedIn;
+
     }
 }

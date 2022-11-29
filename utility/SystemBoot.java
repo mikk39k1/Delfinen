@@ -58,29 +58,7 @@ public class SystemBoot {
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));
         loadAndSetUsers();
-        for (int i = 0; i < swimmerCoachDatabase.getMemberList().size(); i++) {
-
-            if (swimmerCoachDatabase.getMemberList().get(i) instanceof CompetitiveSwimmer) {
-                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
-                        swimmerCoachDatabase.getMemberList().get(i).getName(),
-                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
-                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
-                ((CompetitiveSwimmer) swimmerCoachDatabase.getMemberList().get(i)).printSwimDisciplineList();
-
-            }
-            else {
-                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b",
-                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
-                        swimmerCoachDatabase.getMemberList().get(i).getName(),
-                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
-                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
-                        System.out.println();
-            }
-
-        }
+        testMemberDatabaseLoad();
         while (true) {
             loginSystem();
 
@@ -138,4 +116,32 @@ public class SystemBoot {
     private boolean isPasswordCorrect(String password) {
         return !fileHandler.checkPassword(password).equals("0");
     }
+
+    private void testMemberDatabaseLoad(){
+        for (int i = 0; i < swimmerCoachDatabase.getMemberList().size(); i++) {
+
+            if (swimmerCoachDatabase.getMemberList().get(i) instanceof CompetitiveSwimmer) {
+                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
+                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
+                        swimmerCoachDatabase.getMemberList().get(i).getName(),
+                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
+                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
+                ((CompetitiveSwimmer) swimmerCoachDatabase.getMemberList().get(i)).printSwimDisciplineList();
+            }
+            else {
+                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b",
+                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
+                        swimmerCoachDatabase.getMemberList().get(i).getName(),
+                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
+                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
+                System.out.println();
+            }
+
+        }
+    }
 }
+
+
+

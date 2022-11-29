@@ -16,19 +16,19 @@ public class LeisureSwimmer extends Member {
         setAge(in.setDate());
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
+        setHasPaid(false);
 
     }
 
 
-    public LeisureSwimmer(int uniqueID, String name, String phoneNumber, String birthday, boolean isActive) {//this is for the loadmethod
+    public LeisureSwimmer(int uniqueID, String name, String phoneNumber,
+                          String birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
         setID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);
         setAge(birthday);
         setIsMembershipActive(isActive);
+        setHasPaid(hasPaid);
     }
-
-
-
 
 }
