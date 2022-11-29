@@ -59,6 +59,8 @@ public class SystemBoot {
         loadAndSetUsers();
         testMemberDatabaseLoad();
         while (true) {
+            System.out.println("\n\n\n");
+            fileHandler.printWelcomeSharks();
             loginSystem();
 
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
