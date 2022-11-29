@@ -35,4 +35,8 @@ public abstract class Member extends Person {
 	public void setIsMembershipActive(boolean isMembershipActive) {
 		this.isMembershipActive = isMembershipActive;
 	}
+
+	public static void setID(int ID) {
+		Member.ID = ID;
+	}
 }

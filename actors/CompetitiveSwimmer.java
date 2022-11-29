@@ -35,4 +35,6 @@ public class CompetitiveSwimmer extends Member {
         }
         System.out.println("|");
     }
+
+
 }

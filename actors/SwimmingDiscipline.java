@@ -34,6 +34,7 @@ public class SwimmingDiscipline {
         return swimmingDisciplineResults;
     }
 
+
     @Override
     public String toString() {
         return "" + swimmingDiscipline;

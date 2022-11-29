@@ -19,7 +19,17 @@ public class LeisureSwimmer extends Member {
 
         // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
-    public LeisureSwimmer(String name, String phoneNumber, String birthday) {//this is for the loadmethod
 
+
+    public LeisureSwimmer(int uniqueID, String name, String phoneNumber, String birthday, boolean isActive) {//this is for the loadmethod
+        setID(uniqueID);
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setAge(birthday);
+        setIsMembershipActive(isActive);
     }
+
+
+
+
 }
