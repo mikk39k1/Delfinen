@@ -14,7 +14,7 @@ public class FileHandler {
 
     private PrintStream printToFile;
     private PrintStream appendPrintToFile;
-    private Scanner readMemberArrayListFile;
+    private Scanner readFromFile;
 
     public String checkUsername(String username) {//reads from passwd file and gets usernames
         try {
@@ -76,7 +76,7 @@ public class FileHandler {
                 if (swimmer instanceof CompetitiveSwimmer)
                     for (SwimmingDiscipline type : ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList()) {
                         printToFile.print((";") + (type));
-                        }
+                    }
                 printToFile.println("");
             }
         } catch (FileNotFoundException e) {
