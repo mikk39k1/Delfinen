@@ -67,7 +67,7 @@ public class FileHandler {
                 if (swimmer instanceof CompetitiveSwimmer) {
                     printToFile.print("true");
                 } else {
-                    appendPrintToFile.print("false");
+                    printToFile.print("false");
                 }
 
                 printToFile.print(";" + swimmer.getUniqueID());
