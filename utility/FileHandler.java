@@ -64,13 +64,14 @@ public class FileHandler {
                 if (swimmer instanceof CompetitiveSwimmer) {
                     printToFile.print("true");
                 } else {
-                    appendPrintToFile.print("false");
+                    printToFile.print("false");
                 }
 
                 printToFile.print(";" + swimmer.getUniqueID());
                 printToFile.print(";" + swimmer.getName());
                 printToFile.print(";" + swimmer.getPhoneNumber());
                 printToFile.print(";" + swimmer.getAge());
+                printToFile.print(";" + swimmer.isIsMembershipActive());
 
                 if (swimmer instanceof CompetitiveSwimmer)
                     for (SwimmingDiscipline type : ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList()) {
