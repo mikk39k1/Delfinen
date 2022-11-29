@@ -142,7 +142,6 @@ public class FileHandler {
                     membersList.add(leisureSwimmer);
                 }
             }
-            Member.setID(loadID());
             return membersList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
