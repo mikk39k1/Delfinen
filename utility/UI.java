@@ -51,6 +51,10 @@ public class UI {
 		System.out.println(msg);
 	}
 
+	public void printF(String msg) {
+		System.out.printf(msg);
+	}
+
 	public String setTime() {
 		print("minutes: ");
 		int minutes = in.nextInt();

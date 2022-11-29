@@ -21,6 +21,10 @@ public class MenuRun {
 
     // MenuRun Behaviors (Methods) ----------------------------
 
+
+    /*
+    * This method is looping each option a user can interact with within the menu
+     */
     public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
         boolean isSignedIn = true;
         while (isSignedIn) {
@@ -28,35 +32,37 @@ public class MenuRun {
             int userChoice = ui.readInt();
             switch (userChoice) {
                 case 1 -> {addMember(employee, swimmerCoachDatabase); /*add new member to all members lists */}
-                case 2 -> {printAllMembers(employee, swimmerCoachDatabase);/*print all members */}
-                case 3 -> {printMembersInDebt(employee, swimmerCoachDatabase); /*Prints list of members who hasn't paid */}
-                case 4 -> {changePayDue(employee, swimmerCoachDatabase);}
-                case 5 -> {addSwimResult(employee, swimmerCoachDatabase);/*add swimResult*/}
-                case 6 -> {printCompetitiveSwimmersResult(employee, swimmerCoachDatabase); /*Prints 1 swimmers results*/}
-                case 7 -> {printTopFiveByDiscipline(employee, swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
-                case 8 -> {printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/}
-                case 9 -> {isSignedIn = logOut(); /*Logs you out of the system */}
+                case 2 -> {deleteMember(employee,swimmerCoachDatabase); /*deletes member from members lists*/}
+                case 3 -> {printAllMembers(employee, swimmerCoachDatabase);/*print all members */}
+                case 4 -> {printMembersInDebt(employee, swimmerCoachDatabase); /*Prints list of members who hasn't paid */}
+                case 5 -> {changePayDue(employee, swimmerCoachDatabase);}
+                case 6 -> {addSwimResult(employee, swimmerCoachDatabase);/*add swimResult*/}
+                case 7 -> {printCompetitiveSwimmersResult(employee, swimmerCoachDatabase); /*Prints 1 swimmers results*/}
+                case 8 -> {printTopFiveByDiscipline(employee, swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
+                case 9 -> {printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/}
+                case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
                 default -> ui.printLn("Vælg en eksisterende mulighed.\n");
             } // End of switch statement
         } // End of while loop
     } // End of method
 
 
+
     /*
      * Prints all attributes of the menu
      */
     private void printMenu() {
-        System.out.println(menuHeader);
-        System.out.println(leadtext);
+        ui.printLn(menuHeader);
+        ui.printLn(leadtext);
         for (String menuOption : menuOptions) {
-            System.out.println(menuOption);
+            ui.printLn(menuOption);
         } // End of for loop
     } // End of method
 
 
     /*
      * This method adds a member through the Chairman class
-     * Only Employee Privilege leve of ADMINISTRATOR can use this method (Chairman class)
+     * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
     private void addMember(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
@@ -71,25 +77,42 @@ public class MenuRun {
 
 
     /*
-     * This method prints all members from the database through the Chairman class
-     * Only Employee Privilege leve of ADMINISTRATOR can use this method (Chairman class)
+    * This method finds and deletes a member from the Database memberList
+    * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void printAllMembers(Employee employee, Database memberList) {
+    private void deleteMember(Employee employee, Database memberList) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).printMembers(memberList);
+            ((Chairman)employee).deleteMember(ui,memberList);
+            fileHandler.writeToFullMembersList(memberList.getMemberList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         } // End of if / else statement
     } // End of method
 
 
+
+    /*
+     * This method prints all members from the database through the Chairman class
+     * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
+     */
+    private void printAllMembers(Employee employee, Database memberList) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            ((Chairman) employee).printMembers(ui,memberList);
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of if / else statement
+    } // End of method
+
+
+
     /*
      * This method prints all members with arrears through the Treasurer class
-     * Only Employee Privilege leve of ADMINISTRATOR and ECONOMYMANAGEMENT can use this method (Chairman/Treasurer class)
+     * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
      */
     private void printMembersInDebt(Employee employee, Database swimmerCoachDatabase) {
-        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMYMANAGEMENT) ||
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
@@ -104,12 +127,13 @@ public class MenuRun {
     } // End of method
 
 
+
     /*
      * This method allows for changes within member status, regarding paid status through the Treasurer class
-     * Only Employee Privilege leve of ADMINISTRATOR and ECONOMYMANAGEMENT can use this method (Chairman/Treasurer class)
+     * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
      */
     private void changePayDue(Employee employee, Database swimmerCoachDatabase) {
-        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMYMANAGEMENT) ||
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
@@ -126,9 +150,10 @@ public class MenuRun {
     } // End of method
 
 
+
     /*
      * This method adds swimming result to a member through the Coach class
-     * Only Employee Privilege leve of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
     private void addSwimResult(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
@@ -150,9 +175,11 @@ public class MenuRun {
     } // End of method
 
 
+
+
     /*
      * This method prints out a specific Swimmers results
-     * Only Employee Privilege leve of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
     private void printCompetitiveSwimmersResult(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
@@ -173,10 +200,12 @@ public class MenuRun {
     } // End of method
 
 
+
+
     /*
      * This method prints and sorts the top 5 swimmer performances based on inputs from user.
      * The method reads input from user: swimDiscipline and period of time to get results
-     * Only Employee Privilege leve of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
     private void printTopFiveByDiscipline(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
@@ -197,9 +226,10 @@ public class MenuRun {
 
 
 
+
     /*
     * This method prints all the members associated for a specific coach
-    * Only Employee Privilege leve of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+    * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
     private void printSwimmersByCoach(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
@@ -218,6 +248,8 @@ public class MenuRun {
     } // End of method
 
 
+
+
     /*
     * This method will log out the user and terminate the program
      */
@@ -225,6 +257,6 @@ public class MenuRun {
         ui.printLn("Logger ud");
         System.exit(0);
         return false;
+    } // End of Method
 
-    }
-}
+} // End of Class

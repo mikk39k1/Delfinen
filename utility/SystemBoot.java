@@ -27,7 +27,7 @@ public class SystemBoot {
     private void loadAndSetUsers() {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
-        enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMYMANAGEMENT));
+        enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
         enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
         enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13", "Marry123"));
         enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));
@@ -63,17 +63,18 @@ public class SystemBoot {
 
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tilføj et nyt medlem.",
+                    "2. Slet et medlem",
                     // Slet en burger
-                    "2. Udprint af alle eksisterende medlemmer.",
-                    "3. Oversigt over medlemmer i restance.",
-                    "4. Ændr meldemmers betalingsstatus",
+                    "3. Udprint af alle eksisterende medlemmer.",
+                    "4. Oversigt over medlemmer i restance.",
+                    "5. Ændr meldemmers betalingsstatus",
                     // Betalingsændringer
                     //Årets resultat - måske også noget med at se kun for junior, senior...
-                    "5. Tilføj nyt svømmeresultat.",
-                    "6. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
-                    "7. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
-                    "8. Oversigt over alle members for en coach",
-                    "9. Log ud."
+                    "6. Tilføj nyt svømmeresultat.",
+                    "7. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
+                    "8. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
+                    "9. Oversigt over alle members for en coach",
+                    "0. Log ud."
             }, currentUser, swimmerCoachDatabase);
 
         }
