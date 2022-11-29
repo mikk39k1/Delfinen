@@ -93,6 +93,7 @@ public class MenuRun {
             } else {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);
             }
+            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         }

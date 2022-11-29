@@ -75,6 +75,7 @@ public class FileHandler {
                 printToFile.print(";" + swimmer.getPhoneNumber());
                 printToFile.print(";" + swimmer.getAge());
                 printToFile.print(";" + swimmer.isIsMembershipActive());
+                printToFile.print(";" + swimmer.isHasPaid());
 
                 if (swimmer instanceof CompetitiveSwimmer)
                     for (SwimmingDiscipline type : ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList()) {
