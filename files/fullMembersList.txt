@@ -1,4 +1,4 @@
-true;1000;asdasda;1;0002-01-01;true;false;CRAWL
+true;1000;asdasda;1;0002-01-01;true;true;CRAWL
 true;1001;dasda;123;0001-01-01;true;false;BUTTERFLY
 true;1004;dasda;123;0001-01-01;true;false;BUTTERFLY
 true;1005;dasda;123;0001-01-01;true;false;BUTTERFLY
