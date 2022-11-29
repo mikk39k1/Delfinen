@@ -17,12 +17,6 @@ public class MenuRun {
         menuLooping(employee,swimmerCoachDatabase);
     }
 
-    public MenuRun(String menuHeader, String leadtext, String[] menuOptions) {
-        this.menuHeader = menuHeader;
-        this.menuOptions = menuOptions;
-        this.leadtext = leadtext;
-    }
-
     public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
         boolean isSignedIn = true;
         while (isSignedIn) {

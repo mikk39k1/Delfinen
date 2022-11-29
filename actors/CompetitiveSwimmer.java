@@ -26,7 +26,7 @@ public class CompetitiveSwimmer extends Member {
 
     public CompetitiveSwimmer(int uniqueID, String name, String phoneNumber,
                               String birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
-        setID(uniqueID);
+        setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);
         setAge(birthday);
