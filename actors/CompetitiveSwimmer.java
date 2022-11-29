@@ -23,16 +23,25 @@ public class CompetitiveSwimmer extends Member {
         // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
 
+    public CompetitiveSwimmer(int uniqueID, String name, String phoneNumber, String birthday, boolean isActive) {//this is for the loadmethod
+        setID(uniqueID);
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setAge(birthday);
+        setIsMembershipActive(isActive);
+
+    }
 
     public ArrayList<SwimmingDiscipline> getSwimmingDisciplineList() {
         return swimmingDisciplineList;
     }
 
-    public void printSwimDisciplineList(){
-        for (int i = 0; i <swimmingDisciplineList.size(); i++){
+    public void printSwimDisciplineList() {
+        for (int i = 0; i < swimmingDisciplineList.size(); i++) {
             System.out.print(swimmingDisciplineList.get(i).getSwimmingDiscipline() + ", ");
-
         }
-        System.out.println("|");
+        System.out.print("|\n");
     }
+
+
 }

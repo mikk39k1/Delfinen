@@ -19,10 +19,16 @@ public class SwimmingDiscipline {
     private final ArrayList<SwimmingResult> swimmingDisciplineResults = new ArrayList<>();
 
 
-    // Constructor -------------------------------
+    // Constructor manual add method-------------------------------
     public SwimmingDiscipline(UI ui) {
         this.swimmingDiscipline = ui.setSwimmingDisciplineType();
         ui.printLn("Swimming Discipline added");
+    }
+
+    // Constructor for loading method-------------------------------
+    public SwimmingDiscipline(String swimDisciplineType) {
+        this.swimmingDiscipline = SwimmingDiscipline.SwimmingDisciplineTypes.valueOf
+                (swimDisciplineType.toUpperCase());
     }
 
     // Getter ------------------------------------
@@ -33,6 +39,7 @@ public class SwimmingDiscipline {
     public ArrayList<SwimmingResult> getSwimmingDisciplineResults() {
         return swimmingDisciplineResults;
     }
+
 
     @Override
     public String toString() {
