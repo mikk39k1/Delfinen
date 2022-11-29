@@ -106,18 +106,34 @@ public class FileHandler {
         }
     } */
 
-/*
-    public ArrayList loadMemberList() {
-        ArrayList<Member> memberList = new ArrayList<>();
-        readMemberArrayListFile = new Scanner(memberArrayListFile);
-        while (readMemberArrayListFile.hasNextLine()) {
-            String s = readMemberArrayListFile.nextLine();
-            String[] arrOfStr = s.split(";");
 
+    public ArrayList<Member> loadMemberList(ArrayList<Member> membersList, UI ui) {
+        try {
+            readFromFile = new Scanner(memberArrayListFile);
+            while (readFromFile.hasNextLine()) {
+                String s = readFromFile.nextLine();
+                String[] arrOfStr = s.split(";");
 
-            return memberList;
-        } catch(IOException e){
+                if (arrOfStr[0].equalsIgnoreCase("true")){
+                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer();
+                    int id = Integer.parseInt(arrOfStr[1]);
+                    String name = arrOfStr[2];
+                    String phone = arrOfStr[3];
+                    String dob = arrOfStr[4];
+                    boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
+
+                    int disciplineAmount = arrOfStr.length - 6;
+                    for (int i = 0; i < disciplineAmount; i++) {
+                        compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
+                    }
+
+                    membersList.add(compSwimmer);
+                }
+
+            }
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-*/
-}
+        return membersList;
+    }
+    }
