@@ -32,9 +32,10 @@ public class MenuRun {
                 case 1 -> {addMember(employee,swimmerCoachDatabase);/*add new member to all members lists */ }
                 case 2 -> {printAllMembers(employee,swimmerCoachDatabase);/*print all members */ }
                 case 3 -> {printMembersInDebt(employee,swimmerCoachDatabase); /*Prints list of members who hasn't paid */}
-                case 4 -> {addSwimResult(employee,swimmerCoachDatabase);/*add swimResult*/}
-                case 5 -> {printCompetitiveSwimmersResult(employee,swimmerCoachDatabase); /*Prints 1 swimmers results*/}
-                case 6 -> {printTopFiveByDiscipline(employee,swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
+                case 4 -> {changePayDue(employee,swimmerCoachDatabase);}
+                case 5 -> {addSwimResult(employee,swimmerCoachDatabase);/*add swimResult*/}
+                case 6 -> {printCompetitiveSwimmersResult(employee,swimmerCoachDatabase); /*Prints 1 swimmers results*/}
+                case 7 -> {printTopFiveByDiscipline(employee,swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
                 case 8 -> {printSwimmersByCoach(employee,swimmerCoachDatabase);/*Prints all members for specific coach*/}
                 case 9 -> {logOut(isSignedIn); /*Logs you out of the system */}
                 default -> ui.printLn("Vælg en eksisterende mulighed.\n");
@@ -75,6 +76,20 @@ public class MenuRun {
             if (employee instanceof Chairman){
                 Treasurer adminOverride = new Treasurer();
                 adminOverride.checkMemberArrears(swimmerCoachDatabase);
+            } else {
+                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);
+            }
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        }
+    }
+    private void changePayDue(Employee employee, Database swimmerCoachDatabase){
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMYMANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman){
+                Treasurer adminOverride = new Treasurer();
+                adminOverride.setMemberArrears(swimmerCoachDatabase,ui);
             } else {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);
             }

@@ -1,6 +1,7 @@
 package actors;
 
 import database.Database;
+import utility.UI;
 
 public class Treasurer extends Employee {
 
@@ -19,21 +20,28 @@ public class Treasurer extends Employee {
 	}
 
 	public void checkMemberArrears(Database swimmerCoachDatabase) {
-		System.out.printf("%-20s", "Members in arrears");
+		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
 		for (Member member : swimmerCoachDatabase.getMemberList()){
-			if(member.isHasPaid()==false){
-				System.out.printf("%-20s",member.getName());
-			}
+			int age = member.getRealAge();
+			String state = "";
+			String type = null;
+			int amount = 0;
+			if (!member.isIsMembershipActive()) {amount = 500;state = "INACTIVE";}
+			else if (age<18) {amount = 1000;state = "ACTIVE";type="Child";}
+			else if (age>=60) {amount =1200;state = "ACTIVE";type="Pensioner";}
+			else {amount = 1600;state="ACTIVE";type="Adult";}
+
+
+			System.out.printf("- %-20s %-10s %-12s %-7s %s%n",member.getName(),state,(type==null?"-":type),age,amount);
+
 		}
 	}
 
-	/**
-	 * Changes the arrears status of a member from debt to paid
-	 */
-
-	private void setMemberArrears() {
+	public void setMemberArrears(Database swimmerCoachDatabase, UI ui) {
 
 	}
+
+
 
 	// Interface ------------------- unique username/password loader
 

@@ -53,8 +53,6 @@ public class SystemBoot {
             }
         } while (user.equals("0"));
     }
-
-
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));
         Member.setID(fileHandler.loadID());
@@ -64,31 +62,29 @@ public class SystemBoot {
             loginSystem();
 
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
-                    "1. Tiljøj et nyt medlem.",
+                    "1. Tilføj et nyt medlem.",
                     // Slet en burger
                     "2. Udprint af alle eksisterende medlemmer.",
                     "3. Oversigt over medlemmer i restance.",
+                    "4. Ændr meldemmers betalingsstatus",
                     // Betalingsændringer
                     //Årets resultat - måske også noget med at se kun for junior, senior...
-                    "4. Tilføj nyt svømmeresultat.",
-                    "5. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
-                    "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
+                    "5. Tilføj nyt svømmeresultat.",
+                    "6. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
+                    "7. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
                     "8. Oversigt over alle members for en coach",
                     "9. Log ud."
             }, currentUser, swimmerCoachDatabase);
 
         }
     }
-
     public static void main(String[] args) {
         new SystemBoot().startSystem();
     }
 
-
     // loginStuff ----------------------------------
     public String isLoggedIn() {
         String username = fileHandler.checkUsername(getUsername());
-
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
 
@@ -143,6 +139,3 @@ public class SystemBoot {
         }
     }
 }
-
-
-

@@ -1,5 +1,9 @@
 package actors;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
+
 public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------
@@ -21,6 +25,17 @@ public abstract class Member extends Person {
 	}
 	public boolean isHasPaid() {
 		return hasPaid;
+	}
+
+	public int getRealAge(){
+		String s = this.birthOfYear;
+		String[] arrOfStr = s.split("-");
+		int year = Integer.parseInt(arrOfStr[0]);
+		int month = Integer.parseInt(arrOfStr[1]);
+		int day = Integer.parseInt(arrOfStr[2]);
+		LocalDate dob = LocalDate.of(year,month,day);
+		LocalDate now = LocalDate.now();
+		return Period.between(dob, now).getYears();
 	}
 
 	// Setters -----------------------------------------------

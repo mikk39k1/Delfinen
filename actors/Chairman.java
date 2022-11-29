@@ -21,7 +21,6 @@ public class Chairman extends Employee {
         return (ui.readInt()) == 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui);
     }
 
-
     public void addMember(UI ui, Member newMember, Database database) {
         database.getMemberList().add(newMember);
 
@@ -36,7 +35,6 @@ public class Chairman extends Employee {
 
             ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
                     " aktive svømme discipliner");
-
         }
     }
 
