@@ -41,21 +41,46 @@ public class SystemBoot {
     }
 
     private void loginSystem() {
-        String user = isLoggedIn();
-        if (!user.equals("0")) {
-            setRoleAndPrivilege(user);
+        String user = null;
+        do {
+            user = isLoggedIn();
+            if (!user.equals("0")) {
+                setRoleAndPrivilege(user);
 
-            System.out.println(currentUser.getUsername());
-            System.out.println(currentUser.getRole());
-            System.out.println(currentUser.getPrivilege());
-        }
+                System.out.println(currentUser.getUsername());
+                System.out.println(currentUser.getRole());
+                System.out.println(currentUser.getPrivilege());
+            }
+        } while (user.equals("0"));
     }
 
 
     private void startSystem() {
-        fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList(),ui);
+        swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));
         loadAndSetUsers();
+        for (int i = 0; i < swimmerCoachDatabase.getMemberList().size(); i++) {
 
+            if (swimmerCoachDatabase.getMemberList().get(i) instanceof CompetitiveSwimmer) {
+                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
+                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
+                        swimmerCoachDatabase.getMemberList().get(i).getName(),
+                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
+                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
+                ((CompetitiveSwimmer) swimmerCoachDatabase.getMemberList().get(i)).printSwimDisciplineList();
+
+            }
+            else {
+                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b",
+                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
+                        swimmerCoachDatabase.getMemberList().get(i).getName(),
+                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
+                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
+                        System.out.println();
+            }
+
+        }
         while (true) {
             loginSystem();
 
@@ -71,7 +96,7 @@ public class SystemBoot {
                     "6. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
                     "8. Oversigt over alle members for en coach",
                     "9. Log ud."
-            },currentUser, swimmerCoachDatabase);
+            }, currentUser, swimmerCoachDatabase);
 
         }
     }

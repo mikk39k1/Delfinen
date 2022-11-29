@@ -110,25 +110,26 @@ public class FileHandler {
     } */
 
 
-    public ArrayList<Member> loadMemberList(ArrayList<Member> membersList, UI ui) {
+    public ArrayList<Member> loadMemberList(ArrayList<Member> membersList) {
         try {
             readFromFile = new Scanner(memberArrayListFile);
             while (readFromFile.hasNextLine()) {
                 String s = readFromFile.nextLine();
                 String[] arrOfStr = s.split(";");
 
-                if (arrOfStr[0].equalsIgnoreCase("true")){
+                if (arrOfStr[0].equalsIgnoreCase("true")) {
                     int id = Integer.parseInt(arrOfStr[1]);
                     String name = arrOfStr[2];
                     String phone = arrOfStr[3];
                     String dob = arrOfStr[4];
                     boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
 
-                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id,name,phone,dob,membershipActive);
+                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id, name, phone, dob, membershipActive);
 
                     int disciplineAmount = arrOfStr.length - 6;
                     for (int i = 0; i < disciplineAmount; i++) {
-                        compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline(ui));
+                        compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline
+                                (arrOfStr[6 + i])); //magicnumber is to get the start pos enumSwimDisciplin in array
                     }
                     membersList.add(compSwimmer);
                 } else {
@@ -137,14 +138,14 @@ public class FileHandler {
                     String phone = arrOfStr[3];
                     String dob = arrOfStr[4];
                     boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
-                    LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id,name,phone,dob,membershipActive);
+                    LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id, name, phone, dob, membershipActive);
                     membersList.add(leisureSwimmer);
                 }
-
             }
+            return membersList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return membersList;
     }
-    }
+}
