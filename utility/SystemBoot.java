@@ -53,6 +53,7 @@ public class SystemBoot {
 
 
     private void startSystem() {
+        fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList(),ui);
         loadAndSetUsers();
 
         while (true) {

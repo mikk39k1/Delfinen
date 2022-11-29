@@ -4,7 +4,9 @@ import actors.CompetitiveSwimmer;
 import actors.LeisureSwimmer;
 import actors.Member;
 import actors.SwimmingDiscipline;
+import database.Database;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -116,12 +118,13 @@ public class FileHandler {
                 String[] arrOfStr = s.split(";");
 
                 if (arrOfStr[0].equalsIgnoreCase("true")){
-                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer();
                     int id = Integer.parseInt(arrOfStr[1]);
                     String name = arrOfStr[2];
                     String phone = arrOfStr[3];
                     String dob = arrOfStr[4];
                     boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);
+
+                    CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id,name,phone,dob,membershipActive);
 
                     int disciplineAmount = arrOfStr.length - 6;
                     for (int i = 0; i < disciplineAmount; i++) {
