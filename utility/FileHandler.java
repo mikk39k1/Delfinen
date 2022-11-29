@@ -152,4 +152,19 @@ public class FileHandler {
         }
         return membersList;
     }
+
+    public int loadID() {
+        ArrayList<Integer> idArray = new ArrayList<>();
+        try {
+            readFromFile = new Scanner(memberArrayListFile);
+            while (readFromFile.hasNextLine()) {
+                String s = readFromFile.nextLine();
+                String[] arrOfStr = s.split(";");
+                idArray.add(Integer.parseInt(arrOfStr[1]));
+            }
+            return idArray.get(idArray.size()-1)+1;
+        } catch (IndexOutOfBoundsException | FileNotFoundException e) {
+            return 1000;
+        }
+    }
 }

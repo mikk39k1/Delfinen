@@ -3,7 +3,7 @@ package actors;
 public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------
-	private static int ID = 1000;
+	private static int ID;
 	private int uniqueID = Member.ID++;
 	private String birthOfYear;
 	private boolean isMembershipActive;
@@ -38,5 +38,8 @@ public abstract class Member extends Person {
 
 	public static void setID(int ID) {
 		Member.ID = ID;
+	}
+	public void setUniqueID(int uniqueID) {
+		this.uniqueID = uniqueID;
 	}
 }
