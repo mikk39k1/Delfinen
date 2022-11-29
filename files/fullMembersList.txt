@@ -1,5 +1,6 @@
-false;0;Mikkelmotionist;21212121;1998-09-04;true;false
-true;0;Mikkelcomp;212123242;1998-09-04;true;false;CRAWL
-true;0;Mikkelmangedecsiplin;42424242;1998-09-04;true;true;CRAWL;BUTTERFLY;BREASTSTROKE
-true;0;Alex;21212121;1956-09-09;true;true;CRAWL;BUTTERFLY;BREASTSTROKE
-false;1000;Alexander;21212121;1996-09-09;false;false
+true;1000;asdasda;1;0002-01-01;true;false;CRAWL
+true;1001;dasda;123;0001-01-01;true;false;BUTTERFLY
+true;1004;dasda;123;0001-01-01;true;false;BUTTERFLY
+true;1005;dasda;123;0001-01-01;true;false;BUTTERFLY
+true;1006;dasda;123;0001-01-01;true;false;BUTTERFLY
+false;1007;Alex;123;1332-01-01;true;false

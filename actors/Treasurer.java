@@ -3,8 +3,6 @@ package actors;
 import database.Database;
 import utility.UI;
 
-import java.util.ArrayList;
-
 public class Treasurer extends Employee {
 
 
@@ -25,7 +23,7 @@ public class Treasurer extends Employee {
 		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
 		for (Member member : swimmerCoachDatabase.getMemberList()){
 			if (!member.isHasPaid()) {
-				String arr[];
+				String[] arr;
 				arr = memberAnalysis(member);
 				System.out.printf("- %-20s %-10s %-12s %-7s %s%n", member.getName(), arr[2],
 						(arr[3] == null ? "-" : arr[3]), arr[0], arr[1]);
@@ -39,8 +37,8 @@ public class Treasurer extends Employee {
 		int count = 0;
 		for (Member member : swimmerCoachDatabase.getMemberList()){
 			count++;
-			String arr[];
-			String hasPaid = (member.isHasPaid()==true?"TRUE":"FALSE");
+			String[] arr;
+			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");
 			arr = memberAnalysis(member);
 			System.out.printf("%d# %-20s %-10s %-12s %-20s %-10s%n",count, member.getName(),arr[2],
 					(arr[3]==null?"-":arr[3]),arr[0],hasPaid);

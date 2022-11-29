@@ -41,7 +41,7 @@ public class SystemBoot {
     }
 
     private void loginSystem() {
-        String user = null;
+        String user;
         do {
             user = isLoggedIn();
             if (!user.equals("0")) {

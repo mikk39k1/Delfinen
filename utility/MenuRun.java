@@ -160,7 +160,7 @@ public class MenuRun {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         }
     }
-    private boolean logOut(Boolean isSignedIn){
+    private boolean logOut(boolean isSignedIn){
         ui.printLn("Logger ud");
         isSignedIn = false;
         System.exit(0);
