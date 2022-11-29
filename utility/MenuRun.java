@@ -49,7 +49,7 @@ public class MenuRun {
 
 
     /*
-     * Prints all attributes of the menu
+     * Prints all the attributes of the menu
      */
     private void printMenu() {
         ui.printLn(menuHeader);

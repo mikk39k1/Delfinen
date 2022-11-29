@@ -35,7 +35,7 @@ public class Chairman extends Employee {
 
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
-            int disciplineAmount = ui.readInt();
+            int disciplineAmount = ui.readInt();        // Stores temporary the amount of Discipline Types swimmer should have
             for (int i = 0; i < disciplineAmount; i++) {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui)); // Adds Swimming Discipline
             } // End of for loop
@@ -52,20 +52,20 @@ public class Chairman extends Employee {
     * This method finds and deletes a member from the Database memberList
      */
     public void deleteMember(UI ui, Database memberList) {
-        boolean memberNameExist = false;
+        boolean memberNameExist = false;    // Attribute will help determine for further continuation of this method
         ui.print("Please enter name of member: ");
-        String memberName = ui.readLine();
+        String memberName = ui.readLine();  // Stores a name value of a member, intended to remove as a String
         for (Member member : memberList.getMemberList()) {
             if (member.getName().equals(memberName)) {
-                System.out.printf("%-20d %-10s %-12s %-20s ",
+                System.out.printf("%-20d %-10s %-12s %-20s ",   // Prints members in case of doublets in names
                         member.getUniqueID(), member.getName(), member.getAge(), member.isIsMembershipActive());
-                memberNameExist = true;
+                memberNameExist = true;   // Attribute will now be argument for continuation of this method
                 ui.printLn("");
             } // End of first if statement
         } // End of first for loop
         if (memberNameExist) {
             ui.print("\nPlease enter ID of the member to remove: ");
-            int memberID = ui.readInt();
+            int memberID = ui.readInt();    // Stores the ID value of member, intended to remove
             memberList.getMemberList().removeIf(member -> member.getUniqueID() == memberID); // Removes member if ID matches a member entity
             ui.printLn("\nMember deleted");
         } else {
@@ -86,10 +86,10 @@ public class Chairman extends Employee {
 
         ui.print("Hvilken Træner skal medlemmet have: ");
         while (true) {
-            String coachName = ui.readLine();
+            String coachName = ui.readLine();       // Stores temporary the name of the Coach intended to be used
             for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
-                    return coach;
+                    return coach;       // If temporary name exists within employed Coaches, returns that actual coach
                 } // End of if statement
             } // End of for loop
             ui.printLn("Træner eksisterer ikke, prøv venligst igen");
