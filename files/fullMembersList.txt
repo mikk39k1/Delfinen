@@ -1,1 +1,4 @@
-true;1000;Mikkel;28404215;1998-09-04;true;false;CRAWL
+true;1000;asdasda;1;0002-01-01;true;false;CRAWL
+true;1001;Oliver;245435978;1992-02-11;true;false;CRAWL;BUTTERFLY
+false;1002;Alexander Bøv;45978234;1996-02-01;true;false
+true;1003;Jens;43574567;1992-11-02;true;false;BACKCRAWL;FREESTYLE

@@ -66,7 +66,7 @@ public class Chairman extends Employee {
         for (Member member : memberList.getMemberList()) {
             if (member.getName().equals(memberName)) {
                 System.out.printf("%-20d %-10s %-12s %-20s ",   // Prints members in case of doublets in names
-                        member.getUniqueID(), member.getName(), member.getAge(), member.isIsMembershipActive());
+                        member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.isIsMembershipActive());
                 memberNameExist = true;   // Attribute will now be argument for continuation of this method
                 ui.printLn("");
             } // End of first if statement

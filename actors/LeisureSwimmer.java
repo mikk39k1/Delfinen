@@ -2,8 +2,6 @@ package actors;
 
 import utility.UI;
 
-import java.time.format.DateTimeFormatter;
-
 public class LeisureSwimmer extends Member {
 
     public LeisureSwimmer(UI in) {
@@ -13,7 +11,7 @@ public class LeisureSwimmer extends Member {
         setPhoneNumber(in.readLine());
         in.print("Please enter age: ");//Tnis shouldn't be here - it's not prompting for age, but birfday :D
         in.printLn("What is the members birthday");
-        setAge(in.setDate());
+        setDateOfBirth(in.setDate());
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
         setHasPaid(false);
@@ -26,7 +24,7 @@ public class LeisureSwimmer extends Member {
         setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);
-        setAge(birthday);
+        setDateOfBirth(birthday);
         setIsMembershipActive(isActive);
         setHasPaid(hasPaid);
     }
