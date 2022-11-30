@@ -2,6 +2,9 @@ package actors;
 
 import database.Database;
 import utility.UI;
+import utility.FileHandler;
+
+import java.io.File;
 
 public class Coach extends Employee {
 
@@ -95,23 +98,24 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(UI ui, Database swimmerCoachDatabase) {
+	public void addSwimResult(Employee employee,UI ui, Database swimmerCoachDatabase, FileHandler filehandler) {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
 		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(swimmer)) {
 				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
-
 				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
 
 				if (hasSwimDiscipline > -1) {
 					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
 							.add(new SwimmingResult(ui));
+					filehandler.appendResult(employee,swimmerCoachDatabase,swimmer,hasSwimDiscipline);
 				} else {
 					ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
 				} // End of inner if / else statement
 			} // End of if statement
+
 		} // End of for loop
 	} // End of method
 
@@ -196,5 +200,14 @@ public class Coach extends Employee {
 			} // End of if statement
 		} // End of for loop
 	} // End of method
+
+	public String loadCoachOfMember(Database swimmerCoachDatabase, Member member) {
+		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values)) {
+				return values.getName();
+			} // End of if statement
+		} // End of for loop
+		return "NoCoach";
+	}
 
 } // End of class

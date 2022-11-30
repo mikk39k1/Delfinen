@@ -161,12 +161,11 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();                         // Creates temporary user for admin
-                adminOverride.addSwimResult(ui, swimmerCoachDatabase); // Runs temporary user method
-                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());   // Writes to file
+                adminOverride.addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs temporary user method
 
             } else {
-                ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase); // Runs method as Coach
-                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes to file
+                ((Coach) employee).addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs method as Coach
+
             } // End of inner if / else statement
 
         } else {
