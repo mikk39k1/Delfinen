@@ -33,9 +33,9 @@ public class SystemBoot {
      */
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
+        swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
         Member.setID(fileHandler.loadID());     // 3
         loadAndSetUsers();                      // 4
-        swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));//
         testMemberDatabaseLoad();
         testCoachDatabaseLoad();
         while (true) {
