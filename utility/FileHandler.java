@@ -291,6 +291,9 @@ public class FileHandler {
     }
 
 
+    /*
+    * This method loads all results from results file, and adds them to corresponding member with matching ID from file
+     */
     public void loadResultMethod(Database database) {
 
         try {
@@ -305,27 +308,27 @@ public class FileHandler {
                 boolean isCompetitive = Boolean.parseBoolean(arr[6]);
                 int rank = Integer.parseInt(arr[7]);
 
-                // Adding swimResult to swimDiscipline
-                SwimmingDiscipline swimmingDisciplineWithResults = new SwimmingDiscipline(String.
-                        valueOf(SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(swimDiscipline)));
-
                 for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
                     if (set.getKey().getUniqueID() == uniqueId) {
-                        ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().add(swimmingDisciplineWithResults);
-                        if (isCompetitive) {
-                            swimmingDisciplineWithResults.getSwimmingDisciplineResults().
-                                    add(new SwimmingResult(distance, date, swimTime, true, rank));
-                        } else {
-                            swimmingDisciplineWithResults.getSwimmingDisciplineResults().
-                                    add(new SwimmingResult(distance, date, swimTime, false, 0));
-                        }
-                    }
-                }
-            }
+                        for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
+                            if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
+                                    getSwimmingDiscipline().equals(SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(swimDiscipline))) {
+                                if (isCompetitive) {
+                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().
+                                            add(new SwimmingResult(distance, date, swimTime, true, rank));
+                                } else {
+                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().
+                                            add(new SwimmingResult(distance, date, swimTime, false, 0));
+                                } // End of inner if / else statement
+                            } // End of second inner if statement
+                        } // of for loop
+                    } // End of outer if statement
+                } // End of HashMap for loop iteration
+            } // End of while loop
         } catch (FileNotFoundException e) {
             System.out.println("fil eksisterer ikke");
-        }
-    }
+        } // End of try / catch statement
+    } // End of method
 
 
     public ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
@@ -334,7 +337,7 @@ public class FileHandler {
             while (readFromFile.hasNextLine()) {
                 String s = readFromFile.nextLine();         // Stores the whole line containing a member to temporary String
                 String[] arrOfStr = s.split(";");     // Delimiting by semicolon sign and adds to a temporary array
-                String username = arrOfStr[0];              // Stroes Coach Username
+                String username = arrOfStr[0];              // Stores Coach Username
                 String name = arrOfStr[1];                  // Stores the name of Coach in a temporary String
                 String phone = arrOfStr[2];                 // Stores phone number of Coach in a temporary String
                 Coach coachToList = new Coach(name,phone,username); // Creates a coach with these attributes

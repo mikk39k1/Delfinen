@@ -247,6 +247,11 @@ public class MenuRun {
         } // End of outer if / else statement
     } // End of method
 
+
+
+    /*
+    * This method allows chairman to create a coach with login credentials, so he can be a user of the system
+     */
     private void createCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
@@ -266,7 +271,7 @@ public class MenuRun {
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         } // End of if / else statement
-    }
+    } // End of method
 
 
 
