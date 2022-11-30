@@ -30,4 +30,13 @@ public class Database {
     public void setMemberList(ArrayList<Member> memberList) {
         this.memberList = memberList;
     }
+
+    public void setCoachList(ArrayList<Coach> coachList) {
+        this.coachList = coachList;
+    }
+
+    public void setSwimmersCoachAssociationList(HashMap<Member, Coach> swimmersCoachAssociationList){
+        this.swimmersCoachAssociationList = swimmersCoachAssociationList;
+    }
+
 }

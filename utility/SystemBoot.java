@@ -113,7 +113,7 @@ public class SystemBoot {
 
     // loginStuff ----------------------------------
     /*
-    * This method checks through file and username / password method if inputs are authentic, to allow login
+      This method checks through file and username / password method if inputs are authentic, to allow login
      */
     public String isLoggedIn() {
         String username = fileHandler.checkUsername(getUsername());
@@ -178,6 +178,17 @@ public class SystemBoot {
                         swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
                 System.out.println();
             }
+        }
+    }
+
+    private void testCoachDatabaseLoad(){
+        for (int i = 0; i < swimmerCoachDatabase.getCoachList().size(); i++) {
+            System.out.println();
+            System.out.printf("Username: %-5s Name: %-10s Phone Number: %-10s ",
+                    swimmerCoachDatabase.getCoachList().get(i).getUsername(),
+                    swimmerCoachDatabase.getCoachList().get(i).getName(),
+                    swimmerCoachDatabase.getCoachList().get(i).getPhoneNumber());
+            System.out.println();
         }
     }
 }

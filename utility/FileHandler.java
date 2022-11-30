@@ -103,6 +103,25 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
+    public void writeToCoachlist(ArrayList<Coach> coaches) {
+        try {
+            printToFile = new PrintStream(coachListFile);
+
+            for (Coach coach : coaches) {
+
+
+                printToFile.print(coach.getUsername() + ";");     // Write username to coachlist file
+                printToFile.print(coach.getName() + ";");         // Write Name to coachlist file
+                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phonenumber to coachlist file
+                printToFile.println();
+                printToFile.close();    // Closes the PrintStream
+            } // End of outer for loop
+        } catch (FileNotFoundException e) {
+            System.out.println("Noget gik galt");
+        } // End of try / catch statement
+
+    } // End of method
+
 
     /*public void writeToResults(ArrayList<>){
         for (int i = 0; i < type.getSwimmingDisciplineResults().size(); i++) {
@@ -173,6 +192,8 @@ public class FileHandler {
         } // End of try / catch statement
         return membersList;
     } // End of method
+
+
 
 
     /*
