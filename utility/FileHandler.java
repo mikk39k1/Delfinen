@@ -168,7 +168,7 @@ public class FileHandler {
             return membersList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } // End of Catch
+        } // End of try / catch statement
         return membersList;
     } // End of method
 
