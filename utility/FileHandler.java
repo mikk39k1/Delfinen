@@ -96,8 +96,8 @@ public class FileHandler {
                         printToFile.print((";") + (type));
                     } // End of inner for loop
                 printToFile.println();
-                printToFile.close();    // Closes the PrintStream
             } // End of outer for loop
+            printToFile.close();    // Closes the PrintStream
         } catch (FileNotFoundException e) {
             System.out.println("Noget gik galt");
         } // End of try / catch statement
@@ -336,15 +336,15 @@ public class FileHandler {
 
 
     /*
-    * This method prints a welcome emoji presenting creators of this project
+     * This method prints a welcome emoji presenting creators of this project
      */
-    public void printWelcomeSharks(){
+    public void printWelcomeSharks() {
         try {
             readFromFile = new Scanner(sharksPrint);
             while (readFromFile.hasNextLine()) {
                 System.out.println(readFromFile.nextLine());
             } // End of while loop
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } // End of try / catch statement
     } // End of method

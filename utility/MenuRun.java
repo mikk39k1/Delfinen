@@ -200,7 +200,6 @@ public class MenuRun {
 
 
 
-
     /*
      * This method prints and sorts the top 5 swimmer performances based on inputs from user.
      * The method reads input from user: swimDiscipline and period of time to get results

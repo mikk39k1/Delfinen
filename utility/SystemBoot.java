@@ -32,10 +32,14 @@ public class SystemBoot {
      * - 6 Starts the menu selection
      */
     private void startSystem() {
-        swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));   // 1
-        Member.setID(fileHandler.loadID());     // 2
-        loadAndSetUsers();                      // 3
+        swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
+        swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
+        fileHandler.loadSwimmerCoachAssociationList(swimmerCoachDatabase);
+        fileHandler.loadResultMethod(swimmerCoachDatabase);
+        Member.setID(fileHandler.loadID());     // 3
+        loadAndSetUsers();                      // 4
         testMemberDatabaseLoad();
+        testCoachDatabaseLoad();
         while (true) {
             System.out.println("\n\n\n");
             fileHandler.printWelcomeSharks();   // 4
@@ -53,6 +57,7 @@ public class SystemBoot {
                     "7. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
                     "8. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
                     "9. Oversigt over alle members for en coach",
+                    "10. Opret en ny coach",
                     "0. Log ud."
             }, currentUser, swimmerCoachDatabase);      // 6
         } // End of while loop

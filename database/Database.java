@@ -23,7 +23,7 @@ public class Database {
     }
 
     public HashMap<Member, Coach> getSwimmersCoachAssociationList() {
-        return this.SwimmersCoachAssociationList;
+        return this.swimmersCoachAssociationList;
     }
 
     // Setters ------------------------------------------------
