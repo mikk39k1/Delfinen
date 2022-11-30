@@ -183,7 +183,7 @@ public class Coach extends Employee {
 	* This method finds and prints all members belonging to the coach logged in.
 	 */
 	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
-		System.out.println("Træner: " + this.getName() + "har følgende medlemmere");
+		System.out.println("Træner: " + this.getName() + " har følgende medlemmere");
 
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {

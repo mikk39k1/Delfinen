@@ -13,7 +13,6 @@ public class FileHandler {
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
     private final File sharksPrint = new File("files/sharksPrint.txt");
-    private final File resultPrint = new File("files/results.txt");
     private final File swimmerCoachAssociationList = new File("files/swimmerCoachAssociationList.txt");
     private final File coachListFile = new File("files/coachList.txt");
 
@@ -189,6 +188,7 @@ public class FileHandler {
             return membersList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            System.out.println("Load Member Fejl");
         } // End of try / catch statement
         return membersList;
     } // End of method
@@ -267,7 +267,7 @@ public class FileHandler {
                 }
             }//while loop ends
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            System.out.println("Load Result Fejl 1");
         }
     }
 
@@ -275,6 +275,7 @@ public class FileHandler {
     public void loadResultMethod(Database database) {
 
         try {
+            readFromFile = new Scanner(memberResultFile);
             while (readFromFile.hasNextLine()) {
                 String[] arr = readFromFile.nextLine().split(";");
                 int uniqueId = Integer.parseInt(arr[0]);
@@ -302,7 +303,7 @@ public class FileHandler {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
             System.out.println("fil eksisterer ikke");
         }
     }
@@ -332,27 +333,30 @@ public class FileHandler {
     /*
      * This method loads SwimmerCoachAssociation based on result ID and coachList
      */
-    public void loadSwimmerCoachAssociationList(Database database) {
+    public HashMap<Member, Coach> loadSwimmerCoachAssociationList(HashMap<Member, Coach> swimmerCoachList, Database database) {
+
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
             while (readFromFile.hasNextLine()) {
                 String[] lineParam = readFromFile.nextLine().split(";");
                 int swimmerID = Integer.parseInt(lineParam[0]);
                 String coachName = lineParam[1];
-
                 for (Member member : database.getMemberList()) {
                     if (member.getUniqueID() == swimmerID) {
                         for (Coach coach : database.getCoachList()) {
                             if (coach.getName().equals(coachName)) {
-                                database.getSwimmersCoachAssociationList().put(member, coach);
-                            }
-                        }
-                    }
-                }
-            }
+                                assert false;
+                                swimmerCoachList.put(member, coach);
+                            } // End of inner if statement
+                        } // End of inner for loop
+                    } // End of outer if statement
+                } // End of outer for loop
+            } // End of while loop
+            return swimmerCoachList;
         } catch (FileNotFoundException e) {
             System.out.println(e);
-        }
+        } // End of try / catch statement
+        return swimmerCoachList;
     }
 
 
