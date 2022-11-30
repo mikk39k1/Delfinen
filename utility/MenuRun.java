@@ -41,6 +41,7 @@ public class MenuRun {
                 case 8 -> {printTopFiveByDiscipline(employee, swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
                 case 9 -> {printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/}
                 case 10 ->{createCoach(employee,swimmerCoachDatabase,ui);}/*Create a coach and add them to coachlist.*/
+                case 11 ->{deleteCoach(employee,swimmerCoachDatabase,ui);}//Delete Coach
                 case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
                 default -> ui.printLn("Vælg en eksisterende mulighed.\n");
             } // End of switch statement
@@ -251,15 +252,16 @@ public class MenuRun {
 
             ((Chairman) employee).createCoach(database,ui);
             fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeCoachUserAndPassToList(database.getCoachList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         } // End of if / else statement
     }
 
-    private void createCoach(Employee employee, Database database, UI ui){
+    private void deleteCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).createCoach(database,ui);
+            ((Chairman) employee).deleteCoach(database,ui);
             fileHandler.writeToCoachlist(database.getCoachList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");

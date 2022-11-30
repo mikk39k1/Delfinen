@@ -26,13 +26,24 @@ public class Chairman extends Employee {
         return (ui.readInt()) == 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui); // Adds member based on int input
     } // End of method
 
+
+
     public void createCoach(Database coachList, UI ui){
         coachList.getCoachList().add(new Coach(ui));
     }
 
+    public void deleteCoach(Database coachlist, UI ui){
+        ui.printLn("Write the name of the coach you would like to remove:");
+        String findCoach = ui.readLine();
 
-    public void createCoach(Database coachList, UI ui){
-        coachList.getCoachList().add(new Coach(ui));
+        for (int i = 0; i < coachlist.getCoachList().size(); i++){
+            if (coachlist.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
+                coachlist.getCoachList().remove(i);
+                ui.printLn("You have removed " + findCoach + " From the coach list.");
+            }
+
+        }
+
     }
 
 

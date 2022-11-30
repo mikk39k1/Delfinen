@@ -15,6 +15,7 @@ public class FileHandler {
     private final File sharksPrint = new File("files/sharksPrint.txt");
     private final File swimmerCoachAssociationList = new File("files/swimmerCoachAssociationList.txt");
     private final File coachListFile = new File("files/coachList.txt");
+    private final File passwordList = new File("files/passwd.txt");
 
 
     private PrintStream printToFile;
@@ -107,19 +108,37 @@ public class FileHandler {
             printToFile = new PrintStream(coachListFile);
 
             for (Coach coach : coaches) {
-
-
                 printToFile.print(coach.getUsername() + ";");     // Write username to coachlist file
                 printToFile.print(coach.getName() + ";");         // Write Name to coachlist file
                 printToFile.print(coach.getPhoneNumber() + ";");  // Write Phonenumber to coachlist file
+                printToFile.print(coach.getPassword());
                 printToFile.println();
-                printToFile.close();    // Closes the PrintStream
-            } // End of outer for loop
+
+            }
+                printToFile.close();// Closes the PrintStream
+             // End of outer for loop
         } catch (FileNotFoundException e) {
             System.out.println("Noget gik galt");
         } // End of try / catch statement
 
     } // End of method
+
+    public void writeCoachUserAndPassToList(ArrayList<Coach> coaches){
+        try{
+            printToFile = new PrintStream(new FileOutputStream(passwordList,true));
+                for (Coach coach: coaches) {
+                    printToFile.print(coach.getUsername() + " ");
+                    printToFile.print(coach.getPassword());
+                    printToFile.println();
+                }
+
+            printToFile.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     /*public void writeToResults(ArrayList<>){

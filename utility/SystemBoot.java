@@ -35,7 +35,7 @@ public class SystemBoot {
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
         swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
-        Member.setID(fileHandler.loadID());     // 3
+        Member.setID(fileHandler.loadID());// 3
         loadAndSetUsers();                      // 4
         swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
                 swimmerCoachDatabase.getSwimmersCoachAssociationList() ,swimmerCoachDatabase));
@@ -61,6 +61,7 @@ public class SystemBoot {
                     "8. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
                     "9. Oversigt over alle members for en coach",
                     "10. Opret en ny coach",
+                    "11. Fjern en coach",
                     "0. Log ud."
             }, currentUser, swimmerCoachDatabase);      // 6
         } // End of while loop
@@ -87,9 +88,9 @@ public class SystemBoot {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
-        enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
+        /*enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
         enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13", "Marry123"));
-        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));
+        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));*/
 
         // Add coaches to coach list -------------------------------------------
         for (Employee user : enigmaUsers) {
@@ -160,6 +161,7 @@ public class SystemBoot {
      */
     private boolean isPasswordCorrect(String password) {
         return !fileHandler.checkPassword(password).equals("0");
+
     } // End of method
 
     private void testMemberDatabaseLoad(){

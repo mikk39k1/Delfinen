@@ -15,6 +15,7 @@ public abstract class Employee extends Person {
 	private RoleType role;
 	private PrivilegeType privilege;
 	private String username;
+	private String password;
 
 
 	// Getters ------------------------------------
@@ -29,6 +30,9 @@ public abstract class Employee extends Person {
 	public String getUsername() {
 		return this.username;
 	}
+	public String getPassword() {
+		return password;
+	}
 
 
 	// Setters -------------------------------------
@@ -42,8 +46,10 @@ public abstract class Employee extends Person {
 		this.username = username;
 	}
 
-
-	// Behaviors (Methods) -------------------------
+	public void setPassword(String password) {
+		this.password = password;
+	}
+// Behaviors (Methods) -------------------------
 	/**
 	 * Loads the username and password from etc/passwd file
 	 */

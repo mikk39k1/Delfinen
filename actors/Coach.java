@@ -20,6 +20,7 @@ public class Coach extends Employee {
 		in.print("Please enter a username: ");
 		setUsername(in.readLine());
 		in.print("Please enter a password: ");
+		setPassword(in.readLine());
 
 		// Need method to add Coach to database on FILE so database can load array with active Coaches
 	}
@@ -41,6 +42,7 @@ public class Coach extends Employee {
 	public Coach(RoleType accountant, PrivilegeType competitiveSwimmerManagement) {
 		super();
 	}
+
 
 
 	// Coach Behaviors (Methods) --------------------------
