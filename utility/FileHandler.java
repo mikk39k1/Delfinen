@@ -1,12 +1,7 @@
 package utility;
 
-import actors.CompetitiveSwimmer;
-import actors.LeisureSwimmer;
-import actors.Member;
-import actors.SwimmingDiscipline;
-import database.Database;
+import actors.*;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,6 +9,7 @@ import java.util.Scanner;
 public class FileHandler {
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
+    private final File coachListFile = new File("files/coachList.txt");
     private final File sharksPrint = new File("files/sharksPrint.txt");
 
     private PrintStream printToFile;
@@ -100,6 +96,52 @@ public class FileHandler {
             System.out.println("Noget gik galt");
         } // End of try / catch statement
     } // End of method
+
+
+
+    public void writeToCoachlist(ArrayList<Coach> coaches) {
+        try {
+            printToFile = new PrintStream(coachListFile);
+
+            for (Coach coach : coaches) {
+
+
+                printToFile.print(coach.getUsername() + ";");     // Write username to coachlist file
+                printToFile.print(coach.getName() + ";");         // Write Name to coachlist file
+                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phonenumber to coachlist file
+                printToFile.println();
+                printToFile.close();    // Closes the PrintStream
+            } // End of outer for loop
+        } catch (FileNotFoundException e) {
+            System.out.println("Noget gik galt");
+        } // End of try / catch statement
+    } // End of method
+
+
+    public ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
+        try {
+            readFromFile = new Scanner(coachListFile);
+            while (readFromFile.hasNextLine()) {
+                String s = readFromFile.nextLine();         // Stores the whole line containing a member to temporary String
+                String[] arrOfStr = s.split(";");     // Delimiting by semicolon sign and adds to a temporary array
+                String username = arrOfStr[0];              // Stroes Coach Username
+                String name = arrOfStr[1];                  // Stores the name of Coach in a temporary String
+                String phone = arrOfStr[2];                 // Stores phone number of Coach in a temporary String
+                Coach coachToList = new Coach(name,phone,username); // Creates a coach with these attributes
+
+                coachList.add(coachToList);
+            }   // End of while loop
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } // End of try / catch statement
+        return coachList;
+    } // End of method
+
+
+
+
+
 
 
     /*public void writeToResults(ArrayList<>){

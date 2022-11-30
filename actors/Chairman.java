@@ -3,6 +3,8 @@ package actors;
 import database.Database;
 import utility.UI;
 
+import javax.xml.crypto.Data;
+
 public class Chairman extends Employee {
 
     // Constructor ---------------------------------------
@@ -23,6 +25,11 @@ public class Chairman extends Employee {
         ui.print("Tast venligst 1 - for motionist eller 2 - for Konkurrence Svømmer: ");
         return (ui.readInt()) == 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui); // Adds member based on int input
     } // End of method
+
+
+    public void createCoach(Database coachList, UI ui){
+        coachList.getCoachList().add(new Coach(ui));
+    }
 
 
 

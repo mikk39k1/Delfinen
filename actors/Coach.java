@@ -35,6 +35,10 @@ public class Coach extends Employee {
 
 	}
 
+	public Coach(RoleType accountant, PrivilegeType competitiveSwimmerManagement) {
+		super();
+	}
+
 
 	// Coach Behaviors (Methods) --------------------------
 	public void checkTrainingResults() {
