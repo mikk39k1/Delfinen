@@ -1,12 +1,12 @@
 package utility;
 
-import actors.CompetitiveSwimmer;
-import actors.LeisureSwimmer;
-import actors.Member;
-import actors.SwimmingDiscipline;
+import actors.*;
+import database.Database;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FileHandler {

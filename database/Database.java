@@ -10,7 +10,8 @@ public class Database {
     // Attributes ---------------------------------------------
     ArrayList<Member> memberList = new ArrayList<>();
     ArrayList<Coach> coachList = new ArrayList<>();
-    private final HashMap<Member, Coach> SwimmersCoachAssociationList = new HashMap<>();
+
+    private HashMap<Member, Coach> swimmersCoachAssociationList = new HashMap<>();
 
 
     // Getters ------------------------------------------------
