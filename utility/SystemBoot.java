@@ -25,25 +25,28 @@ public class SystemBoot {
     /*
      * This method starts the whole program doing different important steps as followed:
      * - 1 Loading all member data from fullMemberList file
-     * - 2 Sets the corresponding static member ID, so Member ID keeps incrementing, even after deleted users
-     * - 3 Loads the employed users.
-     * - 4 Prints welcome screen
-     * - 5 Invokes login method
-     * - 6 Starts the menu selection
+     * - 2 Loading all coach employees from coachList file
+     * - 3 Sets the corresponding static member ID, so Member ID keeps incrementing, even after deleted users
+     * - 4 Loads the employed users.
+     * - 5 Prints welcome screen
+     * - 6 Invokes login method
+     * - 7 Starts the menu selection
      */
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
         swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
-        fileHandler.loadSwimmerCoachAssociationList(swimmerCoachDatabase);
-        fileHandler.loadResultMethod(swimmerCoachDatabase);
         Member.setID(fileHandler.loadID());     // 3
         loadAndSetUsers();                      // 4
+        swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
+                swimmerCoachDatabase.getSwimmersCoachAssociationList() ,swimmerCoachDatabase));
+        fileHandler.loadResultMethod(swimmerCoachDatabase);
         testMemberDatabaseLoad();
         testCoachDatabaseLoad();
+
         while (true) {
             System.out.println("\n\n\n");
-            fileHandler.printWelcomeSharks();   // 4
-            loginSystem();                      // 5
+            fileHandler.printWelcomeSharks();   // 5
+            loginSystem();                      // 6
 
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tilføj et nyt medlem.",
