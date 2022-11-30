@@ -29,10 +29,17 @@ public class Chairman extends Employee {
 
 
 
+    /*
+    * This method creates a new Coach employee to file and coachList
+     */
     public void createCoach(Database coachList, UI ui){
         coachList.getCoachList().add(new Coach(ui));
-    }
+    } // End of method
 
+
+    /*
+    * This method removes a coach from the file and coachList.
+     */
     public void deleteCoach(Database coachlist, UI ui){
         ui.printLn("Write the name of the coach you would like to remove:");
         String findCoach = ui.readLine();
@@ -41,11 +48,9 @@ public class Chairman extends Employee {
             if (coachlist.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
                 coachlist.getCoachList().remove(i);
                 ui.printLn("You have removed " + findCoach + " From the coach list.");
-            }
-
-        }
-
-    }
+            } // End of if statement
+        } // End of for loop
+    } //End of method
 
 
 
