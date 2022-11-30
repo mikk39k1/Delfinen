@@ -32,6 +32,20 @@ public class SwimmingResult {
         }
     }
 
+    // Constructor for fileWriter -----------------------
+
+    public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank){
+        this.distance = distance;
+        this.swimTime = swimTime;
+        this.date = date;
+        this.isCompetitive = isCompetitive;
+        if (isCompetitive){
+            this.rank = rank;
+        }else {
+            this.rank = 0;
+        }
+    }
+
     // Getters ------------------------------------------
     public int getDistance() {
         return distance;

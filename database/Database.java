@@ -10,7 +10,8 @@ public class Database {
     // Attributes ---------------------------------------------
     ArrayList<Member> memberList = new ArrayList<>();
     ArrayList<Coach> coachList = new ArrayList<>();
-    private final HashMap<Member, Coach> SwimmersCoachAssociationList = new HashMap<>();
+
+    private HashMap<Member, Coach> swimmersCoachAssociationList = new HashMap<>();
 
 
     // Getters ------------------------------------------------
@@ -23,7 +24,7 @@ public class Database {
     }
 
     public HashMap<Member, Coach> getSwimmersCoachAssociationList() {
-        return this.SwimmersCoachAssociationList;
+        return this.swimmersCoachAssociationList;
     }
 
     // Setters ------------------------------------------------
@@ -31,7 +32,12 @@ public class Database {
         this.memberList = memberList;
     }
 
-    public void setCoachList(ArrayList<Coach> coachList){
+    public void setCoachList(ArrayList<Coach> coachList) {
         this.coachList = coachList;
     }
+
+    public void setSwimmersCoachAssociationList(HashMap<Member, Coach> swimmersCoachAssociationList){
+        this.swimmersCoachAssociationList = swimmersCoachAssociationList;
+    }
+
 }

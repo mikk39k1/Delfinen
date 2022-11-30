@@ -201,7 +201,6 @@ public class MenuRun {
 
 
 
-
     /*
      * This method prints and sorts the top 5 swimmer performances based on inputs from user.
      * The method reads input from user: swimDiscipline and period of time to get results
@@ -247,6 +246,15 @@ public class MenuRun {
         } // End of outer if / else statement
     } // End of method
 
+    private void createCoach(Employee employee, Database database, UI ui){
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            ((Chairman) employee).createCoach(database,ui);
+            fileHandler.writeToCoachlist(database.getCoachList());
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of if / else statement
+    }
 
     private void createCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {

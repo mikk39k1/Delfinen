@@ -34,6 +34,8 @@ public class SystemBoot {
     private void startSystem() {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
         swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
+        fileHandler.loadSwimmerCoachAssociationList(swimmerCoachDatabase);
+        fileHandler.loadResultMethod(swimmerCoachDatabase);
         Member.setID(fileHandler.loadID());     // 3
         loadAndSetUsers();                      // 4
         testMemberDatabaseLoad();
@@ -82,9 +84,9 @@ public class SystemBoot {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
-        /*enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
+        enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
         enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13", "Marry123"));
-        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));*/
+        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));
 
         // Add coaches to coach list -------------------------------------------
         for (Employee user : enigmaUsers) {
@@ -109,9 +111,11 @@ public class SystemBoot {
     } // end of method
 
 
+
+
     // loginStuff ----------------------------------
     /*
-    * This method checks through file and username / password method if inputs are authentic, to allow login
+      This method checks through file and username / password method if inputs are authentic, to allow login
      */
     public String isLoggedIn() {
         String username = fileHandler.checkUsername(getUsername());
@@ -179,14 +183,13 @@ public class SystemBoot {
         }
     }
 
-
     private void testCoachDatabaseLoad(){
         for (int i = 0; i < swimmerCoachDatabase.getCoachList().size(); i++) {
             System.out.println();
-                System.out.printf("Username: %-5s Name: %-10s Phone Number: %-10s ",
-                        swimmerCoachDatabase.getCoachList().get(i).getUsername(),
-                        swimmerCoachDatabase.getCoachList().get(i).getName(),
-                        swimmerCoachDatabase.getCoachList().get(i).getPhoneNumber());
+            System.out.printf("Username: %-5s Name: %-10s Phone Number: %-10s ",
+                    swimmerCoachDatabase.getCoachList().get(i).getUsername(),
+                    swimmerCoachDatabase.getCoachList().get(i).getName(),
+                    swimmerCoachDatabase.getCoachList().get(i).getPhoneNumber());
             System.out.println();
         }
     }

@@ -1,12 +1,12 @@
 package utility;
 
-import actors.CompetitiveSwimmer;
-import actors.LeisureSwimmer;
-import actors.Member;
-import actors.SwimmingDiscipline;
+import actors.*;
+import database.Database;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -96,11 +96,30 @@ public class FileHandler {
                         printToFile.print((";") + (type));
                     } // End of inner for loop
                 printToFile.println();
+            } // End of outer for loop
+            printToFile.close();    // Closes the PrintStream
+        } catch (FileNotFoundException e) {
+            System.out.println("Noget gik galt");
+        } // End of try / catch statement
+    } // End of method
+
+    public void writeToCoachlist(ArrayList<Coach> coaches) {
+        try {
+            printToFile = new PrintStream(coachListFile);
+
+            for (Coach coach : coaches) {
+
+
+                printToFile.print(coach.getUsername() + ";");     // Write username to coachlist file
+                printToFile.print(coach.getName() + ";");         // Write Name to coachlist file
+                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phonenumber to coachlist file
+                printToFile.println();
                 printToFile.close();    // Closes the PrintStream
             } // End of outer for loop
         } catch (FileNotFoundException e) {
             System.out.println("Noget gik galt");
         } // End of try / catch statement
+
     } // End of method
 
 
@@ -173,6 +192,8 @@ public class FileHandler {
         } // End of try / catch statement
         return membersList;
     } // End of method
+
+
 
 
     /*
@@ -336,15 +357,15 @@ public class FileHandler {
 
 
     /*
-    * This method prints a welcome emoji presenting creators of this project
+     * This method prints a welcome emoji presenting creators of this project
      */
-    public void printWelcomeSharks(){
+    public void printWelcomeSharks() {
         try {
             readFromFile = new Scanner(sharksPrint);
             while (readFromFile.hasNextLine()) {
                 System.out.println(readFromFile.nextLine());
             } // End of while loop
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } // End of try / catch statement
     } // End of method
