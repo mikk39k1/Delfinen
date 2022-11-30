@@ -1,6 +1,7 @@
 package actors;
 
 import database.Database;
+import utility.FileHandler;
 import utility.UI;
 
 import javax.xml.crypto.Data;
@@ -52,12 +53,12 @@ public class Chairman extends Employee {
     * This method takes in createMember method and adds the member to the arraylist in the Database class
     * It also takes in chooseCoach method to add both Member and Coach as Key/Value pair in the hashMap inside Database
      */
-    public void addMember(UI ui, Member newMember, Database database) {
+    public void addMember(UI ui, Member newMember, Database database, FileHandler fileHandler) {
         database.getMemberList().add(newMember);            // Adds new member to Database memberList
 
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
-            int disciplineAmount = ui.readInt();        // Stores temporary the amount of Discipline Types swimmer should have
+            int disciplineAmount = ui.readInt();           // Stores temporary the amount of Discipline Types swimmer should have
             for (int i = 0; i < disciplineAmount; i++) {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui)); // Adds Swimming Discipline
             } // End of for loop
@@ -66,6 +67,7 @@ public class Chairman extends Employee {
 
             ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
                     " aktive svømme discipliner");
+            fileHandler.writeToSwimmerCoachAssociationFile(database);
         } // End of if statement
     } // End of method
 

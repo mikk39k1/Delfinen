@@ -10,7 +10,7 @@ public class SwimmingResult {
     private final String date;
     private final String swimTime;
     private final boolean isCompetitive;
-    private int rank;
+    private int rank = 0;
 
 
     // Constructor --------------------------------------
@@ -39,10 +39,8 @@ public class SwimmingResult {
         this.swimTime = swimTime;
         this.date = date;
         this.isCompetitive = isCompetitive;
-        if (isCompetitive){
+        if (isCompetitive) {
             this.rank = rank;
-        }else {
-            this.rank = 0;
         }
     }
 
@@ -67,15 +65,8 @@ public class SwimmingResult {
         return rank;
     }
 
-
-    @Override
-    public String toString() {
-        return "SwimmingResult{" +
-                "distance=" + distance +
-                ", date='" + date + '\'' +
-                ", swimTime='" + swimTime + '\'' +
-                ", isCompetitive=" + isCompetitive +
-                ", rank=" + rank +
-                '}';
+    public void printResults() {
+        System.out.printf("Distance: %-10d Swim Time: %-30s Competition: %-15s Rank: %-10d\n",
+                distance,swimTime,isCompetitive,rank);
     }
 }

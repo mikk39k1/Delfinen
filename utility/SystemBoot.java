@@ -27,7 +27,7 @@ public class SystemBoot {
      * - 1 Loading all member data from fullMemberList file
      * - 2 Loading all coach employees from coachList file
      * - 3 Sets the corresponding static member ID, so Member ID keeps incrementing, even after deleted users
-     * - 4 Loads the employed users.
+     * - 4 Loads the employed users
      * - 5 Prints welcome screen
      * - 6 Invokes login method
      * - 7 Starts the menu selection
@@ -48,7 +48,7 @@ public class SystemBoot {
             fileHandler.printWelcomeSharks();   // 5
             loginSystem();                      // 6
 
-            new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
+            new MenuRun(">>> ENIGMA SOLUTION <<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tilføj et nyt medlem.",
                     "2. Slet et medlem",
                     "3. Udprint af alle eksisterende medlemmer.",

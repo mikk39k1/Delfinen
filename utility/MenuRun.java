@@ -70,7 +70,7 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
-                    swimmerCoachDatabase);
+                    swimmerCoachDatabase, fileHandler);
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");

@@ -5,6 +5,7 @@ import utility.UI;
 import utility.FileHandler;
 
 import java.io.File;
+import java.util.Map;
 
 public class Coach extends Employee {
 
@@ -104,15 +105,14 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(Employee employee,UI ui, Database swimmerCoachDatabase, FileHandler filehandler) {
+	public void addSwimResult(Employee employee, UI ui, Database swimmerCoachDatabase, FileHandler filehandler) {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
-		for (int i = 0; i < swimmerCoachDatabase.getSwimmersCoachAssociationList().size(); i++) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().containsKey(swimmer)) {
+		for (Map.Entry<Member, Coach> set : swimmerCoachDatabase.getSwimmersCoachAssociationList().entrySet()) {
+			if (set.getKey().equals(swimmer)) {
 				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
 				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
-
 				if (hasSwimDiscipline > -1) {
 					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
 							.add(new SwimmingResult(ui));
@@ -121,7 +121,6 @@ public class Coach extends Employee {
 					ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
 				} // End of inner if / else statement
 			} // End of if statement
-
 		} // End of for loop
 	} // End of method
 
@@ -137,8 +136,11 @@ public class Coach extends Employee {
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
 					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getDateOfBirth(), competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
-			System.out.println(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults());
-		} // End of for loop
+			for (SwimmingResult result : competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults()) {
+				System.out.print(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline()+": ");
+				result.printResults();
+			} // End of inner for loop
+		} // End of outer for loop
 	} // End of method
 
 
@@ -206,6 +208,8 @@ public class Coach extends Employee {
 			} // End of if statement
 		} // End of for loop
 	} // End of method
+
+
 
 	public String loadCoachOfMember(Database swimmerCoachDatabase, Member member) {
 		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {

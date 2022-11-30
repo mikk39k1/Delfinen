@@ -19,7 +19,7 @@ public class FileHandler {
 
 
     private PrintStream printToFile;
-    private FileOutputStream appendToFile;
+    private  FileOutputStream appendToFile;
     private Scanner readFromFile;
 
 
@@ -103,26 +103,32 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
+
+    /*
+    * This method writes coach employee credentials to coachList file
+     */
     public void writeToCoachlist(ArrayList<Coach> coaches) {
         try {
             printToFile = new PrintStream(coachListFile);
 
             for (Coach coach : coaches) {
-                printToFile.print(coach.getUsername() + ";");     // Write username to coachlist file
-                printToFile.print(coach.getName() + ";");         // Write Name to coachlist file
-                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phonenumber to coachlist file
-                printToFile.print(coach.getPassword());
+                printToFile.print(coach.getUsername() + ";");     // Write username to coachList file
+                printToFile.print(coach.getName() + ";");         // Write Name to coachList file
+                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phone number to coachList file
+                printToFile.print(coach.getPassword());           // Write password to coachList file
                 printToFile.println();
 
-            }
-                printToFile.close();// Closes the PrintStream
-             // End of outer for loop
+            } // End of for loop
+            printToFile.close();    // Closes the PrintStream
         } catch (FileNotFoundException e) {
             System.out.println("Noget gik galt");
         } // End of try / catch statement
-
     } // End of method
 
+
+    /*
+    * This method writes coach username and password to passwd file
+     */
     public void writeCoachUserAndPassToList(ArrayList<Coach> coaches){
         try{
             printToFile = new PrintStream(new FileOutputStream(passwordList,true));
@@ -130,39 +136,13 @@ public class FileHandler {
                     printToFile.print(coach.getUsername() + " ");
                     printToFile.print(coach.getPassword());
                     printToFile.println();
-                }
-
+                } // End of for loop
             printToFile.close();
         } catch (Exception e){
             e.printStackTrace();
-        }
-    }
+        } // End of try / catch statement
+    } // End of method
 
-
-
-
-    /*public void writeToResults(ArrayList<>){
-        for (int i = 0; i < type.getSwimmingDisciplineResults().size(); i++) {
-            try {
-                appendPrintToFile = new PrintStream(new FileOutputStream(memberResultFile,true));
-
-                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDistance() + ";");
-                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getDate() + ";");
-                appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getSwimTime() + ";");
-                if (type.getSwimmingDisciplineResults().get(i).isCompetitive()) {
-                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
-                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).getRank() + ";");
-                    appendPrintToFile.println();
-                } else {
-                    appendPrintToFile.print(type.getSwimmingDisciplineResults().get(i).isCompetitive() + ";");
-                    appendPrintToFile.println();
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                System.out.println("Ingen resultater at hente");
-            }
-        }
-    } */
 
 
     /*
@@ -190,7 +170,7 @@ public class FileHandler {
                     int disciplineAmount = arrOfStr.length - 7;     //Stores amounts of active Discipline types of Member
                     for (int i = 0; i < disciplineAmount; i++) {
                         compSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline
-                                (arrOfStr[7 + i])); // magicNumber is to get the start pos enumSwimDiscipline in array
+                                (arrOfStr[7 + i])); // MAGIC NUMBER 7 is to get the start position of enumSwimDiscipline in array
                     } // End of for loop
                     membersList.add(compSwimmer);           // Adds the created swimmerMember to memberList Array
                 } else {
@@ -223,9 +203,8 @@ public class FileHandler {
         try {
             readFromFile = new Scanner(memberArrayListFile);
             while (readFromFile.hasNextLine()) {
-                String s = readFromFile.nextLine();
-                String[] arrOfStr = s.split(";");
-                idArray.add(Integer.parseInt(arrOfStr[1])); // This adds the ID value to the temporary arrayList idArray
+                String[] arr = readFromFile.nextLine().split(";"); // Stores line from file to arr
+                idArray.add(Integer.parseInt(arr[1])); // This adds the ID value to the temporary arrayList idArray
             } // End of while loop
             return idArray.get(idArray.size() - 1) + 1; // Returns the ID value + 1 of the last member within the fullMemberList file
         } catch (IndexOutOfBoundsException | FileNotFoundException e) {
@@ -234,33 +213,50 @@ public class FileHandler {
     } // End of method
 
     public void appendResult(Employee employee, Database database, CompetitiveSwimmer swimmer, int hasSwimDiscipline) {
+        Coach temporaryCoach = new Coach();
+
         try {
             appendToFile = new FileOutputStream(memberResultFile, true);
             StringBuilder sb = new StringBuilder();
-            sb.append(swimmer.getUniqueID() + ";");
-            sb.append(((Coach) employee).loadCoachOfMember(database,swimmer));
-            sb.append(swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline) + ";");
-            int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults().size();
-            String time = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults().get(numberInArray).getSwimTime();
-            sb.append(time + ";");
-            String date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults().get(numberInArray).getDate();
-            sb.append(date + ";");
-            boolean isCompetitive = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults().get(numberInArray).isCompetitive();
-            sb.append(isCompetitive + ";");
-            int rank = 0;
-            if (isCompetitive) {
-                rank = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults().get(numberInArray).getRank();
-            }
-            sb.append(rank);
+            /*
+             * To illustrate which parameters are being stores this bulky setup seems appropriate
+             * The method stores all valuable attributes from being uniqueID, coach and result parameters
+             * Then the method append each attribute to the results file
+             */
+            int swimmerUniqueID = swimmer.getUniqueID();                                    // Store uniqueID
+            String coachName = temporaryCoach.loadCoachOfMember(database,swimmer);  // Store coach name
+            String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline) + ";"; // Store SwimmingDisciplineType
+            int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results
+            int distance = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getDistance();    // Stores distance of result
+            String time = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getSwimTime();    // Stores time of result
+            String date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getDate();        // Stores date of result
+            boolean isCompetitive = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).isCompetitive(); // Stores competitiveness of result
+            int rank = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getRank();        // Stores rank placement of result
+
+            sb.append(swimmerUniqueID);                 // Appends ID to StringBuilder
+            sb.append(coachName);                       // Appends Coach name to StringBuilder
+            sb.append(swimmingDisciplineType);          // Appends Swimming Discipline Type to StringBuilder
+            sb.append(distance).append(";");            // Appends distance from result to StringBuilder
+            sb.append(time).append(";");                // Appends time from result to StringBuilder
+            sb.append(date).append(";");                // Appends date from result to StringBuilder
+            sb.append(isCompetitive).append(";");       // Appends competitiveness from result to StringBuilder
+            sb.append(rank);                            // Appends rank from result to StringBuilder
+            sb.append("\n");                            // Appends a new line to StringBuilder
 
             appendToFile.write(sb.toString().getBytes());
-            appendToFile.write(System.getProperty("line.separator").getBytes());
+            //appendToFile.write(System.getProperty("line.separator").getBytes());
             appendToFile.close();
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("File not found");
-        }
-    }
+        } // End of try / catch statement
+    } // End of method
 
 
     //MyFinestSmadderkODE *atc
@@ -299,25 +295,35 @@ public class FileHandler {
         try {
             readFromFile = new Scanner(memberResultFile);
             while (readFromFile.hasNextLine()) {
-                String[] arr = readFromFile.nextLine().split(";");
-                int uniqueId = Integer.parseInt(arr[0]);
-                String swimDiscipline = arr[2];
-                int distance = Integer.parseInt(arr[3]);
-                String date = arr[4];
-                String swimTime = arr[5];
-                boolean isCompetitive = Boolean.parseBoolean(arr[6]);
-                int rank = Integer.parseInt(arr[7]);
+                String[] arr = readFromFile.nextLine().split(";");  // Stores whole line from file to arr
+                int uniqueId = Integer.parseInt(arr[0]);    // Stores UniqueID from arr
+                String swimDiscipline = arr[2];                // Stores SwimmingDisciplineType from arr
+                int distance = Integer.parseInt(arr[3]);    // Stores distance from arr
+                String date = arr[4];                          // Stores date from arr
+                String swimTime = arr[5];                      // Stores swimTime from arr
+                boolean isCompetitive = Boolean.parseBoolean(arr[6]);   // Stores competitiveness from arr
+                int rank = Integer.parseInt(arr[7]);        // Stores rank position from arr
 
+                /*
+                * The method first iterates through the HashMap containing the association between the swimmers and coaches
+                *  - Then the method identifies the UniqueID from result with Key value from HashMap
+                *  - Then the method verifies the SwimmingDisciplineType name from results with the Key value from hashMap
+                *  - Then the method conditionally chooses between boolean statement of competitiveness the constructor
+                *  - The constructor chosen will be filled with stored attributes
+                 */
                 for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
                     if (set.getKey().getUniqueID() == uniqueId) {
                         for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
                             if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
-                                    getSwimmingDiscipline().equals(SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(swimDiscipline))) {
+                                    getSwimmingDiscipline().
+                                    equals(SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(swimDiscipline))) {
                                 if (isCompetitive) {
-                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().
+                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
+                                            getSwimmingDisciplineResults().
                                             add(new SwimmingResult(distance, date, swimTime, true, rank));
                                 } else {
-                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().
+                                    ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
+                                            getSwimmingDisciplineResults().
                                             add(new SwimmingResult(distance, date, swimTime, false, 0));
                                 } // End of inner if / else statement
                             } // End of second inner if statement
@@ -344,7 +350,6 @@ public class FileHandler {
 
                 coachList.add(coachToList);
             }   // End of while loop
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } // End of try / catch statement
@@ -360,14 +365,19 @@ public class FileHandler {
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
             while (readFromFile.hasNextLine()) {
-                String[] lineParam = readFromFile.nextLine().split(";");
-                int swimmerID = Integer.parseInt(lineParam[0]);
-                String coachName = lineParam[1];
+                String[] arr = readFromFile.nextLine().split(";");    // Stores line from file to arr
+                int swimmerID = Integer.parseInt(arr[0]);                // Stores swimmers unique ID from arr
+                String coachName = arr[1];                                  // Stores coach name from arr
+
+                /*
+                * If a uniqueID from the current memberList matches that of the uniqueID stored in file
+                * The method goes on to see if a coach candidate also matches in pair value of coach name
+                * if both parameters have a match, the two entities are put inside the HashMap from Database class
+                 */
                 for (Member member : database.getMemberList()) {
                     if (member.getUniqueID() == swimmerID) {
                         for (Coach coach : database.getCoachList()) {
                             if (coach.getName().equals(coachName)) {
-                                assert false;
                                 swimmerCoachList.put(member, coach);
                             } // End of inner if statement
                         } // End of inner for loop
@@ -376,10 +386,31 @@ public class FileHandler {
             } // End of while loop
             return swimmerCoachList;
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            e.printStackTrace();
         } // End of try / catch statement
         return swimmerCoachList;
     }
+
+
+    /*
+    * This method writes the association link between a member and coach whenever a competitive swimmer is added
+     */
+    public void writeToSwimmerCoachAssociationFile(Database associationList) {
+        try {
+            printToFile = new PrintStream(swimmerCoachAssociationList);
+
+            /*
+            * Whenever the HashMap from database has had placed Key / Value pairs, an iteration and file writing happens
+            * of each key / value pair.
+             */
+            for (Map.Entry<Member, Coach> set : associationList.getSwimmersCoachAssociationList().entrySet()) {
+                printToFile.println(set.getKey().getUniqueID() + ";" + set.getValue().getName());
+            } // End of for loop
+            printToFile.close();
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } // End of try / catch statement
+    } // End of method
 
 
     /*
