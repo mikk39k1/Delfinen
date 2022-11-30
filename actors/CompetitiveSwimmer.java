@@ -16,7 +16,7 @@ public class CompetitiveSwimmer extends Member {
         in.print("Please enter phone number: ");
         setPhoneNumber(in.readLine());
         in.printLn("What is the members birthday");
-        setAge(in.setDate());
+        setDateOfBirth(in.setDate());
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
         setHasPaid(false);
@@ -29,7 +29,7 @@ public class CompetitiveSwimmer extends Member {
         setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);
-        setAge(birthday);
+        setDateOfBirth(birthday);
         setIsMembershipActive(isActive);
         setHasPaid(hasPaid);
 

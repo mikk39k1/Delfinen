@@ -61,7 +61,7 @@ public class Treasurer extends Employee {
 	 */
 	private String[] memberAnalysis(Member member){
 		String[] arr = new String[4]; 					// Stores temporary the member data of membership
-		arr[0] = Integer.toString(member.getRealAge());
+		arr[0] = Integer.toString(member.getAge());
 		if (!member.isIsMembershipActive()) {
 			arr[1]="500";arr[2] = "INACTIVE";arr[3]=null; // If member isn't active: price is 500
 		} else if (Integer.parseInt(arr[0])<18) {

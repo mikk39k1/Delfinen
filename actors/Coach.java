@@ -81,7 +81,7 @@ public class Coach extends Employee {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					System.out.printf("|ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getAge(),
+							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getDateOfBirth(),
 							member.isIsMembershipActive());
 							((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
@@ -125,7 +125,7 @@ public class Coach extends Employee {
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
 			System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: %-10s\n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
-					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getAge(), competitiveSwimmer.isIsMembershipActive(),
+					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getDateOfBirth(), competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
 			System.out.println(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults());
 		} // End of for loop

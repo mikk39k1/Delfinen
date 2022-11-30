@@ -4,9 +4,7 @@ import actors.CompetitiveSwimmer;
 import actors.LeisureSwimmer;
 import actors.Member;
 import actors.SwimmingDiscipline;
-import database.Database;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -85,7 +83,7 @@ public class FileHandler {
                 printToFile.print(";" + swimmer.getUniqueID());     // Delimiting with UniqueID value of swimmer
                 printToFile.print(";" + swimmer.getName());         // Delimiting with name value of swimmer
                 printToFile.print(";" + swimmer.getPhoneNumber());  // Delimiting with phoneNumber value of swimmer
-                printToFile.print(";" + swimmer.getAge());          // Delimiting with age value of swimmer
+                printToFile.print(";" + swimmer.getDateOfBirth());          // Delimiting with age value of swimmer
                 printToFile.print(";" + swimmer.isIsMembershipActive());    // Delimiting with member state value of swimmer
                 printToFile.print(";" + swimmer.isHasPaid());       // Delimiting with paid status value of swimmer
 

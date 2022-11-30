@@ -2,14 +2,13 @@ package actors;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.chrono.ChronoLocalDate;
 
 public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------
 	private static int ID;
 	private int uniqueID = Member.ID++;
-	private String birthOfYear;
+	private String dateOfBirth;
 	private boolean isMembershipActive;
 	private boolean hasPaid;
 
@@ -17,8 +16,8 @@ public abstract class Member extends Person {
 	public int getUniqueID() {
 		return this.uniqueID;
 	}
-	public String getAge() {
-		return this.birthOfYear;
+	public String getDateOfBirth() {
+		return this.dateOfBirth;
 	}
 	public boolean isIsMembershipActive() {
 		return this.isMembershipActive;
@@ -28,8 +27,8 @@ public abstract class Member extends Person {
 	}
 
 	// Setters -----------------------------------------------
-	public void setAge(String birthOfYear) {
-		this.birthOfYear = birthOfYear;
+	public void setDateOfBirth(String birthOfYear) {
+		this.dateOfBirth = birthOfYear;
 	}
 
 	public void setHasPaid(boolean hasPaid) {
@@ -56,8 +55,8 @@ public abstract class Member extends Person {
 	/*
 	* This method extracts the exact age based on the date of birth
 	 */
-	public int getRealAge() {
-		String s = this.birthOfYear;  // Stores the birthOfYear attribute temporary as a String
+	public int getAge() {
+		String s = dateOfBirth;  // Stores the birthOfYear attribute temporary as a String
 		String[] arrOfStr = s.split("-");		// Splits and adds components to a temporary String array
 		int year = Integer.parseInt(arrOfStr[0]); 	// Stores first value in array as year
 		int month = Integer.parseInt(arrOfStr[1]);	// Stores second value in array as month

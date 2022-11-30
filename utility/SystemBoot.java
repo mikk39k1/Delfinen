@@ -160,7 +160,7 @@ public class SystemBoot {
                         swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
                         swimmerCoachDatabase.getMemberList().get(i).getName(),
                         swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).getDateOfBirth(),
                         swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
                 ((CompetitiveSwimmer) swimmerCoachDatabase.getMemberList().get(i)).printSwimDisciplineList();
             }
@@ -169,7 +169,7 @@ public class SystemBoot {
                         swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
                         swimmerCoachDatabase.getMemberList().get(i).getName(),
                         swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getAge(),
+                        swimmerCoachDatabase.getMemberList().get(i).getDateOfBirth(),
                         swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
                 System.out.println();
             }
