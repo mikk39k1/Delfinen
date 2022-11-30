@@ -14,8 +14,6 @@ public class SystemBoot {
     ArrayList<Employee> enigmaUsers = new ArrayList<>();
     Database swimmerCoachDatabase = new Database();
 
-    // Setter -----------------------------------
-
     /*
      * Main method booting it all up
      */
@@ -46,7 +44,6 @@ public class SystemBoot {
             new MenuRun(">>>ENIGMA SOLUTION<<<", "Vælg en af nedenstående muligheder", new String[]{
                     "1. Tilføj et nyt medlem.",
                     "2. Slet et medlem",
-                    // Slet en burger
                     "3. Udprint af alle eksisterende medlemmer.",
                     "4. Oversigt over medlemmer i restance.",
                     "5. Ændr meldemmers betalingsstatus",
