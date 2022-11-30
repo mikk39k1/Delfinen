@@ -10,139 +10,254 @@ public class MenuRun {
     private final String menuHeader;
     private final String leadtext;
 
-    public MenuRun(String menuHeader,String leadtext ,String[] menuOptions, Employee employee, Database swimmerCoachDatabase) {
+    // Constructor  -----------------------------------------
+    public MenuRun(String menuHeader, String leadtext, String[] menuOptions, Employee employee, Database swimmerCoachDatabase) {
         this.menuHeader = menuHeader;
         this.menuOptions = menuOptions;
         this.leadtext = leadtext;
-        menuLooping(employee,swimmerCoachDatabase);
+        menuLooping(employee, swimmerCoachDatabase);
     }
 
-    public MenuRun(String menuHeader, String leadtext, String[] menuOptions) {
-        this.menuHeader = menuHeader;
-        this.menuOptions = menuOptions;
-        this.leadtext = leadtext;
-    }
 
+    // MenuRun Behaviors (Methods) ----------------------------
+
+
+    /*
+    * This method is looping each option a user can interact with within the menu
+     */
     public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
         boolean isSignedIn = true;
-
         while (isSignedIn) {
             printMenu();
             int userChoice = ui.readInt();
-
             switch (userChoice) {
-
-                case 1 -> {//add new member to all members lists
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-                        //Chairman method adding member with parameter - new member which creates member fixes
-                        ui.printLn(">> CREATE MEMBER <<");
-                        ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
-                                swimmerCoachDatabase);
-                        fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 2 -> {//print all members
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-                        ((Chairman) employee).printMembers(swimmerCoachDatabase);
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 3 -> {//Prints list of members who hasn't paid
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMYMANAGEMENT) ||
-                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 4 -> {//add swimResult
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
-                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-                        if (employee instanceof Chairman) {
-                            Coach adminOverride = new Coach();
-                            adminOverride.addSwimResult(ui, swimmerCoachDatabase);
-                            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
-
-                        } else {
-                            ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase);
-                            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
-                        }
-
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 5 -> { //method for printing swimResult for ONE competitor --
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
-                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-                        //Method reads input from user: swimDiscipline and period of time to get results
-                        if (employee instanceof Chairman) {
-                            Coach adminOverride = new Coach();
-                            adminOverride.checkCompetitorSwimResults(
-                                    adminOverride.lookupSwimmer(ui, swimmerCoachDatabase));
-                        } else {
-                            ((Coach) employee).checkCompetitorSwimResults(
-                                    ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase));
-                        }
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 6 -> {//method for printing top 5 results for specific discipline
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
-                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-                        //Method reads input from user: swimDiscipline and period of time to get results
-                        if (employee instanceof Chairman) {
-                            Coach adminOverride = new Coach();
-                            /*adminOverride.checkCompetitorSwimResults(
-                                    adminOverride.foundSwimmer(ui, swimmerCoachDatabase));
-                             */
-                        } else {
-                            ((Coach) employee).checkCompetitorSwimResults(
-                                    ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase));
-                        }
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-                }
-                case 8 -> {// this method prints all members for specific coach
-
-                    if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
-                            employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-                        //Method reads input from user: swimDiscipline and period of time to get results
-                        if (employee instanceof Chairman) {
-                            Coach adminOverride = ((Chairman) employee).chooseCoach(ui,swimmerCoachDatabase);
-                            adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride);
-
-                        } else {
-                            ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee));
-                        }
-                    } else {
-                        ui.printLn("Du har ikke login rettigheder til denne funktion");
-                    }
-
-                }
-                case 9 -> {
-                    ui.printLn("Logger ud");
-                    isSignedIn = false;
-                }
+                case 1 -> {addMember(employee, swimmerCoachDatabase); /*add new member to all members lists */}
+                case 2 -> {deleteMember(employee,swimmerCoachDatabase); /*deletes member from members lists*/}
+                case 3 -> {printAllMembers(employee, swimmerCoachDatabase);/*print all members */}
+                case 4 -> {printMembersInDebt(employee, swimmerCoachDatabase); /*Prints list of members who hasn't paid */}
+                case 5 -> {changePayDue(employee, swimmerCoachDatabase);}
+                case 6 -> {addSwimResult(employee, swimmerCoachDatabase);/*add swimResult*/}
+                case 7 -> {printCompetitiveSwimmersResult(employee, swimmerCoachDatabase); /*Prints 1 swimmers results*/}
+                case 8 -> {printTopFiveByDiscipline(employee, swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/}
+                case 9 -> {printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/}
+                case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
                 default -> ui.printLn("Vælg en eksisterende mulighed.\n");
-            }
-        }
-    }
+            } // End of switch statement
+        } // End of while loop
+    } // End of method
 
+
+
+    /*
+     * Prints all the attributes of the menu
+     */
     private void printMenu() {
-        System.out.println(menuHeader);
-        System.out.println(leadtext);
+        ui.printLn(menuHeader);
+        ui.printLn(leadtext);
         for (String menuOption : menuOptions) {
-            System.out.println(menuOption);
-        }
-    }
-}
+            ui.printLn(menuOption);
+        } // End of for loop
+    } // End of method
+
+
+    /*
+     * This method adds a member through the Chairman class
+     * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
+     */
+    private void addMember(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
+                    swimmerCoachDatabase);
+            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of if / else statement
+    } // End of method
+
+
+    /*
+    * This method finds and deletes a member from the Database memberList
+    * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
+     */
+    private void deleteMember(Employee employee, Database memberList) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            ((Chairman)employee).deleteMember(ui,memberList);
+            fileHandler.writeToFullMembersList(memberList.getMemberList());
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of if / else statement
+    } // End of method
+
+
+
+    /*
+     * This method prints all members from the database through the Chairman class
+     * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
+     */
+    private void printAllMembers(Employee employee, Database memberList) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            ((Chairman) employee).printMembers(ui,memberList);
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of if / else statement
+    } // End of method
+
+
+
+    /*
+     * This method prints all members with arrears through the Treasurer class
+     * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
+     */
+    private void printMembersInDebt(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman) {
+                Treasurer adminOverride = new Treasurer();                      // Creates temporary user for admin
+                adminOverride.checkMemberArrears(swimmerCoachDatabase);         // Runs temporary user intended method
+            } else {
+                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
+            } // End of inner if / else statement
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
+
+
+
+    /*
+     * This method allows for changes within member status, regarding paid status through the Treasurer class
+     * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
+     */
+    private void changePayDue(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman) {
+                Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
+                adminOverride.setMemberArrears(swimmerCoachDatabase, ui); // Runs temporary user intended method
+                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+            } else {
+                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
+            } // End of inner if / else statement
+            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
+
+
+
+    /*
+     * This method adds swimming result to a member through the Coach class
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     */
+    private void addSwimResult(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman) {
+                Coach adminOverride = new Coach();                         // Creates temporary user for admin
+                adminOverride.addSwimResult(ui, swimmerCoachDatabase); // Runs temporary user method
+                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());   // Writes to file
+
+            } else {
+                ((Coach) employee).addSwimResult(ui, swimmerCoachDatabase); // Runs method as Coach
+                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes to file
+            } // End of inner if / else statement
+
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
+
+
+
+
+    /*
+     * This method prints out a specific Swimmers results
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     */
+    private void printCompetitiveSwimmersResult(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            //Method reads input from user: swimDiscipline and period of time to get results
+            if (employee instanceof Chairman) {
+                Coach adminOverride = new Coach();                      // Creates temporary user for admin
+                adminOverride.checkCompetitorSwimResults(
+                        adminOverride.lookupSwimmer(ui, swimmerCoachDatabase)); //Runs temporary user method
+            } else {
+                ((Coach) employee).checkCompetitorSwimResults(
+                        ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase)); // runs method as Coach
+            } // End of inner if / else statement
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
+
+
+
+
+    /*
+     * This method prints and sorts the top 5 swimmer performances based on inputs from user.
+     * The method reads input from user: swimDiscipline and period of time to get results
+     * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     */
+    private void printTopFiveByDiscipline(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman) {
+                Coach adminOverride = new Coach();              // Creates a temporary user for admin
+                adminOverride.checkCompetitorSwimResults(
+                        adminOverride.lookupSwimmer(ui, swimmerCoachDatabase)); //Runs temporary user method
+            } else {
+                ((Coach) employee).checkCompetitorSwimResults(
+                        ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase)); // Runs method as Coach
+            } // End of inner if / else statement
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } //End of method
+
+
+
+
+    /*
+    * This method prints all the members associated for a specific coach
+    * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
+     */
+    private void printSwimmersByCoach(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+            if (employee instanceof Chairman) {
+                // This method makes admin take role of an existing coach, to print his members out
+                Coach adminOverride = ((Chairman) employee).chooseCoach(ui, swimmerCoachDatabase);
+                adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride); // Runs method as temporary user
+            } else {
+                ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
+            } // End of inner if / else statement
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
+
+
+
+
+    /*
+    * This method will log out the user and terminate the program
+     */
+    private boolean logOut() {
+        ui.printLn("Logger ud");
+        System.exit(0);
+        return false;
+    } // End of Method
+
+} // End of Class
+

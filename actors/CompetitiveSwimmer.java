@@ -19,16 +19,19 @@ public class CompetitiveSwimmer extends Member {
         setAge(in.setDate());
         in.print("Please enter if membership is active? true/false: ");
         setIsMembershipActive(in.readBoolean());
+        setHasPaid(false);
 
         // Need method to add Coach to database on FILE so database can load array with active Coaches
     }
 
-    public CompetitiveSwimmer(int uniqueID, String name, String phoneNumber, String birthday, boolean isActive) {//this is for the loadmethod
-        setID(uniqueID);
+    public CompetitiveSwimmer(int uniqueID, String name, String phoneNumber,
+                              String birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
+        setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);
         setAge(birthday);
         setIsMembershipActive(isActive);
+        setHasPaid(hasPaid);
 
     }
 

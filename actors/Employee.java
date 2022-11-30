@@ -9,7 +9,7 @@ public abstract class Employee extends Person {
 		COACHING}
 	public enum PrivilegeType {
 		ADMINISTRATOR,
-		ECONOMYMANAGEMENT,
+		ECONOMY_MANAGEMENT,
 		COMPETITIVE_SWIMMER_MANAGEMENT};
 
 	private RoleType role;
