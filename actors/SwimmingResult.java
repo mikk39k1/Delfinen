@@ -71,6 +71,7 @@ public class SwimmingResult {
     }
 
     public void printResults() {
+
         System.out.printf("Distance: %-10d Swim Time: %-30s Competition: %-15s Rank: %-10d\n",
                 distance, swimTime, isCompetitive, rank);
     }
