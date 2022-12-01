@@ -46,7 +46,7 @@ public class CompetitiveSwimmer extends Member {
 
     public void printSwimDisciplineList() {
         for (int i = 0; i < swimmingDisciplineList.size(); i++) {
-            System.out.print(swimmingDisciplineList.get(i).getSwimmingDiscipline() + ", ");
+            System.out.print(" | " + swimmingDisciplineList.get(i).getSwimmingDiscipline());
         }
         System.out.print("\n");
     }

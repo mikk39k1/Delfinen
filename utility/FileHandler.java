@@ -35,7 +35,7 @@ public class FileHandler {
      */
     public String checkUsername(String username) {
         try {
-            Scanner readLoginCredentials = new Scanner(new File("files/passwd.txt"));
+            Scanner readLoginCredentials = new Scanner(passwordList);
 
             while (readLoginCredentials.hasNextLine()) {
                 String[] loadedUsername = readLoginCredentials.nextLine().split(";");    // Stores temporary username to arr
@@ -118,12 +118,10 @@ public class FileHandler {
             printToFile = new PrintStream(coachListFile);
 
             for (Coach coach : coaches) {
-                printToFile.print(coach.getUsername() + ";");     // Write username to coachList file
+                printToFile.print(coach.getUsername() + ";");
                 printToFile.print(coach.getName() + ";");         // Write Name to coachList file
-                printToFile.print(coach.getPhoneNumber() + ";");  // Write Phone number to coachList file
-                printToFile.print(coach.getPassword());           // Write password to coachList file
+                printToFile.print(coach.getPhoneNumber());  // Write Phone number to coachList file
                 printToFile.println();
-
             } // End of for loop
             printToFile.close();    // Closes the PrintStream
         } catch (FileNotFoundException e) {
@@ -138,12 +136,10 @@ public class FileHandler {
     public void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
         try{
             printToFile = new PrintStream(new FileOutputStream(passwordList,true));
-                for (Coach coach: coaches) {
-                    printToFile.print(coach.getUsername() + " ");
-                    printToFile.print(coach.getPassword());
-                    printToFile.println();
-                } // End of for loop
-            printToFile.close();
+                printToFile.print(coachUsername + ";");
+                printToFile.print(coachPassword);
+                printToFile.println();
+                printToFile.close();
         } catch (Exception e){
             e.printStackTrace();
         } // End of try / catch statement
@@ -349,11 +345,23 @@ public class FileHandler {
             while (readFromFile.hasNextLine()) {
                 String s = readFromFile.nextLine();         // Stores the whole line containing a member to temporary String
                 String[] arrOfStr = s.split(";");     // Delimiting by semicolon sign and adds to a temporary array
-                String username = arrOfStr[0];              // Stores Coach Username
+                String username = arrOfStr[0];              //Stores the username
                 String name = arrOfStr[1];                  // Stores the name of Coach in a temporary String
                 String phone = arrOfStr[2];                 // Stores phone number of Coach in a temporary String
-                Coach coachToList = new Coach(name,phone,username); // Creates a coach with these attributes
 
+
+                Scanner readFromPassFile = new Scanner(passwordList);   // finds username matching from coach list
+                String psswPassword = "";                                     // Placeholder for password matching username
+
+                while(readFromPassFile.hasNextLine()) {
+                    String[] arr = readFromPassFile.nextLine().split(";");
+                    if (arr[0].equalsIgnoreCase(username)) {   // If username from password file matches username from coach list
+                        psswPassword = arr[1];                            // Stores matching password for coach
+                        readFromPassFile.close();
+                        break;                                          // breaks out of while loop
+                    } // End of if statement
+                } // End of while loop
+                Coach coachToList = new Coach(name,phone, username, psswPassword); // Creates a coach with these attributes
                 coachList.add(coachToList);
             }   // End of while loop
         } catch (FileNotFoundException e) {

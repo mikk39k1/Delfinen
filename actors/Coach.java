@@ -16,29 +16,15 @@ import java.util.Map;
 public class Coach extends Employee {
 
 	// Constructors ---------------------------------
-	public Coach(UI in) {
-		in.print("Please enter name of Coach: ");
-		setName(in.readLine());
-		setRole(RoleType.COACHING);
-		setPrivilege(PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT);
-		in.print("Please enter a phone number: ");
-		setPhoneNumber(in.readLine());
-		in.print("Please enter a username: ");
-		setUsername(in.readLine());
-		in.print("Please enter a password: ");
-		setPassword(in.readLine());
 
-		// Need method to add Coach to database on FILE so database can load array with active Coaches
-	}
-
-	public Coach(String name, String phoneNumber, String username) {
+	// Constructor to create a Coach with Password.
+	public Coach(String name, String phonenumber, String username, String password) {
 		setName(name);
 		setRole(RoleType.COACHING);
 		setPrivilege(PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT);
-		setPhoneNumber(phoneNumber);
+		setPhoneNumber(phonenumber);
 		setUsername(username);
-
-		// Need method to add Coach to database on FILE so database can load array with active Coaches
+		setPassword(password);
 	}
 
 	public Coach() {
