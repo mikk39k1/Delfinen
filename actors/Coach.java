@@ -15,7 +15,6 @@ import java.util.Map;
  */
 public class Coach extends Employee {
 
-
 	// Constructors ---------------------------------
 	public Coach(UI in) {
 		in.print("Please enter name of Coach: ");
@@ -46,12 +45,6 @@ public class Coach extends Employee {
 
 	}
 
-	public Coach(RoleType accountant, PrivilegeType competitiveSwimmerManagement) {
-		super();
-	}
-
-
-
 	// Coach Behaviors (Methods) --------------------------
 	public void checkTrainingResults() {
 
@@ -70,7 +63,7 @@ public class Coach extends Employee {
 		//Finds member name
 		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase); // Stores temporary swimmer name in a String
 
-		System.out.println("Please enter ID on the member: ");
+		System.out.print("Please enter ID on the member: ");
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
@@ -91,7 +84,7 @@ public class Coach extends Employee {
 		//Finds member name
 		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
 
-		System.out.println("Please enter ID on the member you wish to add result to:");
+		System.out.print("Please enter ID on the member you wish to add result to: ");
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
@@ -117,6 +110,11 @@ public class Coach extends Employee {
 
 		for (Map.Entry<Member, Coach> set : swimmerCoachDatabase.getSwimmersCoachAssociationList().entrySet()) {
 			if (set.getKey().equals(swimmer)) {
+				ui.print("Enter Swimming Disciplines: | ");
+				for (SwimmingDiscipline swimType : ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList()) {
+					ui.print(swimType + " | ");
+				}
+				ui.printLn("");
 				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
 				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
 				if (hasSwimDiscipline > -1) {
@@ -157,7 +155,7 @@ public class Coach extends Employee {
 	 */
 	public String findSwimmerByName(UI ui, Database swimmerCoachDatabase) {
 
-		ui.printLn("Please enter name of swimmer you wish lookup: ");
+		ui.print("Please enter name of swimmer you wish lookup: ");
 		String swimmerName = ui.readLine();		// Stores temporary swimmerName we are searching for
 
 		for (Member member : swimmerCoachDatabase.getMemberList()) {

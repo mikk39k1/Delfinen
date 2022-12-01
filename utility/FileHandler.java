@@ -38,14 +38,13 @@ public class FileHandler {
             Scanner readLoginCredentials = new Scanner(new File("files/passwd.txt"));
 
             while (readLoginCredentials.hasNextLine()) {
-                String loadedUsername = readLoginCredentials.next();    // Stores temporary username as a String
-                if (username.equals(loadedUsername)) {
+                String[] loadedUsername = readLoginCredentials.nextLine().split(";");    // Stores temporary username to arr
+                String loadUsername = loadedUsername[0];
+                if (loadUsername.equals(username)) {
                     readLoginCredentials.close();       // If username matches, closes the Scanner and return value
-                    return loadedUsername;
-                } else {
-                    readLoginCredentials.next();
-                } // End of if / else statement
-            } // End of while loop
+                    return loadUsername;
+                    } // End of if /  else {
+                } // End of if / else statemen
         } catch (Exception e) {
             System.out.println("File doesn't exist\n");
         } // End of try / catch statement
@@ -65,7 +64,7 @@ public class FileHandler {
                 String loadedPassword = readLoginCredentials.next();    // Stores temporary password as a String
                 if (loadedPassword.equals(password)) {
                     readLoginCredentials.close();       // If password matches closes the Scanner and returns value
-                    return loadedPassword;
+                    return password;
                 } // End of if statement
             } // End of while loop
         } catch (Exception e) {
@@ -136,7 +135,7 @@ public class FileHandler {
     /*
     * This method writes coach username and password to passwd file
      */
-    public void writeCoachUserAndPassToList(ArrayList<Coach> coaches){
+    public void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
         try{
             printToFile = new PrintStream(new FileOutputStream(passwordList,true));
                 for (Coach coach: coaches) {
@@ -232,7 +231,7 @@ public class FileHandler {
              */
             int swimmerUniqueID = swimmer.getUniqueID();                                    // Store uniqueID
             String coachName = temporaryCoach.loadCoachOfMember(database,swimmer);  // Store coach name
-            String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline) + ";"; // Store SwimmingDisciplineType
+            String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline)+";"; // Store SwimmingDisciplineType
             int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results
             int distance = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
@@ -246,8 +245,8 @@ public class FileHandler {
             int rank = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).getRank();        // Stores rank placement of result
 
-            sb.append(swimmerUniqueID);                 // Appends ID to StringBuilder
-            sb.append(coachName);                       // Appends Coach name to StringBuilder
+            sb.append(swimmerUniqueID).append(";");                 // Appends ID to StringBuilder
+            sb.append(coachName).append(";");                       // Appends Coach name to StringBuilder
             sb.append(swimmingDisciplineType);          // Appends Swimming Discipline Type to StringBuilder
             sb.append(distance).append(";");            // Appends distance from result to StringBuilder
             sb.append(time).append(";");                // Appends time from result to StringBuilder

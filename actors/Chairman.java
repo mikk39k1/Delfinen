@@ -36,9 +36,20 @@ public class Chairman extends Employee {
 
     /*
     * This method creates a new Coach employee to file and coachList
-     */
-    public void createCoach(Database coachList, UI ui){
-        coachList.getCoachList().add(new Coach(ui));
+    * and sets the username and Password in Password file
+    */
+    public void createCoach(Database coachList, UI ui, FileHandler filehandler) {
+        ui.print("Please enter name of Coach: ");
+        String coachName = ui.readLine();
+        ui.print("Please enter a phone number: ");
+        String phonenumber = ui.readLine();
+        ui.print("Please enter a username: ");
+        String username = ui.readLine();
+        ui.print("Please enter a password: ");
+        String password = ui.readLine();
+
+        coachList.getCoachList().add(new Coach(coachName, phonenumber,username,password));
+        filehandler.writeCoachUserAndPassToList(username,password);
     } // End of method
 
 

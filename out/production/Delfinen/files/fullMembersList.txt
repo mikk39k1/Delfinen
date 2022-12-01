@@ -1,3 +1,2 @@
-true;1000;asdasda;1;0002-01-01;true;false;CRAWL
-true;1001;Oliver;245435978;1992-02-11;true;false;CRAWL;BUTTERFLY
-true;1002;Alex;42237826;1993-03-02;true;false;CRAWL
+false;1000;Alex;12312312;1993-10-01;false;false
+true;1001;Oliver;123123123;1985-10-01;true;false;CRAWL;FREESTYLE

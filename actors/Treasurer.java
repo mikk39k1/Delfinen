@@ -7,7 +7,7 @@ import utility.UI;
 * This class represents the treasurer, which is the accountant in the system.
 * Being the accountant the only status he / she can manipulate and is paid status and see all members in debt
  */
-public class Treasurer extends Employee {
+public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 
 
 	// Constructors-------------------------------------------------
@@ -78,4 +78,83 @@ public class Treasurer extends Employee {
 		return arr;
 	} // End of method
 
+
+	private ArrayList<int[]> gatherPaymentInfoForPayingMembers(Database swimmerCoachDatabase) {
+		ArrayList<int[]> list = new ArrayList<>();
+		int[] posinactive = {0,0};
+		int[] poschild = {0,0};
+		int[] posadult = {0,0};
+		int[] pospensioner = {0,0};
+		int[] neginactive = {0,0};
+		int[] negchild = {0,0};
+		int[] negadult = {0,0};
+		int[] negpensioner = {0,0};
+
+		for (Member member : swimmerCoachDatabase.getMemberList()){
+			String[] arrAnalysis = memberAnalysis(member);
+			if (member.isHasPaid()){
+				switch (arrAnalysis[3]){
+					case "Child" -> {poschild[0]++;poschild[1]+=1000;}
+					case "Adult" -> {posadult[0]++;posadult[1]+=1600;}
+					case "Pensioner" -> {pospensioner[0]++;pospensioner[1]+=1200;}
+					default -> {posinactive[0]++;posinactive[1]+=500;}
+				}
+			}else {
+				switch (arrAnalysis[3]){
+					case "Child" -> {negchild[0]++;negchild[1]+=1000;}
+					case "Adult" -> {negadult[0]++;negadult[1]+=1600;}
+					case "Pensioner" -> {negpensioner[0]++;negpensioner[1]+=1600;}
+					default -> {neginactive[0]++;neginactive[1]+=500;}
+				}
+			}
+
+		list.add(posinactive);
+		list.add(poschild);
+		list.add(posadult);
+		list.add(pospensioner);
+		list.add(neginactive);
+		list.add(negchild);
+		list.add(negadult);
+		list.add(negpensioner);
+
+		}
+		return list;
+	}
+
+	public void printEconomyInfo(Database swimmerCoachDatabase) {
+		ArrayList<int[]> list =	gatherPaymentInfoForPayingMembers(swimmerCoachDatabase);
+		String[] names = {"Inactive","Child","Adult","Senior"};
+		System.out.println("Members who have paid:");
+		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT PAID");
+		for (int i = 0; i < 4; i++) {
+			System.out.printf("%-10s %-15s %-14s%n",names[i],list.get(i)[0],list.get(i)[1]);
+		}
+		System.out.println("------------------------------------------------------");
+		System.out.println("");
+		System.out.println("Members who haven't paid:");
+		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT TO PAY");
+		for (int i = 4; i < 8; i++) {
+			System.out.printf("%-10s %-15s %-14s%n",names[i-4],list.get(i)[0],list.get(i)[1]);
+		}
+		System.out.println("------------------------------------------------------");
+		int numberOfMember = swimmerCoachDatabase.getMemberList().size();
+		int paidTotal = 0;
+		int owedTotal = 0;
+		for (int i = 0; i < 4; i++) {
+			paidTotal += list.get(i)[1];
+		}
+		for (int i = 4; i < 8; i++) {
+			owedTotal += list.get(i)[1];
+		}
+
+		System.out.printf("%-30s %-15s %-14s%n","TOTAL NUMBER OF MEMBERS","AMOUNT PAID","AMOUNT TO PAY");
+		System.out.printf("%-30s %-15s %-14s%n",numberOfMember,paidTotal,owedTotal);
+
+		System.out.println("------------------------------------------------------");
+	}
+
+	@Override
+	public int compare(SwimmingResult o1, SwimmingResult o2) {
+		return 0;
+	}
 } // End of class

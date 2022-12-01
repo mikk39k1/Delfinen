@@ -23,8 +23,7 @@ public class SystemBoot {
      */
     public static void main(String[] args) {
         new SystemBoot().startSystem();
-    } // End of method
-
+    }
 
     /*
      * This method starts the whole program doing different important steps as followed:
@@ -40,7 +39,7 @@ public class SystemBoot {
         swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
         swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
         Member.setID(fileHandler.loadID());// 3
-        loadAndSetUsers();                      // 4
+        loadStaff();                      // 4
         swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
                 swimmerCoachDatabase.getSwimmersCoachAssociationList() ,swimmerCoachDatabase));
         fileHandler.loadResultMethod(swimmerCoachDatabase);
@@ -80,7 +79,13 @@ public class SystemBoot {
         for (Employee user : enigmaUsers) {
             if (user.getUsername().equals(username)) {
                 currentUser = user;
-            } // End of if statement
+            } else {
+                for (Coach coach : swimmerCoachDatabase.getCoachList()) {
+                    if (coach.getUsername().equals(username)) {
+                        currentUser = coach;
+                    } // End inner if statement
+                } // End inner for loop
+            } // End if / else statement
         } // End of for loop
     } // End of method
 
@@ -88,20 +93,10 @@ public class SystemBoot {
     /*
     * This method loads pre added employees, and adds coaches to the Database coachList
      */
-    private void loadAndSetUsers() {
+    private void loadStaff() {
         // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
-        /*enigmaUsers.add(new Coach("Thomas", "+45 01 23 58 13", "thomas123"));
-        enigmaUsers.add(new Coach("Marry", "+45 01 23 58 13", "Marry123"));
-        enigmaUsers.add(new Coach("Jen", "+45 01 23 58 13", "Jen123"));*/
-
-        // Add coaches to coach list -------------------------------------------
-        for (Employee user : enigmaUsers) {
-            if (user instanceof Coach) {
-                swimmerCoachDatabase.getCoachList().add((Coach) user);
-            } // End of if statement
-        } // End of for loop
     } // End of method
 
 

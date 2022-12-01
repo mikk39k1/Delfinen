@@ -260,13 +260,12 @@ public class MenuRun {
     private void createCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).createCoach(database,ui);
+            ((Chairman) employee).createCoach(database,ui, fileHandler);
             fileHandler.writeToCoachlist(database.getCoachList());
-            fileHandler.writeCoachUserAndPassToList(database.getCoachList());
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");
         } // End of if / else statement
-    }
+    } // End of method
 
     private void deleteCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {

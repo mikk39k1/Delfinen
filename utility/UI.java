@@ -69,16 +69,16 @@ public class UI {
 	}
 
 
-	/*
-	* This method requests minutes and seconds and returns a String containing input
-	 */
-	public String setTime() {
-		print("minutes: ");
-		int minutes = in.nextInt();
-		print("Please enter seconds: ");
-		int seconds = in.nextInt();
-		return minutes + " minutes and " + seconds + " seconds";
-	} // End of method
+    /*
+     * This method requests minutes and seconds and returns a String containing input
+     */
+    public String setTime() {
+        print("minutes: ");
+        int minutes = in.nextInt();
+        print("Please enter seconds: ");
+        int seconds = in.nextInt();
+        return minutes + "." + seconds;
+    } // End of method
 
 
 
