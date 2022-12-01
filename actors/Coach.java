@@ -134,6 +134,11 @@ public class Coach extends Employee {
 	} // End of method
 
 
+	public void checkTopFiveCompetitionSwimResults(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
+		SuperSorterThreeThousand sorterThreeThousand = new SuperSorterThreeThousand();
+		sorterThreeThousand.setSortByDistance(database,swimType,ui);
+	}
+
 
 
 	/*

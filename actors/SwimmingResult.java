@@ -32,14 +32,14 @@ public class SwimmingResult {
         this.isCompetitive = ui.readBoolean();
 
         if (isCompetitive) {
-            ui.print("Please enter rank placement: " );
+            ui.print("Please enter rank placement: ");
             this.rank = ui.readInt();
         }
     }
 
     // Constructor for fileWriter -----------------------
 
-    public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank){
+    public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank) {
         this.distance = distance;
         this.swimTime = swimTime;
         this.date = date;
@@ -72,6 +72,18 @@ public class SwimmingResult {
 
     public void printResults() {
         System.out.printf("Distance: %-10d Swim Time: %-30s Competition: %-15s Rank: %-10d\n",
-                distance,swimTime,isCompetitive,rank);
+                distance, swimTime, isCompetitive, rank);
+    }
+
+
+    @Override
+    public String toString() {
+        return "SwimmingResult{" +
+                "distance=" + distance +
+                ", date='" + date + '\'' +
+                ", swimTime='" + swimTime + '\'' +
+                ", isCompetitive=" + isCompetitive +
+                ", rank=" + rank +
+                '}' + "\n";
     }
 }
