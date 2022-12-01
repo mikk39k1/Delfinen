@@ -43,30 +43,29 @@ public class SystemBoot {
         swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
                 swimmerCoachDatabase.getSwimmersCoachAssociationList() ,swimmerCoachDatabase));
         fileHandler.loadResultMethod(swimmerCoachDatabase);
-        testMemberDatabaseLoad();
-        testCoachDatabaseLoad();
+        //testMemberDatabaseLoad();
+        //testCoachDatabaseLoad();
 
         while (true) {
-            System.out.println("\n\n\n");
+            System.out.println("\n");
             fileHandler.printWelcomeSharks();   // 5
+            loading();
             loginSystem();                      // 6
 
             new MenuRun(">>> ENIGMA SOLUTION <<<", "Vælg en af nedenstående muligheder", new String[]{
-                    "1. Tilføj et nyt medlem.",
-                    "2. Slet et medlem",
-                    "3. Udprint af alle eksisterende medlemmer.",
-                    "4. Oversigt over medlemmer i restance.",
-                    "5. Ændr meldemmers betalingsstatus",
-                    // Betalingsændringer
-                    //Årets resultat - måske også noget med at se kun for junior, senior...
-                    "6. Tilføj nyt svømmeresultat.",
-                    "7. Se svømme resultater", // vælge om se alle eller en enkeltsvømmer
-                    "8. Oversigt over top 5 konkurrerende svømmere for en given svømmedisciplin.", // Forskellige sort typer,
-                    "9. Oversigt over alle members for en coach",
-                    "10. Opret en ny coach",
-                    "11. Fjern en coach",
-                    "12. Check Economy",
-                    "0. Log ud."
+                    "1. Add a new member.",
+                    "2. Delete a member",
+                    "3. Print list of existing members.",
+                    "4. Print member(s) in arrear.",
+                    "5. Change a members payment status",
+                    "6. Add a new swimming result.",
+                    "7. Print swimmming results", // vælge om se alle eller en enkeltsvømmer
+                    "8. Print top 5 athletes in a given discipline.", // Forskellige sort typer,
+                    "9. Print all members associated with a certain coach",
+                    "10. Add a new coach",
+                    "11. Delete a coach",
+                    "12. Check this years Club-Economy",
+                    "0. Log ouy."
             }, currentUser, swimmerCoachDatabase);      // 6
         } // End of while loop
     } // End of method
@@ -196,6 +195,21 @@ public class SystemBoot {
                     swimmerCoachDatabase.getCoachList().get(i).getName(),
                     swimmerCoachDatabase.getCoachList().get(i).getPhoneNumber());
             System.out.println();
+        }
+    }
+    private void loading() {
+        try {
+            System.out.println("\n                                       Loading ");
+            String anim = "|/-\\";
+            for (int x = 0; x < 100; x++) {
+                String data = "\r                                     " + anim.charAt(x % anim.length()) + " " + x;
+                System.out.print(data + " of 100");
+                Thread.sleep(70);
+
+            }
+            System.out.println("\n\n");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

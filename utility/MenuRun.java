@@ -50,7 +50,7 @@ public class MenuRun {
                 case 11 ->{deleteCoach(employee,swimmerCoachDatabase,ui);}//Delete Coach
                 case 12 ->{printEco(employee,swimmerCoachDatabase);}
                 case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
-                default -> ui.printLn("Vælg en eksisterende mulighed.\n");
+                default -> ui.printLn("Chose an existing option.\n");
             } // End of switch statement
         } // End of while loop
     } // End of method
@@ -80,7 +80,7 @@ public class MenuRun {
                     swimmerCoachDatabase, fileHandler);
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of if / else statement
     } // End of method
 
@@ -95,7 +95,7 @@ public class MenuRun {
             ((Chairman)employee).deleteMember(ui,memberList);
             fileHandler.writeToFullMembersList(memberList.getMemberList());
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of if / else statement
     } // End of method
 
@@ -110,7 +110,7 @@ public class MenuRun {
 
             ((Chairman) employee).printMembers(ui,memberList);
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of if / else statement
     } // End of method
 
@@ -131,7 +131,7 @@ public class MenuRun {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
             } // End of inner if / else statement
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -154,7 +154,7 @@ public class MenuRun {
             } // End of inner if / else statement
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -178,7 +178,7 @@ public class MenuRun {
             } // End of inner if / else statement
 
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -203,7 +203,7 @@ public class MenuRun {
                         ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase)); // runs method as Coach
             } // End of inner if / else statement
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -225,7 +225,7 @@ public class MenuRun {
                 ((Coach) employee).checkTopFiveCompetitionSwimResults(swimmerCoachDatabase,ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
             } // End of inner if / else statement
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } //End of method
 
@@ -248,7 +248,7 @@ public class MenuRun {
                 ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
             } // End of inner if / else statement
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -263,7 +263,7 @@ public class MenuRun {
             ((Chairman) employee).createCoach(database,ui, fileHandler);
             fileHandler.writeToCoachlist(database.getCoachList());
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of if / else statement
     } // End of method
 
@@ -273,7 +273,7 @@ public class MenuRun {
             ((Chairman) employee).deleteCoach(database,ui);
             fileHandler.writeToCoachlist(database.getCoachList());
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of if / else statement
     } // End of method
 
@@ -290,7 +290,7 @@ public class MenuRun {
             } // End of inner if / else statement
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
         } else {
-            ui.printLn("Du har ikke login rettigheder til denne funktion");
+            ui.printLn("You don't have the privilege to use this function");
         } // End of outer if / else statement
     } // End of method
 
@@ -298,7 +298,7 @@ public class MenuRun {
     * This method will log out the user and terminate the program
      */
     private boolean logOut() {
-        ui.printLn("Logger ud");
+        ui.printLn("Until next time!");
         System.exit(0);
         return false;
     } // End of Method
