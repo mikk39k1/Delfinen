@@ -305,8 +305,8 @@ public class FileHandler {
                 int rank = Integer.parseInt(arr[7]);        // Stores rank position from arr
 
                 /*
-                * The method first iterates through the HashMap containing the association between the swimmers and coaches
-                *  - Then the method identifies the UniqueID from result with Key value from HashMap
+                * The method first starts iterating through the HashMap containing the association between the swimmers and coaches
+                *  - Then the method identifies the match between UniqueID from result with Key value from HashMap
                 *  - Then the method verifies the SwimmingDisciplineType name from results with the Key value from hashMap
                 *  - Then the method conditionally chooses between boolean statement of competitiveness the constructor
                 *  - The constructor chosen will be filled with stored attributes
