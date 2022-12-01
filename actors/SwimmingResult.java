@@ -21,7 +21,7 @@ public class SwimmingResult {
     // Constructor --------------------------------------
     public SwimmingResult(UI ui) {
         ui.print("Please enter distance: ");
-        this.distance = ui.readInt();
+        this.distance = ui.setDistance();
 
         this.date = ui.setDate();
 

@@ -220,11 +220,9 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();              // Creates a temporary user for admin
-                adminOverride.checkCompetitorSwimResults(
-                        adminOverride.lookupSwimmer(ui, swimmerCoachDatabase)); //Runs temporary user method
+                adminOverride.checkTopFiveCompetitionSwimResults(swimmerCoachDatabase,ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
             } else {
-                ((Coach) employee).checkCompetitorSwimResults(
-                        ((Coach) employee).lookupSwimmer(ui, swimmerCoachDatabase)); // Runs method as Coach
+                ((Coach) employee).checkTopFiveCompetitionSwimResults(swimmerCoachDatabase,ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
             } // End of inner if / else statement
         } else {
             ui.printLn("Du har ikke login rettigheder til denne funktion");

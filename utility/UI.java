@@ -140,6 +140,18 @@ public class UI {
         } // End of while loop
     } // End of method
 
+    public int setDistance() {
+        while (true) {
+            printLn("Chose a distance:\n- 1. 100m\n- 2. 200m\n- 3. 500m");
+            switch (readInt()) {
+                case 1 -> {return 100;}
+                case 2 -> {return 200;}
+                case 3 -> {return 500;}
+            }
+            printLn("Not valid input");
+        }
+    }
+
 
     // ENUM READER ---------------------------------------------
     /*
