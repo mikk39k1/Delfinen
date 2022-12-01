@@ -13,7 +13,7 @@ public class SwimmingResult {
     // Attributes ---------------------------------------
     private final int distance;
     private final String date;
-    private final String swimTime;
+    private final int swimTime;
     private final boolean isCompetitive;
     private int rank = 0;
 
@@ -41,7 +41,7 @@ public class SwimmingResult {
 
     public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank) {
         this.distance = distance;
-        this.swimTime = swimTime;
+        this.swimTime = Integer.parseInt(swimTime);
         this.date = date;
         this.isCompetitive = isCompetitive;
         if (isCompetitive) {
@@ -58,7 +58,7 @@ public class SwimmingResult {
         return date;
     }
 
-    public String getSwimTime() {
+    public int getSwimTime() {
         return swimTime;
     }
 
@@ -82,9 +82,15 @@ public class SwimmingResult {
         return "SwimmingResult{" +
                 "distance=" + distance +
                 ", date='" + date + '\'' +
-                ", swimTime='" + swimTime + '\'' +
+                ", swimTime='" + secondsToMinutesAndSeconds(swimTime) + '\'' +
                 ", isCompetitive=" + isCompetitive +
                 ", rank=" + rank +
                 '}' + "\n";
+    }
+
+    private String secondsToMinutesAndSeconds(int seconds){
+        String result = "";
+
+        return result + (seconds/60) + ":" + (seconds%60);
     }
 }
