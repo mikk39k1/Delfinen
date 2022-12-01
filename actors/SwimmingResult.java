@@ -13,7 +13,8 @@ public class SwimmingResult {
     // Attributes ---------------------------------------
     private final int distance;
     private final String date;
-    private final String swimTime;
+    private final int minutes;
+    private final int seconds;
     private final boolean isCompetitive;
     private int rank = 0;
 
@@ -25,8 +26,11 @@ public class SwimmingResult {
 
         this.date = ui.setDate();
 
-        ui.print("Please enter the swim time - ");
-        this.swimTime = ui.setTime();
+        ui.printLn("Please enter the swim time");
+        ui.print("Mintues: ");
+        this.minutes = ui.readInt();
+        ui.print("Seconds: ");
+        this.seconds = ui.readInt();
 
         ui.print("Please enter was this in a competition - true/false: ");
         this.isCompetitive = ui.readBoolean();
@@ -39,9 +43,10 @@ public class SwimmingResult {
 
     // Constructor for fileWriter -----------------------
 
-    public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank) {
+    public SwimmingResult(int distance, String date, int minutes, int seconds, boolean isCompetitive, int rank) {
         this.distance = distance;
-        this.swimTime = swimTime;
+        this.minutes = minutes;
+        this.seconds = seconds;
         this.date = date;
         this.isCompetitive = isCompetitive;
         if (isCompetitive) {
@@ -57,9 +62,11 @@ public class SwimmingResult {
     public String getDate() {
         return date;
     }
-
-    public String getSwimTime() {
-        return swimTime;
+    public int getMinutes() {
+        return minutes;
+    }
+    public int getSeconds() {
+        return seconds;
     }
 
     public boolean isCompetitive() {
@@ -72,17 +79,17 @@ public class SwimmingResult {
 
     public void printResults() {
 
-        System.out.printf("Distance: %-10d Swim Time: %-30s Competition: %-15s Rank: %-10d\n",
-                distance, swimTime, isCompetitive, rank);
+        System.out.printf("Distance: %-10d Minutes: %-10d Seconds: %10d Competition: %-15s Rank: %-10d\n",
+                distance, minutes, seconds, isCompetitive, rank);
     }
-
 
     @Override
     public String toString() {
         return "SwimmingResult{" +
                 "distance=" + distance +
                 ", date='" + date + '\'' +
-                ", swimTime='" + swimTime + '\'' +
+                ", minutes=" + minutes +
+                ", seconds=" + seconds +
                 ", isCompetitive=" + isCompetitive +
                 ", rank=" + rank +
                 '}' + "\n";

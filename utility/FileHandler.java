@@ -231,8 +231,10 @@ public class FileHandler {
                     getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results
             int distance = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).getDistance();    // Stores distance of result
-            String time = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).getSwimTime();    // Stores time of result
+            int minutes = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getMinutes();    // Stores time of result
+            int seconds = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+                    getSwimmingDisciplineResults().get(numberInArray).getSeconds();
             String date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).getDate();        // Stores date of result
             boolean isCompetitive = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
@@ -244,7 +246,8 @@ public class FileHandler {
             sb.append(coachName).append(";");                       // Appends Coach name to StringBuilder
             sb.append(swimmingDisciplineType);          // Appends Swimming Discipline Type to StringBuilder
             sb.append(distance).append(";");            // Appends distance from result to StringBuilder
-            sb.append(time).append(";");                // Appends time from result to StringBuilder
+            sb.append(minutes).append(";");
+            sb.append(seconds).append(";");
             sb.append(date).append(";");                // Appends date from result to StringBuilder
             sb.append(isCompetitive).append(";");       // Appends competitiveness from result to StringBuilder
             sb.append(rank);                            // Appends rank from result to StringBuilder
@@ -259,7 +262,7 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-
+/*
     //MyFinestSmadderkODE *atc
     public void loadResults(HashMap<Member, Coach> swimmersCoachAssociationList) {
         try {
@@ -288,6 +291,9 @@ public class FileHandler {
     }
 
 
+ */
+
+
     /*
     * This method loads all results from results file, and adds them to corresponding member with matching ID from file
      */
@@ -300,10 +306,11 @@ public class FileHandler {
                 int uniqueId = Integer.parseInt(arr[0]);    // Stores UniqueID from arr
                 String swimDiscipline = arr[2];                // Stores SwimmingDisciplineType from arr
                 int distance = Integer.parseInt(arr[3]);    // Stores distance from arr
-                String date = arr[4];                          // Stores date from arr
-                String swimTime = arr[5];                      // Stores swimTime from arr
-                boolean isCompetitive = Boolean.parseBoolean(arr[6]);   // Stores competitiveness from arr
-                int rank = Integer.parseInt(arr[7]);        // Stores rank position from arr
+                int minutes = Integer.parseInt(arr[4]);        // Stores swimTime minutes from arr
+                int seconds = Integer.parseInt(arr[5]);
+                String date = arr[6];                          // Stores date from arr
+                boolean isCompetitive = Boolean.parseBoolean(arr[7]);   // Stores competitiveness from arr
+                int rank = Integer.parseInt(arr[8]);        // Stores rank position from arr
 
                 /*
                 * The method first starts iterating through the HashMap containing the association between the swimmers and coaches
@@ -321,11 +328,11 @@ public class FileHandler {
                                 if (isCompetitive) {
                                     ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
                                             getSwimmingDisciplineResults().
-                                            add(new SwimmingResult(distance, date, swimTime, true, rank));
+                                            add(new SwimmingResult(distance, date, minutes, seconds, true, rank));
                                 } else {
                                     ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
                                             getSwimmingDisciplineResults().
-                                            add(new SwimmingResult(distance, date, swimTime, false, 0));
+                                            add(new SwimmingResult(distance, date, minutes, seconds, false, 0));
                                 } // End of inner if / else statement
                             } // End of second inner if statement
                         } // of for loop
