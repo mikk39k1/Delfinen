@@ -33,6 +33,7 @@ public class MenuRun {
     public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
         boolean isSignedIn = true;
         while (isSignedIn) {
+            ui.printLn("");
             printMenu();
             int userChoice = ui.readInt();
             switch (userChoice) {

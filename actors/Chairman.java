@@ -80,6 +80,7 @@ public class Chairman extends Employee {
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
             int disciplineAmount = ui.readInt();           // Stores temporary the amount of Discipline Types swimmer should have
+            ui.printLn("Enter Swimming discipline: Crawl, Butterfly, Breaststroke, Backcrawl or Freestyle: ");
             for (int i = 0; i < disciplineAmount; i++) {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui)); // Adds Swimming Discipline
             } // End of for loop
