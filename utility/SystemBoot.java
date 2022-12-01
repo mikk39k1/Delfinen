@@ -199,15 +199,15 @@ public class SystemBoot {
     }
     private void loading() {
         try {
-            System.out.println("\n                                       Loading ");
+            System.out.println("\n                                     Loading ");
             String anim = "|/-\\";
-            for (int x = 0; x < 100; x++) {
+            for (int x = 0; x <= 100; x++) {
                 String data = "\r                                     " + anim.charAt(x % anim.length()) + " " + x;
                 System.out.print(data + " of 100");
                 Thread.sleep(70);
 
             }
-            System.out.println("\n\n");
+            System.out.println("\nENIGMA SOLUTIONS" + (char)153 + " 2022. All rights reserved " + (char)174 +"\n");
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
