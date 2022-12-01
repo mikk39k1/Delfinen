@@ -52,7 +52,7 @@ public class SystemBoot {
             //loading();
             loginSystem();                      // 6
 
-            new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
+            MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
                     "1. Add a new member.",
                     "2. Delete a member",
                     "3. Print list of existing members.",
@@ -66,7 +66,8 @@ public class SystemBoot {
                     "11. Delete a coach",
                     "12. Check this years Club-Economy",
                     "0. Log out."
-            }, currentUser, swimmerCoachDatabase);      // 6
+            });      // 6
+            startSystem.menuLooping(currentUser, swimmerCoachDatabase);
         } // End of while loop
     } // End of method
 

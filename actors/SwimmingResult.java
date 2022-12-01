@@ -2,8 +2,6 @@ package actors;
 
 import utility.UI;
 
-import java.lang.module.Configuration;
-
 /*
 * This class represents what each result contains which any swimming discipline can perform
 *  - Whenever a swimmer is active within a swimming discipline, results to each swimming discipline can be added, and
@@ -79,13 +77,12 @@ public class SwimmingResult {
 
     @Override
     public String toString() {
-        return "SwimmingResult{" +
-                "distance=" + distance +
-                ", date='" + date + '\'' +
-                ", swimTime='" + secondsToMinutesAndSeconds(swimTime) + '\'' +
-                ", isCompetitive=" + isCompetitive +
-                ", rank=" + rank +
-                '}' + "\n";
+        return "\nSwimmingResult - " +
+                "distance: " + distance +
+                " date: " + date  +
+                " swimTime: " + secondsToMinutesAndSeconds(swimTime) +
+                " isCompetitive: " + isCompetitive +
+                " rank: " + rank;
     }
 
     private String secondsToMinutesAndSeconds(int seconds){

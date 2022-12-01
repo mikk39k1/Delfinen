@@ -62,45 +62,82 @@ public class SuperSorterThreeThousand {
                             get(i).getSwimmingDisciplineResults());
                 } // End of inner if statement
             } // End of for loop
-        } // End of outer for loop
+        } // End of outer HashMap iteration
+        return swimResultList;
+    } // End of method
+
+    public ArrayList<SwimmingResult> oneSwimmersResultList(CompetitiveSwimmer swimmer, Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
+        ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
+        for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
+            if (set.getKey().getName().equals(swimmer.getName())) {
+                for (int i = 0; i < database.getSwimmersCoachAssociationList().size(); i++) {
+                    if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDiscipline().equals(swimType)) {
+                        swimResultList.addAll(((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().
+                                get(i).getSwimmingDisciplineResults());
+                    } // End of inner if statement
+                } // End of inner for loop
+            } //End of out if statement
+        } // End of outer for HashMap iteration
         return swimResultList;
     } // End of method
 
 
-    public void setSortByDistance(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
-
-        ArrayList<SwimmingResult> localist = swimmingResultList(database, swimType);
+    public void setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch(ui.setDistance()) {
             case 100 ->{
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 200);
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 500);
-                localist.sort(sortByTime);
-            }
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 200);
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 500);
+                swimmingResults.sort(sortByTime);
+            } // End of case 100
             case 200 ->{
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 500);
-                localist.sort(sortByTime);
-            }
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 500);
+                swimmingResults.sort(sortByTime);
+            } // End of case 200
             case 500 ->{
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
-                localist.removeIf(swimmingResult -> swimmingResult.getDistance() == 200);
-                localist.sort(sortByTime);
-            }
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 200);
+                swimmingResults.sort(sortByTime);
+            } // End of case 500
+        } // End of switch case
+        System.out.println(swimmingResults);
+    } // End of method
+
+
+
+
+
+    public void setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+
+        if (!ui.setCompetitiveness()) {
+            swimmingResults.removeIf(SwimmingResult::isCompetitive);
+            swimmingResults.sort(sortByTime);
+        } else {
+            swimmingResults.removeIf(swimmingResult -> !swimmingResult.isCompetitive());
+            swimmingResults.sort(sortByTime);
         }
-        localist.sort(sortByDistance);
-        System.out.println(localist);
-
+        System.out.println(swimmingResults);
     }
 
-    /*
-    public void setSortByIsCompetitive(Database database, SwimmingDiscipline swimType, UI ui) {
-        swimmingResultList(database, swimType).sort(sortByIsCompetitive);
-    }
+    public void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
-    public void setSortByRank(Database database, SwimmingDiscipline swimType, UI ui) {
-        List<Member> localist = database.getMemberList();
 
+        switch(ui.setRank()) {
+            case 3 ->{
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 3);
+                swimmingResults.sort(sortByTime);
+            } // End of case 100
+            case 5 ->{
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 5);
+                swimmingResults.sort(sortByTime);
+            } // End of case 200
+            case 10 ->{
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 10);
+                swimmingResults.sort(sortByTime);
+            } // End of case 500
+        } // End of switch case
+        System.out.println(swimmingResults);
     }
 
     public void setSortByTime(Database database, SwimmingDiscipline swimType, UI ui) {
@@ -108,6 +145,6 @@ public class SuperSorterThreeThousand {
 
     }
 
-     */
+
 
 }

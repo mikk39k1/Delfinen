@@ -2,6 +2,7 @@ package utility;
 
 import actors.SwimmingDiscipline;
 
+import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -69,6 +70,10 @@ public class UI {
         System.out.println(msg);
     }
 
+    public void printf(PrintStream msgHolder, String input) {
+        msgHolder.printf(input);
+    }
+
 
     /*
      * This method requests minutes and seconds and returns a String containing input
@@ -78,8 +83,7 @@ public class UI {
         int minutes = in.nextInt();
         print("Please enter seconds: ");
         int seconds = in.nextInt();
-        int total = (minutes*60)+seconds;
-        return total;
+        return (minutes*60)+seconds;
     } // End of method
 
 
@@ -153,12 +157,36 @@ public class UI {
         }
     }
 
+    public int setRank() {
+        while (true) {
+            printLn("Chose a Rank:\n 1. Top 3\n 2. Top 5\n 3. Top 10");
+            switch (readInt()) {
+                case 1 -> {return 3;}
+                case 2 -> {return 5;}
+                case 3 -> {return 10;}
+            }
+            printLn("Not valid input");
+        }
+    }
+
+    public boolean setCompetitiveness() {
+        while(true) {
+            printLn("Choose either\n 1. Training-session\n 2. Competition");
+            switch (readInt()) {
+                case 1 -> {return false;}
+                case 2 -> {return true;}
+            }
+            printLn("Not a valid input");
+        }
+    }
+
 
     // ENUM READER ---------------------------------------------
     /*
      * This method checks input to match Enum value of SwimingDiscplineType
      */
     public SwimmingDiscipline.SwimmingDisciplineTypes setSwimmingDisciplineType() {
+        System.out.printf("Please enter Swimming Discipline/s ");
         while (true) {
             try {
                 return SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(in.nextLine().toUpperCase());

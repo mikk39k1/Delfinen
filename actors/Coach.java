@@ -1,11 +1,10 @@
 package actors;
 
 import database.Database;
+import utility.FileHandler;
 import utility.SuperSorterThreeThousand;
 import utility.UI;
-import utility.FileHandler;
 
-import java.io.File;
 import java.util.Map;
 
 /*
@@ -97,7 +96,7 @@ public class Coach extends Employee {
 
 		for (Map.Entry<Member, Coach> set : swimmerCoachDatabase.getSwimmersCoachAssociationList().entrySet()) {
 			if (set.getKey().equals(swimmer)) {
-				ui.print("Enter Swimming Disciplines: | ");
+				ui.print(" | ");
 				for (SwimmingDiscipline swimType : ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList()) {
 					ui.print(swimType + " | ");
 				}
@@ -123,7 +122,7 @@ public class Coach extends Employee {
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
 
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
-			System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: %-10s\n",
+			System.out.printf("%nID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: %-10s%n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
 					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getDateOfBirth(), competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
@@ -137,7 +136,7 @@ public class Coach extends Employee {
 
 	public void checkTopFiveCompetitionSwimResults(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
 		SuperSorterThreeThousand sorterThreeThousand = new SuperSorterThreeThousand();
-		sorterThreeThousand.setSortByDistance(database,swimType,ui);
+		sorterThreeThousand.setSortByDistance(ui,sorterThreeThousand.swimmingResultList(database,swimType));
 	}
 
 
