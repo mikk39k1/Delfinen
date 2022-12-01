@@ -48,6 +48,7 @@ public class MenuRun {
                 case 9 -> {printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/}
                 case 10 ->{createCoach(employee,swimmerCoachDatabase,ui);}/*Create a coach and add them to coachlist.*/
                 case 11 ->{deleteCoach(employee,swimmerCoachDatabase,ui);}//Delete Coach
+                case 12 ->{printEco(employee,swimmerCoachDatabase);}
                 case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
                 default -> ui.printLn("Vælg en eksisterende mulighed.\n");
             } // End of switch statement
@@ -278,7 +279,22 @@ public class MenuRun {
         } // End of if / else statement
     } // End of method
 
+    private void printEco(Employee employee, Database swimmerCoachDatabase) {
+        if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
+                employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
+            if (employee instanceof Chairman) {
+                Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
+                adminOverride.printEconomyInfo(swimmerCoachDatabase); // Runs temporary user intended method
+
+            } else {
+                ((Treasurer) employee).printEconomyInfo(swimmerCoachDatabase);
+            } // End of inner if / else statement
+            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+        } else {
+            ui.printLn("Du har ikke login rettigheder til denne funktion");
+        } // End of outer if / else statement
+    } // End of method
 
     /*
     * This method will log out the user and terminate the program

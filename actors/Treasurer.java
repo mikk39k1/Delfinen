@@ -3,6 +3,9 @@ package actors;
 import database.Database;
 import utility.UI;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 /*
 * This class represents the treasurer, which is the accountant in the system.
 * Being the accountant the only status he / she can manipulate and is paid status and see all members in debt
@@ -52,7 +55,7 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
 			arr = memberAnalysis(member); // Stores the member inside String array arr
 			System.out.printf("%d# %-20s %-10s %-12s %-20s %-10s%n",count, member.getName(),arr[2],
-					(arr[3]==null?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
+					(arr[3] == "null"?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
 		} // End of for loop
 		ui.printLn("For which member do you wish to toggle the payment?");
 		swimmerCoachDatabase.getMemberList().get(ui.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
@@ -67,7 +70,7 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 		String[] arr = new String[4]; 					// Stores temporary the member data of membership
 		arr[0] = Integer.toString(member.getAge());
 		if (!member.isIsMembershipActive()) {
-			arr[1]="500";arr[2] = "INACTIVE";arr[3]=null; // If member isn't active: price is 500
+			arr[1]="500";arr[2] = "INACTIVE";arr[3]="null"; // If member isn't active: price is 500
 		} else if (Integer.parseInt(arr[0])<18) {
 			arr[1]="1000";arr[2] = "ACTIVE";arr[3]="Child"; // If member is active and minor (under 18): cost 1000
 		} else if (Integer.parseInt(arr[0])>=60) {

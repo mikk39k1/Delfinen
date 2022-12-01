@@ -59,10 +59,9 @@ public class FileHandler {
     public String checkPassword(String password) {
         try {
             Scanner readLoginCredentials = new Scanner(new File("files/passwd.txt"));
-
             while (readLoginCredentials.hasNextLine()) {
-                String loadedPassword = readLoginCredentials.next();    // Stores temporary password as a String
-                if (loadedPassword.equals(password)) {
+                String[] loadedPassword = readLoginCredentials.nextLine().split(";");    // Stores temporary password as a String
+                if (loadedPassword[1].equals(password)) {
                     readLoginCredentials.close();       // If password matches closes the Scanner and returns value
                     return password;
                 } // End of if statement

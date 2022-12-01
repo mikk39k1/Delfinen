@@ -65,6 +65,7 @@ public class SystemBoot {
                     "9. Oversigt over alle members for en coach",
                     "10. Opret en ny coach",
                     "11. Fjern en coach",
+                    "12. Check Economy",
                     "0. Log ud."
             }, currentUser, swimmerCoachDatabase);      // 6
         } // End of while loop
