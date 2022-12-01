@@ -49,10 +49,10 @@ public class SystemBoot {
         while (true) {
             System.out.println("\n");
             fileHandler.printWelcomeSharks();   // 5
-            loading();
+            //loading();
             loginSystem();                      // 6
 
-            new MenuRun(">>> ENIGMA SOLUTION <<<", "Vælg en af nedenstående muligheder", new String[]{
+            new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
                     "1. Add a new member.",
                     "2. Delete a member",
                     "3. Print list of existing members.",
@@ -65,7 +65,7 @@ public class SystemBoot {
                     "10. Add a new coach",
                     "11. Delete a coach",
                     "12. Check this years Club-Economy",
-                    "0. Log ouy."
+                    "0. Log out."
             }, currentUser, swimmerCoachDatabase);      // 6
         } // End of while loop
     } // End of method

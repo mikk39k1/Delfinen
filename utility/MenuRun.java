@@ -50,7 +50,7 @@ public class MenuRun {
                 case 11 ->{deleteCoach(employee,swimmerCoachDatabase,ui);}//Delete Coach
                 case 12 ->{printEco(employee,swimmerCoachDatabase);}
                 case 0 -> {isSignedIn = logOut(); /*Logs you out of the system */}
-                default -> ui.printLn("Chose an existing option.\n");
+                default -> ui.printLn("Incorrect choice. Chose another option.\n");
             } // End of switch statement
         } // End of while loop
     } // End of method

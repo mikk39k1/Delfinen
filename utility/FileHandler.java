@@ -157,14 +157,13 @@ public class FileHandler {
                 String s = readFromFile.nextLine();         // Stores the whole line containing a member to temporary String
                 String[] arrOfStr = s.split(";");     // Delimiting by semicolon sign and adds to a temporary array
                 int id = Integer.parseInt(arrOfStr[1]);  // Stores ID value of Member
+                String name = arrOfStr[2];              // Stores the name of Member in a temporary String
+                String phone = arrOfStr[3];             // Stores phone number of member in a temporary String
+                String dob = arrOfStr[4];               // Stores date of birth of member in a temporary String
+                boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);   // Stores state of membership in a temporary boolean
+                boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);    // Stores paid status of membership in a temporary boolean
+
                 if (arrOfStr[0].equalsIgnoreCase("true")) {     // Checks if member is Leisure or Competitive
-
-                    String name = arrOfStr[2];              // Stores the name of Member in a temporary String
-                    String phone = arrOfStr[3];             // Stores phone number of member in a temporary String
-                    String dob = arrOfStr[4];               // Stores date of birth of member in a temporary String
-                    boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);   // Stores state of membership in a temporary boolean
-                    boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);    // Stores paid status of membership in a temporary boolean
-
                     CompetitiveSwimmer compSwimmer = new CompetitiveSwimmer(id,
                             name, phone, dob, membershipActive, hasPaid);   // Creates the member with attributes
 
@@ -175,11 +174,6 @@ public class FileHandler {
                     } // End of for loop
                     membersList.add(compSwimmer);           // Adds the created swimmerMember to memberList Array
                 } else {
-                    String name = arrOfStr[2];              // Stores the name of Member in a temporary String
-                    String phone = arrOfStr[3];             // Stores phone number of member in a temporary String
-                    String dob = arrOfStr[4];                // Stores date of birth of member in a temporary String
-                    boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);   // Stores state of membership in a temporary boolean
-                    boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);    // Stores paid status of membership in a temporary boolean
                     LeisureSwimmer leisureSwimmer = new LeisureSwimmer(id,
                             name, phone, dob, membershipActive, hasPaid);   // Creates the member with attributes
                     membersList.add(leisureSwimmer);        // Adds the created swimmerMember to memberList Array
@@ -251,7 +245,6 @@ public class FileHandler {
             sb.append("\n");                            // Appends a new line to StringBuilder
 
             appendToFile.write(sb.toString().getBytes());
-            //appendToFile.write(System.getProperty("line.separator").getBytes());
             appendToFile.close();
 
         } catch (IOException e) {
@@ -334,7 +327,7 @@ public class FileHandler {
                 } // End of HashMap for loop iteration
             } // End of while loop
         } catch (FileNotFoundException e) {
-            System.out.println("fil eksisterer ikke");
+            System.out.println("File doesn't exist");
         } // End of try / catch statement
     } // End of method
 

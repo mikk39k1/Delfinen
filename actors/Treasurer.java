@@ -149,9 +149,9 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 		for (int i = 4; i < 8; i++) {
 			owedTotal += list.get(i)[1];
 		}
-
-		System.out.printf("%-30s %-15s %-14s%n","TOTAL NUMBER OF MEMBERS","AMOUNT PAID","AMOUNT TO PAY");
-		System.out.printf("%-30s %-15s %-14s%n",numberOfMember,paidTotal,owedTotal);
+		System.out.println("\nTOTALS:");
+		System.out.printf("%-15s %-15s %-14s%n","# OF MEMBERS","AMOUNT PAID","AMOUNT TO PAY");
+		System.out.printf("%-15s %-15s %-14s%n",numberOfMember,paidTotal,owedTotal);
 
 		System.out.println("------------------------------------------------------");
 	}

@@ -87,8 +87,8 @@ public class Chairman extends Employee {
             database.getSwimmersCoachAssociationList().
                     put(newMember, chooseCoach(ui, database));  // Adds new member and coach to Database HashMap
 
-            ui.printLn(newMember.getName() + " er blevet tilføjet som medlem med " + disciplineAmount +
-                    " aktive svømme discipliner");
+            ui.printLn(newMember.getName() + " has been added as a member with " + disciplineAmount +
+                    " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
             fileHandler.writeToSwimmerCoachAssociationFile(database);
         } // End of if statement
     } // End of method
@@ -128,7 +128,7 @@ public class Chairman extends Employee {
      */
     public Coach chooseCoach(UI ui, Database swimmerCoachDatabase) {
         for (Coach coach : swimmerCoachDatabase.getCoachList()) {
-            ui.printLn("Træner: " + coach.getName());       // Prints all available Coaches from Database coachList
+            ui.printLn("Coach: " + coach.getName());       // Prints all available Coaches from Database coachList
         } // End of for loop
 
         ui.print("Hvilken Træner skal medlemmet have: ");
@@ -139,7 +139,7 @@ public class Chairman extends Employee {
                     return coach;       // If temporary name exists within employed Coaches, returns that actual coach
                 } // End of if statement
             } // End of for loop
-            ui.printLn("Træner eksisterer ikke, prøv venligst igen");
+            ui.printLn("Coach doesn't exist. Try again");
         } // End of while loop
     } // End of method
 

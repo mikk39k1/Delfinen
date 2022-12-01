@@ -109,7 +109,7 @@ public class Coach extends Employee {
 							.add(new SwimmingResult(ui));
 					filehandler.appendResult(employee,swimmerCoachDatabase,swimmer,hasSwimDiscipline);
 				} else {
-					ui.printLn("Svømmeren er ikke konkurrerende i denne disciplin");
+					ui.printLn("The swimmer does not participate in this kind of competition");
 				} // End of inner if / else statement
 			} // End of if statement
 		} // End of for loop
@@ -183,7 +183,7 @@ public class Coach extends Employee {
 	* This method finds and prints all members belonging to the coach logged in.
 	 */
 	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
-		System.out.println("Træner: " + this.getName() + " har følgende medlemmere");
+		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
