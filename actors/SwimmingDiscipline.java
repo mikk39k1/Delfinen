@@ -4,6 +4,11 @@ import utility.UI;
 
 import java.util.ArrayList;
 
+
+/*
+* This class represents what a swimming discipline contains
+*  - In essence it contains a type (enum presentation), and an array list of results being its own class
+ */
 public class SwimmingDiscipline {
 
     public enum SwimmingDisciplineTypes {

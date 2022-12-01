@@ -3,6 +3,10 @@ package actors;
 import java.time.LocalDate;
 import java.time.Period;
 
+/*
+* This class represent all the raw data any member MUST have. This way we can make sure that whenever a swimmer is created
+* they all have the same search pairs, and attributes for the most common information being age, ID, membership status etc.
+ */
 public abstract class Member extends Person {
 
 	// Attributes -------------------------------------------

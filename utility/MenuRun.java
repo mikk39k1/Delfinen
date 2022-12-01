@@ -3,6 +3,11 @@ package utility;
 import actors.*;
 import database.Database;
 
+/*
+* This class represent the menu and the interaction of user and system. Whenever an input is received for the menu
+*  the corresponding reaction is followed by menuOptions titles. Each option is verifying the user privilege, to ensure
+*  no user is acting with malice or doing thinks not in his/hers jurisdiction.
+ */
 public class MenuRun {
     UI ui = new UI();
     FileHandler fileHandler = new FileHandler();

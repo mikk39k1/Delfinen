@@ -5,6 +5,10 @@ import database.Database;
 
 import java.util.ArrayList;
 
+/*
+* This class is the representing startup of the system. Whenever the program starts, predefined users, members, passwords
+*   and results are loaded through whole Database containing Members, associationsLists, Employees etc
+ */
 public class SystemBoot {
 
     // Utility / Controller ------------------

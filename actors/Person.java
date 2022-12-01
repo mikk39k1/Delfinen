@@ -1,5 +1,8 @@
 package actors;
 
+/*
+* This Class represents the average Person, and what all other entities (Employees / Members) always must share.
+ */
 public abstract class Person {
 
 	// Attributes -------------------------------------

@@ -9,6 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/*
+* This class is representing the whole FileHandling of the system.
+* All loads, reads and file manipulations is being handled by this class. The overall principle of this class is to
+* load members / employees, and write new data to each entity whenever updates or inputs are being fed.
+* We also use this class to read and compare data whenever a user is trying to log in, thus securing safety and avoiding breach
+* by securing no passwords, or usernames are available to be read directly from the code.
+ */
 public class FileHandler {
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");

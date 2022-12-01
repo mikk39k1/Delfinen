@@ -5,6 +5,13 @@ import actors.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+* This class is representing a database.
+* Our structure is designed around a member list, and a coach list. and a swimmer/coach association list.
+* This design ensures that whenever we want to work with members and results, we only need to work with the association list,
+* since all members with coaches ar considered competitive swimmers. This design helps us achieve a faster design, and less
+* search pairs to work with if or whenever this program had to scale member amounts.
+ */
 public class Database {
 
     // Attributes ---------------------------------------------

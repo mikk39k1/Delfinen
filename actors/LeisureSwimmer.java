@@ -2,6 +2,10 @@ package actors;
 
 import utility.UI;
 
+/*
+* This class represent a leisure swimmer. Since our design coaches can only be associated with competitive swimmers, there
+* seems no reason to mix leisure and swimmer with the same class representation.
+ */
 public class LeisureSwimmer extends Member {
 
     public LeisureSwimmer(UI in) {
@@ -19,8 +23,7 @@ public class LeisureSwimmer extends Member {
     }
 
 
-    public LeisureSwimmer(int uniqueID, String name, String phoneNumber,
-                          String birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
+    public LeisureSwimmer(int uniqueID, String name, String phoneNumber,String birthday, boolean isActive, boolean hasPaid) {
         setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);

@@ -3,6 +3,10 @@ package actors;
 import database.Database;
 import utility.UI;
 
+/*
+* This class represents the treasurer, which is the accountant in the system.
+* Being the accountant the only status he / she can manipulate and is paid status and see all members in debt
+ */
 public class Treasurer extends Employee {
 
 

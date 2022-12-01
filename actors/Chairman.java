@@ -6,6 +6,11 @@ import utility.UI;
 
 import javax.xml.crypto.Data;
 
+/*
+* This class represents both the admin and chairman class. Being the highest valuable entity of all the operators within
+*  our system, the chairman is the only class able to create/delete swimmers of type (Leisure or Competitive)
+* In our design the chairman can also create/delete coaches, with their own login/password, which is being stored on a file
+ */
 public class Chairman extends Employee {
 
     // Constructor ---------------------------------------

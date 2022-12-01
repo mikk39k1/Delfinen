@@ -6,6 +6,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/*
+* This class is a UI (utility) class, the sole purpose is to use configurated methods to ensure read data from inputs
+*  doesn't compile errors and bugs. This way we can avoid Scanner Bugs, input errors, Enum Type input errors etc.
+* By using this utility for the exact situations we see scope to, we can also predefine requests inform of text, to have a more
+* fluently, user-friendly and usability oriented experience. We also increase availability and performances of the overall
+* software by using these pre configurated methods.
+ */
 public class UI {
 
 	// Attributes ---------------------------------------------------

@@ -5,6 +5,11 @@ import utility.UI;
 
 import java.util.ArrayList;
 
+/*
+* This class is representing a competitive swimmer.
+* In our design, a competitive swimmer, has a list of disciplines he/she can be active within. This way we can easily
+* sort through different activity parameters when such representation seems appropriate
+ */
 public class CompetitiveSwimmer extends Member {
     // Attributes --------------------------------------
     private final ArrayList<SwimmingDiscipline> swimmingDisciplineList = new ArrayList<>();
@@ -43,7 +48,7 @@ public class CompetitiveSwimmer extends Member {
         for (int i = 0; i < swimmingDisciplineList.size(); i++) {
             System.out.print(swimmingDisciplineList.get(i).getSwimmingDiscipline() + ", ");
         }
-        System.out.print("|\n");
+        System.out.print("\n");
     }
 
 

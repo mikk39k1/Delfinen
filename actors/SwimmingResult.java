@@ -4,6 +4,11 @@ import utility.UI;
 
 import java.lang.module.Configuration;
 
+/*
+* This class represents what each result contains which any swimming discipline can perform
+*  - Whenever a swimmer is active within a swimming discipline, results to each swimming discipline can be added, and
+*    thus having its own entity, is to better be able to compare attributes against other swimmers results
+ */
 public class SwimmingResult {
     // Attributes ---------------------------------------
     private final int distance;

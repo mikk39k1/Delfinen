@@ -1,5 +1,10 @@
 package actors;
 
+/*
+* This class represent all what an employee must have. Our design is made up with "The Least Privilege" concept.
+* Whenever an employee is instantiated, a privilege and role is given, thus ensuring we better can encapsulate each memebers
+* access to the system.
+ */
 public abstract class Employee extends Person {
 
 	// Attributes ---------------------------------
@@ -49,8 +54,4 @@ public abstract class Employee extends Person {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-// Behaviors (Methods) -------------------------
-	/**
-	 * Loads the username and password from etc/passwd file
-	 */
 }

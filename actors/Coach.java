@@ -7,6 +7,12 @@ import utility.FileHandler;
 import java.io.File;
 import java.util.Map;
 
+/*
+* This class represent a coach. The coach is supposed to be able to pick out competition swimmers based on their performances
+* In our design the coach can also add swimming results for both for competitive as training sessions.
+* This class is also subject to the principle of "The Least privilege", securing that an encapsulating principle won't allow
+*  the coach to meddle with methods and changes not within a coach's responsibility
+ */
 public class Coach extends Employee {
 
 
