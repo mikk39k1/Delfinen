@@ -55,30 +55,31 @@ public class Chairman extends Employee {
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(Database database, UI ui, Coach coach, FileHandler filehandler){
+    public void deleteCoach(Database database, UI ui, FileHandler filehandler){
         ui.printLn("Write the name of the coach you would like to remove:");
         String findCoach = ui.readLine();
         ui.printLn("Write the username for the coach:");
         String coachUsername = ui.readLine();
         for (int i = 0; i < database.getCoachList().size(); i++){
             if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
+                for (Member member: database.getSwimmersCoachAssociationList().keySet()){
+                    if (database.getSwimmersCoachAssociationList().get(member).loadCoachOfMember(database,member).equals(findCoach)){
 
-                database.getCoachList().remove(i);
+                        ui.printLn("\n Choose a NEW coach for the following members:");
+                        System.out.println(member.getUniqueID() + member.getName() + "\n ");
+                        database.getCoachList().remove(i);
+                        database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database));
+                    }
+                }
+
                 filehandler.deleteCoachLoginFromFile(coachUsername);
-
-                /*for (Member key : database.getSwimmersCoachAssociationList().keySet()){
-                    database.getSwimmersCoachAssociationList().get(key).findMembersOfCoach(database,coach,ui);
-                    ui.printLn("Choose a new coach for the members");
-                    if (database.getSwimmersCoachAssociationList().get(key).loadCoachOfMember())
-
-
-                }*/
-
 
 
                 ui.printLn("You have removed " + findCoach + " from the coach list.");
             } // End of if statement
         } // End of for loop
+
+
     } //End of method
 
     /*

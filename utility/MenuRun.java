@@ -283,8 +283,9 @@ public class MenuRun {
     private void deleteCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).deleteCoach(database,ui,((Chairman) employee).chooseCoach(ui,database),fileHandler);
+            ((Chairman) employee).deleteCoach(database,ui,fileHandler);
             fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeToSwimmerCoachAssociationFile(database);
             fileHandler.loggingAction("A coach got deleted.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
