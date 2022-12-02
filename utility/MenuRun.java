@@ -108,11 +108,10 @@ public class MenuRun {
      * This method prints all members from the database through the Chairman class
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void printAllMembers(Employee employee, Database memberList) {
+    private void printAllMembers(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).printMembers(ui,memberList);
-            fileHandler.loggingAction("All members was viewed.");
+            innerMenuPrintAllMembers(employee, database);
         } else {
             ui.printLn("You don't have the privilege to use this function");
             fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
@@ -361,7 +360,7 @@ public class MenuRun {
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
                     }
                     chooseSortMethod = false;
-                }
+                } // End
                 case 4 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
@@ -371,9 +370,80 @@ public class MenuRun {
                     } else {
                         sorter.setSortByRank(ui,sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
-                    }
+                    } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 4
+            } // End of switch case
+        } // End of while loop
+    } // End of method
+
+
+
+    public void innerMenuPrintAllMembers(Employee employee, Database database) {
+        boolean chooseSortMethod = true;
+        MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[] {
+                "1. Sort by Name",
+                "2. Sort by Age",
+                "3. Sort by ID",
+                "4. Sort by Phone Number",
+                "0. Back to Head Menu"
+        });
+
+        while (chooseSortMethod) {
+            innerMenu.printMenu();
+            switch (ui.readInt()) {
+                case 1 -> {
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberName(database));
+                        fileHandler.loggingAction("All members was viewed, sorted by Name.");
+                    } else {
+                        ui.printLn("You don't have the privilege to use this function");
+                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                    } // End of if / else statement
+                    chooseSortMethod = false;
+                } // End of case 1 statment
+                case 2 -> {
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberAge(database));
+                        fileHandler.loggingAction("All members was viewed, sorted by Age.");
+                    } else {
+                        ui.printLn("You don't have the privilege to use this function");
+                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                    } // End of if / else statement
+                    chooseSortMethod = false;
+                } // End of case 2 statement
+                case 3 -> {
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberID(database));
+                        fileHandler.loggingAction("All members was viewed, sorted by ID.");
+                    } else {
+                        ui.printLn("You don't have the privilege to use this function");
+                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                    } // End of if / else statement
+                    chooseSortMethod = false;
+                } // End of case 3 statement
+                case 4 -> {
+                    if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberPhoneNumber(database));
+                        fileHandler.loggingAction("All members was viewed, sorted by Phone number.");
+                    } else {
+                        ui.printLn("You don't have the privilege to use this function");
+                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                    } // End of if / else statement
+                    chooseSortMethod = false;
+                } // End of case 4 statement
+                case 0 -> {
+                    ui.printLn("Returning to Head Menu");
+                    chooseSortMethod = false;
+                }
+                default -> {
+
+
+                } // ENd of default case
             } // End of switch case
         } // End of while loop
     } // End of method

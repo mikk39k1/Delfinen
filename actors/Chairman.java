@@ -3,8 +3,7 @@ package actors;
 import database.Database;
 import utility.FileHandler;
 import utility.UI;
-
-import javax.xml.crypto.Data;
+import java.util.List;
 
 /*
 * This class represents both the admin and chairman class. Being the highest valuable entity of all the operators within
@@ -169,9 +168,13 @@ public class Chairman extends Employee {
     /*
     * This method prints every member name
      */
-    public void printMembers(UI ui, Database swimmerCoachDatabase) {
-        for (Member member : swimmerCoachDatabase.getMemberList()) {
-            ui.printLn(member.getName());       // Prints all names of every member in Database memberList
+    public void printMembers(List<Member> members) {
+        for (Member member : members) {
+            System.out.printf("%-20d %-10s %-12s %-20s%n",
+                    member.getUniqueID(),
+                    member.getName(),
+                    member.getDateOfBirth(),
+                    member.isIsMembershipActive());       // Prints all ID, names, DoB, membership status  of every member in Database memberList
         } // End of for loop
     } // End of Method
 
