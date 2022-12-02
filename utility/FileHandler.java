@@ -422,7 +422,31 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-    
+    public void deleteCoachLoginFromFile(String username) {
+        try{
+            ArrayList<String> usernamePassText = new ArrayList<>();
+            readFromFile = new Scanner(passwordList);
+            while(readFromFile.hasNextLine()) {
+                String[] tokens = readFromFile.nextLine().split(";");
+                usernamePassText.add(tokens[0]);
+                usernamePassText.add(tokens[1]);
+            }
+            readFromFile.close();
+            printToFile = new PrintStream(passwordList);
+            for (int i = 0; i < usernamePassText.size(); i += 2) {
+                if (usernamePassText.get(i).equals(username)){
+                    usernamePassText.remove(i);
+                    usernamePassText.remove(i);
+                }
+            }
+            for (int i = 0; i < usernamePassText.size(); i += 2) {
+                printToFile.println(usernamePassText.get(i) + ";" + usernamePassText.get(i+1));
+            }
+            printToFile.close();
+        } catch (FileNotFoundException e){
+            System.out.println(e);
+        }
+    }
 
     public void loggingAction(String action) {
         try {

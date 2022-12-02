@@ -1,1 +1,3 @@
 smadrekode;Alexander;12123123
+pim;Pim;23232323
+zim;Zim;123123123

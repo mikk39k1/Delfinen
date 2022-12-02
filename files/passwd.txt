@@ -1,4 +1,5 @@
 rootAdmin;Enigma123
 Acc001;OnePlusTwoIs3A
 smadrekode;smadrekode123
-hardymadsen;Hardy123
+pim;Pim123
+zim;Zim123

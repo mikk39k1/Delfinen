@@ -252,10 +252,10 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 // This method makes admin take role of an existing coach, to print his members out
                 Coach adminOverride = ((Chairman) employee).chooseCoach(ui, swimmerCoachDatabase);
-                adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride); // Runs method as temporary user
+                adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride,ui); // Runs method as temporary user
                 fileHandler.loggingAction("Swimmers with coach association viewed.");
             } else {
-                ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
+                ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee),ui); // Runs method as coach
                 fileHandler.loggingAction("Swimmers with coach association viewed.");
             } // End of inner if / else statement
         } else {
@@ -284,7 +284,7 @@ public class MenuRun {
     private void deleteCoach(Employee employee, Database database, UI ui){
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).deleteCoach(database,ui);
+            ((Chairman) employee).deleteCoach(database,ui,((Chairman) employee).chooseCoach(ui,database),fileHandler);
             fileHandler.writeToCoachlist(database.getCoachList());
             fileHandler.loggingAction("A coach got deleted.");
         } else {
