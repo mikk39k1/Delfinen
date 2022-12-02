@@ -151,7 +151,7 @@ public class Chairman extends Employee {
             ui.printLn("Coach: " + coach.getName());       // Prints all available Coaches from Database coachList
         } // End of for loop
 
-        ui.print("Hvilken Træner skal medlemmet have: ");
+        ui.print("Please enter then name of a coach: ");
         while (true) {
             String coachName = ui.readLine();       // Stores temporary the name of the Coach intended to be used
             for (Coach coach : swimmerCoachDatabase.getCoachList()) {

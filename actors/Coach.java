@@ -111,6 +111,7 @@ public class Coach extends Employee {
 					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
 							.add(new SwimmingResult(ui));
 					filehandler.appendResult(employee,swimmerCoachDatabase,swimmer,hasSwimDiscipline);
+					System.out.println("The swim result was added! ");
 				} else {
 					ui.printLn("The swimmer does not participate in this kind of competition");
 				} // End of inner if / else statement
