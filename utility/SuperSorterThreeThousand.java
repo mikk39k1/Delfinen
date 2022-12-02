@@ -48,9 +48,6 @@ public class SuperSorterThreeThousand {
 
 
     // Result SORT SECTION ----------------------------------------------------------
-    SortByDistance sortByDistance = new SortByDistance();
-    SortByIsCompetitive sortByIsCompetitive = new SortByIsCompetitive();
-    SortByRank sortByRank = new SortByRank();
     SortByTime sortByTime = new SortByTime();
 
     public ArrayList<SwimmingResult> swimmingResultList(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
@@ -82,8 +79,8 @@ public class SuperSorterThreeThousand {
     } // End of method
 
 
-    public void setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
+    public void setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
         switch(ui.setDistance()) {
             case 100 ->{
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 100);
@@ -94,8 +91,7 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 200
             case 500 ->{
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 200);
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 500);
                 swimmingResults.sort(sortByTime);
             } // End of case 500
         } // End of switch case
@@ -119,7 +115,6 @@ public class SuperSorterThreeThousand {
     }
 
     public void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
-
 
         switch(ui.setRank()) {
             case 3 ->{
