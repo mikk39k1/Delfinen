@@ -77,8 +77,10 @@ public class MenuRun {
             ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
                     swimmerCoachDatabase, fileHandler);
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
+            fileHandler.loggingAction("New member created.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Create a new member\".");
         } // End of if / else statement
     } // End of method
 
@@ -92,8 +94,10 @@ public class MenuRun {
 
             ((Chairman)employee).deleteMember(ui,memberList);
             fileHandler.writeToFullMembersList(memberList.getMemberList());
+            fileHandler.loggingAction("Member deleted.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Delete a member\".");
         } // End of if / else statement
     } // End of method
 
@@ -107,8 +111,10 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).printMembers(ui,memberList);
+            fileHandler.loggingAction("All members was viewed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
         } // End of if / else statement
     } // End of method
 
@@ -125,11 +131,14 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                      // Creates temporary user for admin
                 adminOverride.checkMemberArrears(swimmerCoachDatabase);         // Runs temporary user intended method
+                fileHandler.loggingAction("Members in arrear viewed.");
             } else {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
+                fileHandler.loggingAction("Members in arrear viewed.");
             } // End of inner if / else statement
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print members in arrear\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -147,12 +156,15 @@ public class MenuRun {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
                 adminOverride.setMemberArrears(swimmerCoachDatabase, ui); // Runs temporary user intended method
                 fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+                fileHandler.loggingAction("A members payment status was changed.");
             } else {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
             } // End of inner if / else statement
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+            fileHandler.loggingAction("A members payment status was changed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Change a members payment status\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -169,14 +181,15 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();                         // Creates temporary user for admin
                 adminOverride.addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs temporary user method
-
+                fileHandler.loggingAction("A swim result was added.");
             } else {
                 ((Coach) employee).addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs method as Coach
-
+                fileHandler.loggingAction("A swim result was added.");
             } // End of inner if / else statement
 
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Add a swimresult\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -192,8 +205,10 @@ public class MenuRun {
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             innerMenuSwimmerResults(employee, database);
+            fileHandler.loggingAction("A competitive swimmers results printed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print swimming results\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -211,11 +226,14 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();              // Creates a temporary user for admin
                 adminOverride.checkTopFiveCompetitionSwimResults(swimmerCoachDatabase,ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
+                fileHandler.loggingAction("Top 5 athletes was printed.");
             } else {
                 ((Coach) employee).checkTopFiveCompetitionSwimResults(swimmerCoachDatabase,ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
+                fileHandler.loggingAction("Top 5 athletes was printed.");
             } // End of inner if / else statement
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print top 5 athletes\".");
         } // End of outer if / else statement
     } //End of method
 
@@ -234,11 +252,14 @@ public class MenuRun {
                 // This method makes admin take role of an existing coach, to print his members out
                 Coach adminOverride = ((Chairman) employee).chooseCoach(ui, swimmerCoachDatabase);
                 adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride); // Runs method as temporary user
+                fileHandler.loggingAction("Swimmers with coach association viewed.");
             } else {
                 ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
+                fileHandler.loggingAction("Swimmers with coach association viewed.");
             } // End of inner if / else statement
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print swimmer associated with coach\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -252,8 +273,10 @@ public class MenuRun {
 
             ((Chairman) employee).createCoach(database,ui, fileHandler);
             fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.loggingAction("A new coach added.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Create coach\".");
         } // End of if / else statement
     } // End of method
 
@@ -262,8 +285,10 @@ public class MenuRun {
 
             ((Chairman) employee).deleteCoach(database,ui);
             fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.loggingAction("A coach got deleted.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Delete coach\".");
         } // End of if / else statement
     } // End of method
 
@@ -274,13 +299,15 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
                 adminOverride.printEconomyInfo(swimmerCoachDatabase); // Runs temporary user intended method
-
+                fileHandler.loggingAction("Economy details viewed.");
             } else {
                 ((Treasurer) employee).printEconomyInfo(swimmerCoachDatabase);
             } // End of inner if / else statement
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+            fileHandler.loggingAction("Economy details viewed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
+            fileHandler.loggingAction("Unauthorised user tried to access \"Print economy\".");
         } // End of outer if / else statement
     } // End of method
 
