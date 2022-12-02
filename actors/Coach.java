@@ -54,6 +54,10 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
+					System.out.printf("|ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
+							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getDateOfBirth(),
+							member.isIsMembershipActive());
+					((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
 				} // End of inner if statement
 			} // End of outer if statement

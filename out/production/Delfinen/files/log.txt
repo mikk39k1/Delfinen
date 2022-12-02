@@ -58,15 +58,3 @@
 2022:12:02:11:01:20 Swimmers with coach association viewed.
 2022:12:02:11:03:24 Program started.
 2022:12:02:11:03:41 Program started.
-2022:12:02:11:11:02 Program started.
-2022:12:02:11:11:09 Administrator logged in.
-2022:12:02:11:11:12 Economy details viewed.
-2022:12:02:11:11:12 Economy details viewed.
-2022:12:02:11:11:35 A members payment status was changed.
-2022:12:02:11:11:35 A members payment status was changed.
-2022:12:02:11:11:41 A members payment status was changed.
-2022:12:02:11:11:41 A members payment status was changed.
-2022:12:02:11:11:46 A members payment status was changed.
-2022:12:02:11:11:46 A members payment status was changed.
-2022:12:02:11:11:48 Economy details viewed.
-2022:12:02:11:11:48 Economy details viewed.

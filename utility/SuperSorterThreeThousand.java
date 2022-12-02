@@ -56,7 +56,7 @@ public class SuperSorterThreeThousand {
     public ArrayList<SwimmingResult> swimmingResultList(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
         for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
-            for (int i = 0; i < database.getSwimmersCoachAssociationList().size(); i++) {
+            for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
                 if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDiscipline().equals(swimType)) {
                     swimResultList.addAll(((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().
                             get(i).getSwimmingDisciplineResults());
@@ -91,8 +91,7 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 100
             case 200 ->{
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 100);
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() == 500);
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 200);
                 swimmingResults.sort(sortByTime);
             } // End of case 200
             case 500 ->{
