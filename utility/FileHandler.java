@@ -4,6 +4,8 @@ import actors.*;
 import database.Database;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,7 @@ public class FileHandler {
     private final File swimmerCoachAssociationList = new File("files/swimmerCoachAssociationList.txt");
     private final File coachListFile = new File("files/coachList.txt");
     private final File passwordList = new File("files/passwd.txt");
+    private final File logFile = new File("files/log.txt");
 
 
     private PrintStream printToFile;
@@ -419,6 +422,15 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
+    public void loggingAction(String action) {
+        try {
+            printToFile = new PrintStream(new FileOutputStream(logFile, true));
+            printToFile.print(LocalDateTime.now().format(DateTimeFormatter.ofPattern("u:MM:dd:HH:mm:ss")));
+            printToFile.println(" " + action);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
+    }
 
     /*
      * This method prints a welcome emoji presenting creators of this project
