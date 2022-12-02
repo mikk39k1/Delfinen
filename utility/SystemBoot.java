@@ -54,6 +54,7 @@ public class SystemBoot {
 
         while (true) {
             System.out.println("\n");
+            fileHandler.loggingAction("Program started.");
             fileHandler.printWelcomeSharks();   // 5
             //loading();
             loginSystem();                      // 6
@@ -86,10 +87,12 @@ public class SystemBoot {
         for (Employee user : enigmaUsers) {
             if (user.getUsername().equals(username)) {
                 currentUser = user;
+                fileHandler.loggingAction(currentUser.getName() + " logged in.");
             } else {
                 for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                     if (coach.getUsername().equals(username)) {
                         currentUser = coach;
+                        fileHandler.loggingAction(currentUser.getName() + " logged in.");
                     } // End inner if statement
                 } // End inner for loop
             } // End if / else statement

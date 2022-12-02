@@ -358,6 +358,7 @@ public class MenuRun {
      */
     private boolean logOut() {
         ui.printLn("Until next time!");
+        fileHandler.loggingAction("Program terminated.");
         System.exit(0);
         return false;
     } // End of Method
