@@ -422,6 +422,8 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
+    
+
     public void loggingAction(String action) {
         try {
             printToFile = new PrintStream(new FileOutputStream(logFile, true));

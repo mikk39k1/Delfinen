@@ -77,7 +77,8 @@ public class MenuRun {
             ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
                     swimmerCoachDatabase, fileHandler);
             fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
-            fileHandler.loggingAction("New member created.");
+            fileHandler.loggingAction(swimmerCoachDatabase.getMemberList().get(swimmerCoachDatabase.
+                    getMemberList().size()-1).getName() + " is now swimming with DELFINEN.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
             fileHandler.loggingAction("Unauthorised user tried to access \"Create a new member\".");
