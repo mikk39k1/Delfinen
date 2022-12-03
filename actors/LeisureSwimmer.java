@@ -2,6 +2,8 @@ package actors;
 
 import utility.UI;
 
+import java.time.LocalDate;
+
 /*
 * This class represent a leisure swimmer. Since our design coaches can only be associated with competitive swimmers, there
 * seems no reason to mix leisure and swimmer with the same class representation.
@@ -23,7 +25,7 @@ public class LeisureSwimmer extends Member {
     }
 
 
-    public LeisureSwimmer(int uniqueID, String name, String phoneNumber,String birthday, boolean isActive, boolean hasPaid) {
+    public LeisureSwimmer(int uniqueID, String name, String phoneNumber, LocalDate birthday, boolean isActive, boolean hasPaid) {
         setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);

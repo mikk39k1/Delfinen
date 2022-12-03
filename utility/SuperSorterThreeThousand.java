@@ -6,11 +6,11 @@ import utility.member_comparators.SortByMemberAge;
 import utility.member_comparators.SortByMemberID;
 import utility.member_comparators.SortByMemberName;
 import utility.member_comparators.SortByMemberPhoneNumber;
-import utility.result_comparators.SortByDistance;
-import utility.result_comparators.SortByIsCompetitive;
-import utility.result_comparators.SortByRank;
 import utility.result_comparators.SortByTime;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -133,8 +133,38 @@ public class SuperSorterThreeThousand {
         System.out.println(swimmingResults);
     }
 
-    public void setSortByTime(Database database, SwimmingDiscipline swimType, UI ui) {
-        List<Member> localist = new ArrayList<>();
+    public void setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+
+        switch (ui.chooseTimeFrame()) {
+            case 1 -> {
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(3)));
+                swimmingResults.sort(sortByTime);
+            }
+            case 2 -> {
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(6)));;
+                swimmingResults.sort(sortByTime);
+            }
+            case 3 -> {
+                swimmingResults.removeIf(swimmingResult -> !(swimmingResult.getDate().getYear() == LocalDate.now().getYear()));
+                swimmingResults.sort(sortByTime);
+            }
+            case 4 -> {
+                int specificYear = LocalDate.now().getYear() - ui.readYear();
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusYears(specificYear)));
+                swimmingResults.sort(sortByTime);
+            }
+            case 5 -> {
+                int specificYear = LocalDate.now().getYear() - ui.readYear();
+                swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(LocalDate.now().minusYears(specificYear)));
+                swimmingResults.sort(sortByTime);
+            }
+            case 6 -> {
+                LocalDate date = ui.setDate();
+                swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(date));
+                swimmingResults.sort(sortByTime);
+            }
+        }
+        System.out.println(swimmingResults);
 
     }
 }

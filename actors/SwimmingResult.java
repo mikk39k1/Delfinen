@@ -2,6 +2,8 @@ package actors;
 
 import utility.UI;
 
+import java.time.LocalDate;
+
 /*
 * This class represents what each result contains which any swimming discipline can perform
 *  - Whenever a swimmer is active within a swimming discipline, results to each swimming discipline can be added, and
@@ -10,7 +12,7 @@ import utility.UI;
 public class SwimmingResult {
     // Attributes ---------------------------------------
     private final int distance;
-    private final String date;
+    private final LocalDate date;
     private final int swimTime;
     private final boolean isCompetitive;
     private int rank = 0;
@@ -37,7 +39,7 @@ public class SwimmingResult {
 
     // Constructor for fileWriter -----------------------
 
-    public SwimmingResult(int distance, String swimTime, String date, boolean isCompetitive, int rank) {
+    public SwimmingResult(int distance, String swimTime, LocalDate date, boolean isCompetitive, int rank) {
         this.distance = distance;
         this.swimTime = Integer.parseInt(swimTime);
         this.date = date;
@@ -52,7 +54,7 @@ public class SwimmingResult {
         return distance;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

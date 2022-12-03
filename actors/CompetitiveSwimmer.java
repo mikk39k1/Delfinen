@@ -3,6 +3,7 @@ package actors;
 
 import utility.UI;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /*
@@ -30,7 +31,7 @@ public class CompetitiveSwimmer extends Member {
     }
 
     public CompetitiveSwimmer(int uniqueID, String name, String phoneNumber,
-                              String birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
+                              LocalDate birthday, boolean isActive, boolean hasPaid) {//this is for the loadmethod
         setUniqueID(uniqueID);
         setName(name);
         setPhoneNumber(phoneNumber);

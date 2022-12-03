@@ -3,6 +3,8 @@ package utility;
 import actors.SwimmingDiscipline;
 
 import java.io.PrintStream;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -89,11 +91,16 @@ public class UI {
 
     // DATE TIME READER ----------------------------------------
     /*
-     * This method sets the date based on 3 methods to request: year, month and day. Then formatting it nicely for console
+     * This method sets the date based on 3 methods to request: year, month and days in a month.
      */
-    public String setDate() {
-        LocalDateTime dateTime = LocalDateTime.of(readYear(), readMonth(), readDay(), 0, 0);
-        return dateTime.format(dateFormat);
+    public LocalDate setDate() {
+        while(true) {
+            try {
+                return LocalDate.of(readYear(), readMonth(), readDay());
+            } catch (DateTimeException e) {
+                printLn("Theres not that many days in the month, please try again");
+            }
+        }
     } // end of method
 
 
@@ -105,7 +112,7 @@ public class UI {
         print("Please enter year:  ");
         while (true) {
             int input = readInt();
-            if (input <= LocalDateTime.now().getYear() && input >= LocalDateTime.now().getYear() - 130) {
+            if (input <= LocalDate.now().getYear() && input >= LocalDate.now().getYear() - 130) {
                 return input;
             } else {
                 printLn("You've entered an invalid year");
@@ -147,7 +154,11 @@ public class UI {
 
     public int setDistance() {
         while (true) {
-            printLn("Chose a distance:\n- 1. 100m\n- 2. 200m\n- 3. 500m");
+            printLn("Chose a distance:\n" +
+                    "1. 100m\n" +
+                    "2. 200m\n" +
+                    "3. 500m");
+
             switch (readInt()) {
                 case 1 -> {return 100;}
                 case 2 -> {return 200;}
@@ -159,7 +170,11 @@ public class UI {
 
     public int setRank() {
         while (true) {
-            printLn("Chose a Rank:\n 1. Top 3\n 2. Top 5\n 3. Top 10");
+            printLn("Chose a Rank:\n" +
+                    "1. Top 3\n" +
+                    "2. Top 5\n" +
+                    "3. Top 10");
+
             switch (readInt()) {
                 case 1 -> {return 3;}
                 case 2 -> {return 5;}
@@ -171,7 +186,10 @@ public class UI {
 
     public boolean setCompetitiveness() {
         while(true) {
-            printLn("Choose either\n 1. Training-session\n 2. Competition");
+            printLn("Choose either:\n" +
+                    "1. Training-session\n" +
+                    "2. Competition");
+
             switch (readInt()) {
                 case 1 -> {return false;}
                 case 2 -> {return true;}
@@ -180,13 +198,35 @@ public class UI {
         }
     }
 
+    public int chooseTimeFrame() {
+        while(true) {
+            printLn("Choose results from\n" +
+                    "1. Last Three Months\n" +
+                    "2. Last Six Months\n" +
+                    "3. This Year\n" +
+                    "4. From Specific Year Til Now\n" +
+                    "5. Check Specific Year\n" +
+                    "6. Check Specific Day");
+
+            switch (readInt()) {
+                case 1 -> {return 1;}
+                case 2 -> {return 2;}
+                case 3 -> {return 3;}
+                case 4 -> {return 4;}
+                case 5 -> {return 5;}
+                case 6 -> {return 6;}
+                default -> printLn("Invalid input");
+            } // End of switch statement
+        } // End of while loop
+    } // End of method
+
 
     // ENUM READER ---------------------------------------------
     /*
      * This method checks input to match Enum value of SwimingDiscplineType
      */
     public SwimmingDiscipline.SwimmingDisciplineTypes setSwimmingDisciplineType() {
-        System.out.printf("Please enter Swimming Discipline/s ");
+        System.out.print("Please enter Swimming Discipline/s ");
         while (true) {
             try {
                 return SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(in.nextLine().toUpperCase());
@@ -195,4 +235,8 @@ public class UI {
             } // End of try / catch statement
         } // End of while loop
     } // End of method
+
+    public DateTimeFormatter getDateFormat() {
+        return dateFormat;
+    }
 }

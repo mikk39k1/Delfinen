@@ -12,7 +12,7 @@ public abstract class Member extends Person {
 	// Attributes -------------------------------------------
 	private static int ID;
 	private int uniqueID = Member.ID++;
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private boolean isMembershipActive;
 	private boolean hasPaid;
 
@@ -20,7 +20,7 @@ public abstract class Member extends Person {
 	public int getUniqueID() {
 		return this.uniqueID;
 	}
-	public String getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return this.dateOfBirth;
 	}
 	public boolean isIsMembershipActive() {
@@ -31,7 +31,7 @@ public abstract class Member extends Person {
 	}
 
 	// Setters -----------------------------------------------
-	public void setDateOfBirth(String birthOfYear) {
+	public void setDateOfBirth(LocalDate birthOfYear) {
 		this.dateOfBirth = birthOfYear;
 	}
 
@@ -59,6 +59,8 @@ public abstract class Member extends Person {
 	/*
 	* This method extracts the exact age based on the date of birth
 	 */
+
+	/*
 	public int getAge() {
 		String s = dateOfBirth;  // Stores the birthOfYear attribute temporary as a String
 		String[] arrOfStr = s.split("-");		// Splits and adds components to a temporary String array
@@ -69,6 +71,12 @@ public abstract class Member extends Person {
 		LocalDate now = LocalDate.now();				// Stores the Date today
 		return Period.between(dob, now).getYears();		// Calculates the year difference based on inputs
 	} // End of method
+
+	 */
+
+	public int getAge() {
+		return Period.between(dateOfBirth, LocalDate.now()).getYears();
+	}
 
 
 }

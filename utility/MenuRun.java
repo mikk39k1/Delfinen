@@ -318,9 +318,10 @@ public class MenuRun {
         boolean chooseSortMethod = true;
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[] {
                 "1. Show all Results for Swimmer",
-                "2. Sort by Distance",
-                "3. Sort by Competitiveness",
-                "4. Sort by Rank"
+                "2. Show by Date",
+                "3. Sort by Distance",
+                "4. Sort by Competitiveness",
+                "5. Sort by Rank"
         });
 
         while(chooseSortMethod) {
@@ -341,6 +342,19 @@ public class MenuRun {
                 case 2 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
+                        sorter.setSortByDate(ui,sorter.
+                                oneSwimmersResultList(adminOverride.
+                                        lookupSwimmer(ui, database),database,ui.setSwimmingDisciplineType()));
+                    } else {
+                        sorter.setSortByDate(ui,sorter.
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
+                    }
+                    chooseSortMethod = false;
+
+                }
+                case 3 -> {
+                    if (employee instanceof Chairman) {
+                        Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByDistance(ui,sorter.
                                 oneSwimmersResultList(adminOverride.
                                         lookupSwimmer(ui, database),database,ui.setSwimmingDisciplineType()));
@@ -350,7 +364,7 @@ public class MenuRun {
                     }
                     chooseSortMethod = false;
                 }
-                case 3 -> {
+                case 4 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByIsCompetitive(ui,sorter.
@@ -362,7 +376,7 @@ public class MenuRun {
                     }
                     chooseSortMethod = false;
                 } // End
-                case 4 -> {
+                case 5 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByRank(ui,sorter.

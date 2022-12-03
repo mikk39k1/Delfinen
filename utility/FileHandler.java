@@ -4,6 +4,7 @@ import actors.*;
 import database.Database;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class FileHandler {
                 int id = Integer.parseInt(arrOfStr[1]);  // Stores ID value of Member
                 String name = arrOfStr[2];              // Stores the name of Member in a temporary String
                 String phone = arrOfStr[3];             // Stores phone number of member in a temporary String
-                String dob = arrOfStr[4];               // Stores date of birth of member in a temporary String
+                LocalDate dob = LocalDate.parse(arrOfStr[4]);               // Stores date of birth of member in a temporary String
                 boolean membershipActive = Boolean.parseBoolean(arrOfStr[5]);   // Stores state of membership in a temporary boolean
                 boolean hasPaid = Boolean.parseBoolean(arrOfStr[6]);    // Stores paid status of membership in a temporary boolean
 
@@ -230,7 +231,7 @@ public class FileHandler {
                     getSwimmingDisciplineResults().get(numberInArray).getDistance();    // Stores distance of result
             String time = String.valueOf(swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).getSwimTime());    // Stores time of result
-            String date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
+            LocalDate date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).getDate();        // Stores date of result
             boolean isCompetitive = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().get(numberInArray).isCompetitive(); // Stores competitiveness of result
@@ -255,7 +256,7 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-
+/*
     //MyFinestSmadderkODE *atc
     public void loadResults(HashMap<Member, Coach> swimmersCoachAssociationList) {
         try {
@@ -283,6 +284,8 @@ public class FileHandler {
         }
     }
 
+ */
+
 
     /*
     * This method loads all results from results file, and adds them to corresponding member with matching ID from file
@@ -297,7 +300,7 @@ public class FileHandler {
                 String swimDiscipline = arr[2];                // Stores SwimmingDisciplineType from arr
                 int distance = Integer.parseInt(arr[3]);    // Stores distance from arr
                 String swimTime = arr[4];
-                String date = arr[5];                          // Stores date from arr
+                LocalDate date = LocalDate.parse(arr[5]);                          // Stores date from arr
                 // Stores swimTime from arr
                 boolean isCompetitive = Boolean.parseBoolean(arr[6]);   // Stores competitiveness from arr
                 int rank = Integer.parseInt(arr[7]);        // Stores rank position from arr
