@@ -20,8 +20,6 @@ public class UI {
 
     // Attributes ---------------------------------------------------
     private Scanner in = new Scanner(System.in);
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
 
     public String readLine() {
         return in.nextLine();
@@ -98,9 +96,10 @@ public class UI {
             try {
                 return LocalDate.of(readYear(), readMonth(), readDay());
             } catch (DateTimeException e) {
+                // The DateTimeException can only prompt wrong day inputs, since we already set boundaries within year / month methods.
                 printLn("Theres not that many days in the month, please try again");
-            }
-        }
+            } // End of try / catch statement
+        } // ENd of while loop
     } // end of method
 
 
@@ -165,8 +164,8 @@ public class UI {
                 case 3 -> {return 500;}
             }
             printLn("Not valid input");
-        }
-    }
+        } // End of while loop
+    } // End of method
 
     public int setRank() {
         while (true) {
@@ -179,10 +178,10 @@ public class UI {
                 case 1 -> {return 3;}
                 case 2 -> {return 5;}
                 case 3 -> {return 10;}
-            }
+            } // End of switch statement
             printLn("Not valid input");
-        }
-    }
+        } // End of while loop
+    } // End of method
 
     public boolean setCompetitiveness() {
         while(true) {
@@ -193,10 +192,10 @@ public class UI {
             switch (readInt()) {
                 case 1 -> {return false;}
                 case 2 -> {return true;}
-            }
+            } // End of switch statement
             printLn("Not a valid input");
-        }
-    }
+        } // End of while loop
+    } // End of method
 
     public int chooseTimeFrame() {
         while(true) {
@@ -235,8 +234,4 @@ public class UI {
             } // End of try / catch statement
         } // End of while loop
     } // End of method
-
-    public DateTimeFormatter getDateFormat() {
-        return dateFormat;
-    }
 }
