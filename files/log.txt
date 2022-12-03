@@ -186,3 +186,13 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:02:15:34:08 Administrator logged in.
 2022:12:02:15:34:25 A coach got deleted.
 2022:12:02:15:34:29 Program terminated.
+2022:12:03:11:57:18 Program started.
+2022:12:03:11:57:26 Administrator logged in.
+2022:12:03:11:57:40 Swimmers with coach association viewed.
+2022:12:03:11:57:53 Swimmers with coach association viewed.
+2022:12:03:11:58:26 All members was viewed, sorted by ID.
+2022:12:03:11:59:14 Economy details viewed.
+2022:12:03:11:59:14 Economy details viewed.
+2022:12:03:12:00:33 A swim result was added.
+2022:12:03:12:00:49 A competitive swimmers results printed.
+2022:12:03:12:00:53 Program terminated.
