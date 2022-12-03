@@ -56,17 +56,17 @@ public class SystemBoot {
             System.out.println("\n");
             fileHandler.loggingAction("Program started.");
             fileHandler.printWelcomeSharks();   // 5
-            //loading();
+            loading();
             loginSystem();                      // 6
 
-            MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
+            MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[] {
                     "1. Add a new member.",
                     "2. Delete a member",
                     "3. Print list of existing members.",
                     "4. Print member(s) in arrear.",
                     "5. Change a members payment status",
                     "6. Add a new swimming result.",
-                    "7. Print swimmming results", // vælge om se alle eller en enkeltsvømmer
+                    "7. Print swimming results", // vælge om se alle eller en enkeltsvømmer
                     "8. Print top 5 athletes in a given discipline.", // Forskellige sort typer,
                     "9. Print all members associated with a certain coach",
                     "10. Add a new coach",

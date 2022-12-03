@@ -54,8 +54,8 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("|ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getDateOfBirth(),
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
+							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
@@ -79,8 +79,8 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("|ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-							member.getUniqueID(), member.getName(), member.getPhoneNumber(), member.getDateOfBirth(),
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
+							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 							((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
@@ -127,9 +127,9 @@ public class Coach extends Employee {
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
 
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
-			System.out.printf("%nID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: %-10s%n",
+			System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: %-10s%n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
-					competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.getDateOfBirth(), competitiveSwimmer.isIsMembershipActive(),
+					competitiveSwimmer.getDateOfBirth(),competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
 			for (SwimmingResult result : competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults()) {
 				System.out.print(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline()+": ");

@@ -171,10 +171,11 @@ public class Chairman extends Employee {
      */
     public void printMembers(List<Member> members) {
         for (Member member : members) {
-            System.out.printf("%-20d %-10s %-12s %-20s%n",
+            System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b%n",
                     member.getUniqueID(),
                     member.getName(),
                     member.getDateOfBirth(),
+                    member.getPhoneNumber(),
                     member.isIsMembershipActive());       // Prints all ID, names, DoB, membership status  of every member in Database memberList
         } // End of for loop
     } // End of Method

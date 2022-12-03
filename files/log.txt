@@ -1,6 +1,7 @@
 2022:12:02:09:28:26 Program started.
 2022:12:02:09:30:34 Program started.
-2022:12:02:09:30:43 Administrator logged in.2022:12:02:09:33:42 Program started.
+2022:12:02:09:30:43 Administrator logged in.
+2022:12:02:09:33:42 Program started.
 2022:12:02:09:49:55 Program started.
 2022:12:02:09:50:03 Administrator logged in.
 2022:12:02:09:50:42 New member created.
@@ -200,3 +201,43 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:03:23:54:47 Administrator logged in.
 2022:12:03:23:55:00 A competitive swimmers results printed.
 2022:12:03:23:55:10 Program terminated.
+2022:12:04:00:05:17 Program started.
+2022:12:04:00:05:22 Administrator logged in.
+2022:12:04:00:05:34 All members was viewed, sorted by Age.
+2022:12:04:00:05:56 Members in arrear viewed.
+2022:12:04:00:06:07 All members was viewed, sorted by ID.
+2022:12:04:00:08:15 Program started.
+2022:12:04:00:08:21 Administrator logged in.
+2022:12:04:00:08:23 All members was viewed, sorted by Age.
+2022:12:04:00:08:40 All members was viewed, sorted by Name.
+2022:12:04:00:08:48 All members was viewed, sorted by Phone number.
+2022:12:04:00:10:18 Program started.
+2022:12:04:00:10:23 Administrator logged in.
+2022:12:04:00:10:27 All members was viewed, sorted by Age.
+2022:12:04:00:11:57 Program started.
+2022:12:04:00:12:02 Administrator logged in.
+2022:12:04:00:12:04 All members was viewed, sorted by Age.
+2022:12:04:00:14:28 Program started.
+2022:12:04:00:14:32 Administrator logged in.
+2022:12:04:00:14:34 All members was viewed, sorted by Age.
+2022:12:04:00:15:29 Program started.
+2022:12:04:00:15:33 Administrator logged in.
+2022:12:04:00:15:34 All members was viewed, sorted by Age.
+2022:12:04:00:16:50 Program started.
+2022:12:04:00:16:59 Administrator logged in.
+2022:12:04:00:17:00 All members was viewed, sorted by Age.
+2022:12:04:00:20:05 Program started.
+2022:12:04:00:20:11 Administrator logged in.
+2022:12:04:00:20:33 A competitive swimmers results printed.
+2022:12:04:00:21:53 Program started.
+2022:12:04:00:21:57 Administrator logged in.
+2022:12:04:00:22:05 A competitive swimmers results printed.
+2022:12:04:00:24:15 Program started.
+2022:12:04:00:24:19 Administrator logged in.
+2022:12:04:00:24:26 A competitive swimmers results printed.
+2022:12:04:00:26:54 Program started.
+2022:12:04:00:26:57 Administrator logged in.
+2022:12:04:00:27:00 All members was viewed, sorted by Age.
+2022:12:04:00:27:08 A competitive swimmers results printed.
+2022:12:04:00:38:32 Program started.
+2022:12:04:00:38:49 Administrator logged in.

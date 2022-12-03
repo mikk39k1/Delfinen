@@ -9,8 +9,6 @@ import utility.member_comparators.SortByMemberPhoneNumber;
 import utility.result_comparators.SortByTime;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +46,11 @@ public class SuperSorterThreeThousand {
 
 
     // Result SORT SECTION ----------------------------------------------------------
-    SortByTime sortByTime = new SortByTime();
+    SortByTime sortByTime = new SortByTime();           // We always sort by Time before presenting
 
+    /*
+     * This method gathers all results from all swimmers from AssociationList, then returns them as an ArrayList
+     */
     public ArrayList<SwimmingResult> swimmingResultList(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
         for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
@@ -63,6 +64,10 @@ public class SuperSorterThreeThousand {
         return swimResultList;
     } // End of method
 
+
+    /*
+    * This method gathers all results from one specific swimmer and returns them as an ArrayList
+     */
     public ArrayList<SwimmingResult> oneSwimmersResultList(CompetitiveSwimmer swimmer, Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
         for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
@@ -80,6 +85,9 @@ public class SuperSorterThreeThousand {
 
 
 
+    /*
+    * This method sorts based on distance, look inside ui.class to understand properties being presented
+     */
     public void setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
         switch(ui.setDistance()) {
             case 100 ->{
@@ -94,14 +102,14 @@ public class SuperSorterThreeThousand {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 500);
                 swimmingResults.sort(sortByTime);
             } // End of case 500
-        } // End of switch case
+        } // End of switch statement
         System.out.println(swimmingResults);
     } // End of method
 
 
-
-
-
+    /*
+    * This method sorts results based on competitiveness. True = Competition / False = Training session
+     */
     public void setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         if (!ui.setCompetitiveness()) {
@@ -110,10 +118,14 @@ public class SuperSorterThreeThousand {
         } else {
             swimmingResults.removeIf(swimmingResult -> !swimmingResult.isCompetitive());
             swimmingResults.sort(sortByTime);
-        }
+        } // End of if / else statement
         System.out.println(swimmingResults);
-    }
+    } // End of method
 
+
+    /*
+    * This method sorts results based on Rank. Read more in ui.class defining return values with info.
+     */
     public void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch(ui.setRank()) {
@@ -129,42 +141,47 @@ public class SuperSorterThreeThousand {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 10);
                 swimmingResults.sort(sortByTime);
             } // End of case 500
-        } // End of switch case
+        } // End of switch statement
         System.out.println(swimmingResults);
-    }
+    } // End of method
 
+    /*
+    * This method sorts results based on date attributes.
+     */
     public void setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch (ui.chooseTimeFrame()) {
             case 1 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(3)));
                 swimmingResults.sort(sortByTime);
-            }
+            } // End of case 1
             case 2 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(6)));;
                 swimmingResults.sort(sortByTime);
-            }
+            } // End of case 2
             case 3 -> {
                 swimmingResults.removeIf(swimmingResult -> !(swimmingResult.getDate().getYear() == LocalDate.now().getYear()));
                 swimmingResults.sort(sortByTime);
-            }
+            } // End of case 3
             case 4 -> {
                 int specificYear = LocalDate.now().getYear() - ui.readYear();
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusYears(specificYear)));
                 swimmingResults.sort(sortByTime);
-            }
+            } // End of case 4
             case 5 -> {
                 int specificYear = LocalDate.now().getYear() - ui.readYear();
                 swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(LocalDate.now().minusYears(specificYear)));
                 swimmingResults.sort(sortByTime);
-            }
+            } // End of case 5
             case 6 -> {
                 LocalDate date = ui.setDate();
                 swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(date));
                 swimmingResults.sort(sortByTime);
-            }
-        }
+            } // End of case 6
+        } // End of switch statement
         System.out.println(swimmingResults);
+    } // End of method
 
-    }
-}
+
+
+} // End of class

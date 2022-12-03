@@ -338,7 +338,8 @@ public class MenuRun {
                                 ((Coach) employee).lookupSwimmer(ui, database)); // runs method as Coach
                     } // End of inner if / else statement
                     chooseSortMethod = false;
-                }
+                    fileHandler.loggingAction("All results of a certain swimmer was viewed.");
+                } // End of case 1
                 case 2 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
@@ -348,10 +349,10 @@ public class MenuRun {
                     } else {
                         sorter.setSortByDate(ui,sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
-                    }
+                    } // End of if / else statement
                     chooseSortMethod = false;
-
-                }
+                    fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
+                } // End of case 2
                 case 3 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
@@ -361,9 +362,10 @@ public class MenuRun {
                     } else {
                         sorter.setSortByDistance(ui,sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
-                    }
+                    } // End of if / else statement
                     chooseSortMethod = false;
-                }
+                    fileHandler.loggingAction("Results on a certain distance for a swimmer was viewed.");
+                } // End of case 3
                 case 4 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
@@ -373,9 +375,10 @@ public class MenuRun {
                     } else {
                         sorter.setSortByIsCompetitive(ui,sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
-                    }
+                    } // End of if / else statement
                     chooseSortMethod = false;
-                } // End
+                    fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
+                } // End of case 4
                 case 5 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
@@ -387,7 +390,8 @@ public class MenuRun {
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui,database),database,ui.setSwimmingDisciplineType()));
                     } // End of if / else statement
                     chooseSortMethod = false;
-                } // End of case 4
+                    fileHandler.loggingAction("Results of either training or competitiveness, for a swimmer was viewed.");
+                } // End of case 5
             } // End of switch case
         } // End of while loop
     } // End of method
@@ -417,7 +421,7 @@ public class MenuRun {
                         fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
-                } // End of case 1 statment
+                } // End of case 1
                 case 2 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
@@ -428,7 +432,7 @@ public class MenuRun {
                         fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
-                } // End of case 2 statement
+                } // End of case 2
                 case 3 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
@@ -439,7 +443,7 @@ public class MenuRun {
                         fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
-                } // End of case 3 statement
+                } // End of case 3
                 case 4 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
@@ -450,14 +454,13 @@ public class MenuRun {
                         fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
-                } // End of case 4 statement
+                } // End of case 4
                 case 0 -> {
                     ui.printLn("Returning to Head Menu");
                     chooseSortMethod = false;
-                }
+                } // End of case 0
                 default -> {
-
-
+                    ui.printLn("Invalid input, please try again");
                 } // ENd of default case
             } // End of switch case
         } // End of while loop
