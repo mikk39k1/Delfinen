@@ -27,7 +27,7 @@ public class Chairman extends Employee {
     * This method creates a member, and returns the member as a value
      */
     public Member createMember(UI ui) {
-        ui.print("Tast venligst 1 - for motionist eller 2 - for Konkurrence Svømmer: ");
+        ui.print("Type 1 - for exercising or 2 - for competing swimmer: ");
         return (ui.readInt()) == 1 ? new LeisureSwimmer(ui) : new CompetitiveSwimmer(ui); // Adds member based on int input
     } // End of method
 
