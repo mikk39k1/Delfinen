@@ -186,37 +186,13 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:02:15:34:08 Administrator logged in.
 2022:12:02:15:34:25 A coach got deleted.
 2022:12:02:15:34:29 Program terminated.
-2022:12:03:00:52:18 Program started.
-2022:12:03:00:52:24 Administrator logged in.
-2022:12:03:00:57:31 Program started.
-2022:12:03:00:57:38 Administrator logged in.
-2022:12:03:00:58:15 Program started.
-2022:12:03:00:58:21 Administrator logged in.
-2022:12:03:22:02:58 Program started.
-2022:12:03:22:03:04 Administrator logged in.
-2022:12:03:22:03:18 A competitive swimmers results printed.
-2022:12:03:22:06:08 Program started.
-2022:12:03:22:06:13 Administrator logged in.
-2022:12:03:22:11:38 Program started.
-2022:12:03:22:11:44 Administrator logged in.
-2022:12:03:22:13:55 Program started.
-2022:12:03:22:14:04 Administrator logged in.
-2022:12:03:22:14:14 A competitive swimmers results printed.
-2022:12:03:22:28:01 Program started.
-2022:12:03:22:28:05 Administrator logged in.
-2022:12:03:22:28:19 A competitive swimmers results printed.
-2022:12:03:22:32:41 Program started.
-2022:12:03:22:32:46 Administrator logged in.
-2022:12:03:22:39:39 Program started.
-2022:12:03:22:39:43 Administrator logged in.
-2022:12:03:22:40:40 Program started.
-2022:12:03:22:40:49 Administrator logged in.
-2022:12:03:22:54:55 Program started.
-2022:12:03:22:55:01 Administrator logged in.
-2022:12:03:22:58:50 Program started.
-2022:12:03:22:58:57 Administrator logged in.
-2022:12:03:23:00:09 Program started.
-2022:12:03:23:00:13 Administrator logged in.
-2022:12:03:23:28:52 Program started.
-2022:12:03:23:28:57 Administrator logged in.
-2022:12:03:23:29:20 A competitive swimmers results printed.
+2022:12:03:11:57:18 Program started.
+2022:12:03:11:57:26 Administrator logged in.
+2022:12:03:11:57:40 Swimmers with coach association viewed.
+2022:12:03:11:57:53 Swimmers with coach association viewed.
+2022:12:03:11:58:26 All members was viewed, sorted by ID.
+2022:12:03:11:59:14 Economy details viewed.
+2022:12:03:11:59:14 Economy details viewed.
+2022:12:03:12:00:33 A swim result was added.
+2022:12:03:12:00:49 A competitive swimmers results printed.
+2022:12:03:12:00:53 Program terminated.
