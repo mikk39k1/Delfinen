@@ -392,3 +392,11 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:20:56:26 Program started.
 2022:12:04:20:56:30 Administrator logged in.
 2022:12:04:20:56:34 Swimmers with coach association viewed.
+2022:12:04:21:00:49 Program started.
+2022:12:04:21:00:55 Administrator logged in.
+2022:12:04:21:01:00 Swimmers with coach association viewed.
+2022:12:04:22:46:40 Program started.
+2022:12:04:22:46:43 Administrator logged in.
+2022:12:04:22:48:54 Program started.
+2022:12:04:22:48:57 Administrator logged in.
+2022:12:04:22:49:05 Top 5 athletes was printed.

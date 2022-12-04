@@ -46,15 +46,15 @@ public class CompetitiveSwimmer extends Member {
     }
 
     public void printSwimDisciplineList() {
-        for (int i = 0; i < swimmingDisciplineList.size(); i++) {
-            System.out.print(" | " + swimmingDisciplineList.get(i).getSwimmingDiscipline());
+        for (SwimmingDiscipline swimmingDiscipline : swimmingDisciplineList) {
+            System.out.print(" | " + swimmingDiscipline.getSwimmingDiscipline());
         }
         System.out.print("\n");
     }
     public int getAmountOfLoggedResults(){
         int count = 0;
-        for (int i = 0; i < swimmingDisciplineList.size(); i++){
-            for (int j = 0; j < swimmingDisciplineList.get(i).getSwimmingDisciplineResults().size(); j++){
+        for (SwimmingDiscipline swimmingDiscipline : swimmingDisciplineList) {
+            for (int j = 0; j < swimmingDiscipline.getSwimmingDisciplineResults().size(); j++) {
                 count++;
             }
         }

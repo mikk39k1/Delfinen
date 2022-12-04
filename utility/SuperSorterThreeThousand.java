@@ -12,8 +12,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class SuperSorterThreeThousand {
     // Member SORT SECTION ----------------------------------------------------------
@@ -55,6 +53,17 @@ public class SuperSorterThreeThousand {
      */
     public ArrayList<SwimmingResult> swimmingResultList(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
+
+        database.getSwimmersCoachAssociationList().keySet().forEach(
+                memberCoachEntry -> ((CompetitiveSwimmer)memberCoachEntry).getSwimmingDisciplineList().forEach(
+                        swimmingDiscipline -> {
+                            if (swimmingDiscipline.getSwimmingDiscipline().equals(swimType)) {
+                                swimResultList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
+                            }
+                        }
+                )
+        );
+        /*
         for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
             for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
                 if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDiscipline().equals(swimType)) {
@@ -63,6 +72,8 @@ public class SuperSorterThreeThousand {
                 } // End of inner if statement
             } // End of for loop
         } // End of outer HashMap iteration
+
+         */
         return swimResultList;
     } // End of method
 
@@ -72,6 +83,22 @@ public class SuperSorterThreeThousand {
      */
     public ArrayList<SwimmingResult> oneSwimmersResultList(CompetitiveSwimmer swimmer, Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
+
+        database.getSwimmersCoachAssociationList().keySet().forEach(
+                member -> {
+                    if (member.getName().equals(swimmer.getName())) {
+                        ((CompetitiveSwimmer)member).getSwimmingDisciplineList().forEach(
+                                swimmingDiscipline -> {
+                                    if (swimmingDiscipline.getSwimmingDiscipline().equals(swimType)) {
+                                        swimResultList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
+                                    }
+                                }
+                        );
+                    }
+                }
+        );
+
+        /*
         for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
             if (set.getKey().getName().equals(swimmer.getName())) {
                 for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
@@ -82,6 +109,8 @@ public class SuperSorterThreeThousand {
                 } // End of inner for loop
             } //End of out if statement
         } // End of outer for HashMap iteration
+
+         */
         return swimResultList;
     } // End of method
 
@@ -158,7 +187,7 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 1
             case 2 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(6)));;
+                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(6)));
                 swimmingResults.sort(sortByTime);
             } // End of case 2
             case 3 -> {
@@ -209,7 +238,7 @@ public class SuperSorterThreeThousand {
             } // End of case 3
         } // End of switch statement
         for (Member member : members) {
-            System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b",
+            System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b",
                     member.getUniqueID(),member.getName(),
                     member.getDateOfBirth(),member.getPhoneNumber(), member.isIsMembershipActive());
         } // End of for loop

@@ -55,7 +55,7 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b Discipline: ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					((CompetitiveSwimmer) member).printSwimDisciplineList();
@@ -76,7 +76,7 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getUniqueID() == swimmerID) {
-					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: ",
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					return (CompetitiveSwimmer) member;
@@ -121,7 +121,6 @@ public class Coach extends Employee {
 	* This method prints a specific competitive swimmers results for each swimming discipline
 	 */
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
-
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
 			System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: %-10s%n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
@@ -167,7 +166,6 @@ public class Coach extends Employee {
 	* Checks if a competitor has the swimming discipline, which we are requesting, returns -1 if false
 	 */
 	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
-
 		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
 			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
 					equals(swimmingDiscipline)) {
@@ -236,7 +234,7 @@ public class Coach extends Employee {
 				return values.getName();
 			} // End of if statement
 		} // End of for loop
-		return "NoCoach";
+		return "No Coach";
 	}
 
 } // End of class
