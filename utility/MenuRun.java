@@ -462,7 +462,7 @@ public class MenuRun {
                 "3. See all your members",
                 "0. Return to Head Menu"
         });
-        
+
 
         boolean chooseTeam = true;
         while (chooseTeam) {
