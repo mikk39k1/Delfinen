@@ -6,7 +6,7 @@ import utility.SuperSorterThreeThousand;
 import utility.UI;
 
 import java.util.Map;
-import java.util.stream.IntStream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 * This class represent a coach. The coach is supposed to be able to pick out competition swimmers based on their performances
@@ -186,6 +186,13 @@ public class Coach extends Employee {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+
+				AtomicInteger i = new AtomicInteger();
+
+				((CompetitiveSwimmer)key).getSwimmingDisciplineList().
+						forEach(swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().
+								forEach(swimmingResult -> i.addAndGet(1)));
+
 				System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: " +
 								"%-15s Membership status: %-8s Total Swim Results: %-5d%n",
 						key.getUniqueID(),
@@ -193,7 +200,7 @@ public class Coach extends Employee {
 						key.getDateOfBirth(),
 						key.getPhoneNumber(),
 						(key.isIsMembershipActive()) ? "active" : "passive",
-						((CompetitiveSwimmer) key).getAmountOfLoggedResults());
+						i.get());
 			} // End of if statement
 		} // End of for loop
 	} // End of method
