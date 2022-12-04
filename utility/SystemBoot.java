@@ -69,9 +69,9 @@ public class SystemBoot {
                     "4. Print member(s) in arrear.",
                     "5. Change a members payment status",
                     "6. Add a new swimming result.",
-                    "7. Print swimming results", // vælge om se alle eller en enkeltsvømmer
-                    "8. Print top 5 athletes in a given discipline.", // Forskellige sort typer,
-                    "9. Print all members associated with a certain coach",
+                    "7. Print swimming results",
+                    "8. Print top 5 athletes in a given discipline.",
+                    "9. Print all members associated with this user",
                     "10. Add a new coach",
                     "11. Delete a coach",
                     "12. Check this years Club-Economy",

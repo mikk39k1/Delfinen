@@ -82,14 +82,6 @@ public class Chairman extends Employee {
 
     } //End of method
 
-    /*
-    *
-    *
-    *
-    *
-    *
-    * */
-
 
     /*
     * This method takes in createMember method and adds the member to the arraylist in the Database class
@@ -110,6 +102,9 @@ public class Chairman extends Employee {
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
             fileHandler.writeToSwimmerCoachAssociationFile(database);
         } // End of if statement
+
+        database.getMemberList().add(newMember); // Adds new member to Database memberList
+
     } // End of method
 
 
@@ -153,13 +148,21 @@ public class Chairman extends Employee {
         while (true) {
             ui.print("Please enter the name of a coach: ");
             String coachName = ui.readLine(); // Stores temporary the name of the Coach intended to be used
-
             for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
-                    return coach;       // If temporary name exists within employed Coaches, returns that actual coach
-                } // End of if statement
+                    if (isMemberAddToCoach && coach.getMemberAmountForCoach(swimmerCoachDatabase, coach) < 20) {
+                        return coach;
+                    } else if (isMemberAddToCoach && coach.getMemberAmountForCoach(swimmerCoachDatabase, coach) > 20) {
+                        ui.printLn("The coach's team is full, pick another coach.");
+                    } else if (!isMemberAddToCoach) {
+                        return coach;
+                    }
+                }// End of if statement
             } // End of for loop
-            ui.printLn("Coach doesn't exist. Try again");
+            if (swimmerCoachDatabase.getCoachList().stream().noneMatch(coach ->
+                    coach.getName().equalsIgnoreCase(coachName))) {
+                ui.printLn("Coach does not exist try agian");
+            } // End of if statement
         } // End of while loop
     } // End of method
 

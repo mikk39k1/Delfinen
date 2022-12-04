@@ -75,8 +75,8 @@ public class Coach extends Employee {
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
-				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
+				if (member.getUniqueID() == swimmerID) {
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					return (CompetitiveSwimmer) member;
@@ -186,7 +186,14 @@ public class Coach extends Employee {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
-				System.out.println(key.getUniqueID() + ": " + key.getName());
+				System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: " +
+								"%-15s Membership status: %-8s Total Swim Results: %-5d%n",
+						key.getUniqueID(),
+						key.getName(),
+						key.getDateOfBirth(),
+						key.getPhoneNumber(),
+						(key.isIsMembershipActive()) ? "active" : "passive",
+						((CompetitiveSwimmer) key).getAmountOfLoggedResults());
 			} // End of if statement
 		} // End of for loop
 	} // End of method

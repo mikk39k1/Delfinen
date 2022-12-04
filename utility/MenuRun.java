@@ -173,14 +173,7 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            if (employee instanceof Chairman) {
-                Coach adminOverride = new Coach();                         // Creates temporary user for admin
-                adminOverride.addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs temporary user method
-                fileHandler.loggingAction("A swim result was added.");
-            } else {
-                ((Coach) employee).addSwimResult(employee,ui, swimmerCoachDatabase,fileHandler); // Runs method as Coach
-                fileHandler.loggingAction("A swim result was added.");
-            } // End of inner if / else statement
+            innerMenuAddSwimResults(employee, swimmerCoachDatabase);
 
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -446,9 +439,7 @@ public class MenuRun {
                     ui.printLn("Returning to Head Menu");
                     chooseSortMethod = false;
                 } // End of case 0
-                default -> {
-                    ui.printLn("Invalid input, please try again");
-                } // ENd of default case
+                default -> ui.printLn("Invalid input, please try again"); // ENd of default case
             } // End of switch case
         } // End of while loop
     } // End of method

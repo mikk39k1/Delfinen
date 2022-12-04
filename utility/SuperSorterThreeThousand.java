@@ -10,8 +10,10 @@ import utility.result_comparators.SortByTime;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SuperSorterThreeThousand {
     // Member SORT SECTION ----------------------------------------------------------
@@ -180,6 +182,37 @@ public class SuperSorterThreeThousand {
             } // End of case 6
         } // End of switch statement
         System.out.println(swimmingResults);
+    } // End of method
+
+
+
+    public void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberList) {
+        HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberList);
+        ArrayList<Member> members = new ArrayList<>();
+        switch (readInput) {
+            case 1 -> {
+                temporaryMemberCoachHashMap.keySet().removeIf(member -> member.getAge() > 18);
+                temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
+                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
+                members.sort(sortByMemberName);
+            } // End of case 1
+            case 2 -> {
+                temporaryMemberCoachHashMap.keySet().removeIf(member -> member.getAge() < 18);
+                temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
+                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
+                members.sort(sortByMemberName);
+            } // End of case 2
+            case 3 -> {
+                temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
+                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
+                members.sort(sortByMemberName);
+            } // End of case 3
+        } // End of switch statement
+        for (Member member : members) {
+            System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b",
+                    member.getUniqueID(),member.getName(),
+                    member.getDateOfBirth(),member.getPhoneNumber(), member.isIsMembershipActive());
+        } // End of for loop
     } // End of method
 
 
