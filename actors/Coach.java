@@ -186,7 +186,7 @@ public class Coach extends Employee {
 	/*
 	* This method finds and prints all members belonging to the coach logged in.
 	 */
-	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach, UI ui) {
+	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
@@ -194,6 +194,16 @@ public class Coach extends Employee {
 				System.out.println(key.getUniqueID() + ": " + key.getName());
 			} // End of if statement
 		} // End of for loop
+	} // End of method
+
+	public int getMemberAmountForCoach(Database swimmerCoachDatabase, Coach coach) {
+        int memberAmount = 0;
+		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
+			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+                memberAmount++;
+			} // End of if statement
+		} // End of for loop
+    return memberAmount;
 	} // End of method
 
 

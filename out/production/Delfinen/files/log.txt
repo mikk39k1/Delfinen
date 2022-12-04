@@ -241,3 +241,44 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:00:27:08 A competitive swimmers results printed.
 2022:12:04:00:38:32 Program started.
 2022:12:04:00:38:49 Administrator logged in.
+2022:12:04:01:11:28 Program started.
+2022:12:04:01:11:41 Administrator logged in.
+2022:12:04:09:47:29 Program started.
+2022:12:04:09:47:44 Administrator logged in.
+2022:12:04:09:53:46 Program started.
+2022:12:04:09:54:07 Administrator logged in.
+2022:12:04:09:54:18 All members was viewed, sorted by Name.
+2022:12:04:09:55:52 A swim result was added.
+2022:12:04:09:56:10 Program terminated.
+2022:12:04:10:36:03 Program started.
+2022:12:04:10:36:17 Administrator logged in.
+2022:12:04:10:36:54 Nis is now swimming with DELFINEN.
+2022:12:04:10:52:05 Program started.
+2022:12:04:10:52:18 Program started.
+2022:12:04:10:52:26 Administrator logged in.
+2022:12:04:10:52:59 Program started.
+2022:12:04:10:53:09 Administrator logged in.
+2022:12:04:10:53:18 Swimmers with coach association viewed.
+2022:12:04:10:53:56 A new coach added.
+2022:12:04:10:54:05 Swimmers with coach association viewed.
+2022:12:04:10:54:19 Swimmers with coach association viewed.
+2022:12:04:10:54:59 Laust is now swimming with DELFINEN.
+2022:12:04:11:03:28 Program started.
+2022:12:04:11:03:37 Administrator logged in.
+2022:12:04:11:04:39 Jonna is now swimming with DELFINEN.
+2022:12:04:11:04:52 Swimmers with coach association viewed.
+2022:12:04:11:06:27 Program started.
+2022:12:04:11:06:38 Administrator logged in.
+2022:12:04:11:06:41 Swimmers with coach association viewed.
+2022:12:04:11:08:02 Program started.
+2022:12:04:11:08:11 Administrator logged in.
+2022:12:04:11:08:19 Swimmers with coach association viewed.
+2022:12:04:11:10:33 Swimmers with coach association viewed.
+2022:12:04:11:10:57 A new coach added.
+2022:12:04:11:11:37 Allan is now swimming with DELFINEN.
+2022:12:04:11:12:58 Program started.
+2022:12:04:11:13:04 Administrator logged in.
+2022:12:04:11:13:08 Swimmers with coach association viewed.
+2022:12:04:11:15:12 Program started.
+2022:12:04:11:15:19 Administrator logged in.
+2022:12:04:11:15:24 Swimmers with coach association viewed.

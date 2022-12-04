@@ -59,7 +59,7 @@ public class SystemBoot {
             System.out.println("\n");
             fileHandler.loggingAction("Program started.");
             fileHandler.printWelcomeSharks();   // 5
-            loading();
+            //loading();
             loginSystem();                      // 6
 
             MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[] {

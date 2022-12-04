@@ -9,3 +9,8 @@ true;1008;Patrick;52525252;1957-07-03;true;false;BUTTERFLY
 true;1011;Lise;123;1998-05-16;true;false;CRAWL
 true;1012;Tobias;42;1989-09-09;true;false;BUTTERFLY
 true;1013;Helle;232;1999-11-11;true;false;CRAWL
+true;1014;Nis;230230230;1998-12-21;true;false;BREASTSTROKE
+true;1015;Laust;23324242;1996-10-12;true;false;CRAWL;BUTTERFLY;BREASTSTROKE
+true;1016;Jonna;98765432;1988-12-12;true;false;CRAWL
+true;1017;Allan;98762323;1985-02-27;true;false;FREESTYLE
+true;1018;Bob;2;1992-02-22;true;false;CRAWL

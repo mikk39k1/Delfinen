@@ -68,7 +68,7 @@ public class Chairman extends Employee {
                         ui.printLn("\n Choose a NEW coach for the following members:");
                         System.out.println(member.getUniqueID() + member.getName() + "\n ");
                         database.getCoachList().remove(i);
-                        database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database));
+                        database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database, false));
                     }
                 }
 
@@ -106,7 +106,7 @@ public class Chairman extends Employee {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(ui)); // Adds Swimming Discipline
             } // End of for loop
             database.getSwimmersCoachAssociationList().
-                    put(newMember, chooseCoach(ui, database));  // Adds new member and coach to Database HashMap
+                    put(newMember, chooseCoach(ui, database, true));  // Adds new member and coach to Database HashMap
 
             ui.printLn(newMember.getName() + " has been added as a member with " + disciplineAmount +
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
@@ -147,14 +147,15 @@ public class Chairman extends Employee {
      * The method is used to choose a coach for the instantiation of a competition swimmer, so that both
      * - individuals can be put inside the hashmap as a Key/Value pair containing this association.
      */
-    public Coach chooseCoach(UI ui, Database swimmerCoachDatabase) {
+    public Coach chooseCoach(UI ui, Database swimmerCoachDatabase, Boolean isMemberAddToCoach) {
         for (Coach coach : swimmerCoachDatabase.getCoachList()) {
             ui.printLn("Coach: " + coach.getName());       // Prints all available Coaches from Database coachList
         } // End of for loop
 
-        ui.print("Please enter then name of a coach: ");
         while (true) {
-            String coachName = ui.readLine();       // Stores temporary the name of the Coach intended to be used
+            ui.print("Please enter the name of a coach: ");
+            String coachName = ui.readLine(); // Stores temporary the name of the Coach intended to be used
+
             for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
                     return coach;       // If temporary name exists within employed Coaches, returns that actual coach
