@@ -1,3 +1,6 @@
 rootAdmin;Enigma123
 Acc001;OnePlusTwoIs3A
 smadrekode;smadrekode123
+Ib;bi
+ib;ib
+g;g

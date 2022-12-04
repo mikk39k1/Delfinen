@@ -70,10 +70,6 @@ public class Coach extends Employee {
 	* This method
 	 */
 	public CompetitiveSwimmer loadSwimmer(UI ui, Database swimmerCoachDatabase) {
-
-		//Finds member name
-		String swimmerName = findSwimmerByName(ui, swimmerCoachDatabase);
-
 		System.out.print("Please enter ID on the member you wish to add result to: ");
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
