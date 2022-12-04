@@ -11,7 +11,8 @@ public abstract class Employee extends Person {
 	public enum RoleType {
 		ADMIN,
 		ACCOUNTANT,
-		COACHING}
+		COACHING
+	}
 	public enum PrivilegeType {
 		ADMINISTRATOR,
 		ECONOMY_MANAGEMENT,

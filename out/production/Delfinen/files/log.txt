@@ -1,6 +1,7 @@
 2022:12:02:09:28:26 Program started.
 2022:12:02:09:30:34 Program started.
-2022:12:02:09:30:43 Administrator logged in.2022:12:02:09:33:42 Program started.
+2022:12:02:09:30:43 Administrator logged in.
+2022:12:02:09:33:42 Program started.
 2022:12:02:09:49:55 Program started.
 2022:12:02:09:50:03 Administrator logged in.
 2022:12:02:09:50:42 New member created.
@@ -238,3 +239,5 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:00:26:57 Administrator logged in.
 2022:12:04:00:27:00 All members was viewed, sorted by Age.
 2022:12:04:00:27:08 A competitive swimmers results printed.
+2022:12:04:00:38:32 Program started.
+2022:12:04:00:38:49 Administrator logged in.
