@@ -96,8 +96,6 @@ public class Chairman extends Employee {
     * It also takes in chooseCoach method to add both Member and Coach as Key/Value pair in the hashMap inside Database
      */
     public void addMember(UI ui, Member newMember, Database database, FileHandler fileHandler) {
-        database.getMemberList().add(newMember);            // Adds new member to Database memberList
-
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
             int disciplineAmount = ui.readInt();           // Stores temporary the amount of Discipline Types swimmer should have

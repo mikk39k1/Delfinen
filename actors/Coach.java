@@ -70,7 +70,7 @@ public class Coach extends Employee {
 	* This method
 	 */
 	public CompetitiveSwimmer loadSwimmer(UI ui, Database swimmerCoachDatabase) {
-		System.out.print("Please enter ID on the member you wish to add result to: ");
+		System.out.println("Please enter ID on the member you wish to add result to: ");
 		int swimmerID = ui.readInt();
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
@@ -78,7 +78,6 @@ public class Coach extends Employee {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
-							((CompetitiveSwimmer) member).printSwimDisciplineList();
 					return (CompetitiveSwimmer) member;
 				} // End of inner if statement
 			} // End of outer if statement
@@ -184,7 +183,7 @@ public class Coach extends Employee {
 	 */
 	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
-
+		final int x = 0;
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
 				System.out.println(key.getUniqueID() + ": " + key.getName());
