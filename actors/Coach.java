@@ -6,6 +6,7 @@ import utility.SuperSorterThreeThousand;
 import utility.UI;
 
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /*
 * This class represent a coach. The coach is supposed to be able to pick out competition swimmers based on their performances
@@ -183,7 +184,6 @@ public class Coach extends Employee {
 	 */
 	public void findMembersOfCoach(Database swimmerCoachDatabase, Coach coach) {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
-		final int x = 0;
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
 				System.out.println(key.getUniqueID() + ": " + key.getName());
