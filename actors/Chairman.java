@@ -37,7 +37,7 @@ public class Chairman extends Employee {
     * This method creates a new Coach employee to file and coachList
     * and sets the username and Password in Password file
     */
-     public void createCoach(Database coachList, UI ui, FileHandler filehandler) {
+    public void createCoach(Database coachList, UI ui, FileHandler filehandler) {
         ui.print("Please enter name of Coach: ");
         String coachName = ui.readLine();
         ui.print("Please enter a phone number: ");
@@ -55,16 +55,12 @@ public class Chairman extends Employee {
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(Database database, UI ui, FileHandler filehandler) {
-        ui.printLn("Write the name of the coach you would like to remove:");
-        String findCoach = ui.readLine();
-        ui.printLn("Write the username for the coach:");
-        String coachUsername = ui.readLine();
+    public void deleteCoach(String findCoach, String coachUsername, Database database, UI ui, FileHandler filehandler){
+
         for (int i = 0; i < database.getCoachList().size(); i++){
-            if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)) {
-                for (Member member: database.getSwimmersCoachAssociationList().keySet()) {
-                    if (database.getSwimmersCoachAssociationList().get(member).
-                            loadCoachOfMember(database.getSwimmersCoachAssociationList(),member).equals(findCoach)) {
+            if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
+                for (Member member: database.getSwimmersCoachAssociationList().keySet()){
+                    if (database.getSwimmersCoachAssociationList().get(member).loadCoachOfMember(database,member).equals(findCoach)){
 
                         ui.printLn("\n Choose a NEW coach for the following members:");
                         System.out.println(member.getUniqueID() + member.getName() + "\n ");
@@ -73,12 +69,11 @@ public class Chairman extends Employee {
                     }
                 }
 
-                filehandler.deleteCoachLoginFromFile(coachUsername);
-
-
                 ui.printLn("You have removed " + findCoach + " from the coach list.");
             } // End of if statement
         } // End of for loop
+
+
     } //End of method
 
 

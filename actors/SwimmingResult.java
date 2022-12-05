@@ -79,17 +79,18 @@ public class SwimmingResult {
 
     @Override
     public String toString() {
-        return "\nSwimmingResult - " +
+        return "\nResult - " +
                 "distance: " + distance +
                 " date: " + date  +
                 " swimTime: " + secondsToMinutesAndSeconds(swimTime) +
                 " isCompetitive: " + isCompetitive +
-                " rank: " + rank;
+                " rank: " + (isCompetitive?rank:"-");
     }
 
     private String secondsToMinutesAndSeconds(int seconds){
         String result = "";
 
-        return result + (seconds/60) + ":" + (seconds%60);
+        return result + ((seconds/60)<10? "0" + (seconds/60):(seconds/60)) + ":" + ((seconds%60)<10? "0" +
+                (seconds%60):(seconds%60));
     }
 }
