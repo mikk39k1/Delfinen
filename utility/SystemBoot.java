@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class SystemBoot {
 
     // Utility / Controller ------------------
-    UI ui = new UI();
-    public FileHandler fileHandler = new FileHandler();
+    private final UI ui = new UI();
+    private final FileHandler fileHandler = new FileHandler();
     private Employee currentUser;
-    ArrayList<Employee> enigmaUsers = new ArrayList<>();
-    Database swimmerCoachDatabase = new Database();
+    private final ArrayList<Employee> enigmaUsers = new ArrayList<>();
+    private final Database database = new Database();
 
     /*
      * Main method booting it all up
@@ -36,18 +36,16 @@ public class SystemBoot {
      * - 7 Starts the menu selection
      */
     private void startSystem() {
-        swimmerCoachDatabase.setMemberList(fileHandler.loadMemberList(swimmerCoachDatabase.getMemberList()));// 1
-        swimmerCoachDatabase.setCoachList(fileHandler.loadCoachList(swimmerCoachDatabase.getCoachList()));// 2
+        database.setMemberList(fileHandler.loadMemberList(database.getMemberList()));// 1
+        database.setCoachList(fileHandler.loadCoachList(database.getCoachList()));// 2
         Member.setID(fileHandler.loadID());// 3
-        loadStaff();                      // 4
-        swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
-                swimmerCoachDatabase.getSwimmersCoachAssociationList(), swimmerCoachDatabase));
-        fileHandler.loadResultMethod(swimmerCoachDatabase);
+        database.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(database));
+        fileHandler.loadResultMethod(database.getSwimmersCoachAssociationList());
 
         System.out.println("\n");
         fileHandler.loggingAction("Program started.");
         fileHandler.printWelcomeSharks();   // 5
-        //loading();
+        loading();
         loginSystem();                      // 6
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
@@ -65,7 +63,7 @@ public class SystemBoot {
                 "12. Check this years Club-Economy",
                 "0. Log out."
         });      // 6
-        startSystem.menuLooping(currentUser, swimmerCoachDatabase);
+        startSystem.menuLooping(currentUser, database);
     } // End of method
 
 
@@ -79,7 +77,7 @@ public class SystemBoot {
                 currentUser = user;
                 fileHandler.loggingAction(currentUser.getName() + " logged in.");
             } else {
-                for (Coach coach : swimmerCoachDatabase.getCoachList()) {
+                for (Coach coach : database.getCoachList()) {
                     if (coach.getUsername().equals(username)) {
                         currentUser = coach;
                         fileHandler.loggingAction(currentUser.getName() + " logged in.");
@@ -87,16 +85,6 @@ public class SystemBoot {
                 } // End inner for loop
             } // End if / else statement
         } // End of for loop
-    } // End of method
-
-
-    /*
-    * This method loads pre added employees, and adds coaches to the Database coachList
-     */
-    private void loadStaff() {
-        // Staff -----------------
-        enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
-        enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
     } // End of method
 
 
@@ -121,7 +109,7 @@ public class SystemBoot {
     /*
       This method checks through file and username / password method if inputs are authentic, to allow login
      */
-    public String isLoggedIn() {
+    private String isLoggedIn() {
         String username = fileHandler.checkUsername(getUsername());
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
@@ -165,36 +153,42 @@ public class SystemBoot {
     } // End of method
 
     private void testMemberDatabaseLoad(){
-        for (int i = 0; i < swimmerCoachDatabase.getMemberList().size(); i++) {
+        for (int i = 0; i < database.getMemberList().size(); i++) {
 
-            if (swimmerCoachDatabase.getMemberList().get(i) instanceof CompetitiveSwimmer) {
+            if (database.getMemberList().get(i) instanceof CompetitiveSwimmer) {
                 System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
-                        swimmerCoachDatabase.getMemberList().get(i).getName(),
-                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getDateOfBirth(),
-                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
-                ((CompetitiveSwimmer) swimmerCoachDatabase.getMemberList().get(i)).printSwimDisciplineList();
+                        database.getMemberList().get(i).getUniqueID(),
+                        database.getMemberList().get(i).getName(),
+                        database.getMemberList().get(i).getPhoneNumber(),
+                        database.getMemberList().get(i).getDateOfBirth(),
+                        database.getMemberList().get(i).isIsMembershipActive());
+                ((CompetitiveSwimmer) database.getMemberList().get(i)).printSwimDisciplineList();
             }
             else {
                 System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b",
-                        swimmerCoachDatabase.getMemberList().get(i).getUniqueID(),
-                        swimmerCoachDatabase.getMemberList().get(i).getName(),
-                        swimmerCoachDatabase.getMemberList().get(i).getPhoneNumber(),
-                        swimmerCoachDatabase.getMemberList().get(i).getDateOfBirth(),
-                        swimmerCoachDatabase.getMemberList().get(i).isIsMembershipActive());
+                        database.getMemberList().get(i).getUniqueID(),
+                        database.getMemberList().get(i).getName(),
+                        database.getMemberList().get(i).getPhoneNumber(),
+                        database.getMemberList().get(i).getDateOfBirth(),
+                        database.getMemberList().get(i).isIsMembershipActive());
                 System.out.println();
             }
         }
     }
 
+    protected void loadStaff() {
+        // Staff -----------------
+        enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
+        enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
+    } // End of method
+
     private void testCoachDatabaseLoad(){
-        for (int i = 0; i < swimmerCoachDatabase.getCoachList().size(); i++) {
+        for (int i = 0; i < database.getCoachList().size(); i++) {
             System.out.println();
             System.out.printf("Username: %-5s Name: %-10s Phone Number: %-10s ",
-                    swimmerCoachDatabase.getCoachList().get(i).getUsername(),
-                    swimmerCoachDatabase.getCoachList().get(i).getName(),
-                    swimmerCoachDatabase.getCoachList().get(i).getPhoneNumber());
+                    database.getCoachList().get(i).getUsername(),
+                    database.getCoachList().get(i).getName(),
+                    database.getCoachList().get(i).getPhoneNumber());
             System.out.println();
         }
     }

@@ -9,18 +9,18 @@ import database.Database;
  *  no user is acting with malice or doing thinks not in his/hers jurisdiction.
  */
 public class MenuRun {
-    UI ui = new UI();
-    FileHandler fileHandler = new FileHandler();
-    SuperSorterThreeThousand sorter = new SuperSorterThreeThousand();
+    private final UI ui = new UI();
+    private final FileHandler fileHandler = new FileHandler();
+    private final SuperSorterThreeThousand sorter = new SuperSorterThreeThousand();
     private final String[] menuOptions;
     private final String menuHeader;
-    private final String leadtext;
+    private final String leadText;
 
     // Constructor  -----------------------------------------
     public MenuRun(String menuHeader, String leadtext, String[] menuOptions) {
         this.menuHeader = menuHeader;
         this.menuOptions = menuOptions;
-        this.leadtext = leadtext;
+        this.leadText = leadtext;
     }
 
     // MenuRun Behaviors (Methods) ----------------------------
@@ -29,24 +29,24 @@ public class MenuRun {
     /*
      * This method is looping each option a user can interact with within the menu
      */
-    public void menuLooping(Employee employee, Database swimmerCoachDatabase) {
+    protected void menuLooping(Employee employee, Database database) {
         boolean isSignedIn = true;
         while (isSignedIn) {
             ui.printLn("");
             printMenu();
             switch (ui.readInt()) {
-                case 1 -> addMember(employee, swimmerCoachDatabase); /*add new member to all members lists */
-                case 2 -> deleteMember(employee, swimmerCoachDatabase); /*deletes member from members lists*/
-                case 3 -> printAllMembers(employee, swimmerCoachDatabase);/*print all members */
-                case 4 -> printMembersInDebt(employee, swimmerCoachDatabase); /*Prints list of members who hasn't paid */
-                case 5 -> changePayDue(employee, swimmerCoachDatabase);
-                case 6 -> addSwimResult(employee, swimmerCoachDatabase);/*add swimResult*/
-                case 7 -> printCompetitiveSwimmersResult(employee, swimmerCoachDatabase); /*Prints 1 swimmers results*/
-                case 8 -> printTopFiveByDiscipline(employee, swimmerCoachDatabase);/*Prints top 5 in 1 discipline*/
-                case 9 -> printSwimmersByCoach(employee, swimmerCoachDatabase);/*Prints all members for specific coach*/
-                case 10 -> createCoach(employee, swimmerCoachDatabase, ui);/*Create a coach and add them to coachlist.*/
-                case 11 -> deleteCoach(employee, swimmerCoachDatabase, ui);//Delete Coach
-                case 12 -> printEco(employee, swimmerCoachDatabase);
+                case 1 -> addMember(employee, database); /*add new member to all members lists */
+                case 2 -> deleteMember(employee, database); /*deletes member from members lists*/
+                case 3 -> printAllMembers(employee, database);/*print all members */
+                case 4 -> printMembersInDebt(employee, database); /*Prints list of members who hasn't paid */
+                case 5 -> changePayDue(employee, database);
+                case 6 -> addSwimResult(employee, database);/*add swimResult*/
+                case 7 -> printCompetitiveSwimmersResult(employee, database); /*Prints 1 swimmers results*/
+                case 8 -> printTopFiveByDiscipline(employee, database);/*Prints top 5 in 1 discipline*/
+                case 9 -> printSwimmersByCoach(employee, database);/*Prints all members for specific coach*/
+                case 10 -> createCoach(employee, database, ui);/*Create a coach and add them to coachlist.*/
+                case 11 -> deleteCoach(employee, database, ui);//Delete Coach
+                case 12 -> printEco(employee, database);
                 case 0 -> isSignedIn = logOut(); /*Logs you out of the system */
                 default -> ui.printLn("Incorrect choice. Chose another option.\n");
             } // End of switch statement
@@ -59,7 +59,7 @@ public class MenuRun {
      */
     private void printMenu() {
         ui.printLn(menuHeader);
-        ui.printLn(leadtext);
+        ui.printLn(leadText);
         for (String menuOption : menuOptions) {
             ui.printLn(menuOption);
         } // End of for loop
@@ -204,16 +204,16 @@ public class MenuRun {
      * The method reads input from user: swimDiscipline and period of time to get results
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void printTopFiveByDiscipline(Employee employee, Database swimmerCoachDatabase) {
+    private void printTopFiveByDiscipline(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();              // Creates a temporary user for admin
-                adminOverride.checkTopFiveCompetitionSwimResults(swimmerCoachDatabase, ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
+                adminOverride.checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } else {
-                ((Coach) employee).checkTopFiveCompetitionSwimResults(swimmerCoachDatabase, ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
+                ((Coach) employee).checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } // End of inner if / else statement
         } else {
@@ -254,7 +254,7 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).createCoach(database, ui, fileHandler);
-            fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.loggingAction("A new coach added.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -266,7 +266,7 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).deleteCoach(database, ui, fileHandler);
-            fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.writeToSwimmerCoachAssociationFile(database);
             fileHandler.loggingAction("A coach got deleted.");
         } else {
@@ -326,10 +326,14 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByDate(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                        lookupSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } else {
                         sorter.setSortByDate(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
@@ -339,10 +343,14 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByDistance(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                        lookupSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } else {
                         sorter.setSortByDistance(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain distance for a swimmer was viewed.");
@@ -352,10 +360,14 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByIsCompetitive(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                        lookupSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } else {
                         sorter.setSortByIsCompetitive(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
@@ -365,10 +377,14 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         sorter.setSortByRank(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                        lookupSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } else {
                         sorter.setSortByRank(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database), database, ui.setSwimmingDisciplineType()));
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                                        database.getSwimmersCoachAssociationList(),
+                                        ui.setSwimmingDisciplineType()));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results of either training or competitiveness, for a swimmer was viewed.");
@@ -394,7 +410,7 @@ public class MenuRun {
                 case 1 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberName(database));
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberName(database.getMemberList()));
                         fileHandler.loggingAction("All members was viewed, sorted by Name.");
                     } else {
                         ui.printLn("You don't have the privilege to use this function");
@@ -405,7 +421,7 @@ public class MenuRun {
                 case 2 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberAge(database));
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberAge(database.getMemberList()));
                         fileHandler.loggingAction("All members was viewed, sorted by Age.");
                     } else {
                         ui.printLn("You don't have the privilege to use this function");
@@ -416,7 +432,7 @@ public class MenuRun {
                 case 3 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberID(database));
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberID(database.getMemberList()));
                         fileHandler.loggingAction("All members was viewed, sorted by ID.");
                     } else {
                         ui.printLn("You don't have the privilege to use this function");
@@ -427,7 +443,7 @@ public class MenuRun {
                 case 4 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberPhoneNumber(database));
+                        ((Chairman) employee).printMembers(sorter.setSortByMemberPhoneNumber(database.getMemberList()));
                         fileHandler.loggingAction("All members was viewed, sorted by Phone number.");
                     } else {
                         ui.printLn("You don't have the privilege to use this function");
@@ -465,11 +481,11 @@ public class MenuRun {
                         ui.print("As chairman, please enter the coach name, you wish to see respective members of");
                         Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
                         sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                        adminOverride.addSwimResult(employee, ui, database, fileHandler); // Runs temporary user method
+                        adminOverride.addSwimResult(ui, database, fileHandler); // Runs temporary user method
                         fileHandler.loggingAction("A swim result was added.");
                     } else {
                         sorter.setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
-                        ((Coach) employee).addSwimResult(employee, ui, database, fileHandler); // Runs method as Coach
+                        ((Coach) employee).addSwimResult(ui, database, fileHandler); // Runs method as Coach
                         fileHandler.loggingAction("A swim result was added.");
                     } // End of inner if / else statement
                     chooseTeam = false;

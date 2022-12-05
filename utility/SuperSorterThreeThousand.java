@@ -1,7 +1,6 @@
 package utility;
 
 import actors.*;
-import database.Database;
 import utility.member_comparators.SortByMemberAge;
 import utility.member_comparators.SortByMemberID;
 import utility.member_comparators.SortByMemberName;
@@ -15,65 +14,52 @@ import java.util.List;
 
 public class SuperSorterThreeThousand {
     // Member SORT SECTION ----------------------------------------------------------
-    SortByMemberAge sortByMemberAge = new SortByMemberAge();
-    SortByMemberID sortByMemberID = new SortByMemberID();
-    SortByMemberName sortByMemberName = new SortByMemberName();
-    SortByMemberPhoneNumber sortByMemberPhoneNumber = new SortByMemberPhoneNumber();
+    private final SortByMemberAge sortByMemberAge = new SortByMemberAge();
+    private final SortByMemberID sortByMemberID = new SortByMemberID();
+    private final SortByMemberName sortByMemberName = new SortByMemberName();
+    private final SortByMemberPhoneNumber sortByMemberPhoneNumber = new SortByMemberPhoneNumber();
 
-    public List<Member> setSortByMemberAge(Database database) {
-        List<Member> locaList = database.getMemberList();
-        locaList.sort(sortByMemberAge);
-        return locaList;
+    protected List<Member> setSortByMemberAge(ArrayList<Member> membersList) {
+        ((List<Member>) membersList).sort(sortByMemberAge);
+        return membersList;
     }
 
-    public List<Member> setSortByMemberID(Database database) {
-        List<Member> locaList = database.getMemberList();
-        locaList.sort(sortByMemberID);
-        return locaList;
+    protected List<Member> setSortByMemberID(ArrayList<Member> membersList) {
+        ((List<Member>) membersList).sort(sortByMemberID);
+        return membersList;
     }
 
-    public List<Member> setSortByMemberName(Database database) {
-        List<Member> locaList = database.getMemberList();
-        locaList.sort(sortByMemberName);
-        return locaList;
+    protected List<Member> setSortByMemberName(ArrayList<Member> membersList) {
+        ((List<Member>) membersList).sort(sortByMemberName);
+        return membersList;
     }
 
-    public List<Member> setSortByMemberPhoneNumber(Database database) {
-        List<Member> locaList = database.getMemberList();
-        locaList.sort(sortByMemberPhoneNumber);
-        return locaList;
+    protected List<Member> setSortByMemberPhoneNumber(ArrayList<Member> membersList) {
+        ((List<Member>) membersList).sort(sortByMemberPhoneNumber);
+        return membersList;
     }
 
 
     // Result SORT SECTION ----------------------------------------------------------
-    SortByTime sortByTime = new SortByTime();           // We always sort by Time before presenting
-
+    private final SortByTime sortByTime = new SortByTime();           // We always sort by Time before presenting
     /*
      * This method gathers all results from all swimmers from AssociationList, then returns them as an ArrayList
      */
-    public ArrayList<SwimmingResult> swimmingResultList(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
+    public ArrayList<SwimmingResult> getAllSwimmingResults(
+            HashMap<Member, Coach> memberCoachHashMap,
+            SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
+
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
 
-        database.getSwimmersCoachAssociationList().keySet().forEach(
+        memberCoachHashMap.keySet().forEach(
                 memberCoachEntry -> ((CompetitiveSwimmer)memberCoachEntry).getSwimmingDisciplineList().forEach(
                         swimmingDiscipline -> {
                             if (swimmingDiscipline.getSwimmingDiscipline().equals(swimType)) {
                                 swimResultList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
-                            }
-                        }
-                )
-        );
-        /*
-        for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
-            for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
-                if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDiscipline().equals(swimType)) {
-                    swimResultList.addAll(((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().
-                            get(i).getSwimmingDisciplineResults());
-                } // End of inner if statement
-            } // End of for loop
-        } // End of outer HashMap iteration
-
-         */
+                            } // End of if statement
+                        } // End of lambda -> predicate method entrance statement
+                )// End of forEach lambda -> predicate method entrance statement
+        ); // End of ArrayList, build in forEach method
         return swimResultList;
     } // End of method
 
@@ -81,10 +67,14 @@ public class SuperSorterThreeThousand {
     /*
     * This method gathers all results from one specific swimmer and returns them as an ArrayList
      */
-    public ArrayList<SwimmingResult> oneSwimmersResultList(CompetitiveSwimmer swimmer, Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
+    protected ArrayList<SwimmingResult> oneSwimmersResultList(
+            CompetitiveSwimmer swimmer,
+            HashMap<Member, Coach> memberCoachHashMap,
+            SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
+
         ArrayList<SwimmingResult> swimResultList = new ArrayList<>();
 
-        database.getSwimmersCoachAssociationList().keySet().forEach(
+        memberCoachHashMap.keySet().forEach(
                 member -> {
                     if (member.getName().equals(swimmer.getName())) {
                         ((CompetitiveSwimmer)member).getSwimmingDisciplineList().forEach(
@@ -97,20 +87,6 @@ public class SuperSorterThreeThousand {
                     }
                 }
         );
-
-        /*
-        for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
-            if (set.getKey().getName().equals(swimmer.getName())) {
-                for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
-                    if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).getSwimmingDiscipline().equals(swimType)) {
-                        swimResultList.addAll(((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().
-                                get(i).getSwimmingDisciplineResults());
-                    } // End of inner if statement
-                } // End of inner for loop
-            } //End of out if statement
-        } // End of outer for HashMap iteration
-
-         */
         return swimResultList;
     } // End of method
 
@@ -141,7 +117,7 @@ public class SuperSorterThreeThousand {
     /*
     * This method sorts results based on competitiveness. True = Competition / False = Training session
      */
-    public void setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected void setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         if (!ui.setCompetitiveness()) {
             swimmingResults.removeIf(SwimmingResult::isCompetitive);
@@ -154,10 +130,11 @@ public class SuperSorterThreeThousand {
     } // End of method
 
 
+
     /*
     * This method sorts results based on Rank. Read more in ui.class defining return values with info.
      */
-    public void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch(ui.setRank()) {
             case 3 ->{
@@ -176,10 +153,11 @@ public class SuperSorterThreeThousand {
         System.out.println(swimmingResults);
     } // End of method
 
+
     /*
     * This method sorts results based on date attributes.
      */
-    public void setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected void setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch (ui.chooseTimeFrame()) {
             case 1 -> {
@@ -215,8 +193,8 @@ public class SuperSorterThreeThousand {
 
 
 
-    public void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberList) {
-        HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberList);
+    protected void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberCoachHashMap) {
+        HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberCoachHashMap);
         ArrayList<Member> members = new ArrayList<>();
         switch (readInput) {
             case 1 -> {

@@ -30,14 +30,13 @@ public class FileHandler {
 
 
     private PrintStream printToFile;
-    private  FileOutputStream appendToFile;
     private Scanner readFromFile;
 
 
     /*
      * This method reads from file and is verifying username exist within secret file
      */
-    public String checkUsername(String username) {
+    protected String checkUsername(String username) {
         try {
             Scanner readLoginCredentials = new Scanner(passwordList);
 
@@ -60,7 +59,7 @@ public class FileHandler {
     /*
      * This method reads from file and is verifying that prompted password works with username within secret file, then returns password if match
      */
-    public String checkPassword(String password) {
+    protected String checkPassword(String password) {
         try {
             Scanner readLoginCredentials = new Scanner(new File("files/passwd.txt"));
             while (readLoginCredentials.hasNextLine()) {
@@ -81,11 +80,11 @@ public class FileHandler {
     /*
      * This method writes an added member to the fullMemberList file, whenever one is created/added to Database
      */
-    public void writeToFullMembersList(ArrayList<Member> swimmers) {
+    protected void writeToFullMembersList(ArrayList<Member> memberArrayList) {
         try {
             printToFile = new PrintStream(memberArrayListFile);
 
-            for (Member swimmer : swimmers) {
+            for (Member swimmer : memberArrayList) {
 
                 if (swimmer instanceof CompetitiveSwimmer) {
                     printToFile.print("true");  // Adds true as first part in file if swimmer is competitive
@@ -116,11 +115,11 @@ public class FileHandler {
     /*
     * This method writes coach employee credentials to coachList file
      */
-    public void writeToCoachlist(ArrayList<Coach> coaches) {
+    protected void writeToCoachList(ArrayList<Coach> coachArrayList) {
         try {
             printToFile = new PrintStream(coachListFile);
 
-            for (Coach coach : coaches) {
+            for (Coach coach : coachArrayList) {
                 printToFile.print(coach.getUsername() + ";");
                 printToFile.print(coach.getName() + ";");         // Write Name to coachList file
                 printToFile.print(coach.getPhoneNumber());  // Write Phone number to coachList file
@@ -154,7 +153,7 @@ public class FileHandler {
      * This method loads the members of the fullMemberList file into an arraylist, so we can manipulate again with
      *    member data inside the program.
      */
-    public ArrayList<Member> loadMemberList(ArrayList<Member> membersList) {
+    protected ArrayList<Member> loadMemberList(ArrayList<Member> membersList) {
         try {
             readFromFile = new Scanner(memberArrayListFile);
             while (readFromFile.hasNextLine()) {
@@ -197,7 +196,7 @@ public class FileHandler {
     /*
      * This method ensures that unique ID always continues from last MemberID within fullMemberList file
      */
-    public int loadID() {
+    protected int loadID() {
         ArrayList<Integer> idArray = new ArrayList<>();
         try {
             readFromFile = new Scanner(memberArrayListFile);
@@ -211,11 +210,11 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-    public void appendResult(Employee employee, Database database, CompetitiveSwimmer swimmer, int hasSwimDiscipline) {
+    public void appendResult(HashMap<Member, Coach> swimmerCoachAssociation, CompetitiveSwimmer swimmer, int hasSwimDiscipline) {
         Coach temporaryCoach = new Coach();
 
         try {
-            appendToFile = new FileOutputStream(memberResultFile, true);
+            FileOutputStream appendToFile = new FileOutputStream(memberResultFile, true);
             StringBuilder sb = new StringBuilder();
             /*
              * To illustrate which parameters are being stores this bulky setup seems appropriate
@@ -223,7 +222,7 @@ public class FileHandler {
              * Then the method append each attribute to the results file
              */
             int swimmerUniqueID = swimmer.getUniqueID();                                    // Store uniqueID
-            String coachName = temporaryCoach.loadCoachOfMember(database,swimmer);  // Store coach name
+            String coachName = temporaryCoach.loadCoachOfMember(swimmerCoachAssociation,swimmer);  // Store coach name
             String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline)+";"; // Store SwimmingDisciplineType
             int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results
@@ -290,7 +289,7 @@ public class FileHandler {
     /*
     * This method loads all results from results file, and adds them to corresponding member with matching ID from file
      */
-    public void loadResultMethod(Database database) {
+    protected void loadResultMethod(HashMap<Member, Coach> memberCoachHashMap) {
 
         try {
             readFromFile = new Scanner(memberResultFile);
@@ -312,7 +311,7 @@ public class FileHandler {
                 *  - Then the method conditionally chooses between boolean statement of competitiveness the constructor
                 *  - The constructor chosen will be filled with stored attributes
                  */
-                for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
+                for (Map.Entry<Member, Coach> set : memberCoachHashMap.entrySet()) {
                     if (set.getKey().getUniqueID() == uniqueId) {
                         for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
                             if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
@@ -338,7 +337,7 @@ public class FileHandler {
     } // End of method
 
 
-    public ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
+    protected ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
         try {
             readFromFile = new Scanner(coachListFile);
             while (readFromFile.hasNextLine()) {
@@ -373,7 +372,7 @@ public class FileHandler {
     /*
      * This method loads SwimmerCoachAssociation based on result ID and coachList
      */
-    public HashMap<Member, Coach> loadSwimmerCoachAssociationList(HashMap<Member, Coach> swimmerCoachList, Database database) {
+    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(Database database) {
 
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
@@ -391,17 +390,17 @@ public class FileHandler {
                     if (member.getUniqueID() == swimmerID) {
                         for (Coach coach : database.getCoachList()) {
                             if (coach.getName().equals(coachName)) {
-                                swimmerCoachList.put(member, coach);
+                                database.getSwimmersCoachAssociationList().put(member, coach);
                             } // End of inner if statement
                         } // End of inner for loop
                     } // End of outer if statement
                 } // End of outer for loop
             } // End of while loop
-            return swimmerCoachList;
+            return database.getSwimmersCoachAssociationList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } // End of try / catch statement
-        return swimmerCoachList;
+        return database.getSwimmersCoachAssociationList();
     }
 
 
@@ -451,7 +450,7 @@ public class FileHandler {
         }
     }
 
-    public void loggingAction(String action) {
+    protected void loggingAction(String action) {
         try {
             printToFile = new PrintStream(new FileOutputStream(logFile, true));
             printToFile.print(LocalDateTime.now().format(DateTimeFormatter.ofPattern("u:MM:dd:HH:mm:ss")));
@@ -464,7 +463,7 @@ public class FileHandler {
     /*
      * This method prints a welcome emoji presenting creators of this project
      */
-    public void printWelcomeSharks() {
+    protected void printWelcomeSharks() {
         try {
             readFromFile = new Scanner(sharksPrint);
             while (readFromFile.hasNextLine()) {

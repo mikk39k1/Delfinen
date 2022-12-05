@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class UI {
 
     // Attributes ---------------------------------------------------
-    private Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
 
     public String readLine() {
         return in.nextLine();
@@ -69,11 +69,6 @@ public class UI {
     public void printLn(String msg) {
         System.out.println(msg);
     }
-
-    public void printf(PrintStream msgHolder, String input) {
-        msgHolder.printf(input);
-    }
-
 
     /*
      * This method requests minutes and seconds and returns a String containing input

@@ -400,3 +400,23 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:22:48:54 Program started.
 2022:12:04:22:48:57 Administrator logged in.
 2022:12:04:22:49:05 Top 5 athletes was printed.
+2022:12:04:22:58:00 Program started.
+2022:12:04:22:58:04 Administrator logged in.
+2022:12:04:22:58:25 Results on a certain date for a swimmer was viewed.
+2022:12:04:22:58:25 A competitive swimmers results printed.
+2022:12:05:09:42:15 Program started.
+2022:12:05:09:42:28 Administrator logged in.
+2022:12:05:09:43:47 Results on a certain date for a swimmer was viewed.
+2022:12:05:09:43:47 A competitive swimmers results printed.
+2022:12:05:09:50:16 Program started.
+2022:12:05:09:50:20 Administrator logged in.
+2022:12:05:09:50:26 All members was viewed, sorted by Age.
+2022:12:05:09:50:29 Members in arrear viewed.
+2022:12:05:09:50:36 Economy details viewed.
+2022:12:05:09:50:36 Economy details viewed.
+2022:12:05:09:51:22 Program terminated.
+2022:12:05:09:51:24 Program started.
+2022:12:05:09:51:27 Ib logged in.
+2022:12:05:09:51:27 Ib logged in.
+2022:12:05:09:51:30 Unauthorised user tried to access "Create a new member".
+2022:12:05:09:56:17 Program started.

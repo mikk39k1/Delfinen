@@ -5,6 +5,7 @@ import utility.FileHandler;
 import utility.SuperSorterThreeThousand;
 import utility.UI;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -70,10 +71,10 @@ public class Coach extends Employee {
 	/*
 	* This method
 	 */
-	public CompetitiveSwimmer loadSwimmer(UI ui, Database swimmerCoachDatabase) {
+	public CompetitiveSwimmer loadSwimmer(UI ui, Database database) {
 		System.out.println("Please enter ID on the member you wish to add result to: ");
 		int swimmerID = ui.readInt();
-		for (Member member : swimmerCoachDatabase.getMemberList()) {
+		for (Member member : database.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getUniqueID() == swimmerID) {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b ",
@@ -90,11 +91,11 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(Employee employee, UI ui, Database swimmerCoachDatabase, FileHandler filehandler) {
+	public void addSwimResult(UI ui, Database database, FileHandler filehandler) {
 
-		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
+		CompetitiveSwimmer swimmer = loadSwimmer(ui,database);
 
-		for (Map.Entry<Member, Coach> set : swimmerCoachDatabase.getSwimmersCoachAssociationList().entrySet()) {
+		for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
 			if (set.getKey().equals(swimmer)) {
 				ui.print(" | ");
 				for (SwimmingDiscipline swimType : ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList()) {
@@ -106,7 +107,7 @@ public class Coach extends Employee {
 				if (hasSwimDiscipline > -1) {
 					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
 							.add(new SwimmingResult(ui));
-					filehandler.appendResult(employee,swimmerCoachDatabase,swimmer,hasSwimDiscipline);
+					filehandler.appendResult(database.getSwimmersCoachAssociationList(),swimmer,hasSwimDiscipline);
 					System.out.println("The swim result was added! ");
 				} else {
 					ui.printLn("The swimmer does not participate in this kind of competition");
@@ -134,9 +135,9 @@ public class Coach extends Employee {
 	} // End of method
 
 
-	public void checkTopFiveCompetitionSwimResults(Database database, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
+	public void checkTopFiveCompetitionSwimResults(HashMap<Member, Coach> memberCoachHashMap, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
 		SuperSorterThreeThousand sorterThreeThousand = new SuperSorterThreeThousand();
-		sorterThreeThousand.setSortByDistance(ui,sorterThreeThousand.swimmingResultList(database,swimType));
+		sorterThreeThousand.setSortByDistance(ui,sorterThreeThousand.getAllSwimmingResults(memberCoachHashMap,swimType));
 	}
 
 
@@ -191,6 +192,7 @@ public class Coach extends Employee {
 						forEach(swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().
 								forEach(swimmingResult -> i.addAndGet(1)));
 
+
 				System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: " +
 								"%-15s Membership status: %-8s Total Swim Results: %-5d%n",
 						key.getUniqueID(),
@@ -228,9 +230,9 @@ public class Coach extends Employee {
 
 
 
-	public String loadCoachOfMember(Database swimmerCoachDatabase, Member member) {
-		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values)) {
+	public String loadCoachOfMember(HashMap<Member, Coach> swimmerCoachAssociation, Member member) {
+		for (Coach values : swimmerCoachAssociation.values()) {
+			if (swimmerCoachAssociation.get(member).equals(values)) {
 				return values.getName();
 			} // End of if statement
 		} // End of for loop

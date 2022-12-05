@@ -15,8 +15,8 @@ import java.util.HashMap;
 public class Database {
 
     // Attributes ---------------------------------------------
-    ArrayList<Member> memberList = new ArrayList<>();
-    ArrayList<Coach> coachList = new ArrayList<>();
+    private ArrayList<Member> memberList = new ArrayList<>();
+    private ArrayList<Coach> coachList = new ArrayList<>();
 
     private HashMap<Member, Coach> swimmersCoachAssociationList = new HashMap<>();
 
