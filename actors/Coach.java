@@ -86,26 +86,27 @@ public class Coach extends Employee {
 
 		CompetitiveSwimmer swimmer = loadSwimmer(ui, swimmerCoachDatabase);
 
-		for (Map.Entry<Member, Coach> set : swimmerCoachDatabase.getSwimmersCoachAssociationList().entrySet()) {
-			if (set.getKey().equals(swimmer)) {
-				ui.print(" | ");
-				for (SwimmingDiscipline swimType : ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList()) {
-					ui.print(swimType + " | ");
-				}
-				ui.printLn("");
-				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
-				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
-				if (hasSwimDiscipline > -1) {
-					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
-							.add(new SwimmingResult(ui));
-					filehandler.appendResult(employee,swimmerCoachDatabase,swimmer,hasSwimDiscipline);
-					System.out.println("The swim result was added! ");
-				} else {
-					ui.printLn("The swimmer does not participate in this kind of competition");
-				} // End of inner if / else statement
-			} // End of if statement
-		} // End of for loop
-	} // End of method
+		swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
+			ui.print(" | " + swimmingDiscipline.getSwimmingDiscipline());
+			SwimmingDiscipline.SwimmingDisciplineTypes foundSwimDiscType = ui.setSwimmingDisciplineType();
+
+			if (swimmingDiscipline.getSwimmingDiscipline().equals(foundSwimDiscType)) {
+				swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+				filehandler.appendResult(employee, swimmerCoachDatabase, swimmer, swimmingDiscipline);
+				System.out.println("The swim result was added! ");
+			} else {
+				ui.printLn("The swimmer does not participate in this kind of competition");
+
+			}
+		});
+
+
+		ui.printLn("");
+	}
+				 // End of inner if / else statement
+			// End of if statement
+			// End of for loop
+			// End of method
 
 
 

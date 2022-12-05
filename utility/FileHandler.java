@@ -224,6 +224,7 @@ public class FileHandler {
              */
             int swimmerUniqueID = swimmer.getUniqueID();                                    // Store uniqueID
             String coachName = temporaryCoach.loadCoachOfMember(database,swimmer);  // Store coach name
+
             String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline)+";"; // Store SwimmingDisciplineType
             int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
                     getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results

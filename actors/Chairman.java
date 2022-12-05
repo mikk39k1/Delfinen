@@ -55,26 +55,22 @@ public class Chairman extends Employee {
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(String findCoach, String coachUsername, Database database, UI ui, FileHandler filehandler){
+    public void deleteCoach(String findCoach, Database database, UI ui){
 
-        for (int i = 0; i < database.getCoachList().size(); i++){
-            if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
-                for (Member member: database.getSwimmersCoachAssociationList().keySet()){
-                    if (database.getSwimmersCoachAssociationList().get(member).loadCoachOfMember(database,member).equals(findCoach)){
-
-                        ui.printLn("\n Choose a NEW coach for the following members:");
-                        System.out.println(member.getUniqueID() + member.getName() + "\n ");
-                        database.getCoachList().remove(i);
-                        database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database, false));
-                    }
-                }
+        database.getCoachList().removeIf(coach -> coach.getName().equalsIgnoreCase(findCoach));
+        database.getSwimmersCoachAssociationList().forEach((key, value) -> {
+            if (value.loadCoachOfMember(database,key).equalsIgnoreCase(findCoach)) {
+                ui.printLn("\n Choose a NEW coach for the following members:");
+                System.out.println(key.getUniqueID() + key.getName() + "\n ");
+                database.getCoachList().remove(value);
+                database.getSwimmersCoachAssociationList().put(key, chooseCoach(ui, database, true));
+            }
+        });
 
                 ui.printLn("You have removed " + findCoach + " from the coach list.");
             } // End of if statement
-        } // End of for loop
 
 
-    } //End of method
 
 
     /*
