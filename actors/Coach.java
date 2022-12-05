@@ -33,14 +33,6 @@ public class Coach extends Employee {
 	}
 
 	// Coach Behaviors (Methods) --------------------------
-	public void checkTrainingResults() {
-
-	}
-
-	public void checkCompetitionResults() {
-
-	}
-
 
 	/*
 	* This method looks up a swimmer from Database memberList
@@ -144,7 +136,7 @@ public class Coach extends Employee {
 	/*
 	* This method verifies name of a competitive swimmer, by checking if it exists within the Database memberList
 	 */
-	public String findSwimmerByName(UI ui, Database swimmerCoachDatabase) {
+	private String findSwimmerByName(UI ui, Database swimmerCoachDatabase) {
 
 		ui.print("Please enter name of swimmer you wish lookup: ");
 		String swimmerName = ui.readLine();		// Stores temporary swimmerName we are searching for
