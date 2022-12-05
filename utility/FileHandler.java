@@ -116,7 +116,7 @@ public class FileHandler {
     /*
     * This method writes coach employee credentials to coachList file
      */
-    public void writeToCoachlist(ArrayList<Coach> coaches) {
+    public void writeToCoachList(ArrayList<Coach> coaches) {
         try {
             printToFile = new PrintStream(coachListFile);
 
@@ -338,11 +338,15 @@ public class FileHandler {
     } // End of method
 
 
+
+
+
     public ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
         try {
             readFromFile = new Scanner(coachListFile);
             while (readFromFile.hasNextLine()) {
-                String s = readFromFile.nextLine();         // Stores the whole line containing a member to temporary String
+                String s = readFromFile.nextLine();
+                // Stores the whole line containing a member to temporary String
                 String[] arrOfStr = s.split(";");     // Delimiting by semicolon sign and adds to a temporary array
                 String username = arrOfStr[0];              //Stores the username
                 String name = arrOfStr[1];                  // Stores the name of Coach in a temporary String

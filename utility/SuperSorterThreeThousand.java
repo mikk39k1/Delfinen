@@ -243,7 +243,4 @@ public class SuperSorterThreeThousand {
                     member.getDateOfBirth(),member.getPhoneNumber(), member.isIsMembershipActive());
         } // End of for loop
     } // End of method
-
-
-
 } // End of class

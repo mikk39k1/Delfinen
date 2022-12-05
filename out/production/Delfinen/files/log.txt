@@ -71,6 +71,9 @@
 2022:12:02:11:11:46 A members payment status was changed.
 2022:12:02:11:11:48 Economy details viewed.
 2022:12:02:11:11:48 Economy details viewed.
+2022:12:02:11:52:41 Program started.
+2022:12:02:11:52:50 Administrator logged in.
+2022:12:02:11:53:19 A swim result was added.
 2022:12:02:11:54:51 Program started.
 2022:12:02:11:55:09 Administrator logged in.
 2022:12:02:11:55:19 All members was viewed, sorted by Name.
@@ -102,6 +105,23 @@
 ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:02:12:18:08 A coach got deleted.
 2022:12:02:12:18:11 Program terminated.
+2022:12:02:13:09:15 Program started.
+2022:12:02:13:09:35 Administrator logged in.
+2022:12:02:13:10:14 A competitive swimmers results printed.
+2022:12:02:13:15:50 Program started.
+2022:12:02:13:16:17 Administrator logged in.
+2022:12:02:13:16:42 A competitive swimmers results printed.
+2022:12:02:13:18:28 Program started.
+2022:12:02:13:18:34 Administrator logged in.
+2022:12:02:13:18:47 A competitive swimmers results printed.
+2022:12:02:13:19:35 A swim result was added.
+2022:12:02:13:19:58 A competitive swimmers results printed.
+2022:12:02:13:25:28 Program started.
+2022:12:02:13:25:32 Administrator logged in.
+2022:12:02:13:25:56 A competitive swimmers results printed.
+2022:12:02:13:26:06 A competitive swimmers results printed.
+2022:12:02:13:27:15 A competitive swimmers results printed.
+2022:12:02:13:28:39 Top 5 athletes was printed.
 2022:12:02:12:20:25 Program started.
 2022:12:02:12:21:15 Program started.
 2022:12:02:12:21:22 Administrator logged in.
@@ -241,6 +261,8 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:00:27:08 A competitive swimmers results printed.
 2022:12:04:00:38:32 Program started.
 2022:12:04:00:38:49 Administrator logged in.
+2022:12:04:01:11:28 Program started.
+2022:12:04:01:11:41 Administrator logged in.
 2022:12:04:01:11:28 Program started.
 2022:12:04:01:11:41 Administrator logged in.
 2022:12:04:09:47:29 Program started.

@@ -3,23 +3,24 @@ package actors;
 import database.Database;
 import utility.UI;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 /*
 * This class represents the treasurer, which is the accountant in the system.
 * Being the accountant the only status he / she can manipulate and is paid status and see all members in debt
  */
-public class Treasurer extends Employee implements Comparator<SwimmingResult> {
+public class Treasurer extends Employee {
 
 
 	// Constructors-------------------------------------------------
+			//This constructor is used when the Treasurer logs in, to set privilege and role.
 	public Treasurer(RoleType role, PrivilegeType privilege) {
 		setRole(role);
 		setPrivilege(privilege);
 		setPhoneNumber("+45 01 23 58 13");
 		setUsername("Acc001");
 	}
+			//This constructor is used when the Chairman wants to use the Treasurers methods.
 	public Treasurer(){
 
 	}
@@ -57,10 +58,9 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 			System.out.printf("%d# %-20s %-10s %-12s %-20s %-10s%n",count, member.getName(),arr[2],
 					(arr[3] == "null"?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
 		} // End of for loop
-		ui.printLn("For which member do you wish to toggle the payment?");
+		ui.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
 		swimmerCoachDatabase.getMemberList().get(ui.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
 	} // End of method
-
 
 
 	/*
@@ -82,10 +82,10 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 	} // End of method
 
 
-	private int[][] gatherPaymentInfoForPayingMembers(Database swimmerCoachDatabase) {
-		int[][] multiArray = new int[8][8];								// Stores temporary payment data
+	private int[][] gatherPaymentInfoForMembers(Database swimmerCoachDatabase) {
+		int[][] multiArray = new int[8][2];								// Stores temporary payment data
 		for (Member member : swimmerCoachDatabase.getMemberList()){
-			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analyse
+			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analysis
 			if (member.isHasPaid()){
 				switch (arrAnalysis[3]){
 					case "Child" -> {multiArray[0][0]++;multiArray[0][1]+=1000;}
@@ -106,7 +106,7 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 	}
 
 	public void printEconomyInfo(Database swimmerCoachDatabase) {
-		int list[][] =	gatherPaymentInfoForPayingMembers(swimmerCoachDatabase);
+		int list[][] =	gatherPaymentInfoForMembers(swimmerCoachDatabase);
 		String[] names = {"Inactive","Child","Adult","Senior"};
 		System.out.println("Members who have paid:");
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT PAID");
@@ -134,10 +134,5 @@ public class Treasurer extends Employee implements Comparator<SwimmingResult> {
 		System.out.printf("%-15s %-15s %-14s%n","# OF MEMBERS","AMOUNT PAID","AMOUNT TO PAY");
 		System.out.printf("%-15s %-15s %-14s%n",numberOfMember,paidTotal,owedTotal);
 		System.out.println("------------------------------------------------------");
-	}
-
-	@Override
-	public int compare(SwimmingResult o1, SwimmingResult o2) {
-		return 0;
 	}
 } // End of class
