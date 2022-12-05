@@ -116,7 +116,7 @@ public class FileHandler {
     /*
     * This method writes coach employee credentials to coachList file
      */
-    public void writeToCoachList(ArrayList<Coach> coaches) {
+    protected void writeToCoachList(ArrayList<Coach> coaches) {
         try {
             printToFile = new PrintStream(coachListFile);
 

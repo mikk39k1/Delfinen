@@ -269,7 +269,7 @@ public class MenuRun {
             ui.printLn("Write the username for the coach:");
             String coachUsername = ui.readLine();
 
-            ((Chairman) employee).deleteCoach(findCoach, coachUsername, database, ui, fileHandler);
+            ((Chairman) employee).deleteCoach(findCoach, database, ui);
             fileHandler.deleteCoachLoginFromFile(coachUsername);
             fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.writeToSwimmerCoachAssociationFile(database);
