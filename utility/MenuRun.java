@@ -254,7 +254,7 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).createCoach(database, ui, fileHandler);
-            fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.loggingAction("A new coach added.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
