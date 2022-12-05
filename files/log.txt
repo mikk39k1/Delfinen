@@ -378,3 +378,29 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:15:10:07 Swimmers with coach association viewed.
 2022:12:04:15:11:03 A swim result was added.
 2022:12:04:15:11:11 Swimmers with coach association viewed.
+2022:12:04:20:50:26 Program started.
+2022:12:04:20:50:30 Administrator logged in.
+2022:12:04:20:51:06 Program started.
+2022:12:04:20:51:10 Administrator logged in.
+2022:12:04:20:51:17 Swimmers with coach association viewed.
+2022:12:04:20:52:13 Program started.
+2022:12:04:20:52:16 Administrator logged in.
+2022:12:04:20:52:21 Swimmers with coach association viewed.
+2022:12:04:20:53:18 Program started.
+2022:12:04:20:53:22 Administrator logged in.
+2022:12:04:20:53:25 Swimmers with coach association viewed.
+2022:12:04:20:56:26 Program started.
+2022:12:04:20:56:30 Administrator logged in.
+2022:12:04:20:56:34 Swimmers with coach association viewed.
+2022:12:04:21:00:49 Program started.
+2022:12:04:21:00:55 Administrator logged in.
+2022:12:04:21:01:00 Swimmers with coach association viewed.
+2022:12:04:22:46:40 Program started.
+2022:12:04:22:46:43 Administrator logged in.
+2022:12:04:22:48:54 Program started.
+2022:12:04:22:48:57 Administrator logged in.
+2022:12:04:22:49:05 Top 5 athletes was printed.
+2022:12:04:22:58:00 Program started.
+2022:12:04:22:58:04 Administrator logged in.
+2022:12:04:22:58:25 Results on a certain date for a swimmer was viewed.
+2022:12:04:22:58:25 A competitive swimmers results printed.

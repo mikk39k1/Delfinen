@@ -6,7 +6,7 @@ import utility.SuperSorterThreeThousand;
 import utility.UI;
 
 import java.util.Map;
-import java.util.stream.IntStream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 * This class represent a coach. The coach is supposed to be able to pick out competition swimmers based on their performances
@@ -55,7 +55,7 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
-					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: ",
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b Discipline: ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					((CompetitiveSwimmer) member).printSwimDisciplineList();
@@ -76,7 +76,7 @@ public class Coach extends Employee {
 		for (Member member : swimmerCoachDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getUniqueID() == swimmerID) {
-					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: ",
+					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b ",
 							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					return (CompetitiveSwimmer) member;
@@ -121,7 +121,6 @@ public class Coach extends Employee {
 	* This method prints a specific competitive swimmers results for each swimming discipline
 	 */
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
-
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
 			System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: %-10s%n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
@@ -167,7 +166,6 @@ public class Coach extends Employee {
 	* Checks if a competitor has the swimming discipline, which we are requesting, returns -1 if false
 	 */
 	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
-
 		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
 			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
 					equals(swimmingDiscipline)) {
@@ -186,6 +184,13 @@ public class Coach extends Employee {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+
+				AtomicInteger i = new AtomicInteger();
+
+				((CompetitiveSwimmer)key).getSwimmingDisciplineList().
+						forEach(swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().
+								forEach(swimmingResult -> i.addAndGet(1)));
+
 				System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: " +
 								"%-15s Membership status: %-8s Total Swim Results: %-5d%n",
 						key.getUniqueID(),
@@ -193,7 +198,7 @@ public class Coach extends Employee {
 						key.getDateOfBirth(),
 						key.getPhoneNumber(),
 						(key.isIsMembershipActive()) ? "active" : "passive",
-						((CompetitiveSwimmer) key).getAmountOfLoggedResults());
+						i.get());
 			} // End of if statement
 		} // End of for loop
 	} // End of method
@@ -229,7 +234,7 @@ public class Coach extends Employee {
 				return values.getName();
 			} // End of if statement
 		} // End of for loop
-		return "NoCoach";
+		return "No Coach";
 	}
 
 } // End of class

@@ -3,16 +3,7 @@ package utility;
 import actors.*;
 import database.Database;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Timer;
 
 /*
 * This class is the representing startup of the system. Whenever the program starts, predefined users, members, passwords
@@ -50,35 +41,31 @@ public class SystemBoot {
         Member.setID(fileHandler.loadID());// 3
         loadStaff();                      // 4
         swimmerCoachDatabase.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(
-                swimmerCoachDatabase.getSwimmersCoachAssociationList() ,swimmerCoachDatabase));
+                swimmerCoachDatabase.getSwimmersCoachAssociationList(), swimmerCoachDatabase));
         fileHandler.loadResultMethod(swimmerCoachDatabase);
-        //testMemberDatabaseLoad();
-        //testCoachDatabaseLoad();
 
-        while (true) {
-            System.out.println("\n");
-            fileHandler.loggingAction("Program started.");
-            fileHandler.printWelcomeSharks();   // 5
-            //loading();
-            loginSystem();                      // 6
+        System.out.println("\n");
+        fileHandler.loggingAction("Program started.");
+        fileHandler.printWelcomeSharks();   // 5
+        //loading();
+        loginSystem();                      // 6
 
-            MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[] {
-                    "1. Add a new member.",
-                    "2. Delete a member",
-                    "3. Print list of existing members.",
-                    "4. Print member(s) in arrear.",
-                    "5. Change a members payment status",
-                    "6. Add a new swimming result.",
-                    "7. Print swimming results",
-                    "8. Print top 5 athletes in a given discipline.",
-                    "9. Print all members associated with this user",
-                    "10. Add a new coach",
-                    "11. Delete a coach",
-                    "12. Check this years Club-Economy",
-                    "0. Log out."
-            });      // 6
-            startSystem.menuLooping(currentUser, swimmerCoachDatabase);
-        } // End of while loop
+        MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
+                "1. Add a new member.",
+                "2. Delete a member",
+                "3. Print list of existing members.",
+                "4. Print member(s) in arrear.",
+                "5. Change a members payment status",
+                "6. Add a new swimming result.",
+                "7. Print swimming results",
+                "8. Print top 5 athletes in a given discipline.",
+                "9. Print all members associated with this user",
+                "10. Add a new coach",
+                "11. Delete a coach",
+                "12. Check this years Club-Economy",
+                "0. Log out."
+        });      // 6
+        startSystem.menuLooping(currentUser, swimmerCoachDatabase);
     } // End of method
 
 
