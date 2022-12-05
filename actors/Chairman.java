@@ -55,11 +55,8 @@ public class Chairman extends Employee {
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(Database database, UI ui, FileHandler filehandler){
-        ui.printLn("Write the name of the coach you would like to remove:");
-        String findCoach = ui.readLine();
-        ui.printLn("Write the username for the coach:");
-        String coachUsername = ui.readLine();
+    public void deleteCoach(String findCoach, String coachUsername, Database database, UI ui, FileHandler filehandler){
+
         for (int i = 0; i < database.getCoachList().size(); i++){
             if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
                 for (Member member: database.getSwimmersCoachAssociationList().keySet()){
@@ -71,9 +68,6 @@ public class Chairman extends Employee {
                         database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database, false));
                     }
                 }
-
-                filehandler.deleteCoachLoginFromFile(coachUsername);
-
 
                 ui.printLn("You have removed " + findCoach + " from the coach list.");
             } // End of if statement

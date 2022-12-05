@@ -264,11 +264,16 @@ public class MenuRun {
 
     private void deleteCoach(Employee employee, Database database, UI ui) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+            ui.printLn("Write the name of the coach you would like to remove:");
+            String findCoach = ui.readLine();
+            ui.printLn("Write the username for the coach:");
+            String coachUsername = ui.readLine();
 
-            ((Chairman) employee).deleteCoach(database, ui, fileHandler);
+            ((Chairman) employee).deleteCoach(findCoach, coachUsername, database, ui, fileHandler);
+            fileHandler.deleteCoachLoginFromFile(coachUsername);
             fileHandler.writeToCoachlist(database.getCoachList());
             fileHandler.writeToSwimmerCoachAssociationFile(database);
-            fileHandler.loggingAction("A coach got deleted.");
+            fileHandler.loggingAction(findCoach + " is no longer a DELFINEN coach.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
             fileHandler.loggingAction("Unauthorised user tried to access \"Delete coach\".");
