@@ -429,7 +429,7 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-    public void deleteCoachLoginFromFile(String username) {
+    protected void deleteCoachLoginFromFile(String username) {
         try{
             ArrayList<String> usernamePassText = new ArrayList<>();
             readFromFile = new Scanner(passwordList);
