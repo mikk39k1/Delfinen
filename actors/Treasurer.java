@@ -88,17 +88,17 @@ public class Treasurer extends Employee {
 			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analysis
 			if (member.isHasPaid()){
 				switch (arrAnalysis[3]){
-					case "Child" -> {multiArray[0][0]++;multiArray[0][1]+=1000;}
-					case "Adult" -> {multiArray[1][0]++;multiArray[1][1]+=1600;}
-					case "Pensioner" -> {multiArray[2][0]++;multiArray[2][1]+=1200;}
-					default -> {multiArray[3][0]++;multiArray[3][1]+=500;}
+					case "Child" -> {multiArray[1][0]++;multiArray[1][1]+=1000;}
+					case "Adult" -> {multiArray[2][0]++;multiArray[2][1]+=1600;}
+					case "Pensioner" -> {multiArray[3][0]++;multiArray[3][1]+=1200;}
+					default -> {multiArray[0][0]++;multiArray[0][1]+=500;}
 				}
 			}else {
 				switch (arrAnalysis[3]){
-					case "Child" -> {multiArray[4][0]++;multiArray[4][1]+=1000;}
-					case "Adult" -> {multiArray[5][0]++;multiArray[5][1]+=1600;}
-					case "Pensioner" -> {multiArray[6][0]++;multiArray[6][1]+=1200;}
-					default -> {multiArray[7][0]++;multiArray[7][1]+=500;}
+					case "Child" -> {multiArray[5][0]++;multiArray[5][1]+=1000;}
+					case "Adult" -> {multiArray[6][0]++;multiArray[6][1]+=1600;}
+					case "Pensioner" -> {multiArray[7][0]++;multiArray[7][1]+=1200;}
+					default -> {multiArray[4][0]++;multiArray[4][1]+=500;}
 				}
 			}
 		}

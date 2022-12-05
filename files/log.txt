@@ -433,3 +433,11 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:22:58:04 Administrator logged in.
 2022:12:04:22:58:25 Results on a certain date for a swimmer was viewed.
 2022:12:04:22:58:25 A competitive swimmers results printed.
+2022:12:05:17:11:33 Program started.
+2022:12:05:17:11:39 Administrator logged in.
+2022:12:05:17:11:54 Economy details viewed.
+2022:12:05:17:11:54 Economy details viewed.
+2022:12:05:17:18:37 Program started.
+2022:12:05:17:18:43 Administrator logged in.
+2022:12:05:17:18:44 Economy details viewed.
+2022:12:05:17:18:44 Economy details viewed.

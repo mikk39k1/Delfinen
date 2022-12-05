@@ -271,7 +271,7 @@ public class MenuRun {
 
             ((Chairman) employee).deleteCoach(findCoach, coachUsername, database, ui, fileHandler);
             fileHandler.deleteCoachLoginFromFile(coachUsername);
-            fileHandler.writeToCoachlist(database.getCoachList());
+            fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.writeToSwimmerCoachAssociationFile(database);
             fileHandler.loggingAction(findCoach + " is no longer a DELFINEN coach.");
         } else {
