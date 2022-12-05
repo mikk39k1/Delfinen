@@ -263,8 +263,15 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:04:00:38:49 Administrator logged in.
 2022:12:04:01:11:28 Program started.
 2022:12:04:01:11:41 Administrator logged in.
-2022:12:04:01:11:28 Program started.
-2022:12:04:01:11:41 Administrator logged in.
+2022:12:04:09:39:05 Program started.
+2022:12:04:09:39:16 Administrator logged in.
+2022:12:04:09:40:03 Top 5 athletes was printed.
+2022:12:04:09:40:19 Economy details viewed.
+2022:12:04:09:40:19 Economy details viewed.
+2022:12:04:09:50:15 Results on a certain date for a swimmer was viewed.
+2022:12:04:09:50:15 A competitive swimmers results printed.
+2022:12:04:09:54:16 All results of a certain swimmer was viewed.
+2022:12:04:09:54:16 A competitive swimmers results printed.
 2022:12:04:09:47:29 Program started.
 2022:12:04:09:47:44 Administrator logged in.
 2022:12:04:09:53:46 Program started.
@@ -442,3 +449,20 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:05:09:51:27 Ib logged in.
 2022:12:05:09:51:30 Unauthorised user tried to access "Create a new member".
 2022:12:05:09:56:17 Program started.
+2022:12:05:09:56:58 Program started.
+2022:12:05:15:27:38 Program started.
+2022:12:05:15:28:23 Program started.
+2022:12:05:15:28:37 Administrator logged in.
+2022:12:05:15:32:46 Program started.
+2022:12:05:15:32:58 Administrator logged in.
+2022:12:05:17:37:45 Program started.
+2022:12:05:17:37:57 Administrator logged in.
+2022:12:05:17:38:07 gorm is no longer a DELFINEN coach.
+2022:12:05:21:44:59 Program started.
+2022:12:05:21:45:15 Program started.
+2022:12:05:21:45:21 Administrator logged in.
+2022:12:05:21:56:03 Program started.
+2022:12:05:21:56:08 Administrator logged in.
+2022:12:05:21:56:33 Program started.
+2022:12:05:21:56:37 Administrator logged in.
+2022:12:05:21:57:10 A swim result was added.

@@ -135,7 +135,7 @@ public class FileHandler {
     /*
     * This method writes coach username and password to passwd file
      */
-    public void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
+    protected void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
         try{
             printToFile = new PrintStream(new FileOutputStream(passwordList,true));
                 printToFile.print(coachUsername + ";");
@@ -210,7 +210,7 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-    public void appendResult(HashMap<Member, Coach> swimmerCoachAssociation, CompetitiveSwimmer swimmer, int hasSwimDiscipline) {
+    protected void appendResult(HashMap<Member, Coach> swimmerCoachAssociation, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
         Coach temporaryCoach = new Coach();
 
         try {
@@ -223,30 +223,29 @@ public class FileHandler {
              */
             int swimmerUniqueID = swimmer.getUniqueID();                                    // Store uniqueID
             String coachName = temporaryCoach.loadCoachOfMember(swimmerCoachAssociation,swimmer);  // Store coach name
-            String swimmingDisciplineType = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline)+";"; // Store SwimmingDisciplineType
-            int numberInArray = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().size()-1;    // Store the last entry of added results
-            int distance = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).getDistance();    // Stores distance of result
-            String time = String.valueOf(swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).getSwimTime());    // Stores time of result
-            LocalDate date = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).getDate();        // Stores date of result
-            boolean isCompetitive = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).isCompetitive(); // Stores competitiveness of result
-            int rank = swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).
-                    getSwimmingDisciplineResults().get(numberInArray).getRank();        // Stores rank placement of result
+            swimmer.getSwimmingDisciplineList().forEach(
+                    swimmingDiscipline -> {
+                        if (swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)) {
+                            String swimmingDisciplineType = swimmingDiscipline.getSwimmingDisciplineType()+";";
+                            int posInArr = swimmingDiscipline.getSwimmingDisciplineResults().size()-1;
+                            int distance = swimmingDiscipline.getSwimmingDisciplineResults().get(posInArr).getDistance();
+                            String time = String.valueOf(swimmingDiscipline.getSwimmingDisciplineResults().get(posInArr).getSwimTime());
+                            LocalDate date = swimmingDiscipline.getSwimmingDisciplineResults().get(posInArr).getDate();
+                            boolean isCompetitive = swimmingDiscipline.getSwimmingDisciplineResults().get(posInArr).isCompetitive();
+                            int rank = swimmingDiscipline.getSwimmingDisciplineResults().get(posInArr).getRank();
 
-            sb.append(swimmerUniqueID).append(";");                 // Appends ID to StringBuilder
-            sb.append(coachName).append(";");                       // Appends Coach name to StringBuilder
-            sb.append(swimmingDisciplineType);          // Appends Swimming Discipline Type to StringBuilder
-            sb.append(distance).append(";");            // Appends distance from result to StringBuilder
-            sb.append(time).append(";");                // Appends time from result to StringBuilder
-            sb.append(date).append(";");                // Appends date from result to StringBuilder
-            sb.append(isCompetitive).append(";");       // Appends competitiveness from result to StringBuilder
-            sb.append(rank);                            // Appends rank from result to StringBuilder
-            sb.append("\n");                            // Appends a new line to StringBuilder
-
+                            sb.append(swimmerUniqueID).append(";");                 // Appends ID to StringBuilder
+                            sb.append(coachName).append(";");                       // Appends Coach name to StringBuilder
+                            sb.append(swimmingDisciplineType);          // Appends Swimming Discipline Type to StringBuilder
+                            sb.append(distance).append(";");            // Appends distance from result to StringBuilder
+                            sb.append(time).append(";");                // Appends time from result to StringBuilder
+                            sb.append(date).append(";");                // Appends date from result to StringBuilder
+                            sb.append(isCompetitive).append(";");       // Appends competitiveness from result to StringBuilder
+                            sb.append(rank);                            // Appends rank from result to StringBuilder
+                            sb.append("\n");                            // Appends a new line to StringBuilder
+                        }
+                    }
+            );
             appendToFile.write(sb.toString().getBytes());
             appendToFile.close();
 
@@ -254,36 +253,6 @@ public class FileHandler {
             System.out.println("File not found");
         } // End of try / catch statement
     } // End of method
-
-/*
-    //MyFinestSmadderkODE *atc
-    public void loadResults(HashMap<Member, Coach> swimmersCoachAssociationList) {
-        try {
-            readFromFile = new Scanner(memberResultFile);
-            while (readFromFile.hasNextLine()) { //while loop begin
-                String[] resultParam = readFromFile.nextLine().split(";");
-                for (Map.Entry<Member, Coach> set : swimmersCoachAssociationList.entrySet()) {
-                    if (set.getKey().getUniqueID() == Integer.parseInt(resultParam[0])) {
-                        for (int i = 0; i < ((CompetitiveSwimmer) set.getKey()).
-                                getSwimmingDisciplineList().size(); i++) {
-                            if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i)
-                                    .equals(resultParam[2])) {
-                                ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
-                                        getSwimmingDisciplineResults().add(new SwimmingResult
-                                                (Integer.parseInt(resultParam[3]),
-                                                        resultParam[4], resultParam[5], Boolean.parseBoolean(resultParam[6]),
-                                                        Integer.parseInt(resultParam[7])));
-                            }
-                        }
-                    }
-                }
-            }//while loop ends
-        } catch (FileNotFoundException e) {
-            System.out.println("Load Result Fejl 1");
-        }
-    }
-
- */
 
 
     /*
@@ -315,7 +284,7 @@ public class FileHandler {
                     if (set.getKey().getUniqueID() == uniqueId) {
                         for (int i = 0; i < ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList().size(); i++) {
                             if (((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
-                                    getSwimmingDiscipline().
+                                    getSwimmingDisciplineType().
                                     equals(SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(swimDiscipline))) {
                                 if (isCompetitive) {
                                     ((CompetitiveSwimmer) set.getKey()).getSwimmingDisciplineList().get(i).
@@ -407,7 +376,7 @@ public class FileHandler {
     /*
     * This method writes the association link between a member and coach whenever a competitive swimmer is added
      */
-    public void writeToSwimmerCoachAssociationFile(Database associationList) {
+    protected void writeToSwimmerCoachAssociationFile(Database associationList) {
         try {
             printToFile = new PrintStream(swimmerCoachAssociationList);
 
@@ -424,7 +393,7 @@ public class FileHandler {
         } // End of try / catch statement
     } // End of method
 
-    public void deleteCoachLoginFromFile(String username) {
+    protected void deleteCoachLoginFromFile(String username) {
         try{
             ArrayList<String> usernamePassText = new ArrayList<>();
             readFromFile = new Scanner(passwordList);

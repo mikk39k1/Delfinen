@@ -45,7 +45,8 @@ public class SystemBoot {
         System.out.println("\n");
         fileHandler.loggingAction("Program started.");
         fileHandler.printWelcomeSharks();   // 5
-        loading();
+        loadStaff();
+        //loading();
         loginSystem();                      // 6
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
@@ -152,46 +153,13 @@ public class SystemBoot {
 
     } // End of method
 
-    private void testMemberDatabaseLoad(){
-        for (int i = 0; i < database.getMemberList().size(); i++) {
-
-            if (database.getMemberList().get(i) instanceof CompetitiveSwimmer) {
-                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b Discipline: ",
-                        database.getMemberList().get(i).getUniqueID(),
-                        database.getMemberList().get(i).getName(),
-                        database.getMemberList().get(i).getPhoneNumber(),
-                        database.getMemberList().get(i).getDateOfBirth(),
-                        database.getMemberList().get(i).isIsMembershipActive());
-                ((CompetitiveSwimmer) database.getMemberList().get(i)).printSwimDisciplineList();
-            }
-            else {
-                System.out.printf("ID: %-5d Name: %-10s Phone Number: %-10s Age: %-15s State: %-5b",
-                        database.getMemberList().get(i).getUniqueID(),
-                        database.getMemberList().get(i).getName(),
-                        database.getMemberList().get(i).getPhoneNumber(),
-                        database.getMemberList().get(i).getDateOfBirth(),
-                        database.getMemberList().get(i).isIsMembershipActive());
-                System.out.println();
-            }
-        }
-    }
-
     protected void loadStaff() {
-        // Staff -----------------
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
     } // End of method
 
-    private void testCoachDatabaseLoad(){
-        for (int i = 0; i < database.getCoachList().size(); i++) {
-            System.out.println();
-            System.out.printf("Username: %-5s Name: %-10s Phone Number: %-10s ",
-                    database.getCoachList().get(i).getUsername(),
-                    database.getCoachList().get(i).getName(),
-                    database.getCoachList().get(i).getPhoneNumber());
-            System.out.println();
-        }
-    }
+
+
     private void loading() {
         try {
             System.out.println("\n                                     Loading ");

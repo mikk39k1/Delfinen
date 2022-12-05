@@ -37,6 +37,7 @@ public class Chairman extends Employee {
     * This method creates a new Coach employee to file and coachList
     * and sets the username and Password in Password file
     */
+
     public void createCoach(Database coachList, UI ui, FileHandler filehandler) {
         ui.print("Please enter name of Coach: ");
         String coachName = ui.readLine();
@@ -48,40 +49,36 @@ public class Chairman extends Employee {
         String password = ui.readLine();
 
         coachList.getCoachList().add(new Coach(coachName, phonenumber,username,password));
-        filehandler.writeCoachUserAndPassToList(username,password);
     } // End of method
 
 
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(String findCoach, String coachUsername, Database database, UI ui, FileHandler filehandler){
+    public void deleteCoach(String findCoach, Database database, UI ui) {
 
-        for (int i = 0; i < database.getCoachList().size(); i++){
-            if (database.getCoachList().get(i).getName().equalsIgnoreCase(findCoach)){
-                for (Member member: database.getSwimmersCoachAssociationList().keySet()){
-                    if (database.getSwimmersCoachAssociationList().get(member).loadCoachOfMember(database,member).equals(findCoach)){
+        database.getCoachList().removeIf(coach -> coach.getName().equalsIgnoreCase(findCoach));
+        database.getSwimmersCoachAssociationList().forEach((key, value) -> {
+            if (value.loadCoachOfMember(database.getSwimmersCoachAssociationList(),key).equalsIgnoreCase(findCoach)) {
 
-                        ui.printLn("\n Choose a NEW coach for the following members:");
-                        System.out.println(member.getUniqueID() + member.getName() + "\n ");
-                        database.getCoachList().remove(i);
-                        database.getSwimmersCoachAssociationList().put(member,chooseCoach(ui,database, false));
-                    }
-                }
+                ui.printLn("\n Choose a NEW coach for the following members:");
+                System.out.println("ID: " + key.getUniqueID() + " " + key.getName() + "\n ");
+                database.getSwimmersCoachAssociationList().put(key, chooseCoach(ui, database, false));
+            }
+        });
 
-                ui.printLn("You have removed " + findCoach + " from the coach list.");
-            } // End of if statement
-        } // End of for loop
-
-
-    } //End of method
+        ui.printLn("You have removed " + findCoach + " from the coach list.");
+        // End of if statement
+        // End of for loop
+    }
 
 
-    /*
+
+        /*
     * This method takes in createMember method and adds the member to the arraylist in the Database class
     * It also takes in chooseCoach method to add both Member and Coach as Key/Value pair in the hashMap inside Database
      */
-    public void addMember(UI ui, Member newMember, Database database, FileHandler fileHandler) {
+    public void addMember(UI ui, Member newMember, Database database) {
         if (newMember instanceof CompetitiveSwimmer) {
             ui.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
             int disciplineAmount = ui.readInt();           // Stores temporary the amount of Discipline Types swimmer should have
@@ -94,7 +91,7 @@ public class Chairman extends Employee {
 
             ui.printLn(newMember.getName() + " has been added as a member with " + disciplineAmount +
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
-            fileHandler.writeToSwimmerCoachAssociationFile(database);
+
         } // End of if statement
 
         database.getMemberList().add(newMember); // Adds new member to Database memberList

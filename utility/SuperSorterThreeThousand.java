@@ -54,7 +54,7 @@ public class SuperSorterThreeThousand {
         memberCoachHashMap.keySet().forEach(
                 memberCoachEntry -> ((CompetitiveSwimmer)memberCoachEntry).getSwimmingDisciplineList().forEach(
                         swimmingDiscipline -> {
-                            if (swimmingDiscipline.getSwimmingDiscipline().equals(swimType)) {
+                            if (swimmingDiscipline.getSwimmingDisciplineType().equals(swimType)) {
                                 swimResultList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
                             } // End of if statement
                         } // End of lambda -> predicate method entrance statement
@@ -79,7 +79,7 @@ public class SuperSorterThreeThousand {
                     if (member.getName().equals(swimmer.getName())) {
                         ((CompetitiveSwimmer)member).getSwimmingDisciplineList().forEach(
                                 swimmingDiscipline -> {
-                                    if (swimmingDiscipline.getSwimmingDiscipline().equals(swimType)) {
+                                    if (swimmingDiscipline.getSwimmingDisciplineType().equals(swimType)) {
                                         swimResultList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
                                     }
                                 }

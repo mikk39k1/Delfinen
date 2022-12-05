@@ -37,7 +37,7 @@ public class SwimmingDiscipline {
     }
 
     // Getter ------------------------------------
-    public SwimmingDisciplineTypes getSwimmingDiscipline() {
+    public SwimmingDisciplineTypes getSwimmingDisciplineType() {
         return swimmingDiscipline;
     }
 

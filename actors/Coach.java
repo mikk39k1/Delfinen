@@ -6,7 +6,6 @@ import utility.SuperSorterThreeThousand;
 import utility.UI;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
@@ -83,29 +82,19 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(UI ui, Database database, FileHandler filehandler) {
+	public void addSwimResult(UI ui, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType, Database database) {
 
-		CompetitiveSwimmer swimmer = loadSwimmer(ui,database);
+		swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+		ui.printLn("");
 
-		for (Map.Entry<Member, Coach> set : database.getSwimmersCoachAssociationList().entrySet()) {
-			if (set.getKey().equals(swimmer)) {
-				ui.print(" | ");
-				for (SwimmingDiscipline swimType : ((CompetitiveSwimmer)set.getKey()).getSwimmingDisciplineList()) {
-					ui.print(swimType + " | ");
-				}
-				ui.printLn("");
-				SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline = ui.setSwimmingDisciplineType();
-				int hasSwimDiscipline = hasSwimmingDiscipline(swimmer, swimmingDiscipline);
-				if (hasSwimDiscipline > -1) {
-					swimmer.getSwimmingDisciplineList().get(hasSwimDiscipline).getSwimmingDisciplineResults()
-							.add(new SwimmingResult(ui));
-					filehandler.appendResult(database.getSwimmersCoachAssociationList(),swimmer,hasSwimDiscipline);
-					System.out.println("The swim result was added! ");
-				} else {
-					ui.printLn("The swimmer does not participate in this kind of competition");
-				} // End of inner if / else statement
-			} // End of if statement
-		} // End of for loop
+		swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
+			if (swimmingDiscipline.getSwimmingDisciplineType() == disciplineType) {
+				swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+				ui.printLn("The swim result was added!");
+			} else {
+				ui.printLn("The swimmer does not participate in this kind of competition");
+			} // End of if / else statement
+		}); // End of array build in forEach method
 	} // End of method
 
 
@@ -118,9 +107,9 @@ public class Coach extends Employee {
 			System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: %-10s%n",
 					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
 					competitiveSwimmer.getDateOfBirth(),competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.isIsMembershipActive(),
-					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline());
+					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType());
 			for (SwimmingResult result : competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults()) {
-				System.out.print(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline()+": ");
+				System.out.print(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType()+": ");
 				result.printResults();
 			} // End of inner for loop
 		} // End of outer for loop
@@ -160,7 +149,7 @@ public class Coach extends Employee {
 	 */
 	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
 		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
-			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDiscipline().
+			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType().
 					equals(swimmingDiscipline)) {
 				return i;
 			} // End of if statement

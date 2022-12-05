@@ -70,13 +70,14 @@ public class MenuRun {
      * This method adds a member through the Chairman class
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void addMember(Employee employee, Database swimmerCoachDatabase) {
+    private void addMember(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
-                    swimmerCoachDatabase, fileHandler);
-            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList());
-            fileHandler.loggingAction(swimmerCoachDatabase.getMemberList().get(swimmerCoachDatabase.
+                    database);
+            fileHandler.writeToFullMembersList(database.getMemberList());
+            fileHandler.writeToSwimmerCoachAssociationFile(database);
+            fileHandler.loggingAction(database.getMemberList().get(database.
                     getMemberList().size() - 1).getName() + " is now swimming with DELFINEN.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -255,6 +256,10 @@ public class MenuRun {
 
             ((Chairman) employee).createCoach(database, ui, fileHandler);
             fileHandler.writeToCoachList(database.getCoachList());
+            fileHandler.writeCoachUserAndPassToList(
+                    database.getCoachList().get(database.getCoachList().size()-1).getUsername(),
+                    database.getCoachList().get(database.getCoachList().size()-1).getPassword());
+
             fileHandler.loggingAction("A new coach added.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -264,16 +269,22 @@ public class MenuRun {
 
     private void deleteCoach(Employee employee, Database database, UI ui) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+            ui.printLn("Write the name of the coach you would like to remove:");
+            String findCoach = ui.readLine();
+            ui.printLn("Write the username for the coach:");
+            String coachUsername = ui.readLine();
 
-            ((Chairman) employee).deleteCoach(database, ui, fileHandler);
+            ((Chairman) employee).deleteCoach(findCoach, database, ui);
+            fileHandler.deleteCoachLoginFromFile(coachUsername);
             fileHandler.writeToCoachList(database.getCoachList());
             fileHandler.writeToSwimmerCoachAssociationFile(database);
-            fileHandler.loggingAction("A coach got deleted.");
+            fileHandler.loggingAction(findCoach + " is no longer a DELFINEN coach.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
             fileHandler.loggingAction("Unauthorised user tried to access \"Delete coach\".");
         } // End of if / else statement
     } // End of method
+
 
     private void printEco(Employee employee, Database swimmerCoachDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
@@ -481,11 +492,23 @@ public class MenuRun {
                         ui.print("As chairman, please enter the coach name, you wish to see respective members of");
                         Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
                         sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                        adminOverride.addSwimResult(ui, database, fileHandler); // Runs temporary user method
+                        CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(ui,database);
+                        swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                        ui.printLn("");
+                        SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
+                        adminOverride.addSwimResult(ui, swimmer, disciplineType,database ); // Runs temporary user method
+                        fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                                disciplineType);
                         fileHandler.loggingAction("A swim result was added.");
                     } else {
                         sorter.setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
-                        ((Coach) employee).addSwimResult(ui, database, fileHandler); // Runs method as Coach
+                        CompetitiveSwimmer swimmer = ((Coach)employee).loadSwimmer(ui,database);
+                        swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                        ui.printLn("");
+                        SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
+                        ((Coach) employee).addSwimResult(ui, swimmer ,disciplineType,database); // Runs method as Coach
+                        fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                                disciplineType);
                         fileHandler.loggingAction("A swim result was added.");
                     } // End of inner if / else statement
                     chooseTeam = false;
