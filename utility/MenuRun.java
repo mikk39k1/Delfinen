@@ -471,7 +471,7 @@ public class MenuRun {
 
 
     public void innerMenuAddSwimResults(Employee employee, Database database) {
-        MenuRun innerMenu = new MenuRun("ADD SWIMRESULTS", "Which team is swimmer on?", new String[]{
+        MenuRun innerMenu = new MenuRun("\u001B[1mADD SWIMRESULTS\u001B[0m", "Which team is swimmer on?", new String[]{
                 "Choose either: ",
                 "1. Junior Team",
                 "2. Adult Team",
@@ -488,7 +488,7 @@ public class MenuRun {
                 case 1, 2, 3 -> {
                     if (employee instanceof Chairman) {
                         try {
-                            ui.print("As chairman, please enter the coach name, you wish to see respective members of");
+                            ui.printLn("As chairman, please enter the coach name, you wish to see respective members of");
                             Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
                             sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
                             CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(ui,database);

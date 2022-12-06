@@ -20,11 +20,6 @@ public class Chairman extends Employee {
         setUsername("rootAdmin");
     }
 
-    public Chairman() {
-
-    }
-
-
     // Chairman Behaviors (Methods) ---------------------------------
 
     /*
@@ -168,7 +163,7 @@ public class Chairman extends Employee {
      */
     public void printMembers(List<Member> members) {
         for (Member member : members) {
-            System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b%n",
+            System.out.printf("ID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-5b%n",
                     member.getUniqueID(),
                     member.getName(),
                     member.getDateOfBirth(),
