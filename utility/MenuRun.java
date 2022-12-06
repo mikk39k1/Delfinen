@@ -209,10 +209,14 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();              // Creates a temporary user for admin
-                adminOverride.checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
+                sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
+                //sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
+                //adminOverride.checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } else {
-                ((Coach) employee).checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
+                sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
+                //sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
+                //((Coach) employee).checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } // End of inner if / else statement
         } else {
@@ -333,16 +337,16 @@ public class MenuRun {
                 case 2 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        sorter.setSortByDate(ui, sorter.
+                        System.out.println(sorter.setSortByDate(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database),
+                                                lookupSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } else {
-                        sorter.setSortByDate(ui, sorter.
+                        System.out.println(sorter.setSortByDate(ui, sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
@@ -350,16 +354,16 @@ public class MenuRun {
                 case 3 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        sorter.setSortByDistance(ui, sorter.
+                        System.out.println(sorter.setSortByDistance(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database),
+                                                lookupSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } else {
-                        sorter.setSortByDistance(ui, sorter.
+                        System.out.println(sorter.setSortByDistance(ui, sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain distance for a swimmer was viewed.");
@@ -367,16 +371,16 @@ public class MenuRun {
                 case 4 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        sorter.setSortByIsCompetitive(ui, sorter.
+                        System.out.println(sorter.setSortByIsCompetitive(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database),
+                                                lookupSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } else {
-                        sorter.setSortByIsCompetitive(ui, sorter.
+                        System.out.println(sorter.setSortByIsCompetitive(ui, sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
@@ -384,16 +388,16 @@ public class MenuRun {
                 case 5 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        sorter.setSortByRank(ui, sorter.
+                        System.out.println(sorter.setSortByRank(ui, sorter.
                                 oneSwimmersResultList(adminOverride.
-                                        lookupSwimmer(ui, database),
+                                                lookupSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } else {
-                        sorter.setSortByRank(ui, sorter.
+                        System.out.println(sorter.setSortByRank(ui, sorter.
                                 oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType()));
+                                        ui.setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
                     fileHandler.loggingAction("Results of either training or competitiveness, for a swimmer was viewed.");

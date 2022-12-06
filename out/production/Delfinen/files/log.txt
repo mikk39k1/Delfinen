@@ -491,6 +491,9 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:06:08:54:34 Program started.
 2022:12:06:08:54:38 Administrator logged in.
 2022:12:06:08:54:49 A swim result was added.
+2022:12:06:09:04:15 Program started.
+2022:12:06:09:04:44 Administrator logged in.
+2022:12:06:09:04:57 Top 5 athletes was printed.
 2022:12:06:09:02:55 Program started.
 2022:12:06:09:02:59 Administrator logged in.
 2022:12:06:09:03:03 All members was viewed, sorted by ID.
@@ -511,3 +514,111 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:06:09:10:52 Administrator logged in.
 2022:12:06:09:13:33 Program started.
 2022:12:06:09:13:39 Administrator logged in.
+2022:12:06:09:14:23 Program started.
+2022:12:06:09:14:31 Administrator logged in.
+2022:12:06:09:15:52 Program started.
+2022:12:06:09:15:57 Administrator logged in.
+2022:12:06:09:33:30 Program started.
+2022:12:06:09:33:37 Administrator logged in.
+2022:12:06:09:34:23 Program started.
+2022:12:06:09:34:29 Administrator logged in.
+2022:12:06:09:35:07 Top 5 athletes was printed.
+2022:12:06:09:36:16 Program terminated.
+2022:12:06:09:47:27 Program started.
+2022:12:06:09:47:35 Administrator logged in.
+2022:12:06:10:04:55 Program started.
+2022:12:06:10:05:02 Administrator logged in.
+2022:12:06:10:05:18 Results on a certain date for a swimmer was viewed.
+2022:12:06:10:05:18 A competitive swimmers results printed.
+2022:12:06:11:12:46 Program started.
+2022:12:06:11:12:52 Administrator logged in.
+2022:12:06:11:13:06 Top 5 athletes was printed.
+2022:12:06:11:13:46 Program started.
+2022:12:06:11:13:56 Administrator logged in.
+2022:12:06:11:14:12 Results on a certain date for a swimmer was viewed.
+2022:12:06:11:14:12 A competitive swimmers results printed.
+2022:12:06:11:14:25 All results of a certain swimmer was viewed.
+2022:12:06:11:14:25 A competitive swimmers results printed.
+2022:12:06:11:14:47 Top 5 athletes was printed.
+2022:12:06:11:17:04 Program started.
+2022:12:06:11:17:09 Administrator logged in.
+2022:12:06:11:19:23 Program started.
+2022:12:06:11:19:32 Administrator logged in.
+2022:12:06:11:19:40 Top 5 athletes was printed.
+2022:12:06:11:22:13 Program started.
+2022:12:06:11:22:24 Administrator logged in.
+2022:12:06:11:22:53 Top 5 athletes was printed.
+2022:12:06:11:25:25 Program started.
+2022:12:06:11:25:53 Administrator logged in.
+2022:12:06:11:25:58 Top 5 athletes was printed.
+2022:12:06:11:43:03 Program started.
+2022:12:06:11:43:11 Administrator logged in.
+2022:12:06:11:43:17 Top 5 athletes was printed.
+2022:12:06:11:44:10 Program started.
+2022:12:06:11:44:17 Administrator logged in.
+2022:12:06:11:44:21 Top 5 athletes was printed.
+2022:12:06:11:44:37 Program started.
+2022:12:06:11:44:43 Administrator logged in.
+2022:12:06:11:44:46 Top 5 athletes was printed.
+2022:12:06:11:47:42 Program started.
+2022:12:06:11:47:53 Administrator logged in.
+2022:12:06:11:48:00 Top 5 athletes was printed.
+2022:12:06:11:48:29 Program started.
+2022:12:06:11:48:37 Administrator logged in.
+2022:12:06:11:48:39 Top 5 athletes was printed.
+2022:12:06:11:50:34 Program started.
+2022:12:06:11:50:38 Administrator logged in.
+2022:12:06:11:50:44 Top 5 athletes was printed.
+2022:12:06:12:08:25 Program started.
+2022:12:06:12:08:31 Administrator logged in.
+2022:12:06:12:08:33 Top 5 athletes was printed.
+2022:12:06:12:10:53 Program started.
+2022:12:06:12:14:14 Program started.
+2022:12:06:12:14:18 Administrator logged in.
+2022:12:06:12:14:22 Top 5 athletes was printed.
+2022:12:06:12:16:30 Program started.
+2022:12:06:12:16:41 Administrator logged in.
+2022:12:06:12:16:43 Top 5 athletes was printed.
+2022:12:06:12:16:56 Top 5 athletes was printed.
+2022:12:06:12:17:08 Top 5 athletes was printed.
+2022:12:06:12:19:06 Program started.
+2022:12:06:12:19:12 Administrator logged in.
+2022:12:06:12:19:17 Top 5 athletes was printed.
+2022:12:06:12:25:22 Program started.
+2022:12:06:12:25:27 Administrator logged in.
+2022:12:06:12:25:31 Top 5 athletes was printed.
+2022:12:06:12:34:16 Program started.
+2022:12:06:12:34:21 Administrator logged in.
+2022:12:06:12:34:25 Top 5 athletes was printed.
+2022:12:06:12:35:34 Top 5 athletes was printed.
+2022:12:06:12:51:18 Program started.
+2022:12:06:12:56:22 Program started.
+2022:12:06:12:56:40 Administrator logged in.
+2022:12:06:13:00:31 Program started.
+2022:12:06:13:00:56 Administrator logged in.
+2022:12:06:13:08:53 Program started.
+2022:12:06:13:09:08 Administrator logged in.
+2022:12:06:13:10:07 Program started.
+2022:12:06:13:10:22 Administrator logged in.
+2022:12:06:13:13:41 Program started.
+2022:12:06:13:13:49 Administrator logged in.
+2022:12:06:13:13:57 Top 5 athletes was printed.
+2022:12:06:13:15:10 Program started.
+2022:12:06:13:15:15 Administrator logged in.
+2022:12:06:13:16:17 Program started.
+2022:12:06:13:16:22 Administrator logged in.
+2022:12:06:13:37:32 Program started.
+2022:12:06:13:37:42 Administrator logged in.
+2022:12:06:13:48:33 Program started.
+2022:12:06:13:49:01 Program started.
+2022:12:06:13:49:15 Administrator logged in.
+2022:12:06:13:49:21 Top 5 athletes was printed.
+2022:12:06:13:54:32 Program started.
+2022:12:06:13:54:37 Administrator logged in.
+2022:12:06:13:54:41 Top 5 athletes was printed.
+2022:12:06:13:56:28 Program started.
+2022:12:06:13:56:35 Administrator logged in.
+2022:12:06:13:56:54 Top 5 athletes was printed.
+2022:12:06:14:06:15 Program started.
+2022:12:06:14:06:23 Administrator logged in.
+2022:12:06:14:06:27 Top 5 athletes was printed.

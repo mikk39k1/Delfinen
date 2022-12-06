@@ -95,9 +95,9 @@ public class SuperSorterThreeThousand {
     /*
     * This method sorts based on distance, look inside ui.class to understand properties being presented
      */
-    public void setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
-        switch(ui.setDistance()) {
-            case 100 ->{
+    public ArrayList<SwimmingResult> setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+        switch (ui.setDistance()) {
+            case 100 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 100);
                 swimmingResults.sort(sortByTime);
             } // End of case 100
@@ -110,14 +110,14 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 500
         } // End of switch statement
-        System.out.println(swimmingResults);
+        return swimmingResults;
     } // End of method
 
 
     /*
     * This method sorts results based on competitiveness. True = Competition / False = Training session
      */
-    protected void setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         if (!ui.setCompetitiveness()) {
             swimmingResults.removeIf(SwimmingResult::isCompetitive);
@@ -126,7 +126,7 @@ public class SuperSorterThreeThousand {
             swimmingResults.removeIf(swimmingResult -> !swimmingResult.isCompetitive());
             swimmingResults.sort(sortByTime);
         } // End of if / else statement
-        System.out.println(swimmingResults);
+        return swimmingResults;
     } // End of method
 
 
@@ -134,7 +134,7 @@ public class SuperSorterThreeThousand {
     /*
     * This method sorts results based on Rank. Read more in ui.class defining return values with info.
      */
-    protected void setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch(ui.setRank()) {
             case 3 ->{
@@ -150,14 +150,14 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 500
         } // End of switch statement
-        System.out.println(swimmingResults);
+        return swimmingResults;
     } // End of method
 
 
     /*
     * This method sorts results based on date attributes.
      */
-    protected void setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
 
         switch (ui.chooseTimeFrame()) {
             case 1 -> {
@@ -188,7 +188,7 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 6
         } // End of switch statement
-        System.out.println(swimmingResults);
+        return swimmingResults;
     } // End of method
 
 
@@ -221,4 +221,93 @@ public class SuperSorterThreeThousand {
                     member.getDateOfBirth(),member.getPhoneNumber(), member.isIsMembershipActive());
         } // End of for loop
     } // End of method
+
+    public void topFiveBestPerformance(SwimmingDiscipline.SwimmingDisciplineTypes swimDiscipline,
+                                       int readInputDistance, HashMap<Member, Coach> memberCoachHashMap) {
+        ArrayList<Member> temporarySwimmers = new ArrayList<>(memberCoachHashMap.keySet());
+
+        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
+                {
+                    if (((CompetitiveSwimmer) member).getSwimmingDisciplineList().contains(swimmingDiscipline)) {
+                    }
+                })
+        );
+
+
+        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
+                swimmingDiscipline.getSwimmingDisciplineResults().sort(sortByTime)));
+
+
+        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
+                System.out.println(swimmingDiscipline.getSwimmingDisciplineResults())));
+
+    }
+
+    public void topFiveSmadder(SwimmingDiscipline.SwimmingDisciplineTypes swimDiscipline,
+                               int readInputDistance, HashMap<Member, Coach> memberCoachHashMap) {
+        ArrayList<Member> swimmersLocalList = new ArrayList<>(memberCoachHashMap.keySet());
+        for (Member swimmer : swimmersLocalList) {
+            int count = 0;
+            for (int i = 0; i < ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().size(); i++) {
+                if (!((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().get(i).
+                        getSwimmingDisciplineType().equals(swimDiscipline)) {
+                    ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().remove(i);
+                    count++;
+                }
+                if (((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().size() == count){
+                    swimmersLocalList.remove(swimmer);
+                }
+            }
+        }
+
+        for (Member swimmer : swimmersLocalList) {
+            if (((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().size() > 0) {
+                for (int x = 0; x < ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().
+                        get(0).getSwimmingDisciplineResults().size(); x++) {
+                    if (((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().get(0).
+                            getSwimmingDisciplineResults().get(x).getDistance() != readInputDistance) {
+                        ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().
+                                get(0).getSwimmingDisciplineResults().remove(x);
+                    }
+                }
+            }
+        }
+
+        for (Member swimmer : swimmersLocalList) {
+            if (((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().size() > 0) {
+                System.out.println(((CompetitiveSwimmer) swimmer).getName() + " " +
+                        ((CompetitiveSwimmer) swimmer).
+                                getSwimmingDisciplineList().get(0).getSwimmingDisciplineResults().get(0).getSwimTime() + " "
+                        + ((CompetitiveSwimmer) swimmer).
+                        getSwimmingDisciplineList().get(0).getSwimmingDisciplineType().toString());
+            }
+        }
+    }
+
+    public void topFiveSituation(UI ui, HashMap<Member, Coach> memberCoachHashMap) {
+        ArrayList<SwimmingResult> swimmingResultArrayList = new ArrayList<>();
+
+        int chooseDistance = ui.setDistance();
+        SwimmingDiscipline.SwimmingDisciplineTypes chooseDiscipline = ui.setSwimmingDisciplineType();
+
+        memberCoachHashMap.forEach((key, value) -> ((CompetitiveSwimmer) key).getSwimmingDisciplineList().removeIf(swimmingDiscipline ->
+                !swimmingDiscipline.getSwimmingDisciplineType().equals(chooseDiscipline)));
+
+        memberCoachHashMap.forEach((member, coach) -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
+                swimmingDiscipline.getSwimmingDisciplineResults().removeIf(swimmingResult -> swimmingResult.getDistance() != chooseDistance)));
+
+        ArrayList<Member> listOfSort = new ArrayList<>(memberCoachHashMap.keySet());
+        listOfSort.forEach(member -> ((CompetitiveSwimmer)member).getSwimmingDisciplineList().forEach(
+                swimmingDiscipline -> {
+                    swimmingResultArrayList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
+                }
+                ));
+        swimmingResultArrayList.sort(sortByTime);
+        System.out.println(swimmingResultArrayList);
+
+
+    }
 } // End of class
+
+
+ // End of class
