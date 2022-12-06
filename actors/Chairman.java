@@ -20,6 +20,10 @@ public class Chairman extends Employee {
         setUsername("rootAdmin");
     }
 
+    public Chairman() {
+
+    }
+
 
     // Chairman Behaviors (Methods) ---------------------------------
 
@@ -137,7 +141,7 @@ public class Chairman extends Employee {
         } // End of for loop
 
         while (true) {
-            ui.print("Please enter the name of a coach: ");
+            ui.print("\nPlease enter the name of a coach: ");
             String coachName = ui.readLine(); // Stores temporary the name of the Coach intended to be used
             for (Coach coach : swimmerCoachDatabase.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
@@ -152,7 +156,7 @@ public class Chairman extends Employee {
             } // End of for loop
             if (swimmerCoachDatabase.getCoachList().stream().noneMatch(coach ->
                     coach.getName().equalsIgnoreCase(coachName))) {
-                ui.printLn("Coach does not exist try agian");
+                ui.printLn("Coach does not exist try again");
             } // End of if statement
         } // End of while loop
     } // End of method

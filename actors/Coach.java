@@ -1,7 +1,6 @@
 package actors;
 
 import database.Database;
-import utility.FileHandler;
 import utility.SuperSorterThreeThousand;
 import utility.UI;
 
@@ -63,7 +62,7 @@ public class Coach extends Employee {
 	* This method
 	 */
 	public CompetitiveSwimmer loadSwimmer(UI ui, Database database) {
-		System.out.println("Please enter ID on the member you wish to add result to: ");
+		System.out.println("\nPlease enter ID on the member you wish to add result to: ");
 		int swimmerID = ui.readInt();
 		for (Member member : database.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
@@ -82,19 +81,43 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(UI ui, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType, Database database) {
+	public void addSwimResult(UI ui, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
 
-		swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
-		ui.printLn("");
+		if (swimmer.getSwimmingDisciplineList().stream().filter(swimmingDiscipline ->
+				swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)).count() == 1) {
 
-		swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
-			if (swimmingDiscipline.getSwimmingDisciplineType() == disciplineType) {
-				swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
-				ui.printLn("The swim result was added!");
-			} else {
-				ui.printLn("The swimmer does not participate in this kind of competition");
-			} // End of if / else statement
-		}); // End of array build in forEach method
+			swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
+				if (swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)) {
+					swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+				}
+			});
+		} else {
+			ui.printLn("Swimmer is not active within that discipline");
+		}
+
+
+		/*
+		try {
+			swimmer.getSwimmingDisciplineList().stream().filter(
+					swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)).forEach(
+							swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui))
+			);
+			/*
+			swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
+				if (swimmingDiscipline.getSwimmingDisciplineType() == disciplineType) {
+					swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
+
+				} // End of if
+			}); // End of array build in forEach method
+
+
+		} catch (EnumConstantNotPresentException e) {
+			ui.printLn("Swimmer is not active in this kind of discipline ");
+		}
+
+		 */
+
+
 	} // End of method
 
 
@@ -140,23 +163,6 @@ public class Coach extends Employee {
 		} // End of for loop
 		return swimmerName;
 	} // End of method
-
-
-
-
-	/*
-	* Checks if a competitor has the swimming discipline, which we are requesting, returns -1 if false
-	 */
-	private int hasSwimmingDiscipline(CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes swimmingDiscipline) {
-		for (int i = 0; i < swimmer.getSwimmingDisciplineList().size(); i++) {
-			if (swimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType().
-					equals(swimmingDiscipline)) {
-				return i;
-			} // End of if statement
-		} // End of for loop
-		return -1;
-	} // End of method
-
 
 
 	/*

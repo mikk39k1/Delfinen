@@ -69,23 +69,27 @@ public class SystemBoot {
 
 
     /*
-    * This method follows the principle of "The Least Privilege" and ensure users cant do more than allowed by setting Role and Privilege level
+     * This method follows the principle of "The Least Privilege" and ensure users cant do more than allowed by setting Role and Privilege level
      */
-    private void setRoleAndPrivilege(String username) {
+    private void setRoleAndPrivilege(String username, Database database) {
         // Switch statement set role and privilege based on correct username
-        for (Employee user : enigmaUsers) {
-            if (user.getUsername().equals(username)) {
-                currentUser = user;
-                fileHandler.loggingAction(currentUser.getName() + " logged in.");
-            } else {
-                for (Coach coach : database.getCoachList()) {
-                    if (coach.getUsername().equals(username)) {
-                        currentUser = coach;
+        enigmaUsers.forEach(
+                employee -> {
+                    if (employee.getUsername().equals(username)) {
+                        currentUser = employee;
                         fileHandler.loggingAction(currentUser.getName() + " logged in.");
-                    } // End inner if statement
-                } // End inner for loop
-            } // End if / else statement
-        } // End of for loop
+                    } else {
+                        database.getCoachList().forEach(
+                                coach -> {
+                                    if (coach.getUsername().equals(username)) {
+                                        currentUser = coach;
+                                        fileHandler.loggingAction(currentUser.getName() + " logged in.");
+                                    } // End of inner if statement
+                                } // End of lambda predicate expression
+                        ); // End of inner forEach ArrayList build-in method
+                    } // End of if / else statement
+                } // End of lambda predicate expression
+        ); // End of out forEach ArrayList build-in method
     } // End of method
 
 
@@ -98,7 +102,7 @@ public class SystemBoot {
         do {
             user = isLoggedIn();                // Temporary stores a username if prompted existing username
             if (!user.equals("0")) {
-                setRoleAndPrivilege(user);      // Sets authorization level of role / privileges
+                setRoleAndPrivilege(user,database);      // Sets authorization level of role / privileges
             } // End of if statement
         } while (user.equals("0")); // End of do-while loop
     } // end of method

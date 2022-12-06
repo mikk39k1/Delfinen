@@ -2,11 +2,8 @@ package utility;
 
 import actors.SwimmingDiscipline;
 
-import java.io.PrintStream;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /*
@@ -148,10 +145,11 @@ public class UI {
 
     public int setDistance() {
         while (true) {
-            printLn("Chose a distance:\n" +
-                    "1. 100m\n" +
-                    "2. 200m\n" +
-                    "3. 500m");
+            printLn("""
+                    Chose a distance:
+                    1. 100m
+                    2. 200m
+                    3. 500m""");
 
             switch (readInt()) {
                 case 1 -> {return 100;}
@@ -164,10 +162,11 @@ public class UI {
 
     public int setRank() {
         while (true) {
-            printLn("Chose a Rank:\n" +
-                    "1. Top 3\n" +
-                    "2. Top 5\n" +
-                    "3. Top 10");
+            printLn("""
+                    Chose a Rank:
+                    1. Top 3
+                    2. Top 5
+                    3. Top 10""");
 
             switch (readInt()) {
                 case 1 -> {return 3;}
@@ -180,9 +179,10 @@ public class UI {
 
     public boolean setCompetitiveness() {
         while(true) {
-            printLn("Choose either:\n" +
-                    "1. Training-session\n" +
-                    "2. Competition");
+            printLn("""
+                    Choose either:
+                    1. Training-session
+                    2. Competition""");
 
             switch (readInt()) {
                 case 1 -> {return false;}
@@ -194,13 +194,14 @@ public class UI {
 
     public int chooseTimeFrame() {
         while(true) {
-            printLn("Choose results from\n" +
-                    "1. Last Three Months\n" +
-                    "2. Last Six Months\n" +
-                    "3. This Year\n" +
-                    "4. From Specific Year Til Now\n" +
-                    "5. Check Specific Year\n" +
-                    "6. Check Specific Day");
+            printLn("""
+                    Choose results from
+                    1. Last Three Months
+                    2. Last Six Months
+                    3. This Year
+                    4. From Specific Year Til Now
+                    5. Check Specific Year
+                    6. Check Specific Day""");
 
             switch (readInt()) {
                 case 1 -> {return 1;}

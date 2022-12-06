@@ -1,7 +1,6 @@
 package actors;
 
 import utility.UI;
-
 import java.util.ArrayList;
 
 
@@ -12,11 +11,12 @@ import java.util.ArrayList;
 public class SwimmingDiscipline {
 
     public enum SwimmingDisciplineTypes {
-        CRAWL,
-        BREASTSTROKE,
-        FREESTYLE,
         BACKCRAWL,
-        BUTTERFLY
+        BREASTSTROKE,
+        BUTTERFLY,
+        CRAWL,
+        FREESTYLE
+
     }
 
     // Attributes --------------------------------

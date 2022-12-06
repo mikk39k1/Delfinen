@@ -18,6 +18,7 @@ public class SuperSorterThreeThousand {
     private final SortByMemberID sortByMemberID = new SortByMemberID();
     private final SortByMemberName sortByMemberName = new SortByMemberName();
     private final SortByMemberPhoneNumber sortByMemberPhoneNumber = new SortByMemberPhoneNumber();
+    private final SortByTime sortByTime = new SortByTime();    // We will always sort by Time before presenting results
 
     protected List<Member> setSortByMemberAge(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberAge);
@@ -41,7 +42,6 @@ public class SuperSorterThreeThousand {
 
 
     // Result SORT SECTION ----------------------------------------------------------
-    private final SortByTime sortByTime = new SortByTime();           // We always sort by Time before presenting
     /*
      * This method gathers all results from all swimmers from AssociationList, then returns them as an ArrayList
      */

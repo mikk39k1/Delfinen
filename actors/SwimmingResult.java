@@ -35,6 +35,7 @@ public class SwimmingResult {
             ui.print("Please enter rank placement: ");
             this.rank = ui.readInt();
         }
+        ui.printLn("The swim result was added!");
     }
 
     // Constructor for fileWriter -----------------------

@@ -23,8 +23,6 @@ public class MenuRun {
         this.leadText = leadtext;
     }
 
-    // MenuRun Behaviors (Methods) ----------------------------
-
 
     /*
      * This method is looping each option a user can interact with within the menu
@@ -90,11 +88,11 @@ public class MenuRun {
      * This method finds and deletes a member from the Database memberList
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void deleteMember(Employee employee, Database memberList) {
+    private void deleteMember(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).deleteMember(ui, memberList);
-            fileHandler.writeToFullMembersList(memberList.getMemberList());
+            ((Chairman) employee).deleteMember(ui, database);
+            fileHandler.writeToFullMembersList(database.getMemberList());
             fileHandler.loggingAction("Member deleted.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -145,19 +143,19 @@ public class MenuRun {
      * This method allows for changes within member status, regarding paid status through the Treasurer class
      * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
      */
-    private void changePayDue(Employee employee, Database swimmerCoachDatabase) {
+    private void changePayDue(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.setMemberArrears(swimmerCoachDatabase, ui); // Runs temporary user intended method
-                fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+                adminOverride.setMemberArrears(database, ui); // Runs temporary user intended method
+                fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
                 fileHandler.loggingAction("A members payment status was changed.");
             } else {
-                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
+                ((Treasurer) employee).checkMemberArrears(database);    // Runs method as Treasurer
             } // End of inner if / else statement
-            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+            fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
             fileHandler.loggingAction("A members payment status was changed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -170,11 +168,11 @@ public class MenuRun {
      * This method adds swimming result to a member through the Coach class
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void addSwimResult(Employee employee, Database swimmerCoachDatabase) {
+    private void addSwimResult(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            innerMenuAddSwimResults(employee, swimmerCoachDatabase);
+            innerMenuAddSwimResults(employee, database);
 
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -286,18 +284,18 @@ public class MenuRun {
     } // End of method
 
 
-    private void printEco(Employee employee, Database swimmerCoachDatabase) {
+    private void printEco(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.printEconomyInfo(swimmerCoachDatabase); // Runs temporary user intended method
+                adminOverride.printEconomyInfo(database); // Runs temporary user intended method
                 fileHandler.loggingAction("Economy details viewed.");
             } else {
-                ((Treasurer) employee).printEconomyInfo(swimmerCoachDatabase);
+                ((Treasurer) employee).printEconomyInfo(database);
             } // End of inner if / else statement
-            fileHandler.writeToFullMembersList(swimmerCoachDatabase.getMemberList()); // Writes changes to file
+            fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
             fileHandler.loggingAction("Economy details viewed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
@@ -489,37 +487,46 @@ public class MenuRun {
             switch (readInput) {
                 case 1, 2, 3 -> {
                     if (employee instanceof Chairman) {
-                        ui.print("As chairman, please enter the coach name, you wish to see respective members of");
-                        Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
-                        sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                        CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(ui,database);
-                        swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
-                        ui.printLn("");
-                        SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
-                        adminOverride.addSwimResult(ui, swimmer, disciplineType,database ); // Runs temporary user method
-                        fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
-                                disciplineType);
-                        fileHandler.loggingAction("A swim result was added.");
+                        try {
+                            ui.print("As chairman, please enter the coach name, you wish to see respective members of");
+                            Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
+                            sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(ui,database);
+                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                            ui.printLn(" | ");
+                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
+                            adminOverride.addSwimResult(ui, swimmer, disciplineType ); // Runs temporary user method
+                            fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                                    disciplineType);
+                            fileHandler.loggingAction("A swim result was added.");
+                        } catch (NullPointerException e) {
+                            ui.printLn("Swimmer does not exist");
+                        }
+
                     } else {
-                        sorter.setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
-                        CompetitiveSwimmer swimmer = ((Coach)employee).loadSwimmer(ui,database);
-                        swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
-                        ui.printLn("");
-                        SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
-                        ((Coach) employee).addSwimResult(ui, swimmer ,disciplineType,database); // Runs method as Coach
-                        fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
-                                disciplineType);
-                        fileHandler.loggingAction("A swim result was added.");
+                        try {
+                            sorter.setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = ((Coach) employee).loadSwimmer(ui, database);
+                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                            ui.printLn(" | ");
+                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
+                            ((Coach) employee).addSwimResult(ui, swimmer, disciplineType); // Runs method as Coach
+                            fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                                    disciplineType);
+                            fileHandler.loggingAction("A swim result was added.");
+                        } catch (NullPointerException e) {
+                            ui.printLn("Swimmer does not exist");
+
+                        } // End of try / catch statement
                     } // End of inner if / else statement
+
                     chooseTeam = false;
                 }
                 case 0 -> {
                     ui.printLn("Returning to Head Menu");
                     chooseTeam = false;
                 }
-                default -> {
-                    ui.printLn("Not a valid option");
-                }
+                default -> ui.printLn("Not a valid option");
             } // End of switch statement
         } // End of while loop
     } // End of method

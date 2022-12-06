@@ -415,7 +415,7 @@ public class FileHandler {
             }
             printToFile.close();
         } catch (FileNotFoundException e){
-            System.out.println(e);
+            System.out.println("File does not exist");
         }
     }
 
@@ -425,7 +425,7 @@ public class FileHandler {
             printToFile.print(LocalDateTime.now().format(DateTimeFormatter.ofPattern("u:MM:dd:HH:mm:ss")));
             printToFile.println(" " + action);
         } catch (FileNotFoundException e) {
-            System.out.println(e);
+            System.out.println("File does not Exist");
         }
     }
 
