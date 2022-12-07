@@ -209,13 +209,13 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Coach adminOverride = new Coach();              // Creates a temporary user for admin
-                sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
-                //sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
+                //sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
+                sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
                 //adminOverride.checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } else {
-                sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
-                //sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
+                //sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
+                sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
                 //((Coach) employee).checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
                 fileHandler.loggingAction("Top 5 athletes was printed.");
             } // End of inner if / else statement

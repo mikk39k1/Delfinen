@@ -622,3 +622,102 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:06:14:06:15 Program started.
 2022:12:06:14:06:23 Administrator logged in.
 2022:12:06:14:06:27 Top 5 athletes was printed.
+2022:12:06:14:07:14 Program started.
+2022:12:06:14:07:19 Administrator logged in.
+2022:12:06:14:07:22 Top 5 athletes was printed.
+2022:12:06:22:36:33 Program started.
+2022:12:06:22:36:42 Administrator logged in.
+2022:12:06:22:36:47 Top 5 athletes was printed.
+2022:12:06:22:48:58 Program started.
+2022:12:06:22:49:06 Administrator logged in.
+2022:12:06:22:49:12 Top 5 athletes was printed.
+2022:12:06:23:29:10 Program started.
+2022:12:06:23:29:16 Administrator logged in.
+2022:12:06:23:30:08 A swim result was added.
+2022:12:06:23:30:20 Top 5 athletes was printed.
+2022:12:06:23:54:06 Program started.
+2022:12:06:23:54:13 Administrator logged in.
+2022:12:06:23:54:39 Bo is now swimming with DELFINEN.
+2022:12:06:23:55:24 A swim result was added.
+2022:12:06:23:56:00 Results on a certain date for a swimmer was viewed.
+2022:12:06:23:56:00 A competitive swimmers results printed.
+2022:12:06:23:58:18 Program started.
+2022:12:06:23:58:26 Administrator logged in.
+2022:12:06:23:58:36 Top 5 athletes was printed.
+2022:12:07:00:06:13 Program started.
+2022:12:07:00:06:17 Program started.
+2022:12:07:00:06:25 Administrator logged in.
+2022:12:07:00:07:05 Hans is now swimming with DELFINEN.
+2022:12:07:00:07:48 A swim result was added.
+2022:12:07:00:08:11 Top 5 athletes was printed.
+2022:12:07:00:08:58 A swim result was added.
+2022:12:07:00:09:04 Top 5 athletes was printed.
+2022:12:07:00:10:34 A swim result was added.
+2022:12:07:00:10:42 Top 5 athletes was printed.
+2022:12:07:07:08:38 Program started.
+2022:12:07:07:08:47 Administrator logged in.
+2022:12:07:07:09:28 Maria is now swimming with DELFINEN.
+2022:12:07:07:10:28 A swim result was added.
+2022:12:07:07:10:36 Top 5 athletes was printed.
+2022:12:07:07:12:46 Program started.
+2022:12:07:07:13:16 Administrator logged in.
+2022:12:07:07:13:28 All members was viewed, sorted by ID.
+2022:12:07:08:01:44 Program started.
+2022:12:07:08:01:57 Administrator logged in.
+2022:12:07:08:02:21 Member deleted.
+2022:12:07:08:02:28 Member deleted.
+2022:12:07:08:02:37 All members was viewed, sorted by ID.
+2022:12:07:08:04:12 Program started.
+2022:12:07:08:06:33 Program started.
+2022:12:07:08:06:40 Administrator logged in.
+2022:12:07:08:07:14 Ariana Grande is now swimming with DELFINEN.
+2022:12:07:08:08:14 A swim result was added.
+2022:12:07:08:08:24 Top 5 athletes was printed.
+2022:12:07:08:09:15 All members was viewed, sorted by ID.
+2022:12:07:08:10:11 Program started.
+2022:12:07:08:10:20 Administrator logged in.
+2022:12:07:08:10:54 Program started.
+2022:12:07:08:10:59 Administrator logged in.
+2022:12:07:08:11:22 All results of a certain swimmer was viewed.
+2022:12:07:08:11:22 A competitive swimmers results printed.
+2022:12:07:08:12:00 Top 5 athletes was printed.
+2022:12:07:08:12:33 Henriette is now swimming with DELFINEN.
+2022:12:07:08:13:02 A swim result was added.
+2022:12:07:08:13:10 Top 5 athletes was printed.
+2022:12:07:08:17:46 Program started.
+2022:12:07:08:17:51 Administrator logged in.
+2022:12:07:08:18:22 A swim result was added.
+2022:12:07:08:18:30 Top 5 athletes was printed.
+2022:12:07:08:27:10 Program started.
+2022:12:07:08:27:19 Administrator logged in.
+2022:12:07:08:28:23 Allan is now swimming with DELFINEN.
+2022:12:07:08:29:00 A swim result was added.
+2022:12:07:08:29:07 Top 5 athletes was printed.
+2022:12:07:08:44:33 Program started.
+2022:12:07:08:44:39 Administrator logged in.
+2022:12:07:08:45:15 A swim result was added.
+2022:12:07:08:45:40 All results of a certain swimmer was viewed.
+2022:12:07:08:45:40 A competitive swimmers results printed.
+2022:12:07:08:46:15 Top 5 athletes was printed.
+2022:12:07:08:49:47 Program started.
+2022:12:07:08:50:06 Administrator logged in.
+2022:12:07:08:50:50 A swim result was added.
+2022:12:07:08:50:55 Top 5 athletes was printed.
+2022:12:07:08:53:30 Program started.
+2022:12:07:08:53:39 Administrator logged in.
+2022:12:07:08:53:49 Top 5 athletes was printed.
+2022:12:07:08:54:08 All members was viewed, sorted by ID.
+2022:12:07:08:54:51 A swim result was added.
+2022:12:07:08:54:56 Top 5 athletes was printed.
+2022:12:07:09:35:49 Program started.
+2022:12:07:09:35:56 Administrator logged in.
+2022:12:07:09:36:02 Top 5 athletes was printed.
+2022:12:07:09:39:25 Program started.
+2022:12:07:09:39:41 Administrator logged in.
+2022:12:07:09:40:28 Ruth is now swimming with DELFINEN.
+2022:12:07:09:41:04 Ruddi is now swimming with DELFINEN.
+2022:12:07:09:41:48 A swim result was added.
+2022:12:07:09:41:54 Top 5 athletes was printed.
+2022:12:07:09:42:47 Oskar is now swimming with DELFINEN.
+2022:12:07:09:43:21 A swim result was added.
+2022:12:07:09:43:26 Top 5 athletes was printed.
