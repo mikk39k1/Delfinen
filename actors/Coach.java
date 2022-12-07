@@ -1,7 +1,6 @@
 package actors;
 
 import database.Database;
-import utility.SuperSorterThreeThousand;
 import utility.UI;
 
 import java.util.HashMap;
@@ -94,30 +93,6 @@ public class Coach extends Employee {
 		} else {
 			ui.printLn("Swimmer is not active within that discipline");
 		}
-
-
-		/*
-		try {
-			swimmer.getSwimmingDisciplineList().stream().filter(
-					swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)).forEach(
-							swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui))
-			);
-			/*
-			swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> {
-				if (swimmingDiscipline.getSwimmingDisciplineType() == disciplineType) {
-					swimmingDiscipline.getSwimmingDisciplineResults().add(new SwimmingResult(ui));
-
-				} // End of if
-			}); // End of array build in forEach method
-
-
-		} catch (EnumConstantNotPresentException e) {
-			ui.printLn("Swimmer is not active in this kind of discipline ");
-		}
-
-		 */
-
-
 	} // End of method
 
 
@@ -137,14 +112,6 @@ public class Coach extends Employee {
 			} // End of inner for loop
 		} // End of outer for loop
 	} // End of method
-
-
-	public void checkTopFiveCompetitionSwimResults(HashMap<Member, Coach> memberCoachHashMap, SwimmingDiscipline.SwimmingDisciplineTypes swimType, UI ui) {
-		SuperSorterThreeThousand sorterThreeThousand = new SuperSorterThreeThousand();
-		sorterThreeThousand.setSortByDistance(ui,sorterThreeThousand.getAllSwimmingResults(memberCoachHashMap,swimType));
-	}
-
-
 
 	/*
 	* This method verifies name of a competitive swimmer, by checking if it exists within the Database memberList

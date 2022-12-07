@@ -20,14 +20,21 @@ public abstract class Member extends Person {
 	public int getUniqueID() {
 		return this.uniqueID;
 	}
+
 	public LocalDate getDateOfBirth() {
 		return this.dateOfBirth;
 	}
+
 	public boolean isIsMembershipActive() {
 		return this.isMembershipActive;
 	}
+
 	public boolean isHasPaid() {
 		return hasPaid;
+	}
+
+	public int getAge() {
+		return Period.between(dateOfBirth, LocalDate.now()).getYears();
 	}
 
 	// Setters -----------------------------------------------
@@ -47,36 +54,9 @@ public abstract class Member extends Person {
 		Member.ID = ID;
 	}
 	public void toggleHasPaid(){
-		if (this.hasPaid) {this.hasPaid=false;}
-		else this.hasPaid=true;
+		this.hasPaid= !this.hasPaid;
 	}
 	public void setUniqueID(int uniqueID) {
 		this.uniqueID = uniqueID;
 	}
-
-	// Member Behavior (Method) ------------------------------
-
-	/*
-	* This method extracts the exact age based on the date of birth
-	 */
-
-	/*
-	public int getAge() {
-		String s = dateOfBirth;  // Stores the birthOfYear attribute temporary as a String
-		String[] arrOfStr = s.split("-");		// Splits and adds components to a temporary String array
-		int year = Integer.parseInt(arrOfStr[0]); 	// Stores first value in array as year
-		int month = Integer.parseInt(arrOfStr[1]);	// Stores second value in array as month
-		int day = Integer.parseInt(arrOfStr[2]);		// Stores third value in array as day
-		LocalDate dob = LocalDate.of(year,month,day); 	// Stores the format based on temporary attributes as a Local Date
-		LocalDate now = LocalDate.now();				// Stores the Date today
-		return Period.between(dob, now).getYears();		// Calculates the year difference based on inputs
-	} // End of method
-
-	 */
-
-	public int getAge() {
-		return Period.between(dateOfBirth, LocalDate.now()).getYears();
-	}
-
-
 }

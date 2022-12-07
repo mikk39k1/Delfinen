@@ -16,7 +16,6 @@ public class SwimmingDiscipline {
         BUTTERFLY,
         CRAWL,
         FREESTYLE
-
     }
 
     // Attributes --------------------------------

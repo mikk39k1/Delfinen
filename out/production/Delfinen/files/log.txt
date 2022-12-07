@@ -721,3 +721,6 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:07:09:42:47 Oskar is now swimming with DELFINEN.
 2022:12:07:09:43:21 A swim result was added.
 2022:12:07:09:43:26 Top 5 athletes was printed.
+2022:12:07:09:47:54 Program started.
+2022:12:07:09:48:03 Administrator logged in.
+2022:12:07:09:48:09 Top 5 athletes was printed.

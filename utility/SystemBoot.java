@@ -12,11 +12,8 @@ import java.util.ArrayList;
 public class SystemBoot {
 
     // Utility / Controller ------------------
-    private final UI ui = new UI();
-    private final FileHandler fileHandler = new FileHandler();
     private Employee currentUser;
     private final ArrayList<Employee> enigmaUsers = new ArrayList<>();
-    private final Database database = new Database();
 
     /*
      * Main method booting it all up
@@ -36,17 +33,16 @@ public class SystemBoot {
      * - 7 Starts the menu selection
      */
     private void startSystem() {
-        database.setMemberList(fileHandler.loadMemberList(database.getMemberList()));// 1
-        database.setCoachList(fileHandler.loadCoachList(database.getCoachList()));// 2
-        Member.setID(fileHandler.loadID());// 3
-        database.setSwimmersCoachAssociationList(fileHandler.loadSwimmerCoachAssociationList(database));
-        fileHandler.loadResultMethod(database.getSwimmersCoachAssociationList());
+        Database.getSingletonDatabase().setMemberList(FileHandler.getInstance().loadMemberList(Database.getSingletonDatabase().getMemberList()));// 1
+        Database.getSingletonDatabase().setCoachList(FileHandler.getInstance().loadCoachList(Database.getSingletonDatabase().getCoachList()));// 2
+        Member.setID(FileHandler.getInstance().loadID());// 3
+        Database.getSingletonDatabase().setSwimmersCoachAssociationList(FileHandler.getInstance().loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));
+        FileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase().getSwimmersCoachAssociationList());
 
-        System.out.println("\n");
-        fileHandler.loggingAction("Program started.");
-        fileHandler.printWelcomeSharks();   // 5
+        FileHandler.getInstance().loggingAction("Program started.");
+        FileHandler.getInstance().printWelcomeSharks();   // 5
         loadStaff();
-        //loading();
+        loading();
         loginSystem();                      // 6
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
@@ -64,7 +60,7 @@ public class SystemBoot {
                 "12. Check this years Club-Economy",
                 "0. Log out."
         });      // 6
-        startSystem.menuLooping(currentUser, database);
+        startSystem.menuLooping(currentUser, Database.getSingletonDatabase());
     } // End of method
 
 
@@ -77,13 +73,13 @@ public class SystemBoot {
                 employee -> {
                     if (employee.getUsername().equals(username)) {
                         currentUser = employee;
-                        fileHandler.loggingAction(currentUser.getName() + " logged in.");
+                        FileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                     } else {
                         database.getCoachList().forEach(
                                 coach -> {
                                     if (coach.getUsername().equals(username)) {
                                         currentUser = coach;
-                                        fileHandler.loggingAction(currentUser.getName() + " logged in.");
+                                        FileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                                     } // End of inner if statement
                                 } // End of lambda predicate expression
                         ); // End of inner forEach ArrayList build-in method
@@ -102,7 +98,7 @@ public class SystemBoot {
         do {
             user = isLoggedIn();                // Temporary stores a username if prompted existing username
             if (!user.equals("0")) {
-                setRoleAndPrivilege(user,database);      // Sets authorization level of role / privileges
+                setRoleAndPrivilege(user,Database.getSingletonDatabase());      // Sets authorization level of role / privileges
             } // End of if statement
         } while (user.equals("0")); // End of do-while loop
     } // end of method
@@ -115,7 +111,7 @@ public class SystemBoot {
       This method checks through file and username / password method if inputs are authentic, to allow login
      */
     private String isLoggedIn() {
-        String username = fileHandler.checkUsername(getUsername());
+        String username = FileHandler.getInstance().checkUsername(getUsername());
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
 
@@ -137,7 +133,7 @@ public class SystemBoot {
      */
     private String getUsername() {
         System.out.print("Please enter your username: ");
-        return ui.readLine();
+        return UI.getInstance().readLine();
     } // End of method
 
 
@@ -146,14 +142,14 @@ public class SystemBoot {
      */
     private String getPassword() {
         System.out.print("Please enter your password: ");
-        return ui.readLine();
+        return UI.getInstance().readLine();
     } // End of method
 
     /*
     * This method checks if password is correct, and returns a boolean based on success / failure
      */
     private boolean isPasswordCorrect(String password) {
-        return !fileHandler.checkPassword(password).equals("0");
+        return !FileHandler.getInstance().checkPassword(password).equals("0");
 
     } // End of method
 

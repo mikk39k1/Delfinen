@@ -9,9 +9,6 @@ import database.Database;
  *  no user is acting with malice or doing thinks not in his/hers jurisdiction.
  */
 public class MenuRun {
-    private final UI ui = new UI();
-    private final FileHandler fileHandler = new FileHandler();
-    private final SuperSorterThreeThousand sorter = new SuperSorterThreeThousand();
     private final String[] menuOptions;
     private final String menuHeader;
     private final String leadText;
@@ -30,9 +27,9 @@ public class MenuRun {
     protected void menuLooping(Employee employee, Database database) {
         boolean isSignedIn = true;
         while (isSignedIn) {
-            ui.printLn("");
+            UI.getInstance().printLn("");
             printMenu();
-            switch (ui.readInt()) {
+            switch (UI.getInstance().readInt()) {
                 case 1 -> addMember(employee, database); /*add new member to all members lists */
                 case 2 -> deleteMember(employee, database); /*deletes member from members lists*/
                 case 3 -> printAllMembers(employee, database);/*print all members */
@@ -42,11 +39,11 @@ public class MenuRun {
                 case 7 -> printCompetitiveSwimmersResult(employee, database); /*Prints 1 swimmers results*/
                 case 8 -> printTopFiveByDiscipline(employee, database);/*Prints top 5 in 1 discipline*/
                 case 9 -> printSwimmersByCoach(employee, database);/*Prints all members for specific coach*/
-                case 10 -> createCoach(employee, database, ui);/*Create a coach and add them to coachlist.*/
-                case 11 -> deleteCoach(employee, database, ui);//Delete Coach
+                case 10 -> createCoach(employee, database, UI.getInstance());/*Create a coach and add them to coachlist.*/
+                case 11 -> deleteCoach(employee, database, UI.getInstance());//Delete Coach
                 case 12 -> printEco(employee, database);
                 case 0 -> isSignedIn = logOut(); /*Logs you out of the system */
-                default -> ui.printLn("Incorrect choice. Chose another option.\n");
+                default -> UI.getInstance().printLn("Incorrect choice. Chose another option.\n");
             } // End of switch statement
         } // End of while loop
     } // End of method
@@ -56,10 +53,10 @@ public class MenuRun {
      * Prints all the attributes of the menu
      */
     private void printMenu() {
-        ui.printLn(menuHeader);
-        ui.printLn(leadText);
+        UI.getInstance().printLn(menuHeader);
+        UI.getInstance().printLn(leadText);
         for (String menuOption : menuOptions) {
-            ui.printLn(menuOption);
+            UI.getInstance().printLn(menuOption);
         } // End of for loop
     } // End of method
 
@@ -71,15 +68,15 @@ public class MenuRun {
     private void addMember(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).addMember(ui, ((Chairman) employee).createMember(ui),
+            ((Chairman) employee).addMember(UI.getInstance(), ((Chairman) employee).createMember(UI.getInstance()),
                     database);
-            fileHandler.writeToFullMembersList(database.getMemberList());
-            fileHandler.writeToSwimmerCoachAssociationFile(database);
-            fileHandler.loggingAction(database.getMemberList().get(database.
+            FileHandler.getInstance().writeToFullMembersList(database.getMemberList());
+            FileHandler.getInstance().writeToSwimmerCoachAssociationFile(database);
+            FileHandler.getInstance().loggingAction(database.getMemberList().get(database.
                     getMemberList().size() - 1).getName() + " is now swimming with DELFINEN.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Create a new member\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Create a new member\".");
         } // End of if / else statement
     } // End of method
 
@@ -91,12 +88,12 @@ public class MenuRun {
     private void deleteMember(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).deleteMember(ui, database);
-            fileHandler.writeToFullMembersList(database.getMemberList());
-            fileHandler.loggingAction("Member deleted.");
+            ((Chairman) employee).deleteMember(UI.getInstance(), database);
+            FileHandler.getInstance().writeToFullMembersList(database.getMemberList());
+            FileHandler.getInstance().loggingAction("Member deleted.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Delete a member\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Delete a member\".");
         } // End of if / else statement
     } // End of method
 
@@ -110,8 +107,8 @@ public class MenuRun {
 
             innerMenuPrintAllMembers(employee, database);
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
         } // End of if / else statement
     } // End of method
 
@@ -127,14 +124,14 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                      // Creates temporary user for admin
                 adminOverride.checkMemberArrears(swimmerCoachDatabase);         // Runs temporary user intended method
-                fileHandler.loggingAction("Members in arrear viewed.");
+                FileHandler.getInstance().loggingAction("Members in arrear viewed.");
             } else {
                 ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
-                fileHandler.loggingAction("Members in arrear viewed.");
+                FileHandler.getInstance().loggingAction("Members in arrear viewed.");
             } // End of inner if / else statement
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print members in arrear\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print members in arrear\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -149,17 +146,17 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.setMemberArrears(database, ui); // Runs temporary user intended method
-                fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
-                fileHandler.loggingAction("A members payment status was changed.");
+                adminOverride.setMemberArrears(database, UI.getInstance()); // Runs temporary user intended method
+                FileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+                FileHandler.getInstance().loggingAction("A members payment status was changed.");
             } else {
                 ((Treasurer) employee).checkMemberArrears(database);    // Runs method as Treasurer
             } // End of inner if / else statement
-            fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
-            fileHandler.loggingAction("A members payment status was changed.");
+            FileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+            FileHandler.getInstance().loggingAction("A members payment status was changed.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Change a members payment status\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Change a members payment status\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -175,8 +172,8 @@ public class MenuRun {
             innerMenuAddSwimResults(employee, database);
 
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Add a swimresult\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Add a swimresult\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -190,10 +187,10 @@ public class MenuRun {
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             innerMenuSwimmerResults(employee, database);
-            fileHandler.loggingAction("A competitive swimmers results printed.");
+            FileHandler.getInstance().loggingAction("A competitive swimmers results printed.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print swimming results\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print swimming results\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -207,11 +204,11 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            sorter.topFiveMemberResults(ui, database.getSwimmersCoachAssociationList());
-            fileHandler.loggingAction("Top 5 athletes was printed.");
+            SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
+            FileHandler.getInstance().loggingAction("Top 5 athletes was printed.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print top 5 athletes\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print top 5 athletes\".");
         } // End of outer if / else statement
     } //End of method
 
@@ -226,16 +223,16 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 // This method makes admin take role of an existing coach, to print his members out
-                Coach adminOverride = ((Chairman) employee).chooseCoach(ui, swimmerCoachDatabase, false);
+                Coach adminOverride = ((Chairman) employee).chooseCoach(UI.getInstance(), swimmerCoachDatabase, false);
                 adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride); // Runs method as temporary user
-                fileHandler.loggingAction("Swimmers with coach association viewed.");
+                FileHandler.getInstance().loggingAction("Swimmers with coach association viewed.");
             } else {
                 ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
-                fileHandler.loggingAction("Swimmers with coach association viewed.");
+                FileHandler.getInstance().loggingAction("Swimmers with coach association viewed.");
             } // End of inner if / else statement
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print swimmer associated with coach\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print swimmer associated with coach\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -246,16 +243,16 @@ public class MenuRun {
     private void createCoach(Employee employee, Database database, UI ui) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).createCoach(database, ui, fileHandler);
-            fileHandler.writeToCoachList(database.getCoachList());
-            fileHandler.writeCoachUserAndPassToList(
+            ((Chairman) employee).createCoach(database, ui, FileHandler.getInstance());
+            FileHandler.getInstance().writeToCoachList(database.getCoachList());
+            FileHandler.getInstance().writeCoachUserAndPassToList(
                     database.getCoachList().get(database.getCoachList().size()-1).getUsername(),
                     database.getCoachList().get(database.getCoachList().size()-1).getPassword());
 
-            fileHandler.loggingAction("A new coach added.");
+            FileHandler.getInstance().loggingAction("A new coach added.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Create coach\".");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Create coach\".");
         } // End of if / else statement
     } // End of method
 
@@ -267,13 +264,13 @@ public class MenuRun {
             String coachUsername = ui.readLine();
 
             ((Chairman) employee).deleteCoach(findCoach, database, ui);
-            fileHandler.deleteCoachLoginFromFile(coachUsername);
-            fileHandler.writeToCoachList(database.getCoachList());
-            fileHandler.writeToSwimmerCoachAssociationFile(database);
-            fileHandler.loggingAction(findCoach + " is no longer a DELFINEN coach.");
+            FileHandler.getInstance().deleteCoachLoginFromFile(coachUsername);
+            FileHandler.getInstance().writeToCoachList(database.getCoachList());
+            FileHandler.getInstance().writeToSwimmerCoachAssociationFile(database);
+            FileHandler.getInstance().loggingAction(findCoach + " is no longer a DELFINEN coach.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Delete coach\".");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Delete coach\".");
         } // End of if / else statement
     } // End of method
 
@@ -285,15 +282,15 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
                 adminOverride.printEconomyInfo(database); // Runs temporary user intended method
-                fileHandler.loggingAction("Economy details viewed.");
+                FileHandler.getInstance().loggingAction("Economy details viewed.");
             } else {
                 ((Treasurer) employee).printEconomyInfo(database);
             } // End of inner if / else statement
-            fileHandler.writeToFullMembersList(database.getMemberList()); // Writes changes to file
-            fileHandler.loggingAction("Economy details viewed.");
+            FileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+            FileHandler.getInstance().loggingAction("Economy details viewed.");
         } else {
-            ui.printLn("You don't have the privilege to use this function");
-            fileHandler.loggingAction("Unauthorised user tried to access \"Print economy\".");
+            UI.getInstance().printLn("You don't have the privilege to use this function");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print economy\".");
         } // End of outer if / else statement
     } // End of method
 
@@ -310,87 +307,87 @@ public class MenuRun {
 
         while (chooseSortMethod) {
             innerMenu.printMenu();
-            switch (ui.readInt()) {
+            switch (UI.getInstance().readInt()) {
                 case 1 -> {
                     //Method reads input from user: swimDiscipline and period of time to get results
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         adminOverride.checkCompetitorSwimResults(
-                                adminOverride.lookupSwimmer(ui, database)); //Runs temporary user method
+                                adminOverride.lookupSwimmer(UI.getInstance(), database)); //Runs temporary user method
                     } else {
                         ((Coach) employee).checkCompetitorSwimResults(
-                                ((Coach) employee).lookupSwimmer(ui, database)); // runs method as Coach
+                                ((Coach) employee).lookupSwimmer(UI.getInstance(), database)); // runs method as Coach
                     } // End of inner if / else statement
                     chooseSortMethod = false;
-                    fileHandler.loggingAction("All results of a certain swimmer was viewed.");
+                    FileHandler.getInstance().loggingAction("All results of a certain swimmer was viewed.");
                 } // End of case 1
                 case 2 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        System.out.println(sorter.setSortByDate(ui, sorter.
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByDate(UI.getInstance(), SuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(ui, database),
+                                                lookupSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } else {
-                        System.out.println(sorter.setSortByDate(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByDate(UI.getInstance(), SuperSorterThreeThousand.getInstance().
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
-                    fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
+                    FileHandler.getInstance().loggingAction("Results on a certain date for a swimmer was viewed.");
                 } // End of case 2
                 case 3 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        System.out.println(sorter.setSortByDistance(ui, sorter.
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByDistance(UI.getInstance(), SuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(ui, database),
+                                                lookupSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } else {
-                        System.out.println(sorter.setSortByDistance(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByDistance(UI.getInstance(), SuperSorterThreeThousand.getInstance().
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
-                    fileHandler.loggingAction("Results on a certain distance for a swimmer was viewed.");
+                    FileHandler.getInstance().loggingAction("Results on a certain distance for a swimmer was viewed.");
                 } // End of case 3
                 case 4 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        System.out.println(sorter.setSortByIsCompetitive(ui, sorter.
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByIsCompetitive(UI.getInstance(), SuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(ui, database),
+                                                lookupSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } else {
-                        System.out.println(sorter.setSortByIsCompetitive(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByIsCompetitive(UI.getInstance(), SuperSorterThreeThousand.getInstance().
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
-                    fileHandler.loggingAction("Results on a certain date for a swimmer was viewed.");
+                    FileHandler.getInstance().loggingAction("Results on a certain date for a swimmer was viewed.");
                 } // End of case 4
                 case 5 -> {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
-                        System.out.println(sorter.setSortByRank(ui, sorter.
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByRank(UI.getInstance(), SuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(ui, database),
+                                                lookupSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } else {
-                        System.out.println(sorter.setSortByRank(ui, sorter.
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(ui, database),
+                        System.out.println(SuperSorterThreeThousand.getInstance().setSortByRank(UI.getInstance(), SuperSorterThreeThousand.getInstance().
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(UI.getInstance(), database),
                                         database.getSwimmersCoachAssociationList(),
-                                        ui.setSwimmingDisciplineType())));
+                                        UI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
-                    fileHandler.loggingAction("Results of either training or competitiveness, for a swimmer was viewed.");
+                    FileHandler.getInstance().loggingAction("Results of either training or competitiveness, for a swimmer was viewed.");
                 } // End of case 5
             } // End of switch case
         } // End of while loop
@@ -409,56 +406,56 @@ public class MenuRun {
 
         while (chooseSortMethod) {
             innerMenu.printMenu();
-            switch (ui.readInt()) {
+            switch (UI.getInstance().readInt()) {
                 case 1 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberName(database.getMemberList()));
-                        fileHandler.loggingAction("All members was viewed, sorted by Name.");
+                        ((Chairman) employee).printMembers(SuperSorterThreeThousand.getInstance().setSortByMemberName(database.getMemberList()));
+                        FileHandler.getInstance().loggingAction("All members was viewed, sorted by Name.");
                     } else {
-                        ui.printLn("You don't have the privilege to use this function");
-                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        UI.getInstance().printLn("You don't have the privilege to use this function");
+                        FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 1
                 case 2 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberAge(database.getMemberList()));
-                        fileHandler.loggingAction("All members was viewed, sorted by Age.");
+                        ((Chairman) employee).printMembers(SuperSorterThreeThousand.getInstance().setSortByMemberAge(database.getMemberList()));
+                        FileHandler.getInstance().loggingAction("All members was viewed, sorted by Age.");
                     } else {
-                        ui.printLn("You don't have the privilege to use this function");
-                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        UI.getInstance().printLn("You don't have the privilege to use this function");
+                        FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 2
                 case 3 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberID(database.getMemberList()));
-                        fileHandler.loggingAction("All members was viewed, sorted by ID.");
+                        ((Chairman) employee).printMembers(SuperSorterThreeThousand.getInstance().setSortByMemberID(database.getMemberList()));
+                        FileHandler.getInstance().loggingAction("All members was viewed, sorted by ID.");
                     } else {
-                        ui.printLn("You don't have the privilege to use this function");
-                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        UI.getInstance().printLn("You don't have the privilege to use this function");
+                        FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 3
                 case 4 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(sorter.setSortByMemberPhoneNumber(database.getMemberList()));
-                        fileHandler.loggingAction("All members was viewed, sorted by Phone number.");
+                        ((Chairman) employee).printMembers(SuperSorterThreeThousand.getInstance().setSortByMemberPhoneNumber(database.getMemberList()));
+                        FileHandler.getInstance().loggingAction("All members was viewed, sorted by Phone number.");
                     } else {
-                        ui.printLn("You don't have the privilege to use this function");
-                        fileHandler.loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        UI.getInstance().printLn("You don't have the privilege to use this function");
+                        FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 4
                 case 0 -> {
-                    ui.printLn("Returning to Head Menu");
+                    UI.getInstance().printLn("Returning to Head Menu");
                     chooseSortMethod = false;
                 } // End of case 0
-                default -> ui.printLn("Invalid input, please try again"); // ENd of default case
+                default -> UI.getInstance().printLn("Invalid input, please try again"); // ENd of default case
             } // End of switch case
         } // End of while loop
     } // End of method
@@ -477,39 +474,39 @@ public class MenuRun {
         boolean chooseTeam = true;
         while (chooseTeam) {
             innerMenu.printMenu();
-            int readInput = ui.readInt();
+            int readInput = UI.getInstance().readInt();
             switch (readInput) {
                 case 1, 2, 3 -> {
                     if (employee instanceof Chairman) {
                         try {
-                            ui.printLn("As chairman, please enter the coach name, you wish to see respective members of");
-                            Coach adminOverride = ((Chairman) employee).chooseCoach(ui, database, false); // Creates temporary user for admin
-                            sorter.setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(ui,database);
-                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
-                            ui.printLn(" | ");
-                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
-                            adminOverride.addSwimResult(ui, swimmer, disciplineType ); // Runs temporary user method
-                            fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                            UI.getInstance().printLn("As chairman, please enter the coach name, you wish to see respective members of");
+                            Coach adminOverride = ((Chairman) employee).chooseCoach(UI.getInstance(), database, false); // Creates temporary user for admin
+                            SuperSorterThreeThousand.getInstance().setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(UI.getInstance(),database);
+                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> UI.getInstance().print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                            UI.getInstance().printLn(" | ");
+                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = UI.getInstance().setSwimmingDisciplineType();
+                            adminOverride.addSwimResult(UI.getInstance(), swimmer, disciplineType ); // Runs temporary user method
+                            FileHandler.getInstance().appendResult(database.getSwimmersCoachAssociationList(), swimmer,
                                     disciplineType);
-                            fileHandler.loggingAction("A swim result was added.");
+                            FileHandler.getInstance().loggingAction("A swim result was added.");
                         } catch (NullPointerException e) {
-                            ui.printLn("Swimmer does not exist");
+                            UI.getInstance().printLn("Swimmer does not exist");
                         }
 
                     } else {
                         try {
-                            sorter.setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
-                            CompetitiveSwimmer swimmer = ((Coach) employee).loadSwimmer(ui, database);
-                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> ui.print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
-                            ui.printLn(" | ");
-                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = ui.setSwimmingDisciplineType();
-                            ((Coach) employee).addSwimResult(ui, swimmer, disciplineType); // Runs method as Coach
-                            fileHandler.appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                            SuperSorterThreeThousand.getInstance().setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = ((Coach) employee).loadSwimmer(UI.getInstance(), database);
+                            swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> UI.getInstance().print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
+                            UI.getInstance().printLn(" | ");
+                            SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = UI.getInstance().setSwimmingDisciplineType();
+                            ((Coach) employee).addSwimResult(UI.getInstance(), swimmer, disciplineType); // Runs method as Coach
+                            FileHandler.getInstance().appendResult(database.getSwimmersCoachAssociationList(), swimmer,
                                     disciplineType);
-                            fileHandler.loggingAction("A swim result was added.");
+                            FileHandler.getInstance().loggingAction("A swim result was added.");
                         } catch (NullPointerException e) {
-                            ui.printLn("Swimmer does not exist");
+                            UI.getInstance().printLn("Swimmer does not exist");
 
                         } // End of try / catch statement
                     } // End of inner if / else statement
@@ -517,10 +514,10 @@ public class MenuRun {
                     chooseTeam = false;
                 }
                 case 0 -> {
-                    ui.printLn("Returning to Head Menu");
+                    UI.getInstance().printLn("Returning to Head Menu");
                     chooseTeam = false;
                 }
-                default -> ui.printLn("Not a valid option");
+                default -> UI.getInstance().printLn("Not a valid option");
             } // End of switch statement
         } // End of while loop
     } // End of method
@@ -530,8 +527,8 @@ public class MenuRun {
      * This method will log out the user and terminate the program
      */
     private boolean logOut() {
-        ui.printLn("Until next time!");
-        fileHandler.loggingAction("Program terminated.");
+        UI.getInstance().printLn("Until next time!");
+        FileHandler.getInstance().loggingAction("Program terminated.");
         System.exit(0);
         return false;
     } // End of Method

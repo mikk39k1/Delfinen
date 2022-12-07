@@ -11,6 +11,20 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class SuperSorterThreeThousand {
+
+    private static SuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SuperSorterThreeThousand();
+
+
+    // Constructor -----------------------
+    private SuperSorterThreeThousand() {
+
+    }
+
+    // Getter ----------------------------
+    public static SuperSorterThreeThousand getInstance() {
+        return SingleTonSuperSorterThreeThousand;
+    }
+
     // Member SORT SECTION ----------------------------------------------------------
     private final SortByMemberAge sortByMemberAge = new SortByMemberAge();
     private final SortByMemberID sortByMemberID = new SortByMemberID();
@@ -187,7 +201,6 @@ public class SuperSorterThreeThousand {
         return swimmingResults;
     } // End of method
 
-
     protected void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberCoachHashMap) {
         HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberCoachHashMap);
         ArrayList<Member> members = new ArrayList<>();
@@ -216,108 +229,6 @@ public class SuperSorterThreeThousand {
                     member.getDateOfBirth(), member.getPhoneNumber(), member.isIsMembershipActive());
         } // End of for loop
     } // End of method
-
-    public void topFiveBestPerformance(SwimmingDiscipline.SwimmingDisciplineTypes swimDiscipline,
-                                       int readInputDistance, HashMap<Member, Coach> memberCoachHashMap) {
-        ArrayList<Member> temporarySwimmers = new ArrayList<>(memberCoachHashMap.keySet());
-
-        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
-                {
-                    if (((CompetitiveSwimmer) member).getSwimmingDisciplineList().contains(swimmingDiscipline)) {
-                    }
-                })
-        );
-
-
-        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
-                swimmingDiscipline.getSwimmingDisciplineResults().sort(sortByTime)));
-
-
-        temporarySwimmers.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
-                System.out.println(swimmingDiscipline.getSwimmingDisciplineResults())));
-
-    }
-    /*This method takes in hashmap that contain coach and competitive swimmer relation.
-    It collects the competitive members, and adds their name, uniqueID and their best swim result for the given
-    swim disciplin and distance.
-     */
-    public void topFiveSmadder(SwimmingDiscipline.SwimmingDisciplineTypes swimDiscipline,
-                               int readInputDistance, HashMap<Member, Coach> memberCoachHashMap) {
-        ArrayList<Member> swimmersLocalList = new ArrayList<>(memberCoachHashMap.keySet());//converting input hashmap to arraylist
-        ArrayList<SwimmingResult> list = new ArrayList<>();//this is for sorting
-        HashMap<String, SwimmingResult> membersResults = new HashMap<>(); //new hashmap for storing given swimmer with relevant results
-        LinkedHashMap<String, SwimmingResult> sortedMap = new LinkedHashMap<>();//this is for sorting
-        List<SwimmingResult> fixedList;//list that gets sorted may contain more than 5 swimmers this arraylist takes a sublist from list
-        ArrayList<SwimmingResult> swimmersResults = new ArrayList<>();//contains the swimresults equal to discipline and distance for each swimmer while looping
-
-        for (Member swimmer : swimmersLocalList) {
-            for (int i = 0; i < ((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().size(); i++) {
-                if (((CompetitiveSwimmer) swimmer).getSwimmingDisciplineList().get(i).
-                        getSwimmingDisciplineType().equals(swimDiscipline)) {
-                    swimmersResults.clear();
-                    for (int x = 0; x < ((CompetitiveSwimmer) swimmer).
-                            getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().size(); x++) {
-                        if (((CompetitiveSwimmer) swimmer).
-                                getSwimmingDisciplineList().get(i).
-                                getSwimmingDisciplineResults().get(x).getDistance() == readInputDistance) {
-                            swimmersResults.add(((CompetitiveSwimmer) swimmer).
-                                    getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults().get(x));
-                        }
-                    }
-                    if (!swimmersResults.isEmpty()) {
-                        swimmersResults.sort(sortByTime);
-                        membersResults.put(swimmer.getUniqueID() + " " + swimmer.getName(), swimmersResults.get(0));
-                    }
-                }
-            }
-        }
-        for (Map.Entry<String, SwimmingResult> entry : membersResults.entrySet()){
-            list.add(entry.getValue());
-        }
-        Collections.sort(list, sortByTime);
-        if(list.size() >= 5) {
-            fixedList = list.subList(0, 5);
-        }else {
-            fixedList = list.subList(0, list.size()-1);
-        }
-
-        for (SwimmingResult swimmingResult : fixedList) {
-            for(Map.Entry<String, SwimmingResult> entry : membersResults.entrySet()){
-                if (entry.getValue().equals(swimmingResult)){
-                    sortedMap.put(entry.getKey(), swimmingResult);
-                }
-            }
-        }
-
-        sortedMap.forEach((member, results) -> {
-            System.out.print(member + " ");
-            results.printResults();
-        });
-    }
-
-    public void topFiveSituation(UI ui, HashMap<Member, Coach> memberCoachHashMap) {
-        ArrayList<SwimmingResult> swimmingResultArrayList = new ArrayList<>();
-
-        int chooseDistance = ui.setDistance();
-        SwimmingDiscipline.SwimmingDisciplineTypes chooseDiscipline = ui.setSwimmingDisciplineType();
-
-        memberCoachHashMap.forEach((key, value) -> ((CompetitiveSwimmer) key).getSwimmingDisciplineList().removeIf(swimmingDiscipline ->
-                !swimmingDiscipline.getSwimmingDisciplineType().equals(chooseDiscipline)));
-
-        memberCoachHashMap.forEach((member, coach) -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(swimmingDiscipline ->
-                swimmingDiscipline.getSwimmingDisciplineResults().removeIf(swimmingResult -> swimmingResult.getDistance() != chooseDistance)));
-
-        ArrayList<Member> listOfSort = new ArrayList<>(memberCoachHashMap.keySet());
-        listOfSort.forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(
-                swimmingDiscipline -> {
-                    swimmingResultArrayList.addAll(swimmingDiscipline.getSwimmingDisciplineResults());
-                }
-        ));
-        swimmingResultArrayList.sort(sortByTime);
-        System.out.println(swimmingResultArrayList);
-    }
-
-
 
     public void topFiveMemberResults(UI ui, HashMap<Member, Coach> memberCoachHashMap) {
         HashMap<SwimmingResult, Member> allResults = new HashMap<>();

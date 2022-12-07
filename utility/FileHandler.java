@@ -20,6 +20,7 @@ import java.util.Scanner;
 * by securing no passwords, or usernames are available to be read directly from the code.
  */
 public class FileHandler {
+    private static final FileHandler SingleTonFileHandler = new FileHandler();
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
     private final File sharksPrint = new File("files/sharksPrint.txt");
@@ -32,6 +33,14 @@ public class FileHandler {
     private PrintStream printToFile;
     private Scanner readFromFile;
 
+    private FileHandler() {
+    }
+
+    // Getter ----------------------------------------------------------------------
+
+    public static FileHandler getInstance() {
+        return SingleTonFileHandler;
+    }
 
     /*
      * This method reads from file and is verifying username exist within secret file
@@ -433,6 +442,7 @@ public class FileHandler {
      * This method prints a welcome emoji presenting creators of this project
      */
     protected void printWelcomeSharks() {
+        System.out.println("\n");
         try {
             readFromFile = new Scanner(sharksPrint);
             while (readFromFile.hasNextLine()) {

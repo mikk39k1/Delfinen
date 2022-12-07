@@ -14,6 +14,15 @@ import java.util.Scanner;
  * software by using these pre configurated methods.
  */
 public class UI {
+    private static UI SingleTonUI = new UI();
+
+
+    private UI() {
+    }
+
+    public static UI getInstance() {
+        return SingleTonUI;
+    }
 
     // Attributes ---------------------------------------------------
     private final Scanner in = new Scanner(System.in);

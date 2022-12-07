@@ -15,6 +15,18 @@ import java.util.HashMap;
 public class Database {
 
     // Attributes ---------------------------------------------
+
+    private static final Database SingletonDatabase = new Database();
+
+    private Database() {
+
+    }
+
+    public static Database getSingletonDatabase() {
+        return SingletonDatabase;
+    }
+
+
     private ArrayList<Member> memberList = new ArrayList<>();
     private ArrayList<Coach> coachList = new ArrayList<>();
 
