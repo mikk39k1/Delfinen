@@ -207,18 +207,8 @@ public class MenuRun {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            if (employee instanceof Chairman) {
-                Coach adminOverride = new Coach();              // Creates a temporary user for admin
-                //sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
-                sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
-                //adminOverride.checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); //Runs temporary user method
-                fileHandler.loggingAction("Top 5 athletes was printed.");
-            } else {
-                //sorter.topFiveSituation(ui,database.getSwimmersCoachAssociationList());
-                sorter.topFiveSmadder(ui.setSwimmingDisciplineType(), ui.setDistance(), database.getSwimmersCoachAssociationList());
-                //((Coach) employee).checkTopFiveCompetitionSwimResults(database.getSwimmersCoachAssociationList(), ui.setSwimmingDisciplineType(), ui); // Runs method as Coach
-                fileHandler.loggingAction("Top 5 athletes was printed.");
-            } // End of inner if / else statement
+            sorter.topFiveMemberResults(ui, database.getSwimmersCoachAssociationList());
+            fileHandler.loggingAction("Top 5 athletes was printed.");
         } else {
             ui.printLn("You don't have the privilege to use this function");
             fileHandler.loggingAction("Unauthorised user tried to access \"Print top 5 athletes\".");

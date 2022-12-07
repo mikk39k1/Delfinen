@@ -315,9 +315,47 @@ public class SuperSorterThreeThousand {
         ));
         swimmingResultArrayList.sort(sortByTime);
         System.out.println(swimmingResultArrayList);
-
-
     }
+
+
+
+    public void topFiveMemberResults(UI ui, HashMap<Member, Coach> memberCoachHashMap) {
+        HashMap<SwimmingResult, Member> allResults = new HashMap<>();
+        Set<Member> members = new HashSet<>();
+        List<Map.Entry<SwimmingResult, Member>> uniqueMemberEntriesOnly = new ArrayList<>();
+
+        memberCoachHashMap.keySet().forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(
+                swimmingDiscipline ->  swimmingDiscipline.getSwimmingDisciplineResults().forEach(
+                        swimmingResult -> allResults.put(swimmingResult,member))));
+
+        int distance = ui.setDistance();
+        SwimmingDiscipline.SwimmingDisciplineTypes discipline = ui.setSwimmingDisciplineType();
+        boolean isCompetitive = ui.setCompetitiveness();
+
+        List<Map.Entry<SwimmingResult, Member>> list = new LinkedList<>(allResults.entrySet());
+        list.sort(Comparator.comparingInt(o -> o.getKey().getSwimTime()));
+
+        list.removeIf(swimmingResultMemberEntry -> swimmingResultMemberEntry.getKey().getDistance() != distance);
+        list.removeIf(swimmingResultMemberEntry ->
+                ((CompetitiveSwimmer)swimmingResultMemberEntry.getValue()).getSwimmingDisciplineList().removeIf(swimmingDiscipline ->
+                        swimmingDiscipline.getSwimmingDisciplineType().equals(discipline)));
+        list.removeIf((swimmingResultMemberEntry -> swimmingResultMemberEntry.getKey().isCompetitive() != isCompetitive));
+
+        list.forEach(swimmingResultMemberEntry -> {
+            if (!members.contains(swimmingResultMemberEntry.getValue())) {
+                members.add(swimmingResultMemberEntry.getValue());
+                uniqueMemberEntriesOnly.add(swimmingResultMemberEntry);
+            }});
+
+        uniqueMemberEntriesOnly.stream().limit(5).forEach(
+                swimmingResultMemberEntry -> {
+                    ui.printLn(swimmingResultMemberEntry.getValue().getName() + " - ID: " + swimmingResultMemberEntry.getValue().getUniqueID());
+                    swimmingResultMemberEntry.getKey().printResults();
+                    ui.printLn("");
+                }
+        );
+    }
+
 } // End of class
 
 
