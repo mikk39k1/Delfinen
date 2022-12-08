@@ -1,6 +1,6 @@
 package actors;
 
-import database.Database;
+import database.SingleTonDatabase;
 import utility.SingleTonUI;
 
 import java.util.Objects;
@@ -30,9 +30,9 @@ public class Treasurer extends Employee {
 	/*
 	* This method checks all members within the Database memberList if they have arrears
 	 */
-	public void checkMemberArrears(Database swimmerCoachDatabase) {
+	public void checkMemberArrears(SingleTonDatabase database) {
 		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
-		for (Member member : swimmerCoachDatabase.getMemberList()){
+		for (Member member : database.getMemberList()){
 			if (!member.isHasPaid()) {
 				String[] arr;  					// Temporary array created
 				arr = memberAnalysis(member);	// Stores the result of memberAnalysis method inside String array arr
@@ -46,7 +46,7 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(Database database, SingleTonUI singleTonUi) {
+	public void setMemberArrears(SingleTonDatabase database, SingleTonUI singleTonUi) {
 		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
 		int count = 0;												// We could have used a for-i loop here.
@@ -82,9 +82,9 @@ public class Treasurer extends Employee {
 	} // End of method
 
 
-	private int[][] gatherPaymentInfoForMembers(Database swimmerCoachDatabase) {
+	private int[][] gatherPaymentInfoForMembers(SingleTonDatabase database) {
 		int[][] multiArray = new int[8][2];								// Stores payment data
-		for (Member member : swimmerCoachDatabase.getMemberList()){
+		for (Member member : database.getMemberList()){
 			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analysis
 			if (member.isHasPaid()){
 				switch (arrAnalysis[3]){			// Adds Info about members who haven't paid
@@ -106,8 +106,8 @@ public class Treasurer extends Employee {
 		return multiArray;
 	}
 
-	public void printEconomyInfo(Database swimmerCoachDatabase) {
-		int[][] list =	gatherPaymentInfoForMembers(swimmerCoachDatabase); // Creates a 2d int-array to store Eco-Info
+	public void printEconomyInfo(SingleTonDatabase database) {
+		int[][] list =	gatherPaymentInfoForMembers(database); // Creates a 2d int-array to store Eco-Info
 		String[] names = {"Inactive","Child","Adult","Senior"};			   // Temporary name-array for name-looping
 		System.out.println("Members who have paid:");					   // TeXt
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT PAID"); // Print header
@@ -121,7 +121,7 @@ public class Treasurer extends Employee {
 			System.out.printf("%-10s %-15s %-14s%n",names[i-4],list[i][0],list[i][1]);
 		}// End of for loop. This loop prints all the members who HAVE paid, in the order stated in line 111.
 		System.out.println("------------------------------------------------------"); // Print divider
-		int numberOfMember = swimmerCoachDatabase.getMemberList().size(); // Stores the amount of members in local var
+		int numberOfMember = database.getMemberList().size(); // Stores the amount of members in local var
 		int paidTotal = 0; // Temp var for number of paying members
 		int owedTotal = 0; // Temp var for number of owing members
 		for (int i = 0; i < 4; i++) {

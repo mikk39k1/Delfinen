@@ -146,11 +146,11 @@ public class MenuRun {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.setMemberArrears(singleTonDatabase, SingleTonUI.getInstance()); // Runs temporary user intended method
+                adminOverride.setMemberArrears(SingleTonDatabase.getSingletonDatabase(), SingleTonUI.getInstance()); // Runs temporary user intended method
                 SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList()); // Writes changes to file
                 SingleTonFileHandler.getInstance().loggingAction("A members payment status was changed.");
             } else {
-                ((Treasurer) employee).checkMemberArrears(singleTonDatabase);    // Runs method as Treasurer
+                ((Treasurer) employee).setMemberArrears(SingleTonDatabase.getSingletonDatabase(), SingleTonUI.getInstance());    // Runs method as Treasurer
             } // End of inner if / else statement
             SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList()); // Writes changes to file
             SingleTonFileHandler.getInstance().loggingAction("A members payment status was changed.");
