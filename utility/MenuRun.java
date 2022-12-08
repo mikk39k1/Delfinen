@@ -245,7 +245,7 @@ public class MenuRun {
     private void createCoach(Employee employee, Database database, UI ui) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).createCoach(database, ui, FileHandler.getInstance());
+            ((Chairman) employee).createCoach(database, ui);
             FileHandler.getInstance().writeToCoachList(database.getCoachList());
             FileHandler.getInstance().writeCoachUserAndPassToList(
                     database.getCoachList().get(database.getCoachList().size() - 1).getUsername(),
