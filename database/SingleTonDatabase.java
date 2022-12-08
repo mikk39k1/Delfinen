@@ -12,17 +12,17 @@ import java.util.HashMap;
 * since all members with coaches ar considered competitive swimmers. This design helps us achieve a faster design, and less
 * search pairs to work with if or whenever this program had to scale member amounts.
  */
-public class Database {
+public class SingleTonDatabase {
 
     // Attributes ---------------------------------------------
 
-    private static final Database SingletonDatabase = new Database();
+    private static final SingleTonDatabase SingletonDatabase = new SingleTonDatabase();
 
-    private Database() {
+    private SingleTonDatabase() {
 
     }
 
-    public static Database getSingletonDatabase() {
+    public static SingleTonDatabase getSingletonDatabase() {
         return SingletonDatabase;
     }
 

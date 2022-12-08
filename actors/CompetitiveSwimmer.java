@@ -16,15 +16,15 @@ public class CompetitiveSwimmer extends Member {
     private final ArrayList<SwimmingDiscipline> swimmingDisciplineList = new ArrayList<>();
 
 
-    public CompetitiveSwimmer(SingleTonUI in) {
-        in.print("Please enter name: ");
-        setName(in.readLine());
-        in.print("Please enter phone number: ");
-        setPhoneNumber(in.readLine());
-        in.printLn("What is the members birthday");
-        setDateOfBirth(in.setDate());
-        in.print("Please enter if membership is active? true/false: ");
-        setIsMembershipActive(in.readBoolean());
+    public CompetitiveSwimmer(SingleTonUI ui) {
+        ui.print("Please enter name: ");
+        setName(ui.readLine());
+        ui.print("Please enter phone number: ");
+        setPhoneNumber(ui.readLine());
+        ui.printLn("What is the members birthday");
+        setDateOfBirth(ui.setDate());
+        ui.print("Please enter if membership is active? true/false: ");
+        setIsMembershipActive(ui.readBoolean());
         setHasPaid(false);
 
         // Need method to add Coach to database on FILE so database can load array with active Coaches

@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.Database;
+import database.SingleTonDatabase;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -350,7 +350,7 @@ public class SingleTonFileHandler {
     /*
      * This method loads SwimmerCoachAssociation based on result ID and coachList
      */
-    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(Database database) {
+    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(SingleTonDatabase singleTonDatabase) {
 
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
@@ -364,28 +364,28 @@ public class SingleTonFileHandler {
                 * The method goes on to see if a coach candidate also matches in pair value of coach name
                 * if both parameters have a match, the two entities are put inside the HashMap from Database class
                  */
-                for (Member member : database.getMemberList()) {
+                for (Member member : singleTonDatabase.getMemberList()) {
                     if (member.getUniqueID() == swimmerID) {
-                        for (Coach coach : database.getCoachList()) {
+                        for (Coach coach : singleTonDatabase.getCoachList()) {
                             if (coach.getName().equals(coachName)) {
-                                database.getSwimmersCoachAssociationList().put(member, coach);
+                                singleTonDatabase.getSwimmersCoachAssociationList().put(member, coach);
                             } // End of inner if statement
                         } // End of inner for loop
                     } // End of outer if statement
                 } // End of outer for loop
             } // End of while loop
-            return database.getSwimmersCoachAssociationList();
+            return singleTonDatabase.getSwimmersCoachAssociationList();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } // End of try / catch statement
-        return database.getSwimmersCoachAssociationList();
+        return singleTonDatabase.getSwimmersCoachAssociationList();
     }
 
 
     /*
     * This method writes the association link between a member and coach whenever a competitive swimmer is added
      */
-    protected void writeToSwimmerCoachAssociationFile(Database associationList) {
+    protected void writeToSwimmerCoachAssociationFile(SingleTonDatabase associationList) {
         try {
             printToFile = new PrintStream(swimmerCoachAssociationList);
 

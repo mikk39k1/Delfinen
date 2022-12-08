@@ -17,7 +17,6 @@ public class SingleTonSuperSorterThreeThousand {
 
     // Constructor -----------------------
     private SingleTonSuperSorterThreeThousand() {
-
     }
 
     // Getter ----------------------------
