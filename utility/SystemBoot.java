@@ -42,7 +42,7 @@ public class SystemBoot {
         SingleTonFileHandler.getInstance().loggingAction("Program started.");
         SingleTonFileHandler.getInstance().printWelcomeSharks();   // 5
         loadStaff();
-        loading();
+        //loading();
         loginSystem();                      // 6
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
