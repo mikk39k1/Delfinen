@@ -9,6 +9,7 @@ import utility.result_comparators.SortByTime;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SingleTonSuperSorterThreeThousand {
 
@@ -31,22 +32,22 @@ public class SingleTonSuperSorterThreeThousand {
     private final SortByMemberPhoneNumber sortByMemberPhoneNumber = new SortByMemberPhoneNumber();
     private final SortByTime sortByTime = new SortByTime();    // We will always sort by Time before presenting results
 
-    protected List<Member> setSortByMemberAge(ArrayList<Member> membersList) {
+     List<Member> setSortByMemberAge(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberAge);
         return membersList;
     }
 
-    protected List<Member> setSortByMemberID(ArrayList<Member> membersList) {
+     List<Member> setSortByMemberID(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberID);
         return membersList;
     }
 
-    protected List<Member> setSortByMemberName(ArrayList<Member> membersList) {
+     List<Member> setSortByMemberName(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberName);
         return membersList;
     }
 
-    protected List<Member> setSortByMemberPhoneNumber(ArrayList<Member> membersList) {
+     List<Member> setSortByMemberPhoneNumber(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberPhoneNumber);
         return membersList;
     }
@@ -78,7 +79,7 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method gathers all results from one specific swimmer and returns them as an ArrayList
      */
-    protected ArrayList<SwimmingResult> oneSwimmersResultList(
+     ArrayList<SwimmingResult> oneSwimmersResultList(
             CompetitiveSwimmer swimmer,
             HashMap<Member, Coach> memberCoachHashMap,
             SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
@@ -105,131 +106,150 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method sorts based on distance, look inside ui.class to understand properties being presented
      */
-    public ArrayList<SwimmingResult> setSortByDistance(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByDistance(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+         ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.setDistance()) {
             case 100 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 100);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDistance() == 100).toList());
+                sortedList.sort(sortByTime);
             } // End of case 100
             case 200 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 200);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDistance() == 200).toList());
+                sortedList.sort(sortByTime);
             } // End of case 200
             case 500 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 500);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDistance() == 500).toList());
+                sortedList.sort(sortByTime);
             } // End of case 500
         } // End of switch statement
-        return swimmingResults;
+        return sortedList;
     } // End of method
 
 
     /*
      * This method sorts results based on competitiveness. True = Competition / False = Training session
      */
-    protected ArrayList<SwimmingResult> setSortByIsCompetitive(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByIsCompetitive(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+         ArrayList<SwimmingResult> sortedList = new ArrayList<>();
 
         if (!singleTonUi.setCompetitiveness()) {
-            swimmingResults.removeIf(SwimmingResult::isCompetitive);
-            swimmingResults.sort(sortByTime);
+            sortedList = new ArrayList<>(swimmingResults.stream()
+                    .filter(SwimmingResult::isCompetitive).toList());
+            sortedList.sort(sortByTime);
         } else {
-            swimmingResults.removeIf(swimmingResult -> !swimmingResult.isCompetitive());
-            swimmingResults.sort(sortByTime);
+            sortedList = new ArrayList<>(swimmingResults.stream()
+                    .filter(swimmingResult -> !swimmingResult.isCompetitive()).toList());
+            sortedList.sort(sortByTime);
         } // End of if / else statement
-        return swimmingResults;
+        return sortedList;
     } // End of method
 
 
     /*
      * This method sorts results based on Rank. Read more in ui.class defining return values with info.
      */
-    protected ArrayList<SwimmingResult> setSortByRank(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
-
+     ArrayList<SwimmingResult> setSortByRank(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+         ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.setRank()) {
             case 3 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 3);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getRank() < 3).toList());
+                sortedList.sort(sortByTime);
             } // End of case 100
             case 5 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 5);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getRank() < 5).toList());
+                sortedList.sort(sortByTime);
             } // End of case 200
             case 10 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 10);
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getRank() < 10).toList());
+                sortedList.sort(sortByTime);
             } // End of case 500
         } // End of switch statement
-        return swimmingResults;
+        return sortedList;
     } // End of method
 
 
     /*
      * This method sorts results based on date attributes.
      */
-    protected ArrayList<SwimmingResult> setSortByDate(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
-
+     ArrayList<SwimmingResult> setSortByDate(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+         ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.chooseTimeFrame()) {
             case 1 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(3)));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate()
+                                .isAfter(LocalDate.now().minusMonths(3))).toList());
+                sortedList.sort(sortByTime);
             } // End of case 1
             case 2 -> {
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(6)));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate()
+                                .isAfter(LocalDate.now().minusMonths(6))).toList());
+                sortedList.sort(sortByTime);
             } // End of case 2
             case 3 -> {
-                swimmingResults.removeIf(swimmingResult -> !(swimmingResult.getDate().getYear() == LocalDate.now().getYear()));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate()
+                                .getYear() == LocalDate.now().getYear()).toList());
+                sortedList.sort(sortByTime);
             } // End of case 3
             case 4 -> {
                 int specificYear = LocalDate.now().getYear() - singleTonUi.readYear();
-                swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusYears(specificYear)));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate()
+                                .isAfter(LocalDate.now().minusYears(specificYear))).toList());
+                sortedList.sort(sortByTime);
             } // End of case 4
             case 5 -> {
                 int specificYear = LocalDate.now().getYear() - singleTonUi.readYear();
-                swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(LocalDate.now().minusYears(specificYear)));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate()
+                                .isEqual(LocalDate.now().minusYears(specificYear))).toList());
+                sortedList.sort(sortByTime);
             } // End of case 5
             case 6 -> {
                 LocalDate date = singleTonUi.setDate();
-                swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(date));
-                swimmingResults.sort(sortByTime);
+                sortedList = new ArrayList<>(swimmingResults.stream()
+                        .filter(swimmingResult -> swimmingResult.getDate().isEqual(date)).toList());
+                sortedList.sort(sortByTime);
             } // End of case 6
         } // End of switch statement
-        return swimmingResults;
+        return sortedList;
     } // End of method
 
-    protected void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberCoachHashMap) {
+     void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberCoachHashMap) {
         HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberCoachHashMap);
-        ArrayList<Member> members = new ArrayList<>();
+        ArrayList<Member> sortedList = new ArrayList<>();
         switch (readInput) {
             case 1 -> {
-                temporaryMemberCoachHashMap.keySet().removeIf(member -> member.getAge() > 18);
-                temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
-                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
-                members.sort(sortByMemberName);
+                sortedList = new ArrayList<>(memberCoachHashMap.keySet().stream()
+                        .filter(member -> member.getAge() > 18).toList());
+                sortedList.sort(sortByMemberName);
             } // End of case 1
             case 2 -> {
-                temporaryMemberCoachHashMap.keySet().removeIf(member -> member.getAge() < 18);
-                temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
-                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
-                members.sort(sortByMemberName);
+                sortedList = new ArrayList<>(memberCoachHashMap.keySet().stream()
+                        .filter(member -> member.getAge() < 18).toList());
+                sortedList.sort(sortByMemberName);
             } // End of case 2
             case 3 -> {
                 temporaryMemberCoachHashMap.values().removeIf(coachValues -> !coachValues.getName().equals(coach.getName()));
-                members = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
-                members.sort(sortByMemberName);
+                sortedList = new ArrayList<>(temporaryMemberCoachHashMap.keySet());
+                sortedList.sort(sortByMemberName);
             } // End of case 3
         } // End of switch statement
-        for (Member member : members) {
+        for (Member member : sortedList) {
             System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b",
                     member.getUniqueID(), member.getName(),
                     member.getDateOfBirth(), member.getPhoneNumber(), member.isIsMembershipActive());
         } // End of for loop
     } // End of method
 
-    public void topFiveSmadderButRefactored(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
+     void topFiveSmadderButRefactored(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
                                             int distance, HashMap<Member, Coach> memberCoachHashMap) {
         List<CompetitiveSwimmer> allCompMembers = memberCoachHashMap.keySet().stream()
                 .map(member -> (CompetitiveSwimmer) member).toList();
