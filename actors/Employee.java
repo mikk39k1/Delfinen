@@ -18,7 +18,7 @@ public abstract class Employee extends Person {
 		ECONOMY_MANAGEMENT,
 		COMPETITIVE_SWIMMER_MANAGEMENT};
 
-	private RoleType role;
+	private  RoleType role;
 	private PrivilegeType privilege;
 	private String username;
 	private String password;

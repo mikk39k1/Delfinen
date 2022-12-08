@@ -1,9 +1,8 @@
 package actors;
 
 import database.Database;
-import utility.UI;
+import utility.SingleTonUI;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 /*
@@ -47,7 +46,7 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(Database swimmerCoachDatabase, UI ui) {
+	public void setMemberArrears(Database swimmerCoachDatabase, SingleTonUI singleTonUi) {
 		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
 		int count = 0;
@@ -59,8 +58,8 @@ public class Treasurer extends Employee {
 			System.out.printf("%s%-1d# %-40s %-10s %-12s %-20s %-10s%n",(count < 10) ? "0" :"", count, member.getName(),arr[2],
 					(Objects.equals(arr[3], "null") ?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
 		} // End of for loop
-		ui.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
-		swimmerCoachDatabase.getMemberList().get(ui.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
+		singleTonUi.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
+		swimmerCoachDatabase.getMemberList().get(singleTonUi.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
 	} // End of method
 
 

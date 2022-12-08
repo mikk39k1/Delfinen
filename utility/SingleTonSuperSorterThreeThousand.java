@@ -10,18 +10,18 @@ import utility.result_comparators.SortByTime;
 import java.time.LocalDate;
 import java.util.*;
 
-public class SuperSorterThreeThousand {
+public class SingleTonSuperSorterThreeThousand {
 
-    private static final SuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SuperSorterThreeThousand();
+    private static final utility.SingleTonSuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SingleTonSuperSorterThreeThousand();
 
 
     // Constructor -----------------------
-    private SuperSorterThreeThousand() {
+    private SingleTonSuperSorterThreeThousand() {
 
     }
 
     // Getter ----------------------------
-    public static SuperSorterThreeThousand getInstance() {
+    public static utility.SingleTonSuperSorterThreeThousand getInstance() {
         return SingleTonSuperSorterThreeThousand;
     }
 
@@ -106,8 +106,8 @@ public class SuperSorterThreeThousand {
     /*
      * This method sorts based on distance, look inside ui.class to understand properties being presented
      */
-    public ArrayList<SwimmingResult> setSortByDistance(UI ui, ArrayList<SwimmingResult> swimmingResults) {
-        switch (ui.setDistance()) {
+    public ArrayList<SwimmingResult> setSortByDistance(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+        switch (singleTonUi.setDistance()) {
             case 100 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDistance() != 100);
                 swimmingResults.sort(sortByTime);
@@ -128,9 +128,9 @@ public class SuperSorterThreeThousand {
     /*
      * This method sorts results based on competitiveness. True = Competition / False = Training session
      */
-    protected ArrayList<SwimmingResult> setSortByIsCompetitive(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByIsCompetitive(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
 
-        if (!ui.setCompetitiveness()) {
+        if (!singleTonUi.setCompetitiveness()) {
             swimmingResults.removeIf(SwimmingResult::isCompetitive);
             swimmingResults.sort(sortByTime);
         } else {
@@ -144,9 +144,9 @@ public class SuperSorterThreeThousand {
     /*
      * This method sorts results based on Rank. Read more in ui.class defining return values with info.
      */
-    protected ArrayList<SwimmingResult> setSortByRank(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByRank(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
 
-        switch (ui.setRank()) {
+        switch (singleTonUi.setRank()) {
             case 3 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getRank() > 3);
                 swimmingResults.sort(sortByTime);
@@ -167,9 +167,9 @@ public class SuperSorterThreeThousand {
     /*
      * This method sorts results based on date attributes.
      */
-    protected ArrayList<SwimmingResult> setSortByDate(UI ui, ArrayList<SwimmingResult> swimmingResults) {
+    protected ArrayList<SwimmingResult> setSortByDate(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
 
-        switch (ui.chooseTimeFrame()) {
+        switch (singleTonUi.chooseTimeFrame()) {
             case 1 -> {
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusMonths(3)));
                 swimmingResults.sort(sortByTime);
@@ -183,17 +183,17 @@ public class SuperSorterThreeThousand {
                 swimmingResults.sort(sortByTime);
             } // End of case 3
             case 4 -> {
-                int specificYear = LocalDate.now().getYear() - ui.readYear();
+                int specificYear = LocalDate.now().getYear() - singleTonUi.readYear();
                 swimmingResults.removeIf(swimmingResult -> swimmingResult.getDate().isBefore(LocalDate.now().minusYears(specificYear)));
                 swimmingResults.sort(sortByTime);
             } // End of case 4
             case 5 -> {
-                int specificYear = LocalDate.now().getYear() - ui.readYear();
+                int specificYear = LocalDate.now().getYear() - singleTonUi.readYear();
                 swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(LocalDate.now().minusYears(specificYear)));
                 swimmingResults.sort(sortByTime);
             } // End of case 5
             case 6 -> {
-                LocalDate date = ui.setDate();
+                LocalDate date = singleTonUi.setDate();
                 swimmingResults.removeIf(swimmingResult -> !swimmingResult.getDate().isEqual(date));
                 swimmingResults.sort(sortByTime);
             } // End of case 6

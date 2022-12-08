@@ -19,8 +19,8 @@ import java.util.Scanner;
 * We also use this class to read and compare data whenever a user is trying to log in, thus securing safety and avoiding breach
 * by securing no passwords, or usernames are available to be read directly from the code.
  */
-public class FileHandler {
-    private static final FileHandler SingleTonFileHandler = new FileHandler();
+public class SingleTonFileHandler {
+    private static final utility.SingleTonFileHandler SingleTonFileHandler = new SingleTonFileHandler();
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
     private final File sharksPrint = new File("files/sharksPrint.txt");
@@ -33,12 +33,12 @@ public class FileHandler {
     private PrintStream printToFile;
     private Scanner readFromFile;
 
-    private FileHandler() {
+    private SingleTonFileHandler() {
     }
 
     // Getter ----------------------------------------------------------------------
 
-    public static FileHandler getInstance() {
+    public static utility.SingleTonFileHandler getInstance() {
         return SingleTonFileHandler;
     }
 

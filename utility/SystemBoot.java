@@ -33,14 +33,14 @@ public class SystemBoot {
      * - 7 Starts the menu selection
      */
     private void startSystem() {
-        Database.getSingletonDatabase().setMemberList(FileHandler.getInstance().loadMemberList(Database.getSingletonDatabase().getMemberList()));// 1
-        Database.getSingletonDatabase().setCoachList(FileHandler.getInstance().loadCoachList(Database.getSingletonDatabase().getCoachList()));// 2
-        Member.setID(FileHandler.getInstance().loadID());// 3
-        Database.getSingletonDatabase().setSwimmersCoachAssociationList(FileHandler.getInstance().loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));
-        FileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase().getSwimmersCoachAssociationList());
+        Database.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance().loadMemberList(Database.getSingletonDatabase().getMemberList()));// 1
+        Database.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance().loadCoachList(Database.getSingletonDatabase().getCoachList()));// 2
+        Member.setID(SingleTonFileHandler.getInstance().loadID());// 3
+        Database.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance().loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));
+        SingleTonFileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase().getSwimmersCoachAssociationList());
 
-        FileHandler.getInstance().loggingAction("Program started.");
-        FileHandler.getInstance().printWelcomeSharks();   // 5
+        SingleTonFileHandler.getInstance().loggingAction("Program started.");
+        SingleTonFileHandler.getInstance().printWelcomeSharks();   // 5
         loadStaff();
         loading();
         loginSystem();                      // 6
@@ -73,13 +73,13 @@ public class SystemBoot {
                 employee -> {
                     if (employee.getUsername().equals(username)) {
                         currentUser = employee;
-                        FileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
+                        SingleTonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                     } else {
                         database.getCoachList().forEach(
                                 coach -> {
                                     if (coach.getUsername().equals(username)) {
                                         currentUser = coach;
-                                        FileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
+                                        SingleTonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                                     } // End of inner if statement
                                 } // End of lambda predicate expression
                         ); // End of inner forEach ArrayList build-in method
@@ -111,7 +111,7 @@ public class SystemBoot {
       This method checks through file and username / password method if inputs are authentic, to allow login
      */
     private String isLoggedIn() {
-        String username = FileHandler.getInstance().checkUsername(getUsername());
+        String username = SingleTonFileHandler.getInstance().checkUsername(getUsername());
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
 
@@ -133,7 +133,7 @@ public class SystemBoot {
      */
     private String getUsername() {
         System.out.print("Please enter your username: ");
-        return UI.getInstance().readLine();
+        return SingleTonUI.getInstance().readLine();
     } // End of method
 
 
@@ -142,14 +142,14 @@ public class SystemBoot {
      */
     private String getPassword() {
         System.out.print("Please enter your password: ");
-        return UI.getInstance().readLine();
+        return SingleTonUI.getInstance().readLine();
     } // End of method
 
     /*
     * This method checks if password is correct, and returns a boolean based on success / failure
      */
     private boolean isPasswordCorrect(String password) {
-        return !FileHandler.getInstance().checkPassword(password).equals("0");
+        return !SingleTonFileHandler.getInstance().checkPassword(password).equals("0");
 
     } // End of method
 

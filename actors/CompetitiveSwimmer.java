@@ -1,7 +1,7 @@
 package actors;
 
 
-import utility.UI;
+import utility.SingleTonUI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class CompetitiveSwimmer extends Member {
     private final ArrayList<SwimmingDiscipline> swimmingDisciplineList = new ArrayList<>();
 
 
-    public CompetitiveSwimmer(UI in) {
+    public CompetitiveSwimmer(SingleTonUI in) {
         in.print("Please enter name: ");
         setName(in.readLine());
         in.print("Please enter phone number: ");
