@@ -47,19 +47,30 @@ public class Treasurer extends Employee {
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
 	public void setMemberArrears(SingleTonDatabase database, SingleTonUI singleTonUi) {
-		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
+		System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", "[ID]", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
-		int count = 0;												// We could have used a for-i loop here.
-		for (Member member : database.getMemberList()){
-			count++;
+		for (int i = 0; i < database.getMemberList().size(); i++) {
 			String[] arr;											// Temporary array created
-			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
-			arr = memberAnalysis(member); // Stores the member inside String array arr
-			System.out.printf("%s%-1d# %-40s %-10s %-12s %-20s %-10s%n",(count < 10) ? "0" :"", count, member.getName(),arr[2],
-					(Objects.equals(arr[3], "null") ?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
-		} // End of for loop
-		singleTonUi.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
-		database.getMemberList().get(singleTonUi.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
+			String hasPaid = (database.getMemberList().get(i).isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
+			arr = memberAnalysis(database.getMemberList().get(i)); // Stores the member inside String array arr
+			System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n",
+					database.getMemberList().get(i).getUniqueID(),
+					database.getMemberList().get(i).getName(),arr[2],
+					(arr[3].equals("null") ?"-":arr[3]),arr[0],hasPaid); // Prints the status of member
+		}
+		singleTonUi.printLn("For which member do you wish to toggle the payment? Enter their ID");
+		int choice = singleTonUi.readInt();
+		for (int i = 0; i < database.getMemberList().size(); i++) {
+			if (choice==database.getMemberList().get(i).getUniqueID()){
+				database.getMemberList().get(i).toggleHasPaid();
+				singleTonUi.printLn("Payment has been toggled");
+			}
+			else if (database.getMemberList().size()-1==i && choice!=database.getMemberList().get(i).getUniqueID()){
+				singleTonUi.printLn("Wrong Member ID");
+			}
+		}
+
+			// Changes paid status of chosen member
 	} // End of method
 
 

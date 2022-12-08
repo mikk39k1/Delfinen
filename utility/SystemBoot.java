@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.Database;
+import database.SingleTonDatabase;
 
 import java.util.ArrayList;
 
@@ -36,14 +36,14 @@ public class SystemBoot {
      * - 10 Starts the menu selection
      */
     private void startSystem() {
-        Database.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance()
-                .loadMemberList(Database.getSingletonDatabase().getMemberList()));                          // 1
-        Database.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance()
-                .loadCoachList(Database.getSingletonDatabase().getCoachList()));                            // 2
+        SingleTonDatabase.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance()
+                .loadMemberList(SingleTonDatabase.getSingletonDatabase().getMemberList()));                          // 1
+        SingleTonDatabase.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance()
+                .loadCoachList(SingleTonDatabase.getSingletonDatabase().getCoachList()));                            // 2
         Member.setID(SingleTonFileHandler.getInstance().loadID());                                          // 3
-        Database.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance()
-                .loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));                         // 4
-        SingleTonFileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase()
+        SingleTonDatabase.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance()
+                .loadSwimmerCoachAssociationList(SingleTonDatabase.getSingletonDatabase()));                         // 4
+        SingleTonFileHandler.getInstance().loadResultMethod(SingleTonDatabase.getSingletonDatabase()
                 .getSwimmersCoachAssociationList());                                                        // 5
 
         SingleTonFileHandler.getInstance().loggingAction("Program started.");                               // 6
@@ -69,14 +69,14 @@ public class SystemBoot {
                 "12. Check this years Club-Economy",
                 "0. Log out."
         });      // 6
-        startSystem.menuLooping(currentUser, Database.getSingletonDatabase());
+        startSystem.menuLooping(currentUser, SingleTonDatabase.getSingletonDatabase());
     } // End of method
 
 
     /*
      * This method follows the principle of "The Least Privilege" and ensure users cant do more than allowed by setting Role and Privilege level
      */
-    private void setRoleAndPrivilege(String username, Database database) {
+    private void setRoleAndPrivilege(String username, SingleTonDatabase database) {
         // Switch statement set role and privilege based on correct username
         enigmaUsers.forEach(
                 employee -> {
@@ -107,7 +107,7 @@ public class SystemBoot {
         do {
             user = isLoggedIn();                // Temporary stores a username if prompted existing username
             if (!user.equals("0")) {
-                setRoleAndPrivilege(user,Database.getSingletonDatabase());      // Sets authorization level of role / privileges
+                setRoleAndPrivilege(user,SingleTonDatabase.getSingletonDatabase());      // Sets authorization level of role / privileges
             } // End of if statement
         } while (user.equals("0")); // End of do-while loop
     } // end of method
