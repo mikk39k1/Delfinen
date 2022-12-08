@@ -27,23 +27,32 @@ public class SystemBoot {
      * - 1 Loading all member data from fullMemberList file
      * - 2 Loading all coach employees from coachList file
      * - 3 Sets the corresponding static member ID, so Member ID keeps incrementing, even after deleted users
-     * - 4 Loads the employed users
-     * - 5 Prints welcome screen
-     * - 6 Invokes login method
-     * - 7 Starts the menu selection
+     * - 4 Loading all Member/Coach associations from file to SwimmerCoachAssociationList
+     * - 5 Loading all results by members from file to Members Result
+     * - 6 Logs action
+     * - 7 Prints welcome ASCII-art
+     * - 8 Loads the employed users
+     * - 9 Invokes login method
+     * - 10 Starts the menu selection
      */
     private void startSystem() {
-        Database.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance().loadMemberList(Database.getSingletonDatabase().getMemberList()));// 1
-        Database.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance().loadCoachList(Database.getSingletonDatabase().getCoachList()));// 2
-        Member.setID(SingleTonFileHandler.getInstance().loadID());// 3
-        Database.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance().loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));
-        SingleTonFileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase().getSwimmersCoachAssociationList());
+        Database.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance()
+                .loadMemberList(Database.getSingletonDatabase().getMemberList()));                          // 1
+        Database.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance()
+                .loadCoachList(Database.getSingletonDatabase().getCoachList()));                            // 2
+        Member.setID(SingleTonFileHandler.getInstance().loadID());                                          // 3
+        Database.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance()
+                .loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));                         // 4
+        SingleTonFileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase()
+                .getSwimmersCoachAssociationList());                                                        // 5
 
-        SingleTonFileHandler.getInstance().loggingAction("Program started.");
-        SingleTonFileHandler.getInstance().printWelcomeSharks();   // 5
-        loadStaff();
-        loading();
-        loginSystem();                      // 6
+        SingleTonFileHandler.getInstance().loggingAction("Program started.");                               // 6
+        SingleTonFileHandler.getInstance().printWelcomeSharks();                                            // 7
+        loadStaff();                                                                                        // 8
+        loading();                                                                                          // 9
+        loginSystem();                                                                                      // 10
+
+
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Add a new member.",
