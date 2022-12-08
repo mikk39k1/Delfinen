@@ -51,13 +51,4 @@ public class CompetitiveSwimmer extends Member {
         }
         System.out.print("\n");
     }
-    public int getAmountOfLoggedResults(){
-        int count = 0;
-        for (SwimmingDiscipline swimmingDiscipline : swimmingDisciplineList) {
-            for (int j = 0; j < swimmingDiscipline.getSwimmingDisciplineResults().size(); j++) {
-                count++;
-            }
-        }
-        return count;
-    }
 }

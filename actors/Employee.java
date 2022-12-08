@@ -25,9 +25,6 @@ public abstract class Employee extends Person {
 
 
 	// Getters ------------------------------------
-	public RoleType getRole() {
-		return role;
-	}
 
 	public PrivilegeType getPrivilege() {
 		return privilege;
