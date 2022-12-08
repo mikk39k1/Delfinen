@@ -230,14 +230,46 @@ public class SuperSorterThreeThousand {
         } // End of for loop
     } // End of method
 
+    public void topFiveSmadderButRefactored(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
+                                            int distance, HashMap<Member, Coach> memberCoachHashMap) {
+        List<CompetitiveSwimmer> allCompMembers = memberCoachHashMap.keySet().stream().map(member ->
+                (CompetitiveSwimmer) member).toList();
+        HashMap<String, SwimmingResult> displayResults = new HashMap<>();
+        ArrayList<SwimmingResult> swimmersResult = new ArrayList<>();
+
+        for (CompetitiveSwimmer member : allCompMembers) {
+            for (SwimmingDiscipline typeOfDiscipline : member.getSwimmingDisciplineList()) {
+                if (typeOfDiscipline.getSwimmingDisciplineType() != discipline) continue;
+                swimmersResult.clear();
+                for (SwimmingResult result : typeOfDiscipline.getSwimmingDisciplineResults()) {
+
+                    //if (result.isCompetitive() != isCompetitive) continue;
+                    if (result.getDistance() != distance) continue;
+                    swimmersResult.add(result);
+                }
+                if (swimmersResult.isEmpty()) continue;
+                swimmersResult.sort(sortByTime);
+                displayResults.put(member.getUniqueID() + " " + member.getName(), swimmersResult.get(0));
+            }
+        }
+        List<Map.Entry<String, SwimmingResult>> filteredList = new LinkedList<>(displayResults.entrySet());
+
+        filteredList.sort(Comparator.comparingInt(o -> o.getValue().getSwimTime()));
+        filteredList.stream().limit(5).forEach(swimResults -> {
+                    System.out.print(swimResults.getKey() + " ");
+                    swimResults.getValue().printResults();
+                }
+        );
+    }
+
     public void topFiveMemberResults(UI ui, HashMap<Member, Coach> memberCoachHashMap) {
         HashMap<SwimmingResult, Member> allResults = new HashMap<>();
         Set<Member> members = new HashSet<>();
         List<Map.Entry<SwimmingResult, Member>> uniqueMemberEntriesOnly = new ArrayList<>();
 
         memberCoachHashMap.keySet().forEach(member -> ((CompetitiveSwimmer) member).getSwimmingDisciplineList().forEach(
-                swimmingDiscipline ->  swimmingDiscipline.getSwimmingDisciplineResults().forEach(
-                        swimmingResult -> allResults.put(swimmingResult,member))));
+                swimmingDiscipline -> swimmingDiscipline.getSwimmingDisciplineResults().forEach(
+                        swimmingResult -> allResults.put(swimmingResult, member))));
 
         int distance = ui.setDistance();
         SwimmingDiscipline.SwimmingDisciplineTypes discipline = ui.setSwimmingDisciplineType();
@@ -248,7 +280,7 @@ public class SuperSorterThreeThousand {
 
         list.removeIf(swimmingResultMemberEntry -> swimmingResultMemberEntry.getKey().getDistance() != distance);
         list.removeIf(swimmingResultMemberEntry ->
-                ((CompetitiveSwimmer)swimmingResultMemberEntry.getValue()).getSwimmingDisciplineList().removeIf(swimmingDiscipline ->
+                ((CompetitiveSwimmer) swimmingResultMemberEntry.getValue()).getSwimmingDisciplineList().removeIf(swimmingDiscipline ->
                         swimmingDiscipline.getSwimmingDisciplineType().equals(discipline)));
         list.removeIf((swimmingResultMemberEntry -> swimmingResultMemberEntry.getKey().isCompetitive() != isCompetitive));
 
@@ -256,7 +288,8 @@ public class SuperSorterThreeThousand {
             if (!members.contains(swimmingResultMemberEntry.getValue())) {
                 members.add(swimmingResultMemberEntry.getValue());
                 uniqueMemberEntriesOnly.add(swimmingResultMemberEntry);
-            }});
+            }
+        });
 
         uniqueMemberEntriesOnly.stream().limit(5).forEach(
                 swimmingResultMemberEntry -> {

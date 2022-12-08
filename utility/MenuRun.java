@@ -203,8 +203,10 @@ public class MenuRun {
     private void printTopFiveByDiscipline(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-
-            SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
+            UI.getInstance().printLn("Crawl, butterfly, breaststroke, ");
+            SuperSorterThreeThousand.getInstance().topFiveSmadderButRefactored(UI.getInstance().setSwimmingDisciplineType(),
+                    UI.getInstance().setDistance(), database.getSwimmersCoachAssociationList());
+            //SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
             FileHandler.getInstance().loggingAction("Top 5 athletes was printed.");
         } else {
             UI.getInstance().printLn("You don't have the privilege to use this function");
