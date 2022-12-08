@@ -66,18 +66,22 @@ public class MenuRun {
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
     private void addMember(Employee employee, SingleTonDatabase singleTonDatabase) {
-        if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
+        try {
+            if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).addMember(SingleTonUI.getInstance(), ((Chairman) employee).createMember(SingleTonUI.getInstance()),
-                    singleTonDatabase);
-            SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList());
-            SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(singleTonDatabase);
-            SingleTonFileHandler.getInstance().loggingAction(singleTonDatabase.getMemberList().get(singleTonDatabase.
-                    getMemberList().size() - 1).getName() + " is now swimming with DELFINEN.");
-        } else {
-            SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
-            SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Create a new member\".");
-        } // End of if / else statement
+                ((Chairman) employee).addMember(SingleTonUI.getInstance(), ((Chairman) employee).createMember(SingleTonUI.getInstance()),
+                        singleTonDatabase);
+                SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList());
+                SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(singleTonDatabase);
+                SingleTonFileHandler.getInstance().loggingAction(singleTonDatabase.getMemberList().get(singleTonDatabase.
+                        getMemberList().size() - 1).getName() + " is now swimming with DELFINEN.");
+            } else {
+                SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
+                SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Create a new member\".");
+            } // End of if / else statement
+        } catch (IndexOutOfBoundsException e) {
+            SingleTonUI.getInstance().printLn("No member was added, since no Coach was available - Please create a new Coach");
+        }
     } // End of method
 
 
@@ -546,5 +550,4 @@ public class MenuRun {
         System.exit(0);
         return false;
     } // End of Method
-
 } // End of Class

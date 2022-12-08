@@ -56,7 +56,7 @@ public abstract class Member extends Person {
 	public void toggleHasPaid() {
 		this.hasPaid= !this.hasPaid;
 	}
-	public void setUniqueID(int uniqueID) {
+	protected void setUniqueID(int uniqueID) {
 		this.uniqueID = uniqueID;
 	}
 }

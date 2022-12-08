@@ -2,6 +2,8 @@ package actors;
 
 import database.SingleTonDatabase;
 import utility.SingleTonUI;
+
+import java.util.Comparator;
 import java.util.List;
 
 /*
@@ -91,8 +93,10 @@ public class Chairman extends Employee {
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
 
         } // End of if statement
-
-        singleTonDatabase.getMemberList().add(newMember); // Adds new member to Database memberList
+        if (newMember instanceof CompetitiveSwimmer && !singleTonDatabase.getCoachList().isEmpty()) {
+            singleTonDatabase.getMemberList().add(newMember); // Adds new member to Database memberList
+            System.out.println(singleTonDatabase.getMemberList().size());
+        }
 
     } // End of method
 
