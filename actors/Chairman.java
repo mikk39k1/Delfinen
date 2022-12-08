@@ -1,7 +1,6 @@
 package actors;
 
 import database.Database;
-import utility.FileHandler;
 import utility.UI;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class Chairman extends Employee {
     * and sets the username and Password in Password file
     */
 
-    public void createCoach(Database coachList, UI ui, FileHandler filehandler) {
+    public void createCoach(Database coachList, UI ui) {
         ui.print("Please enter name of Coach: ");
         String coachName = ui.readLine();
         ui.print("Please enter a phone number: ");
@@ -130,26 +129,26 @@ public class Chairman extends Employee {
      * The method is used to choose a coach for the instantiation of a competition swimmer, so that both
      * - individuals can be put inside the hashmap as a Key/Value pair containing this association.
      */
-    public Coach chooseCoach(UI ui, Database swimmerCoachDatabase, Boolean isMemberAddToCoach) {
-        for (Coach coach : swimmerCoachDatabase.getCoachList()) {
+    public Coach chooseCoach(UI ui, Database coachList, Boolean isMemberAddToCoach) {
+        for (Coach coach : coachList.getCoachList()) {
             ui.printLn("Coach: " + coach.getName());       // Prints all available Coaches from Database coachList
         } // End of for loop
 
         while (true) {
             ui.print("\nPlease enter the name of a coach: ");
             String coachName = ui.readLine(); // Stores temporary the name of the Coach intended to be used
-            for (Coach coach : swimmerCoachDatabase.getCoachList()) {
+            for (Coach coach : coachList.getCoachList()) {
                 if (coach.getName().equalsIgnoreCase(coachName)) {
-                    if (isMemberAddToCoach && coach.getMemberAmountForCoach(swimmerCoachDatabase, coach) < 20) {
+                    if (isMemberAddToCoach && coach.getMemberAmountForCoach(coachList, coach) < 20) {
                         return coach;
-                    } else if (isMemberAddToCoach && coach.getMemberAmountForCoach(swimmerCoachDatabase, coach) > 20) {
+                    } else if (isMemberAddToCoach && coach.getMemberAmountForCoach(coachList, coach) > 20) {
                         ui.printLn("The coach's team is full, pick another coach.");
                     } else if (!isMemberAddToCoach) {
                         return coach;
                     }
                 }// End of if statement
             } // End of for loop
-            if (swimmerCoachDatabase.getCoachList().stream().noneMatch(coach ->
+            if (coachList.getCoachList().stream().noneMatch(coach ->
                     coach.getName().equalsIgnoreCase(coachName))) {
                 ui.printLn("Coach does not exist try again");
             } // End of if statement
