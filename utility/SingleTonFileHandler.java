@@ -56,7 +56,7 @@ public class SingleTonFileHandler {
                     readLoginCredentials.close();       // If username matches, closes the Scanner and return value
                     return loadUsername;
                     } // End of if /  else {
-                } // End of if / else statemen
+                } // End of if / else statement
         } catch (Exception e) {
             System.out.println("File doesn't exist\n");
         } // End of try / catch statement

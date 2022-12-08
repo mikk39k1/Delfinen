@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.SingleTonDatabase;
+import database.Database;
 
 import java.util.ArrayList;
 
@@ -27,23 +27,32 @@ public class SystemBoot {
      * - 1 Loading all member data from fullMemberList file
      * - 2 Loading all coach employees from coachList file
      * - 3 Sets the corresponding static member ID, so Member ID keeps incrementing, even after deleted users
-     * - 4 Loads the employed users
-     * - 5 Prints welcome screen
-     * - 6 Invokes login method
-     * - 7 Starts the menu selection
+     * - 4 Loading all Member/Coach associations from file to SwimmerCoachAssociationList
+     * - 5 Loading all results by members from file to Members Result
+     * - 6 Logs action
+     * - 7 Prints welcome ASCII-art
+     * - 8 Loads the employed users
+     * - 9 Invokes login method
+     * - 10 Starts the menu selection
      */
     private void startSystem() {
-        SingleTonDatabase.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance().loadMemberList(SingleTonDatabase.getSingletonDatabase().getMemberList()));// 1
-        SingleTonDatabase.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance().loadCoachList(SingleTonDatabase.getSingletonDatabase().getCoachList()));// 2
-        Member.setID(SingleTonFileHandler.getInstance().loadID());// 3
-        SingleTonDatabase.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance().loadSwimmerCoachAssociationList(SingleTonDatabase.getSingletonDatabase()));
-        SingleTonFileHandler.getInstance().loadResultMethod(SingleTonDatabase.getSingletonDatabase().getSwimmersCoachAssociationList());
+        Database.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance()
+                .loadMemberList(Database.getSingletonDatabase().getMemberList()));                          // 1
+        Database.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance()
+                .loadCoachList(Database.getSingletonDatabase().getCoachList()));                            // 2
+        Member.setID(SingleTonFileHandler.getInstance().loadID());                                          // 3
+        Database.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance()
+                .loadSwimmerCoachAssociationList(Database.getSingletonDatabase()));                         // 4
+        SingleTonFileHandler.getInstance().loadResultMethod(Database.getSingletonDatabase()
+                .getSwimmersCoachAssociationList());                                                        // 5
 
-        SingleTonFileHandler.getInstance().loggingAction("Program started.");
-        SingleTonFileHandler.getInstance().printWelcomeSharks();   // 5
-        loadStaff();
-        //loading();
-        loginSystem();                      // 6
+        SingleTonFileHandler.getInstance().loggingAction("Program started.");                               // 6
+        SingleTonFileHandler.getInstance().printWelcomeSharks();                                            // 7
+        loadStaff();                                                                                        // 8
+        loading();                                                                                          // 9
+        loginSystem();                                                                                      // 10
+
+
 
         MenuRun startSystem = new MenuRun(">>> ENIGMA SOLUTION <<<", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Add a new member.",
@@ -60,14 +69,14 @@ public class SystemBoot {
                 "12. Check this years Club-Economy",
                 "0. Log out."
         });      // 6
-        startSystem.menuLooping(currentUser, SingleTonDatabase.getSingletonDatabase());
+        startSystem.menuLooping(currentUser, Database.getSingletonDatabase());
     } // End of method
 
 
     /*
      * This method follows the principle of "The Least Privilege" and ensure users cant do more than allowed by setting Role and Privilege level
      */
-    private void setRoleAndPrivilege(String username, SingleTonDatabase singleTonDatabase) {
+    private void setRoleAndPrivilege(String username, Database database) {
         // Switch statement set role and privilege based on correct username
         enigmaUsers.forEach(
                 employee -> {
@@ -75,7 +84,7 @@ public class SystemBoot {
                         currentUser = employee;
                         SingleTonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                     } else {
-                        singleTonDatabase.getCoachList().forEach(
+                        database.getCoachList().forEach(
                                 coach -> {
                                     if (coach.getUsername().equals(username)) {
                                         currentUser = coach;
@@ -98,7 +107,7 @@ public class SystemBoot {
         do {
             user = isLoggedIn();                // Temporary stores a username if prompted existing username
             if (!user.equals("0")) {
-                setRoleAndPrivilege(user, SingleTonDatabase.getSingletonDatabase());      // Sets authorization level of role / privileges
+                setRoleAndPrivilege(user,Database.getSingletonDatabase());      // Sets authorization level of role / privileges
             } // End of if statement
         } while (user.equals("0")); // End of do-while loop
     } // end of method
