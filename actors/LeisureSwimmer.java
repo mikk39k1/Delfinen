@@ -15,7 +15,6 @@ public class LeisureSwimmer extends Member {
         setName(in.readLine());
         in.print("Please enter phone number: ");
         setPhoneNumber(in.readLine());
-        in.print("Please enter age: ");//Tnis shouldn't be here - it's not prompting for age, but birfday :D
         in.printLn("What is the members birthday");
         setDateOfBirth(in.setDate());
         in.print("Please enter if membership is active? true/false: ");

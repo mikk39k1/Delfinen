@@ -17,11 +17,11 @@ public class Coach extends Employee {
 	// Constructors ---------------------------------
 
 	// Constructor to create a Coach with Password.
-	public Coach(String name, String phonenumber, String username, String password) {
+	public Coach(String name, String phoneNumber, String username, String password) {
 		setName(name);
 		setRole(RoleType.COACHING);
 		setPrivilege(PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT);
-		setPhoneNumber(phonenumber);
+		setPhoneNumber(phoneNumber);
 		setUsername(username);
 		setPassword(password);
 	}
@@ -168,20 +168,6 @@ public class Coach extends Employee {
 		} // End of for loop
     return memberAmount;
 	} // End of method
-
-
-
-	/*
-	* This method finds and prints the coach of a specific member
-	 */
-	public void findCoachOfMember(Database swimmerCoachDatabase, Member member) {
-		for (Coach values : swimmerCoachDatabase.getSwimmersCoachAssociationList().values()) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(member).equals(values)) {
-				System.out.println(values.getName());
-			} // End of if statement
-		} // End of for loop
-	} // End of method
-
 
 
 	public String loadCoachOfMember(HashMap<Member, Coach> swimmerCoachAssociation, Member member) {

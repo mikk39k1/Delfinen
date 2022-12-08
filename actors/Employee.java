@@ -2,7 +2,7 @@ package actors;
 
 /*
 * This class represent all what an employee must have. Our design is made up with "The Least Privilege" concept.
-* Whenever an employee is instantiated, a privilege and role is given, thus ensuring we better can encapsulate each memebers
+* Whenever an employee is instantiated, a privilege and role is given, thus ensuring we better can encapsulate each members
 * access to the system.
  */
 public abstract class Employee extends Person {
@@ -16,7 +16,7 @@ public abstract class Employee extends Person {
 	public enum PrivilegeType {
 		ADMINISTRATOR,
 		ECONOMY_MANAGEMENT,
-		COMPETITIVE_SWIMMER_MANAGEMENT};
+		COMPETITIVE_SWIMMER_MANAGEMENT}
 
 	private RoleType role;
 	private PrivilegeType privilege;

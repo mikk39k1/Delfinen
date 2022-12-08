@@ -40,13 +40,13 @@ public class Chairman extends Employee {
         ui.print("Please enter name of Coach: ");
         String coachName = ui.readLine();
         ui.print("Please enter a phone number: ");
-        String phonenumber = ui.readLine();
+        String phoneNumber = ui.readLine();
         ui.print("Please enter a username: ");
         String username = ui.readLine();
         ui.print("Please enter a password: ");
         String password = ui.readLine();
 
-        coachList.getCoachList().add(new Coach(coachName, phonenumber,username,password));
+        coachList.getCoachList().add(new Coach(coachName, phoneNumber,username,password));
     } // End of method
 
 

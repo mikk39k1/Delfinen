@@ -3,9 +3,7 @@ package actors;
 import database.Database;
 import utility.UI;
 
-import java.util.Comparator;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 * This class represents the treasurer, which is the accountant in the system.
@@ -70,9 +68,6 @@ public class Treasurer extends Employee {
 		} // End of for loop
 	} // End of method
 
-
-
-
 	/*
 	This method does an analysis of each member it gets invoked upon
 	 */
@@ -123,8 +118,7 @@ public class Treasurer extends Employee {
 		for (int i = 0; i < 4; i++) {
 			System.out.printf("%-10s %-15s %-14s%n",names[i],list[i][0],list[i][1]);
 		}
-		System.out.println("------------------------------------------------------");
-		System.out.println("");
+		System.out.println("------------------------------------------------------\n");
 		System.out.println("Members who haven't paid:");
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT TO PAY");
 		for (int i = 4; i < 8; i++) {

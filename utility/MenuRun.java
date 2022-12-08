@@ -14,10 +14,10 @@ public class MenuRun {
     private final String leadText;
 
     // Constructor  -----------------------------------------
-    public MenuRun(String menuHeader, String leadtext, String[] menuOptions) {
+    public MenuRun(String menuHeader, String leadText, String[] menuOptions) {
         this.menuHeader = menuHeader;
         this.menuOptions = menuOptions;
-        this.leadText = leadtext;
+        this.leadText = leadText;
     }
 
 
@@ -39,7 +39,7 @@ public class MenuRun {
                 case 7 -> printCompetitiveSwimmersResult(employee, database); /*Prints 1 swimmers results*/
                 case 8 -> printTopFiveByDiscipline(employee, database);/*Prints top 5 in 1 discipline*/
                 case 9 -> printSwimmersByCoach(employee, database);/*Prints all members for specific coach*/
-                case 10 -> createCoach(employee, database, UI.getInstance());/*Create a coach and add them to coachlist.*/
+                case 10 -> createCoach(employee, database, UI.getInstance());/*Create a coach and add them to coachList.*/
                 case 11 -> deleteCoach(employee, database, UI.getInstance());//Delete Coach
                 case 12 -> printEco(employee, database);
                 case 0 -> isSignedIn = logOut(); /*Logs you out of the system */
@@ -172,7 +172,7 @@ public class MenuRun {
 
         } else {
             UI.getInstance().printLn("You don't have the privilege to use this function");
-            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Add a swimresult\".");
+            FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Add a result\".");
         } // End of outer if / else statement
     } // End of method
 
