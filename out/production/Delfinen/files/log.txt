@@ -724,3 +724,4 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:07:09:47:54 Program started.
 2022:12:07:09:48:03 Administrator logged in.
 2022:12:07:09:48:09 Top 5 athletes was printed.
+2022:12:07:17:55:30 Program started.

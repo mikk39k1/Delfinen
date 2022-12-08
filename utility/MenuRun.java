@@ -203,7 +203,7 @@ public class MenuRun {
     private void printTopFiveByDiscipline(Employee employee, Database database) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
-            UI.getInstance().printLn("Crawl, butterfly, breaststroke, ");
+            UI.getInstance().printLn("Crawl, Butterfly, Breaststroke, Freestyle, Backcrawl");
             SuperSorterThreeThousand.getInstance().topFiveSmadderButRefactored(UI.getInstance().setSwimmingDisciplineType(),
                     UI.getInstance().setDistance(), database.getSwimmersCoachAssociationList());
             //SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
@@ -248,8 +248,8 @@ public class MenuRun {
             ((Chairman) employee).createCoach(database, ui, FileHandler.getInstance());
             FileHandler.getInstance().writeToCoachList(database.getCoachList());
             FileHandler.getInstance().writeCoachUserAndPassToList(
-                    database.getCoachList().get(database.getCoachList().size()-1).getUsername(),
-                    database.getCoachList().get(database.getCoachList().size()-1).getPassword());
+                    database.getCoachList().get(database.getCoachList().size() - 1).getUsername(),
+                    database.getCoachList().get(database.getCoachList().size() - 1).getPassword());
 
             FileHandler.getInstance().loggingAction("A new coach added.");
         } else {
@@ -484,11 +484,11 @@ public class MenuRun {
                             UI.getInstance().printLn("As chairman, please enter the coach name, you wish to see respective members of");
                             Coach adminOverride = ((Chairman) employee).chooseCoach(UI.getInstance(), database, false); // Creates temporary user for admin
                             SuperSorterThreeThousand.getInstance().setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(UI.getInstance(),database);
+                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(UI.getInstance(), database);
                             swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> UI.getInstance().print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
                             UI.getInstance().printLn(" | ");
                             SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = UI.getInstance().setSwimmingDisciplineType();
-                            adminOverride.addSwimResult(UI.getInstance(), swimmer, disciplineType ); // Runs temporary user method
+                            adminOverride.addSwimResult(UI.getInstance(), swimmer, disciplineType); // Runs temporary user method
                             FileHandler.getInstance().appendResult(database.getSwimmersCoachAssociationList(), swimmer,
                                     disciplineType);
                             FileHandler.getInstance().loggingAction("A swim result was added.");
