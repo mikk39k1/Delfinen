@@ -13,6 +13,7 @@ public class SystemBoot {
 
     // Utility / Controller ------------------
     private Employee currentUser;
+
     private final ArrayList<Employee> enigmaUsers = new ArrayList<>();
 
     /*
