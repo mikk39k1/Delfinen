@@ -1,6 +1,6 @@
 package actors;
 
-import utility.UI;
+import utility.SingleTonUI;
 
 import java.time.LocalDate;
 
@@ -19,23 +19,23 @@ public class SwimmingResult {
 
 
     // Constructor --------------------------------------
-    public SwimmingResult(UI ui) {
-        ui.print("Please enter distance: ");
-        this.distance = ui.setDistance();
+    public SwimmingResult(SingleTonUI singleTonUi) {
+        singleTonUi.print("Please enter distance: ");
+        this.distance = singleTonUi.setDistance();
 
-        this.date = ui.setDate();
+        this.date = singleTonUi.setDate();
 
-        ui.print("Please enter the swim time - ");
-        this.swimTime = ui.setTime();
+        singleTonUi.print("Please enter the swim time - ");
+        this.swimTime = singleTonUi.setTime();
 
-        ui.print("Please enter was this in a competition - true/false: ");
-        this.isCompetitive = ui.readBoolean();
+        singleTonUi.print("Please enter was this in a competition - true/false: ");
+        this.isCompetitive = singleTonUi.readBoolean();
 
         if (isCompetitive) {
-            ui.print("Please enter rank placement: ");
-            this.rank = ui.readInt();
+            singleTonUi.print("Please enter rank placement: ");
+            this.rank = singleTonUi.readInt();
         }
-        ui.printLn("The swim result was added!");
+        singleTonUi.printLn("The swim result was added!");
     }
 
     // Constructor for fileWriter -----------------------

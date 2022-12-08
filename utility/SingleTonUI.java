@@ -7,20 +7,20 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /*
- * This class is a UI (utility) class. The sole purpose is to use the configurated methods to ensure read data from inputs
+ * This class is a UI (utility) class, the sole purpose is to use configurated methods to ensure read data from inputs
  *  doesn't compile errors and bugs. This way we can avoid Scanner Bugs, input errors, Enum Type input errors etc.
  * By using this utility for the exact situations we see scope to, we can also predefine requests inform of text, to have a more
  * fluently, user-friendly and usability oriented experience. We also increase availability and performances of the overall
  * software by using these pre configurated methods.
  */
-public class UI {
-    private static final UI SingleTonUI = new UI();
+public class SingleTonUI {
+    private static final utility.SingleTonUI SingleTonUI = new SingleTonUI();
 
 
-    private UI() {
+    private SingleTonUI() {
     }
 
-    public static UI getInstance() {
+    public static utility.SingleTonUI getInstance() {
         return SingleTonUI;
     }
 
@@ -106,7 +106,7 @@ public class UI {
 
     /*
      * This method requests and returns the input value representing a specific year of birth
-     * //130 is what we consider as ultimate age in years for a person
+     * //130 is what we consider as ulitmate age in years for a person
      */
     public int readYear() {
         print("Please enter year:  ");
@@ -227,7 +227,7 @@ public class UI {
 
     // ENUM READER ---------------------------------------------
     /*
-     * This method checks input to match Enum value of SwimingDisciplineType
+     * This method checks input to match Enum value of SwimingDiscplineType
      */
     public SwimmingDiscipline.SwimmingDisciplineTypes setSwimmingDisciplineType() {
         System.out.print("Please enter Swimming Discipline/s ");

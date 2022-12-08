@@ -1,7 +1,7 @@
 package actors;
 
 import database.Database;
-import utility.UI;
+import utility.SingleTonUI;
 
 import java.util.Objects;
 
@@ -31,13 +31,13 @@ public class Treasurer extends Employee {
 	* This method checks all members within the Database memberList if they have arrears
 	 */
 	public void checkMemberArrears(Database swimmerCoachDatabase) {
-		System.out.printf("  %-5s %-19s %-10s %-12s %-7s %-4s%n","[ID]", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
+		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
 		for (Member member : swimmerCoachDatabase.getMemberList()){
 			if (!member.isHasPaid()) {
 				String[] arr;
 				arr = memberAnalysis(member);	// Stores the result of memberAnalysis method inside String array arr
-				System.out.printf("-%5s  %-20s %-10s %-12s %-7s %s%n",member.getUniqueID(), member.getName(), arr[2],
-						(arr[3].equals("null") ? "-" : arr[3]), arr[0], arr[1]);
+				System.out.printf("- %-20s %-10s %-12s %-7s %s%n", member.getName(), arr[2],
+						(arr[3] == null ? "-" : arr[3]), arr[0], arr[1]);
 			} // End of if statement
 		} // End of for loop
 	} // End of method
@@ -46,27 +46,22 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(Database database, UI ui) {
-		System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", "[ID]", "[NAME]", "[STATE]", "[TYPE]", "[AGE]",
+	public void setMemberArrears(Database swimmerCoachDatabase, SingleTonUI singleTonUi) {
+		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
-		for (Member member : database.getMemberList()) {
+		int count = 0;
+		for (Member member : swimmerCoachDatabase.getMemberList()){
+			count++;
 			String[] arr;
-			String hasPaid = (member.isHasPaid() ? "TRUE" : "FALSE");     // Stores temporary statement of paid state
+			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
 			arr = memberAnalysis(member); // Stores the member inside String array arr
-			System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", member.getUniqueID(), member.getName(), arr[2],
-					(Objects.equals(arr[3], "null") ? "-" : arr[3]), arr[0], hasPaid);  // Prints the status of member
+			System.out.printf("%s%-1d# %-40s %-10s %-12s %-20s %-10s%n",(count < 10) ? "0" :"", count, member.getName(),arr[2],
+					(Objects.equals(arr[3], "null") ?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
 		} // End of for loop
-		ui.printLn("Enter the ID of member you wish to toggle payment for");
-		int choice = ui.readInt();
-		for (int i = 0; i < database.getMemberList().size(); i++) {
-			if (database.getMemberList().get(i).getUniqueID() == choice) {
-				database.getMemberList().get(i).toggleHasPaid(); // Changes paid status of chosen member
-			} else if (database.getMemberList().size()-1 == i &&
-					database.getMemberList().get(i).getUniqueID() != choice) {
-				System.out.println("Member not found");
-			}
-		} // End of for loop
+		singleTonUi.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
+		swimmerCoachDatabase.getMemberList().get(singleTonUi.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
 	} // End of method
+
 
 	/*
 	This method does an analysis of each member it gets invoked upon
@@ -118,7 +113,8 @@ public class Treasurer extends Employee {
 		for (int i = 0; i < 4; i++) {
 			System.out.printf("%-10s %-15s %-14s%n",names[i],list[i][0],list[i][1]);
 		}
-		System.out.println("------------------------------------------------------\n");
+		System.out.println("------------------------------------------------------");
+		System.out.println("");
 		System.out.println("Members who haven't paid:");
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT TO PAY");
 		for (int i = 4; i < 8; i++) {
