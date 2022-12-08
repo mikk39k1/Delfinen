@@ -60,14 +60,16 @@ public class Treasurer extends Employee {
 		}
 		singleTonUi.printLn("For which member do you wish to toggle the payment? Enter their ID");
 		int choice = singleTonUi.readInt();
+		boolean exist = false;
 		for (int i = 0; i < database.getMemberList().size(); i++) {
 			if (choice==database.getMemberList().get(i).getUniqueID()){
 				database.getMemberList().get(i).toggleHasPaid();
 				singleTonUi.printLn("Payment has been toggled");
+				exist = true;
 			}
-			else if (database.getMemberList().size()-1==i && choice!=database.getMemberList().get(i).getUniqueID()){
-				singleTonUi.printLn("Wrong Member ID");
-			}
+		}
+		if (!exist) {
+			singleTonUi.printLn("Wrong Member ID");
 		}
 
 			// Changes paid status of chosen member

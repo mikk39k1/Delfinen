@@ -49,7 +49,7 @@ public class SystemBoot {
         SingleTonFileHandler.getInstance().loggingAction("Program started.");                               // 6
         SingleTonFileHandler.getInstance().printWelcomeSharks();                                            // 7
         loadStaff();                                                                                        // 8
-        loading();                                                                                          // 9
+        //loading();                                                                                          // 9
         loginSystem();                                                                                      // 10
 
 

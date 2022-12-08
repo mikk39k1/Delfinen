@@ -778,3 +778,51 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:08:15:40:45 Administrator logged in.
 2022:12:08:15:48:36 Program started.
 2022:12:08:15:48:53 Administrator logged in.
+2022:12:08:16:00:08 Program started.
+2022:12:08:16:00:19 Administrator logged in.
+2022:12:08:16:00:26 A members payment status was changed.
+2022:12:08:16:00:26 A members payment status was changed.
+2022:12:08:16:05:40 Program started.
+2022:12:08:16:05:52 Administrator logged in.
+2022:12:08:16:05:58 A members payment status was changed.
+2022:12:08:16:05:58 A members payment status was changed.
+2022:12:08:16:07:44 Program started.
+2022:12:08:16:11:00 Administrator logged in.
+2022:12:08:16:11:11 A members payment status was changed.
+2022:12:08:16:11:11 A members payment status was changed.
+2022:12:08:16:12:16 Program started.
+2022:12:08:16:12:40 Administrator logged in.
+2022:12:08:16:12:44 A members payment status was changed.
+2022:12:08:16:12:44 A members payment status was changed.
+2022:12:08:16:14:43 Program started.
+2022:12:08:16:14:56 Administrator logged in.
+2022:12:08:16:15:04 A members payment status was changed.
+2022:12:08:16:15:04 A members payment status was changed.
+2022:12:08:16:16:51 Program started.
+2022:12:08:16:17:04 Administrator logged in.
+2022:12:08:16:17:07 A members payment status was changed.
+2022:12:08:16:17:07 A members payment status was changed.
+2022:12:08:16:18:31 Program started.
+2022:12:08:16:18:38 Administrator logged in.
+2022:12:08:16:18:43 A members payment status was changed.
+2022:12:08:16:18:43 A members payment status was changed.
+2022:12:08:16:18:52 A members payment status was changed.
+2022:12:08:16:18:52 A members payment status was changed.
+2022:12:08:16:19:30 A members payment status was changed.
+2022:12:08:16:19:30 A members payment status was changed.
+2022:12:08:16:19:42 A members payment status was changed.
+2022:12:08:16:19:42 A members payment status was changed.
+2022:12:08:16:19:44 A members payment status was changed.
+2022:12:08:16:19:44 A members payment status was changed.
+2022:12:08:16:19:50 A members payment status was changed.
+2022:12:08:16:19:50 A members payment status was changed.
+2022:12:08:16:19:55 A members payment status was changed.
+2022:12:08:16:19:55 A members payment status was changed.
+2022:12:08:16:20:05 A members payment status was changed.
+2022:12:08:16:20:05 A members payment status was changed.
+2022:12:08:16:20:08 A members payment status was changed.
+2022:12:08:16:20:08 A members payment status was changed.
+2022:12:08:16:20:12 A members payment status was changed.
+2022:12:08:16:20:12 A members payment status was changed.
+2022:12:08:16:20:18 A members payment status was changed.
+2022:12:08:16:20:18 A members payment status was changed.
