@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.Database;
+import database.SingleTonDatabase;
 
 /*
  * This class represent the menu and the interaction of user and system. Whenever an input is received for the menu
@@ -24,24 +24,24 @@ public class MenuRun {
     /*
      * This method is looping each option a user can interact with within the menu
      */
-    protected void menuLooping(Employee employee, Database database) {
+    protected void menuLooping(Employee employee, SingleTonDatabase singleTonDatabase) {
         boolean isSignedIn = true;
         while (isSignedIn) {
             SingleTonUI.getInstance().printLn("");
             printMenu();
             switch (SingleTonUI.getInstance().readInt()) {
-                case 1 -> addMember(employee, database); /*add new member to all members lists */
-                case 2 -> deleteMember(employee, database); /*deletes member from members lists*/
-                case 3 -> printAllMembers(employee, database);/*print all members */
-                case 4 -> printMembersInDebt(employee, database); /*Prints list of members who hasn't paid */
-                case 5 -> changePayDue(employee, database);
-                case 6 -> addSwimResult(employee, database);/*add swimResult*/
-                case 7 -> printCompetitiveSwimmersResult(employee, database); /*Prints 1 swimmers results*/
-                case 8 -> printTopFiveByDiscipline(employee, database);/*Prints top 5 in 1 discipline*/
-                case 9 -> printSwimmersByCoach(employee, database);/*Prints all members for specific coach*/
-                case 10 -> createCoach(employee, database, SingleTonUI.getInstance());/*Create a coach and add them to coachlist.*/
-                case 11 -> deleteCoach(employee, database, SingleTonUI.getInstance());//Delete Coach
-                case 12 -> printEco(employee, database);
+                case 1 -> addMember(employee, singleTonDatabase); /*add new member to all members lists */
+                case 2 -> deleteMember(employee, singleTonDatabase); /*deletes member from members lists*/
+                case 3 -> printAllMembers(employee, singleTonDatabase);/*print all members */
+                case 4 -> printMembersInDebt(employee, singleTonDatabase); /*Prints list of members who hasn't paid */
+                case 5 -> changePayDue(employee, singleTonDatabase);
+                case 6 -> addSwimResult(employee, singleTonDatabase);/*add swimResult*/
+                case 7 -> printCompetitiveSwimmersResult(employee, singleTonDatabase); /*Prints 1 swimmers results*/
+                case 8 -> printTopFiveByDiscipline(employee, singleTonDatabase);/*Prints top 5 in 1 discipline*/
+                case 9 -> printSwimmersByCoach(employee, singleTonDatabase);/*Prints all members for specific coach*/
+                case 10 -> createCoach(employee, singleTonDatabase, SingleTonUI.getInstance());/*Create a coach and add them to coachlist.*/
+                case 11 -> deleteCoach(employee, singleTonDatabase, SingleTonUI.getInstance());//Delete Coach
+                case 12 -> printEco(employee, singleTonDatabase);
                 case 0 -> isSignedIn = logOut(); /*Logs you out of the system */
                 default -> SingleTonUI.getInstance().printLn("Incorrect choice. Chose another option.\n");
             } // End of switch statement
@@ -65,14 +65,14 @@ public class MenuRun {
      * This method adds a member through the Chairman class
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void addMember(Employee employee, Database database) {
+    private void addMember(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             ((Chairman) employee).addMember(SingleTonUI.getInstance(), ((Chairman) employee).createMember(SingleTonUI.getInstance()),
-                    database);
-            SingleTonFileHandler.getInstance().writeToFullMembersList(database.getMemberList());
-            SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(database);
-            SingleTonFileHandler.getInstance().loggingAction(database.getMemberList().get(database.
+                    singleTonDatabase);
+            SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList());
+            SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(singleTonDatabase);
+            SingleTonFileHandler.getInstance().loggingAction(singleTonDatabase.getMemberList().get(singleTonDatabase.
                     getMemberList().size() - 1).getName() + " is now swimming with DELFINEN.");
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -85,11 +85,11 @@ public class MenuRun {
      * This method finds and deletes a member from the Database memberList
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void deleteMember(Employee employee, Database database) {
+    private void deleteMember(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).deleteMember(SingleTonUI.getInstance(), database);
-            SingleTonFileHandler.getInstance().writeToFullMembersList(database.getMemberList());
+            ((Chairman) employee).deleteMember(SingleTonUI.getInstance(), singleTonDatabase);
+            SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList());
             SingleTonFileHandler.getInstance().loggingAction("Member deleted.");
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -102,10 +102,10 @@ public class MenuRun {
      * This method prints all members from the database through the Chairman class
      * Only Employee Privilege level of ADMINISTRATOR can use this method (Chairman class)
      */
-    private void printAllMembers(Employee employee, Database database) {
+    private void printAllMembers(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            innerMenuPrintAllMembers(employee, database);
+            innerMenuPrintAllMembers(employee, singleTonDatabase);
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
             SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
@@ -117,16 +117,16 @@ public class MenuRun {
      * This method prints all members with arrears through the Treasurer class
      * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
      */
-    private void printMembersInDebt(Employee employee, Database swimmerCoachDatabase) {
+    private void printMembersInDebt(Employee employee, SingleTonDatabase swimmerCoachSingleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                      // Creates temporary user for admin
-                adminOverride.checkMemberArrears(swimmerCoachDatabase);         // Runs temporary user intended method
+                adminOverride.checkMemberArrears(swimmerCoachSingleTonDatabase);         // Runs temporary user intended method
                 SingleTonFileHandler.getInstance().loggingAction("Members in arrear viewed.");
             } else {
-                ((Treasurer) employee).checkMemberArrears(swimmerCoachDatabase);    // Runs method as Treasurer
+                ((Treasurer) employee).checkMemberArrears(swimmerCoachSingleTonDatabase);    // Runs method as Treasurer
                 SingleTonFileHandler.getInstance().loggingAction("Members in arrear viewed.");
             } // End of inner if / else statement
         } else {
@@ -140,19 +140,19 @@ public class MenuRun {
      * This method allows for changes within member status, regarding paid status through the Treasurer class
      * Only Employee Privilege level of ADMINISTRATOR and ECONOMY_MANAGEMENT can use this method (Chairman/Treasurer class)
      */
-    private void changePayDue(Employee employee, Database database) {
+    private void changePayDue(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.setMemberArrears(database, SingleTonUI.getInstance()); // Runs temporary user intended method
-                SingleTonFileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+                adminOverride.setMemberArrears(singleTonDatabase, SingleTonUI.getInstance()); // Runs temporary user intended method
+                SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList()); // Writes changes to file
                 SingleTonFileHandler.getInstance().loggingAction("A members payment status was changed.");
             } else {
-                ((Treasurer) employee).checkMemberArrears(database);    // Runs method as Treasurer
+                ((Treasurer) employee).checkMemberArrears(singleTonDatabase);    // Runs method as Treasurer
             } // End of inner if / else statement
-            SingleTonFileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+            SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList()); // Writes changes to file
             SingleTonFileHandler.getInstance().loggingAction("A members payment status was changed.");
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -165,11 +165,11 @@ public class MenuRun {
      * This method adds swimming result to a member through the Coach class
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void addSwimResult(Employee employee, Database database) {
+    private void addSwimResult(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            innerMenuAddSwimResults(employee, database);
+            innerMenuAddSwimResults(employee, singleTonDatabase);
 
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -182,11 +182,11 @@ public class MenuRun {
      * This method prints out a specific Swimmers results
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void printCompetitiveSwimmersResult(Employee employee, Database database) {
+    private void printCompetitiveSwimmersResult(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            innerMenuSwimmerResults(employee, database);
+            innerMenuSwimmerResults(employee, singleTonDatabase);
             SingleTonFileHandler.getInstance().loggingAction("A competitive swimmers results printed.");
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -200,12 +200,12 @@ public class MenuRun {
      * The method reads input from user: swimDiscipline and period of time to get results
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void printTopFiveByDiscipline(Employee employee, Database database) {
+    private void printTopFiveByDiscipline(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
             SingleTonUI.getInstance().printLn("Crawl, Butterfly, Breaststroke, Freestyle, Backcrawl");
             SingleTonSuperSorterThreeThousand.getInstance().topFiveSmadderButRefactored(SingleTonUI.getInstance().setSwimmingDisciplineType(),
-                    SingleTonUI.getInstance().setDistance(), database.getSwimmersCoachAssociationList());
+                    SingleTonUI.getInstance().setDistance(), singleTonDatabase.getSwimmersCoachAssociationList());
             //SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
             SingleTonFileHandler.getInstance().loggingAction("Top 5 athletes was printed.");
         } else {
@@ -219,17 +219,17 @@ public class MenuRun {
      * This method prints all the members associated for a specific coach
      * Only Employee Privilege level of ADMINISTRATOR and COMPETITIVE_SWIMMER_MANAGEMENT can use this method (Chairman/Coach class)
      */
-    private void printSwimmersByCoach(Employee employee, Database swimmerCoachDatabase) {
+    private void printSwimmersByCoach(Employee employee, SingleTonDatabase swimmerCoachSingleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 // This method makes admin take role of an existing coach, to print his members out
-                Coach adminOverride = ((Chairman) employee).chooseCoach(SingleTonUI.getInstance(), swimmerCoachDatabase, false);
-                adminOverride.findMembersOfCoach(swimmerCoachDatabase, adminOverride); // Runs method as temporary user
+                Coach adminOverride = ((Chairman) employee).chooseCoach(SingleTonUI.getInstance(), swimmerCoachSingleTonDatabase, false);
+                adminOverride.findMembersOfCoach(swimmerCoachSingleTonDatabase, adminOverride); // Runs method as temporary user
                 SingleTonFileHandler.getInstance().loggingAction("Swimmers with coach association viewed.");
             } else {
-                ((Coach) employee).findMembersOfCoach(swimmerCoachDatabase, ((Coach) employee)); // Runs method as coach
+                ((Coach) employee).findMembersOfCoach(swimmerCoachSingleTonDatabase, ((Coach) employee)); // Runs method as coach
                 SingleTonFileHandler.getInstance().loggingAction("Swimmers with coach association viewed.");
             } // End of inner if / else statement
         } else {
@@ -242,14 +242,14 @@ public class MenuRun {
     /*
      * This method allows chairman to create a coach with login credentials, so he can be a user of the system
      */
-    private void createCoach(Employee employee, Database database, SingleTonUI singleTonUi) {
+    private void createCoach(Employee employee, SingleTonDatabase singleTonDatabase, SingleTonUI singleTonUi) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-            ((Chairman) employee).createCoach(database, singleTonUi);
-            SingleTonFileHandler.getInstance().writeToCoachList(database.getCoachList());
+            ((Chairman) employee).createCoach(singleTonDatabase, singleTonUi);
+            SingleTonFileHandler.getInstance().writeToCoachList(singleTonDatabase.getCoachList());
             SingleTonFileHandler.getInstance().writeCoachUserAndPassToList(
-                    database.getCoachList().get(database.getCoachList().size() - 1).getUsername(),
-                    database.getCoachList().get(database.getCoachList().size() - 1).getPassword());
+                    singleTonDatabase.getCoachList().get(singleTonDatabase.getCoachList().size() - 1).getUsername(),
+                    singleTonDatabase.getCoachList().get(singleTonDatabase.getCoachList().size() - 1).getPassword());
 
             SingleTonFileHandler.getInstance().loggingAction("A new coach added.");
         } else {
@@ -258,17 +258,17 @@ public class MenuRun {
         } // End of if / else statement
     } // End of method
 
-    private void deleteCoach(Employee employee, Database database, SingleTonUI singleTonUi) {
+    private void deleteCoach(Employee employee, SingleTonDatabase singleTonDatabase, SingleTonUI singleTonUi) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
             singleTonUi.printLn("Write the name of the coach you would like to remove:");
             String findCoach = singleTonUi.readLine();
             singleTonUi.printLn("Write the username for the coach:");
             String coachUsername = singleTonUi.readLine();
 
-            ((Chairman) employee).deleteCoach(findCoach, database, singleTonUi);
+            ((Chairman) employee).deleteCoach(findCoach, singleTonDatabase, singleTonUi);
             SingleTonFileHandler.getInstance().deleteCoachLoginFromFile(coachUsername);
-            SingleTonFileHandler.getInstance().writeToCoachList(database.getCoachList());
-            SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(database);
+            SingleTonFileHandler.getInstance().writeToCoachList(singleTonDatabase.getCoachList());
+            SingleTonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(singleTonDatabase);
             SingleTonFileHandler.getInstance().loggingAction(findCoach + " is no longer a DELFINEN coach.");
         } else {
             singleTonUi.printLn("You don't have the privilege to use this function");
@@ -277,18 +277,18 @@ public class MenuRun {
     } // End of method
 
 
-    private void printEco(Employee employee, Database database) {
+    private void printEco(Employee employee, SingleTonDatabase singleTonDatabase) {
         if (employee.getPrivilege().equals(Employee.PrivilegeType.ECONOMY_MANAGEMENT) ||
                 employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
-                adminOverride.printEconomyInfo(database); // Runs temporary user intended method
+                adminOverride.printEconomyInfo(singleTonDatabase); // Runs temporary user intended method
                 SingleTonFileHandler.getInstance().loggingAction("Economy details viewed.");
             } else {
-                ((Treasurer) employee).printEconomyInfo(database);
+                ((Treasurer) employee).printEconomyInfo(singleTonDatabase);
             } // End of inner if / else statement
-            SingleTonFileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
+            SingleTonFileHandler.getInstance().writeToFullMembersList(singleTonDatabase.getMemberList()); // Writes changes to file
             SingleTonFileHandler.getInstance().loggingAction("Economy details viewed.");
         } else {
             SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -297,7 +297,7 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuSwimmerResults(Employee employee, Database database) {
+    public void innerMenuSwimmerResults(Employee employee, SingleTonDatabase singleTonDatabase) {
         boolean chooseSortMethod = true;
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Show all Results for Swimmer",
@@ -315,10 +315,10 @@ public class MenuRun {
                     if (employee instanceof Chairman) {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         adminOverride.checkCompetitorSwimResults(
-                                adminOverride.lookupSwimmer(SingleTonUI.getInstance(), database)); //Runs temporary user method
+                                adminOverride.lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase)); //Runs temporary user method
                     } else {
                         ((Coach) employee).checkCompetitorSwimResults(
-                                ((Coach) employee).lookupSwimmer(SingleTonUI.getInstance(), database)); // runs method as Coach
+                                ((Coach) employee).lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase)); // runs method as Coach
                     } // End of inner if / else statement
                     chooseSortMethod = false;
                     SingleTonFileHandler.getInstance().loggingAction("All results of a certain swimmer was viewed.");
@@ -328,13 +328,13 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByDate(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                                lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } else {
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByDate(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
@@ -345,13 +345,13 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByDistance(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                                lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } else {
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByDistance(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
@@ -362,13 +362,13 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByIsCompetitive(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                                lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } else {
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByIsCompetitive(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
@@ -379,13 +379,13 @@ public class MenuRun {
                         Coach adminOverride = new Coach();                      // Creates temporary user for admin
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByRank(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
                                 oneSwimmersResultList(adminOverride.
-                                                lookupSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                                lookupSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } else {
                         System.out.println(SingleTonSuperSorterThreeThousand.getInstance().setSortByRank(SingleTonUI.getInstance(), SingleTonSuperSorterThreeThousand.getInstance().
-                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), database),
-                                        database.getSwimmersCoachAssociationList(),
+                                oneSwimmersResultList(((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase),
+                                        singleTonDatabase.getSwimmersCoachAssociationList(),
                                         SingleTonUI.getInstance().setSwimmingDisciplineType())));
                     } // End of if / else statement
                     chooseSortMethod = false;
@@ -396,7 +396,7 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuPrintAllMembers(Employee employee, Database database) {
+    public void innerMenuPrintAllMembers(Employee employee, SingleTonDatabase singleTonDatabase) {
         boolean chooseSortMethod = true;
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Sort by Name",
@@ -412,7 +412,7 @@ public class MenuRun {
                 case 1 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberName(database.getMemberList()));
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberName(singleTonDatabase.getMemberList()));
                         SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Name.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -423,7 +423,7 @@ public class MenuRun {
                 case 2 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberAge(database.getMemberList()));
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberAge(singleTonDatabase.getMemberList()));
                         SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Age.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -434,7 +434,7 @@ public class MenuRun {
                 case 3 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberID(database.getMemberList()));
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberID(singleTonDatabase.getMemberList()));
                         SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by ID.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -445,7 +445,7 @@ public class MenuRun {
                 case 4 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberPhoneNumber(database.getMemberList()));
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberPhoneNumber(singleTonDatabase.getMemberList()));
                         SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Phone number.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
@@ -463,7 +463,7 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuAddSwimResults(Employee employee, Database database) {
+    public void innerMenuAddSwimResults(Employee employee, SingleTonDatabase singleTonDatabase) {
         MenuRun innerMenu = new MenuRun("\u001B[1mADD SWIMRESULTS\u001B[0m", "Which team is swimmer on?", new String[]{
                 "Choose either: ",
                 "1. Junior Team",
@@ -482,14 +482,14 @@ public class MenuRun {
                     if (employee instanceof Chairman) {
                         try {
                             SingleTonUI.getInstance().printLn("As chairman, please enter the coach name, you wish to see respective members of");
-                            Coach adminOverride = ((Chairman) employee).chooseCoach(SingleTonUI.getInstance(), database, false); // Creates temporary user for admin
-                            SingleTonSuperSorterThreeThousand.getInstance().setSortByTeam(readInput, adminOverride, database.getSwimmersCoachAssociationList());
-                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(SingleTonUI.getInstance(), database);
+                            Coach adminOverride = ((Chairman) employee).chooseCoach(SingleTonUI.getInstance(), singleTonDatabase, false); // Creates temporary user for admin
+                            SingleTonSuperSorterThreeThousand.getInstance().setSortByTeam(readInput, adminOverride, singleTonDatabase.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase);
                             swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> SingleTonUI.getInstance().print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
                             SingleTonUI.getInstance().printLn(" | ");
                             SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = SingleTonUI.getInstance().setSwimmingDisciplineType();
                             adminOverride.addSwimResult(SingleTonUI.getInstance(), swimmer, disciplineType); // Runs temporary user method
-                            SingleTonFileHandler.getInstance().appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                            SingleTonFileHandler.getInstance().appendResult(singleTonDatabase.getSwimmersCoachAssociationList(), swimmer,
                                     disciplineType);
                             SingleTonFileHandler.getInstance().loggingAction("A swim result was added.");
                         } catch (NullPointerException e) {
@@ -498,13 +498,13 @@ public class MenuRun {
 
                     } else {
                         try {
-                            SingleTonSuperSorterThreeThousand.getInstance().setSortByTeam(readInput, ((Coach) employee), database.getSwimmersCoachAssociationList());
-                            CompetitiveSwimmer swimmer = ((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), database);
+                            SingleTonSuperSorterThreeThousand.getInstance().setSortByTeam(readInput, ((Coach) employee), singleTonDatabase.getSwimmersCoachAssociationList());
+                            CompetitiveSwimmer swimmer = ((Coach) employee).loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase);
                             swimmer.getSwimmingDisciplineList().forEach(swimmingDiscipline -> SingleTonUI.getInstance().print(" | " + swimmingDiscipline.getSwimmingDisciplineType()));
                             SingleTonUI.getInstance().printLn(" | ");
                             SwimmingDiscipline.SwimmingDisciplineTypes disciplineType = SingleTonUI.getInstance().setSwimmingDisciplineType();
                             ((Coach) employee).addSwimResult(SingleTonUI.getInstance(), swimmer, disciplineType); // Runs method as Coach
-                            SingleTonFileHandler.getInstance().appendResult(database.getSwimmersCoachAssociationList(), swimmer,
+                            SingleTonFileHandler.getInstance().appendResult(singleTonDatabase.getSwimmersCoachAssociationList(), swimmer,
                                     disciplineType);
                             SingleTonFileHandler.getInstance().loggingAction("A swim result was added.");
                         } catch (NullPointerException e) {

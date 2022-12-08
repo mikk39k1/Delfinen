@@ -1,6 +1,6 @@
 package actors;
 
-import database.Database;
+import database.SingleTonDatabase;
 import utility.SingleTonUI;
 
 import java.util.Objects;
@@ -30,9 +30,9 @@ public class Treasurer extends Employee {
 	/*
 	* This method checks all members within the Database memberList if they have arrears
 	 */
-	public void checkMemberArrears(Database swimmerCoachDatabase) {
+	public void checkMemberArrears(SingleTonDatabase swimmerCoachSingleTonDatabase) {
 		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
-		for (Member member : swimmerCoachDatabase.getMemberList()){
+		for (Member member : swimmerCoachSingleTonDatabase.getMemberList()){
 			if (!member.isHasPaid()) {
 				String[] arr;
 				arr = memberAnalysis(member);	// Stores the result of memberAnalysis method inside String array arr
@@ -46,11 +46,11 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(Database swimmerCoachDatabase, SingleTonUI singleTonUi) {
+	public void setMemberArrears(SingleTonDatabase swimmerCoachSingleTonDatabase, SingleTonUI singleTonUi) {
 		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
 		int count = 0;
-		for (Member member : swimmerCoachDatabase.getMemberList()){
+		for (Member member : swimmerCoachSingleTonDatabase.getMemberList()){
 			count++;
 			String[] arr;
 			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
@@ -59,7 +59,7 @@ public class Treasurer extends Employee {
 					(Objects.equals(arr[3], "null") ?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
 		} // End of for loop
 		singleTonUi.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
-		swimmerCoachDatabase.getMemberList().get(singleTonUi.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
+		swimmerCoachSingleTonDatabase.getMemberList().get(singleTonUi.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
 	} // End of method
 
 
@@ -82,9 +82,9 @@ public class Treasurer extends Employee {
 	} // End of method
 
 
-	private int[][] gatherPaymentInfoForMembers(Database swimmerCoachDatabase) {
+	private int[][] gatherPaymentInfoForMembers(SingleTonDatabase swimmerCoachSingleTonDatabase) {
 		int[][] multiArray = new int[8][2];								// Stores temporary payment data
-		for (Member member : swimmerCoachDatabase.getMemberList()){
+		for (Member member : swimmerCoachSingleTonDatabase.getMemberList()){
 			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analysis
 			if (member.isHasPaid()){
 				switch (arrAnalysis[3]){
@@ -105,8 +105,8 @@ public class Treasurer extends Employee {
 		return multiArray;
 	}
 
-	public void printEconomyInfo(Database swimmerCoachDatabase) {
-		int[][] list =	gatherPaymentInfoForMembers(swimmerCoachDatabase);
+	public void printEconomyInfo(SingleTonDatabase swimmerCoachSingleTonDatabase) {
+		int[][] list =	gatherPaymentInfoForMembers(swimmerCoachSingleTonDatabase);
 		String[] names = {"Inactive","Child","Adult","Senior"};
 		System.out.println("Members who have paid:");
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT PAID");
@@ -121,7 +121,7 @@ public class Treasurer extends Employee {
 			System.out.printf("%-10s %-15s %-14s%n",names[i-4],list[i][0],list[i][1]);
 		}
 		System.out.println("------------------------------------------------------");
-		int numberOfMember = swimmerCoachDatabase.getMemberList().size();
+		int numberOfMember = swimmerCoachSingleTonDatabase.getMemberList().size();
 		int paidTotal = 0;
 		int owedTotal = 0;
 		for (int i = 0; i < 4; i++) {

@@ -1,6 +1,6 @@
 package actors;
 
-import database.Database;
+import database.SingleTonDatabase;
 import utility.SingleTonUI;
 
 import java.util.HashMap;
@@ -35,14 +35,14 @@ public class Coach extends Employee {
 	/*
 	* This method looks up a swimmer from Database memberList
 	 */
-	public CompetitiveSwimmer lookupSwimmer(SingleTonUI singleTonUi, Database database) {
+	public CompetitiveSwimmer lookupSwimmer(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
 
 		//Finds member name
-		String swimmerName = findSwimmerByName(singleTonUi, database); // Stores temporary swimmer name in a String
+		String swimmerName = findSwimmerByName(singleTonUi, singleTonDatabase); // Stores temporary swimmer name in a String
 
 		System.out.print("Please enter ID on the member: ");
 		int swimmerID = singleTonUi.readInt();
-		for (Member member : database.getMemberList()) {
+		for (Member member : singleTonDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b Discipline: ",
@@ -60,10 +60,10 @@ public class Coach extends Employee {
 	/*
 	* This method
 	 */
-	public CompetitiveSwimmer loadSwimmer(SingleTonUI singleTonUi, Database database) {
+	public CompetitiveSwimmer loadSwimmer(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
 		System.out.println("\nPlease enter ID on the member you wish to add result to: ");
 		int swimmerID = singleTonUi.readInt();
-		for (Member member : database.getMemberList()) {
+		for (Member member : singleTonDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getUniqueID() == swimmerID) {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b ",
@@ -116,12 +116,12 @@ public class Coach extends Employee {
 	/*
 	* This method verifies name of a competitive swimmer, by checking if it exists within the Database memberList
 	 */
-	private String findSwimmerByName(SingleTonUI singleTonUi, Database database) {
+	private String findSwimmerByName(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
 
 		singleTonUi.print("Please enter name of swimmer you wish lookup: ");
 		String swimmerName = singleTonUi.readLine();		// Stores temporary swimmerName we are searching for
 
-		for (Member member : database.getMemberList()) {
+		for (Member member : singleTonDatabase.getMemberList()) {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName)) {
 					singleTonUi.printLn("ID: " + member.getUniqueID() +  " Name: " + member.getName());
@@ -135,10 +135,10 @@ public class Coach extends Employee {
 	/*
 	* This method finds and prints all members belonging to the coach logged in.
 	 */
-	public void findMembersOfCoach(Database database, Coach coach) {
+	public void findMembersOfCoach(SingleTonDatabase singleTonDatabase, Coach coach) {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
-		for (Member key : database.getSwimmersCoachAssociationList().keySet()) {
-			if (database.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+		for (Member key : singleTonDatabase.getSwimmersCoachAssociationList().keySet()) {
+			if (singleTonDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
 
 				AtomicInteger i = new AtomicInteger();
 
@@ -159,10 +159,10 @@ public class Coach extends Employee {
 		} // End of for loop
 	} // End of method
 
-	public int getMemberAmountForCoach(Database swimmerCoachDatabase, Coach coach) {
+	public int getMemberAmountForCoach(SingleTonDatabase swimmerCoachSingleTonDatabase, Coach coach) {
         int memberAmount = 0;
-		for (Member key : swimmerCoachDatabase.getSwimmersCoachAssociationList().keySet()) {
-			if (swimmerCoachDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+		for (Member key : swimmerCoachSingleTonDatabase.getSwimmersCoachAssociationList().keySet()) {
+			if (swimmerCoachSingleTonDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
                 memberAmount++;
 			} // End of if statement
 		} // End of for loop

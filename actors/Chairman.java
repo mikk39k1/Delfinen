@@ -1,6 +1,6 @@
 package actors;
 
-import database.Database;
+import database.SingleTonDatabase;
 import utility.SingleTonUI;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class Chairman extends Employee {
     * and sets the username and Password in Password file
     */
 
-    public void createCoach(Database coachList, SingleTonUI singleTonUi) {
+    public void createCoach(SingleTonDatabase coachList, SingleTonUI singleTonUi) {
         singleTonUi.print("Please enter name of Coach: ");
         String coachName = singleTonUi.readLine();
         singleTonUi.print("Please enter a phone number: ");
@@ -53,15 +53,15 @@ public class Chairman extends Employee {
     /*
     * This method removes a coach from the file and coachList.
      */
-    public void deleteCoach(String findCoach, Database database, SingleTonUI singleTonUi) {
+    public void deleteCoach(String findCoach, SingleTonDatabase singleTonDatabase, SingleTonUI singleTonUi) {
 
-        database.getCoachList().removeIf(coach -> coach.getName().equalsIgnoreCase(findCoach));
-        database.getSwimmersCoachAssociationList().forEach((key, value) -> {
-            if (value.loadCoachOfMember(database.getSwimmersCoachAssociationList(),key).equalsIgnoreCase(findCoach)) {
+        singleTonDatabase.getCoachList().removeIf(coach -> coach.getName().equalsIgnoreCase(findCoach));
+        singleTonDatabase.getSwimmersCoachAssociationList().forEach((key, value) -> {
+            if (value.loadCoachOfMember(singleTonDatabase.getSwimmersCoachAssociationList(),key).equalsIgnoreCase(findCoach)) {
 
                 singleTonUi.printLn("\n Choose a NEW coach for the following members:");
                 System.out.println("ID: " + key.getUniqueID() + " " + key.getName() + "\n ");
-                database.getSwimmersCoachAssociationList().put(key, chooseCoach(singleTonUi, database, false));
+                singleTonDatabase.getSwimmersCoachAssociationList().put(key, chooseCoach(singleTonUi, singleTonDatabase, false));
             }
         });
 
@@ -76,7 +76,7 @@ public class Chairman extends Employee {
     * This method takes in createMember method and adds the member to the arraylist in the Database class
     * It also takes in chooseCoach method to add both Member and Coach as Key/Value pair in the hashMap inside Database
      */
-    public void addMember(SingleTonUI singleTonUi, Member newMember, Database database) {
+    public void addMember(SingleTonUI singleTonUi, Member newMember, SingleTonDatabase singleTonDatabase) {
         if (newMember instanceof CompetitiveSwimmer) {
             singleTonUi.print("Please enter how many swimming disciplines " + newMember.getName() + " is practising: ");
             int disciplineAmount = singleTonUi.readInt();           // Stores temporary the amount of Discipline Types swimmer should have
@@ -84,15 +84,15 @@ public class Chairman extends Employee {
             for (int i = 0; i < disciplineAmount; i++) {
                 ((CompetitiveSwimmer) newMember).getSwimmingDisciplineList().add(new SwimmingDiscipline(singleTonUi)); // Adds Swimming Discipline
             } // End of for loop
-            database.getSwimmersCoachAssociationList().
-                    put(newMember, chooseCoach(singleTonUi, database, true));  // Adds new member and coach to Database HashMap
+            singleTonDatabase.getSwimmersCoachAssociationList().
+                    put(newMember, chooseCoach(singleTonUi, singleTonDatabase, true));  // Adds new member and coach to Database HashMap
 
             singleTonUi.printLn(newMember.getName() + " has been added as a member with " + disciplineAmount +
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
 
         } // End of if statement
 
-        database.getMemberList().add(newMember); // Adds new member to Database memberList
+        singleTonDatabase.getMemberList().add(newMember); // Adds new member to Database memberList
 
     } // End of method
 
@@ -101,7 +101,7 @@ public class Chairman extends Employee {
     /*
     * This method finds and deletes a member from the Database memberList
      */
-    public void deleteMember(SingleTonUI singleTonUi, Database memberList) {
+    public void deleteMember(SingleTonUI singleTonUi, SingleTonDatabase memberList) {
         boolean memberNameExist = false;    // Attribute will help determine for further continuation of this method
         singleTonUi.print("Please enter name of member: ");
         String memberName = singleTonUi.readLine();  // Stores a name value of a member, intended to remove as a String
@@ -129,7 +129,7 @@ public class Chairman extends Employee {
      * The method is used to choose a coach for the instantiation of a competition swimmer, so that both
      * - individuals can be put inside the hashmap as a Key/Value pair containing this association.
      */
-    public Coach chooseCoach(SingleTonUI singleTonUi, Database coachList, Boolean isMemberAddToCoach) {
+    public Coach chooseCoach(SingleTonUI singleTonUi, SingleTonDatabase coachList, Boolean isMemberAddToCoach) {
         for (Coach coach : coachList.getCoachList()) {
             singleTonUi.printLn("Coach: " + coach.getName());       // Prints all available Coaches from Database coachList
         } // End of for loop
