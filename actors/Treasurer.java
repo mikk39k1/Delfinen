@@ -5,6 +5,7 @@ import utility.UI;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 * This class represents the treasurer, which is the accountant in the system.
@@ -32,13 +33,13 @@ public class Treasurer extends Employee {
 	* This method checks all members within the Database memberList if they have arrears
 	 */
 	public void checkMemberArrears(Database swimmerCoachDatabase) {
-		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
+		System.out.printf("  %-5s %-19s %-10s %-12s %-7s %-4s%n","[ID]", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
 		for (Member member : swimmerCoachDatabase.getMemberList()){
 			if (!member.isHasPaid()) {
 				String[] arr;
 				arr = memberAnalysis(member);	// Stores the result of memberAnalysis method inside String array arr
-				System.out.printf("- %-20s %-10s %-12s %-7s %s%n", member.getName(), arr[2],
-						(arr[3] == null ? "-" : arr[3]), arr[0], arr[1]);
+				System.out.printf("-%5s  %-20s %-10s %-12s %-7s %s%n",member.getUniqueID(), member.getName(), arr[2],
+						(arr[3].equals("null") ? "-" : arr[3]), arr[0], arr[1]);
 			} // End of if statement
 		} // End of for loop
 	} // End of method
@@ -47,21 +48,29 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(Database swimmerCoachDatabase, UI ui) {
-		System.out.printf("   %-41s %-10s %-12s %-20s %-10s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]",
+	public void setMemberArrears(Database database, UI ui) {
+		System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", "[ID]", "[NAME]", "[STATE]", "[TYPE]", "[AGE]",
 				"[HAS PAID?]");
-		int count = 0;
-		for (Member member : swimmerCoachDatabase.getMemberList()){
-			count++;
+		for (Member member : database.getMemberList()) {
 			String[] arr;
-			String hasPaid = (member.isHasPaid() ? "TRUE":"FALSE");	 // Stores temporary statement of paid state
+			String hasPaid = (member.isHasPaid() ? "TRUE" : "FALSE");     // Stores temporary statement of paid state
 			arr = memberAnalysis(member); // Stores the member inside String array arr
-			System.out.printf("%s%-1d# %-40s %-10s %-12s %-20s %-10s%n",(count < 10) ? "0" :"", count, member.getName(),arr[2],
-					(Objects.equals(arr[3], "null") ?"-":arr[3]),arr[0],hasPaid);  // Prints the status of member
+			System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", member.getUniqueID(), member.getName(), arr[2],
+					(Objects.equals(arr[3], "null") ? "-" : arr[3]), arr[0], hasPaid);  // Prints the status of member
 		} // End of for loop
-		ui.printLn("For which member do you wish to toggle the payment? [Numbers are in the first column]");
-		swimmerCoachDatabase.getMemberList().get(ui.readInt()-1).toggleHasPaid();	// Changes paid status of chosen member
+		ui.printLn("Enter the ID of member you wish to toggle payment for");
+		int choice = ui.readInt();
+		for (int i = 0; i < database.getMemberList().size(); i++) {
+			if (database.getMemberList().get(i).getUniqueID() == choice) {
+				database.getMemberList().get(i).toggleHasPaid(); // Changes paid status of chosen member
+			} else if (database.getMemberList().size()-1 == i &&
+					database.getMemberList().get(i).getUniqueID() != choice) {
+				System.out.println("Member not found");
+			}
+		} // End of for loop
 	} // End of method
+
+
 
 
 	/*

@@ -731,3 +731,42 @@ ALEXANDER SKRIVER SMADREKODER. JEG TROR KLOKKEN ER LIDT OVER 12
 2022:12:08:09:49:55 A swim result was added.
 2022:12:08:09:50:50 A swim result was added.
 2022:12:08:09:50:55 Top 5 athletes was printed.
+2022:12:08:12:57:23 Program started.
+2022:12:08:12:57:48 Administrator logged in.
+2022:12:08:12:57:53 Members in arrear viewed.
+2022:12:08:12:58:39 Program started.
+2022:12:08:12:58:55 Administrator logged in.
+2022:12:08:12:58:56 Members in arrear viewed.
+2022:12:08:13:06:17 Program started.
+2022:12:08:13:06:30 Administrator logged in.
+2022:12:08:13:07:00 Members in arrear viewed.
+2022:12:08:13:07:21 Program started.
+2022:12:08:13:07:51 Administrator logged in.
+2022:12:08:13:07:55 Members in arrear viewed.
+2022:12:08:13:09:20 Program started.
+2022:12:08:13:09:24 Administrator logged in.
+2022:12:08:13:09:26 Members in arrear viewed.
+2022:12:08:13:09:54 Program started.
+2022:12:08:13:10:00 Administrator logged in.
+2022:12:08:13:10:02 Members in arrear viewed.
+2022:12:08:13:11:06 Program started.
+2022:12:08:13:11:11 Administrator logged in.
+2022:12:08:13:11:13 Members in arrear viewed.
+2022:12:08:13:11:32 Members in arrear viewed.
+2022:12:08:13:21:27 Program started.
+2022:12:08:13:21:34 Administrator logged in.
+2022:12:08:13:22:55 Program started.
+2022:12:08:13:23:00 Administrator logged in.
+2022:12:08:13:25:12 Program started.
+2022:12:08:13:27:00 Administrator logged in.
+2022:12:08:13:56:00 Program started.
+2022:12:08:13:56:08 Administrator logged in.
+2022:12:08:13:56:13 A members payment status was changed.
+2022:12:08:13:56:49 A members payment status was changed.
+2022:12:08:13:57:36 Program started.
+2022:12:08:13:57:42 Administrator logged in.
+2022:12:08:13:57:45 A members payment status was changed.
+2022:12:08:13:57:55 A members payment status was changed.
+2022:12:08:13:58:46 Program started.
+2022:12:08:13:58:49 Administrator logged in.
+2022:12:08:13:59:31 A members payment status was changed.

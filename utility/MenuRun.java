@@ -147,13 +147,12 @@ public class MenuRun {
             if (employee instanceof Chairman) {
                 Treasurer adminOverride = new Treasurer();                  // Creates temporary user for admin
                 adminOverride.setMemberArrears(database, UI.getInstance()); // Runs temporary user intended method
-                FileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
-                FileHandler.getInstance().loggingAction("A members payment status was changed.");
             } else {
                 ((Treasurer) employee).checkMemberArrears(database);    // Runs method as Treasurer
             } // End of inner if / else statement
             FileHandler.getInstance().writeToFullMembersList(database.getMemberList()); // Writes changes to file
             FileHandler.getInstance().loggingAction("A members payment status was changed.");
+
         } else {
             UI.getInstance().printLn("You don't have the privilege to use this function");
             FileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Change a members payment status\".");
