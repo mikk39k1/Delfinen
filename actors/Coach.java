@@ -46,9 +46,13 @@ public class Coach extends Employee {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getName().equalsIgnoreCase(swimmerName) && member.getUniqueID() == swimmerID) {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b Discipline: ",
-							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
+							member.getUniqueID(),
+							member.getName(),
+							member.getDateOfBirth(),
+							member.getPhoneNumber(),
 							member.isIsMembershipActive());
 					((CompetitiveSwimmer) member).printSwimDisciplineList();
+
 					return (CompetitiveSwimmer) member;
 				} // End of inner if statement
 			} // End of outer if statement
@@ -67,8 +71,12 @@ public class Coach extends Employee {
 			if (member instanceof CompetitiveSwimmer) {
 				if (member.getUniqueID() == swimmerID) {
 					System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s Membership Status: %-10b ",
-							member.getUniqueID(), member.getName(), member.getDateOfBirth(), member.getPhoneNumber(),
+							member.getUniqueID(),
+							member.getName(),
+							member.getDateOfBirth(),
+							member.getPhoneNumber(),
 							member.isIsMembershipActive());
+
 					return (CompetitiveSwimmer) member;
 				} // End of inner if statement
 			} // End of outer if statement
@@ -103,9 +111,13 @@ public class Coach extends Employee {
 	public void checkCompetitorSwimResults(CompetitiveSwimmer competitiveSwimmer) {
 		for (int i = 0; i < competitiveSwimmer.getSwimmingDisciplineList().size(); i++) {
 			System.out.printf("%nID: %-8d Name: %-30s Date of Birth: %-15s Tel: %-15s State: %-5b Discipline: %-10s%n",
-					competitiveSwimmer.getUniqueID(),competitiveSwimmer.getName(),
-					competitiveSwimmer.getDateOfBirth(),competitiveSwimmer.getPhoneNumber(), competitiveSwimmer.isIsMembershipActive(),
+					competitiveSwimmer.getUniqueID(),
+					competitiveSwimmer.getName(),
+					competitiveSwimmer.getDateOfBirth(),
+					competitiveSwimmer.getPhoneNumber(),
+					competitiveSwimmer.isIsMembershipActive(),
 					competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType());
+
 			for (SwimmingResult result : competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineResults()) {
 				System.out.print(competitiveSwimmer.getSwimmingDisciplineList().get(i).getSwimmingDisciplineType()+": ");
 				result.printResults();
