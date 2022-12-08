@@ -412,44 +412,55 @@ public class MenuRun {
                 case 1 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberName(singleTonDatabase.getMemberList()));
-                        SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Name.");
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance()
+                                .setSortByMemberName(singleTonDatabase.getMemberList()));
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("All members was viewed, sorted by Name.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
-                        SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 1
                 case 2 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberAge(singleTonDatabase.getMemberList()));
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance()
+                                .setSortByMemberAge(singleTonDatabase.getMemberList()));
                         SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Age.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
-                        SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 2
                 case 3 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberID(singleTonDatabase.getMemberList()));
-                        SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by ID.");
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance()
+                                .setSortByMemberID(singleTonDatabase.getMemberList()));
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("All members was viewed, sorted by ID.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
-                        SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 3
                 case 4 -> {
                     if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
-                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance().setSortByMemberPhoneNumber(singleTonDatabase.getMemberList()));
-                        SingleTonFileHandler.getInstance().loggingAction("All members was viewed, sorted by Phone number.");
+                        ((Chairman) employee).printMembers(SingleTonSuperSorterThreeThousand.getInstance()
+                                .setSortByMemberPhoneNumber(singleTonDatabase.getMemberList()));
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("All members was viewed, sorted by Phone number.");
                     } else {
                         SingleTonUI.getInstance().printLn("You don't have the privilege to use this function");
-                        SingleTonFileHandler.getInstance().loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
+                        SingleTonFileHandler.getInstance()
+                                .loggingAction("Unauthorised user tried to access \"Print a list of all members\".");
                     } // End of if / else statement
                     chooseSortMethod = false;
                 } // End of case 4
@@ -470,7 +481,7 @@ public class MenuRun {
                 "2. Adult Team",
                 "3. See all your members",
                 "0. Return to Head Menu"
-        });
+        }); // End of innerMenu creation
 
 
         boolean chooseTeam = true;
@@ -481,7 +492,8 @@ public class MenuRun {
                 case 1, 2, 3 -> {
                     if (employee instanceof Chairman) {
                         try {
-                            SingleTonUI.getInstance().printLn("As chairman, please enter the coach name, you wish to see respective members of");
+                            SingleTonUI.getInstance()
+                                    .printLn("As chairman, please enter the coach name, you wish to see respective members of");
                             Coach adminOverride = ((Chairman) employee).chooseCoach(SingleTonUI.getInstance(), singleTonDatabase, false); // Creates temporary user for admin
                             SingleTonSuperSorterThreeThousand.getInstance().setSortByTeam(readInput, adminOverride, singleTonDatabase.getSwimmersCoachAssociationList());
                             CompetitiveSwimmer swimmer = adminOverride.loadSwimmer(SingleTonUI.getInstance(), singleTonDatabase);
@@ -494,7 +506,7 @@ public class MenuRun {
                             SingleTonFileHandler.getInstance().loggingAction("A swim result was added.");
                         } catch (NullPointerException e) {
                             SingleTonUI.getInstance().printLn("Swimmer does not exist");
-                        }
+                        } // End of try catch statement
 
                     } else {
                         try {

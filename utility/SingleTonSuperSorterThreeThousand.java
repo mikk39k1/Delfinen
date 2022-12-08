@@ -9,8 +9,12 @@ import utility.result_comparators.SortByTime;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
+
+/*
+* This class' purpose is to act as a sorting tool to filter and present qualified members and coaches based on specific
+* given parameters.
+ */
 public class SingleTonSuperSorterThreeThousand {
 
     private static final utility.SingleTonSuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SingleTonSuperSorterThreeThousand();
@@ -31,6 +35,8 @@ public class SingleTonSuperSorterThreeThousand {
     private final SortByMemberName sortByMemberName = new SortByMemberName();
     private final SortByMemberPhoneNumber sortByMemberPhoneNumber = new SortByMemberPhoneNumber();
     private final SortByTime sortByTime = new SortByTime();    // We will always sort by Time before presenting results
+
+
 
      List<Member> setSortByMemberAge(ArrayList<Member> membersList) {
         ((List<Member>) membersList).sort(sortByMemberAge);
@@ -222,6 +228,12 @@ public class SingleTonSuperSorterThreeThousand {
         return sortedList;
     } // End of method
 
+
+
+    /*
+     * This method sorts the members based on their age.
+     * By streaming().Filter() the HashMap we can filter out unwanted keySet (Members) which doesn't qualify for sort parameters
+     */
      void setSortByTeam(int readInput, Coach coach, HashMap<Member, Coach> memberCoachHashMap) {
         HashMap<Member, Coach> temporaryMemberCoachHashMap = new HashMap<>(memberCoachHashMap);
         ArrayList<Member> sortedList = new ArrayList<>();
@@ -249,8 +261,12 @@ public class SingleTonSuperSorterThreeThousand {
         } // End of for loop
     } // End of method
 
+
+
+
      void topFiveSmadderButRefactored(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
                                             int distance, HashMap<Member, Coach> memberCoachHashMap) {
+
         List<CompetitiveSwimmer> allCompMembers = memberCoachHashMap.keySet().stream()
                 .map(member -> (CompetitiveSwimmer) member).toList();
 
@@ -259,28 +275,33 @@ public class SingleTonSuperSorterThreeThousand {
 
         for (CompetitiveSwimmer member : allCompMembers) {
             for (SwimmingDiscipline typeOfDiscipline : member.getSwimmingDisciplineList()) {
+
                 if (typeOfDiscipline.getSwimmingDisciplineType() != discipline) continue;
                 swimmersResult.clear();
+
                 for (SwimmingResult result : typeOfDiscipline.getSwimmingDisciplineResults()) {
 
                     //if (result.isCompetitive() != isCompetitive) continue;
                     if (result.getDistance() != distance) continue;
                     swimmersResult.add(result);
-                }
+                } // End of second inner for loop
+
                 if (swimmersResult.isEmpty()) continue;
                 swimmersResult.sort(sortByTime);
                 displayResults.put(member.getUniqueID() + " " + member.getName(), swimmersResult.get(0));
-            }
-        }
+            } // End of first inner for loop
+        } // End of outer for loop
+
+
         List<Map.Entry<String, SwimmingResult>> filteredList = new LinkedList<>(displayResults.entrySet());
 
         filteredList.sort(Comparator.comparingInt(o -> o.getValue().getSwimTime()));
         filteredList.stream().limit(5).forEach(swimResults -> {
                     System.out.print(swimResults.getKey() + " ");
                     swimResults.getValue().printResults();
-                }
-        );
-    }
+                } // End of lambda expression
+        ); // End of build in forEach method
+    } // End of method
 } // End of class
 
 
