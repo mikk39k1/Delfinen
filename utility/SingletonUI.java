@@ -2,6 +2,7 @@ package utility;
 
 import actors.SwimmingDiscipline;
 
+import java.io.PrintStream;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -43,7 +44,7 @@ public class SingletonUI {
                 in.nextLine();                // Scanner Bug avoidance
                 return readInt;
             } else {
-                System.out.println("Not valid input, please enter a number instead");
+                printLn("Not valid input, please enter a number instead");
                 in.nextLine();                // Scanner Bug avoidance
             } // End of if / else statement
         } // End of while loop
@@ -60,7 +61,7 @@ public class SingletonUI {
                 in.nextLine();                // Scanner Bug avoidance
                 return readBoolean;
             } else {
-                System.out.println("Not a valid input, enter true / false ");
+                printLn("Not a valid input, enter true / false ");
                 in.nextLine();                // Scanner Bug avoidance
             } // End of if / else statement
         } // End of while loop
@@ -230,7 +231,7 @@ public class SingletonUI {
      * This method checks input to match Enum value of SwimingDiscplineType
      */
     public SwimmingDiscipline.SwimmingDisciplineTypes setSwimmingDisciplineType() {
-        System.out.print("Please enter Swimming Discipline/s ");
+        print("Please enter Swimming Discipline/s ");
         while (true) {
             try {
                 return SwimmingDiscipline.SwimmingDisciplineTypes.valueOf(in.nextLine().toUpperCase());

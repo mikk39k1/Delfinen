@@ -63,7 +63,7 @@ public class SingletonSuperSorterThreeThousand {
     /*
      * This method gathers all results from all swimmers from AssociationList, then returns them as an ArrayList
      */
-    public ArrayList<SwimmingResult> getAllSwimmingResults(
+     ArrayList<SwimmingResult> getAllSwimmingResults(
             HashMap<Member, Coach> memberCoachHashMap,
             SwimmingDiscipline.SwimmingDisciplineTypes swimType) {
 
@@ -264,8 +264,8 @@ public class SingletonSuperSorterThreeThousand {
 
 
 
-     void topFiveSmadderButRefactored(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
-                                            int distance, HashMap<Member, Coach> memberCoachHashMap) {
+     void topFiveSmadderKode(SwimmingDiscipline.SwimmingDisciplineTypes discipline,
+                             int distance, HashMap<Member, Coach> memberCoachHashMap) {
 
         List<CompetitiveSwimmer> allCompMembers = memberCoachHashMap.keySet().stream()
                 .map(member -> (CompetitiveSwimmer) member).toList();

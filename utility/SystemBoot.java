@@ -38,13 +38,13 @@ public class SystemBoot {
      */
     private void startSystem() {
         SingletonDatabase.getSingletonDatabase().setMemberList(SingletonFileHandler.getInstance()
-                .loadMemberList(SingletonDatabase.getSingletonDatabase().getMemberList()));
+                .readMemberList(SingletonDatabase.getSingletonDatabase().getMemberList()));
         SingletonDatabase.getSingletonDatabase().setCoachList(SingletonFileHandler.getInstance()
-                .loadCoachList(SingletonDatabase.getSingletonDatabase().getCoachList()));
-        Member.setID(SingletonFileHandler.getInstance().loadID());
+                .readCoachList(SingletonDatabase.getSingletonDatabase().getCoachList()));
+        Member.setID(SingletonFileHandler.getInstance().readID());
         SingletonDatabase.getSingletonDatabase().setSwimmersCoachAssociationList(SingletonFileHandler.getInstance()
-                .loadSwimmerCoachAssociationList(SingletonDatabase.getSingletonDatabase()));
-        SingletonFileHandler.getInstance().loadResultMethod(SingletonDatabase.getSingletonDatabase()
+                .readSwimmerCoachAssociationList(SingletonDatabase.getSingletonDatabase()));
+        SingletonFileHandler.getInstance().readResults(SingletonDatabase.getSingletonDatabase()
                 .getSwimmersCoachAssociationList());
 
         SingletonFileHandler.getInstance().loggingAction("Program started.");
@@ -121,7 +121,7 @@ public class SystemBoot {
       This method checks through file and username / password method if inputs are authentic, to allow login
      */
     private String isLoggedIn() {
-        String username = SingletonFileHandler.getInstance().checkUsername(getUsername());
+        String username = SingletonFileHandler.getInstance().readUsername(getUsername());
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
 
@@ -159,7 +159,7 @@ public class SystemBoot {
     * This method checks if password is correct, and returns a boolean based on success / failure
      */
     private boolean isPasswordCorrect(String password) {
-        return !SingletonFileHandler.getInstance().checkPassword(password).equals("0");
+        return !SingletonFileHandler.getInstance().readPassword(password).equals("0");
 
     } // End of method
 

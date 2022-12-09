@@ -61,7 +61,7 @@ public class Chairman extends Employee {
             if (value.loadCoachOfMember(singleTonDatabase.getSwimmersCoachAssociationList(),key).equalsIgnoreCase(findCoach)) {
 
                 singleTonUi.printLn("\n Choose a NEW coach for the following members:");
-                System.out.println("ID: " + key.getUniqueID() + " " + key.getName() + "\n ");
+                singleTonUi.printLn("ID: " + key.getUniqueID() + " " + key.getName() + "\n ");
                 singleTonDatabase.getSwimmersCoachAssociationList().put(key, chooseCoach(singleTonUi, singleTonDatabase, false));
             }
         });

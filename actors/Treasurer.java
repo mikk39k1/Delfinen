@@ -120,18 +120,18 @@ public class Treasurer extends Employee {
 	public void printEconomyInfo(SingletonDatabase database) {
 		int[][] list =	gatherPaymentInfoForMembers(database); // Creates a 2d int-array to store Eco-Info
 		String[] names = {"Inactive","Child","Adult","Senior"};			   // Temporary name-array for name-looping
-		System.out.println("Members who have paid:");					   // TeXt
+		SingletonUI.getInstance().printLn("Members who have paid:");					   // TeXt
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT PAID"); // Print header
 		for (int i = 0; i < 4; i++) {
 			System.out.printf("%-10s %-15s %-14s%n",names[i],list[i][0],list[i][1]);    // Prints each member
 		}	// End of for loop. This loop prints all the members who HAVEN'T paid, in the order stated in line 111.
-		System.out.println("------------------------------------------------------\n"); // Print divider
-		System.out.println("Members who haven't paid:"); 								// TeXt
+		SingletonUI.getInstance().printLn("------------------------------------------------------\n"); // Print divider
+		SingletonUI.getInstance().printLn("Members who haven't paid:"); 								// TeXt
 		System.out.printf("%-10s %-15s %-14s%n","TYPE","# OF MEMBERS","AMOUNT TO PAY");	// Print new header
 		for (int i = 4; i < 8; i++) {
 			System.out.printf("%-10s %-15s %-14s%n",names[i-4],list[i][0],list[i][1]);
 		}// End of for loop. This loop prints all the members who HAVE paid, in the order stated in line 111.
-		System.out.println("------------------------------------------------------"); // Print divider
+		SingletonUI.getInstance().printLn("------------------------------------------------------"); // Print divider
 		int numberOfMember = database.getMemberList().size(); // Stores the amount of members in local var
 		int paidTotal = 0; // Temp var for number of paying members
 		int owedTotal = 0; // Temp var for number of owing members
@@ -141,9 +141,9 @@ public class Treasurer extends Employee {
 		for (int i = 4; i < 8; i++) {
 			owedTotal += list[i][1];
 		} //End of for loop. Counts all owing members
-		System.out.println("\nTOTALS:");
+		SingletonUI.getInstance().printLn("\nTOTALS:");
 		System.out.printf("%-15s %-15s %-14s%n","# OF MEMBERS","AMOUNT PAID","AMOUNT TO PAY");
 		System.out.printf("%-15s %-15s %-14s%n",numberOfMember,paidTotal,owedTotal);			//Prints data of all
-		System.out.println("------------------------------------------------------");			//members
+		SingletonUI.getInstance().printLn("------------------------------------------------------");			//members
 	} // End of Method
 } // End of class

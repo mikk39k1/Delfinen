@@ -219,7 +219,7 @@ public class MenuRun {
             if (employee.getPrivilege().equals(Employee.PrivilegeType.COMPETITIVE_SWIMMER_MANAGEMENT) ||
                     employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
                 SingletonUI.getInstance().printLn("Crawl, Butterfly, Breaststroke, Freestyle, Backcrawl");
-                SingletonSuperSorterThreeThousand.getInstance().topFiveSmadderButRefactored(SingletonUI.getInstance().setSwimmingDisciplineType(),
+                SingletonSuperSorterThreeThousand.getInstance().topFiveSmadderKode(SingletonUI.getInstance().setSwimmingDisciplineType(),
                         SingletonUI.getInstance().setDistance(), database.getSwimmersCoachAssociationList());
                 //SuperSorterThreeThousand.getInstance().topFiveMemberResults(UI.getInstance(), database.getSwimmersCoachAssociationList());
                 SingletonFileHandler.getInstance().loggingAction("Top 5 athletes was printed.");
@@ -423,7 +423,7 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuPrintAllMembers(Employee employee, SingletonDatabase database) {
+    private void innerMenuPrintAllMembers(Employee employee, SingletonDatabase database) {
         boolean chooseSortMethod = true;
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Sort by Name",
@@ -501,7 +501,7 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuAddSwimResults(Employee employee, SingletonDatabase database) {
+    private void innerMenuAddSwimResults(Employee employee, SingletonDatabase database) {
         MenuRun innerMenu = new MenuRun("\u001B[1mADD SWIMRESULTS\u001B[0m", "Which team is swimmer on?", new String[]{
                 "Choose either: ",
                 "1. Junior Team",

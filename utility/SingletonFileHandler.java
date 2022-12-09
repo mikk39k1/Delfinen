@@ -45,7 +45,7 @@ public class SingletonFileHandler {
     /*
      * This method reads from file and is verifying username exist within secret file
      */
-    protected String checkUsername(String username) {
+    String readUsername(String username) {
         try {
             Scanner readLoginCredentials = new Scanner(passwordList);
 
@@ -58,9 +58,9 @@ public class SingletonFileHandler {
                     } // End of if /  else {
                 } // End of if / else statement
         } catch (Exception e) {
-            System.out.println("File doesn't exist\n");
+            SingletonUI.getInstance().printLn("File does not Exist\n");
         } // End of try / catch statement
-        System.out.println("Username doesn't exist\n");
+        SingletonUI.getInstance().printLn("Username doesn't exist\n");
         return "0";
     } // End of method
 
@@ -68,7 +68,7 @@ public class SingletonFileHandler {
     /*
      * This method reads from file and is verifying that prompted password works with username within secret file, then returns password if match
      */
-    protected String checkPassword(String password) {
+    String readPassword(String password) {
         try {
             Scanner readLoginCredentials = new Scanner(new File("files/passwd.txt"));
             while (readLoginCredentials.hasNextLine()) {
@@ -79,9 +79,9 @@ public class SingletonFileHandler {
                 } // End of if statement
             } // End of while loop
         } catch (Exception e) {
-            System.out.println("File doesn't exist\n");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
-        System.out.println("Password is incorrect  ");
+        SingletonUI.getInstance().printLn("Password is incorrect  ");
         return "0";
     } // End of method
 
@@ -89,7 +89,7 @@ public class SingletonFileHandler {
     /*
      * This method writes an added member to the fullMemberList file, whenever one is created/added to Database
      */
-    protected void writeToFullMembersList(ArrayList<Member> memberArrayList) {
+    void writeToFullMembersList(ArrayList<Member> memberArrayList) {
         try {
             printToFile = new PrintStream(memberArrayListFile);
 
@@ -116,7 +116,7 @@ public class SingletonFileHandler {
             } // End of outer for loop
             printToFile.close();    // Closes the PrintStream
         } catch (FileNotFoundException e) {
-            System.out.println("Noget gik galt");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
     } // End of method
 
@@ -124,7 +124,7 @@ public class SingletonFileHandler {
     /*
     * This method writes coach employee credentials to coachList file
      */
-    protected void writeToCoachList(ArrayList<Coach> coachArrayList) {
+    void writeToCoachList(ArrayList<Coach> coachArrayList) {
         try {
             printToFile = new PrintStream(coachListFile);
 
@@ -136,7 +136,7 @@ public class SingletonFileHandler {
             } // End of for loop
             printToFile.close();    // Closes the PrintStream
         } catch (FileNotFoundException e) {
-            System.out.println("Noget gik galt");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
     } // End of method
 
@@ -144,7 +144,7 @@ public class SingletonFileHandler {
     /*
     * This method writes coach username and password to passwd file
      */
-    protected void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
+    void writeCoachUserAndPassToList(String coachUsername, String coachPassword){
         try{
             printToFile = new PrintStream(new FileOutputStream(passwordList,true));
                 printToFile.print(coachUsername + ";");
@@ -162,7 +162,7 @@ public class SingletonFileHandler {
      * This method loads the members of the fullMemberList file into an arraylist, so we can manipulate again with
      *    member data inside the program.
      */
-    protected ArrayList<Member> loadMemberList(ArrayList<Member> membersList) {
+    ArrayList<Member> readMemberList(ArrayList<Member> membersList) {
         try {
             readFromFile = new Scanner(memberArrayListFile);
             while (readFromFile.hasNextLine()) {
@@ -194,7 +194,7 @@ public class SingletonFileHandler {
             return membersList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Load Member Fejl");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
         return membersList;
     } // End of method
@@ -205,7 +205,7 @@ public class SingletonFileHandler {
     /*
      * This method ensures that unique ID always continues from last MemberID within fullMemberList file
      */
-    protected int loadID() {
+    int readID() {
         ArrayList<Integer> idArray = new ArrayList<>();
         try {
             readFromFile = new Scanner(memberArrayListFile);
@@ -219,7 +219,7 @@ public class SingletonFileHandler {
         } // End of try / catch statement
     } // End of method
 
-    protected void appendResult(HashMap<Member, Coach> swimmerCoachAssociation, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
+    void appendResult(HashMap<Member, Coach> swimmerCoachAssociation, CompetitiveSwimmer swimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
         Coach temporaryCoach = new Coach();
 
         try {
@@ -259,7 +259,7 @@ public class SingletonFileHandler {
             appendToFile.close();
 
         } catch (IOException e) {
-            System.out.println("File not found");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
     } // End of method
 
@@ -267,7 +267,7 @@ public class SingletonFileHandler {
     /*
     * This method loads all results from results file, and adds them to corresponding member with matching ID from file
      */
-    protected void loadResultMethod(HashMap<Member, Coach> memberCoachHashMap) {
+    void readResults(HashMap<Member, Coach> memberCoachHashMap) {
 
         try {
             readFromFile = new Scanner(memberResultFile);
@@ -310,12 +310,12 @@ public class SingletonFileHandler {
                 } // End of HashMap for loop iteration
             } // End of while loop
         } catch (FileNotFoundException e) {
-            System.out.println("File doesn't exist");
+            SingletonUI.getInstance().printLn("File does not Exist");
         } // End of try / catch statement
     } // End of method
 
 
-    protected ArrayList<Coach> loadCoachList(ArrayList<Coach> coachList) {
+    ArrayList<Coach> readCoachList(ArrayList<Coach> coachList) {
         try {
             readFromFile = new Scanner(coachListFile);
             while (readFromFile.hasNextLine()) {
@@ -350,7 +350,7 @@ public class SingletonFileHandler {
     /*
      * This method loads SwimmerCoachAssociation based on result ID and coachList
      */
-    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(SingletonDatabase singleTonDatabase) {
+    HashMap<Member, Coach> readSwimmerCoachAssociationList(SingletonDatabase singleTonDatabase) {
 
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
@@ -385,7 +385,7 @@ public class SingletonFileHandler {
     /*
     * This method writes the association link between a member and coach whenever a competitive swimmer is added
      */
-    protected void writeToSwimmerCoachAssociationFile(SingletonDatabase associationList) {
+    void writeToSwimmerCoachAssociationFile(SingletonDatabase associationList) {
         try {
             printToFile = new PrintStream(swimmerCoachAssociationList);
 
@@ -402,7 +402,7 @@ public class SingletonFileHandler {
         } // End of try / catch statement
     } // End of method
 
-    protected void deleteCoachLoginFromFile(String username) {
+    void deleteCoachLoginFromFile(String username) {
         try{
             ArrayList<String> usernamePassText = new ArrayList<>();
             readFromFile = new Scanner(passwordList);
@@ -424,25 +424,25 @@ public class SingletonFileHandler {
             }
             printToFile.close();
         } catch (FileNotFoundException e){
-            System.out.println("File does not exist");
+            SingletonUI.getInstance().printLn("File does not Exist");
         }
     }
 
-    protected void loggingAction(String action) {
+    void loggingAction(String action) {
         try {
             printToFile = new PrintStream(new FileOutputStream(logFile, true));
             printToFile.print(LocalDateTime.now().format(DateTimeFormatter.ofPattern("u:MM:dd:HH:mm:ss")));
             printToFile.println(" " + action);
         } catch (FileNotFoundException e) {
-            System.out.println("File does not Exist");
+            SingletonUI.getInstance().printLn("File does not Exist");
         }
     }
 
     /*
      * This method prints a welcome emoji presenting creators of this project
      */
-    protected void printWelcomeSharks() {
-        System.out.println("\n");
+    void printWelcomeSharks() {
+        SingletonUI.getInstance().printLn("\n");
         try {
             readFromFile = new Scanner(sharksPrint);
             while (readFromFile.hasNextLine()) {
