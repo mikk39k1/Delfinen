@@ -324,8 +324,12 @@ public class MenuRun {
     } // End of method
 
 
-    public void innerMenuSwimmerResults(Employee employee, SingleTonDatabase singleTonDatabase) {
-        boolean chooseSortMethod = true;
+    private void innerMenuSwimmerResults(Employee employee, SingletonDatabase database) {
+        boolean chooseSortMethod = !database.getCoachList().isEmpty();
+        if (!chooseSortMethod) {
+            SingletonUI.getInstance().printLn("You have no swimmers with results available, please add results first");
+        }
+
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Show all Results for Swimmer",
                 "2. Show by Date",
@@ -511,7 +515,10 @@ public class MenuRun {
         }); // End of innerMenu creation
 
 
-        boolean chooseTeam = true;
+        boolean chooseTeam = !database.getCoachList().isEmpty();
+        if (!chooseTeam) {
+            SingletonUI.getInstance().printLn("Action not possible! - You first need to add a new Coach");
+        }
         while (chooseTeam) {
             innerMenu.printMenu();
             int readInput = SingletonUI.getInstance().readInt();
