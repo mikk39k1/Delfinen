@@ -92,7 +92,7 @@ public class Chairman extends Employee {
                     " swimming " + (disciplineAmount>1?"disciplines":"discipline"));
 
         } // End of if statement
-        if (newMember instanceof CompetitiveSwimmer && !singleTonDatabase.getCoachList().isEmpty()) {
+        if ((newMember instanceof CompetitiveSwimmer && !singleTonDatabase.getCoachList().isEmpty() || newMember instanceof LeisureSwimmer)) {
             singleTonDatabase.getMemberList().add(newMember); // Adds new member to Database memberList
             System.out.println(singleTonDatabase.getMemberList().size());
         }
