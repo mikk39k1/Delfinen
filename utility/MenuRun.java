@@ -575,7 +575,7 @@ public class MenuRun {
                     } // End of inner if / else statement
 
                     chooseTeam = false;
-                }
+                } // End of case 1,2,3
                 case 0 -> {
                     SingletonUI.getInstance().printLn("Returning to Head Menu");
                     chooseTeam = false;
