@@ -163,13 +163,19 @@ public class SystemBoot {
 
     } // End of method
 
+
+    /*
+     * This method instantiates the program with minimal users. Chairman and Treasurer
+     */
     protected void loadStaff() {
         enigmaUsers.add(new Chairman(Employee.RoleType.ADMIN, Employee.PrivilegeType.ADMINISTRATOR));
         enigmaUsers.add(new Treasurer(Employee.RoleType.ACCOUNTANT, Employee.PrivilegeType.ECONOMY_MANAGEMENT));
     } // End of method
 
 
-
+    /*
+     * This method is illustrating a loading buffer for a more intuitive experience
+     */
     private void loading() {
         try {
             SingletonUI.getInstance().printLn("\n                                     Loading ");

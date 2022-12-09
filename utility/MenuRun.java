@@ -424,7 +424,7 @@ public class MenuRun {
 
 
     private void innerMenuPrintAllMembers(Employee employee, SingletonDatabase database) {
-        boolean chooseSortMethod = true;
+        boolean chooseSortMethod = !database.getMemberList().isEmpty();
         MenuRun innerMenu = new MenuRun("SORTING OPTIONS", "\u001B[1mChose an option:\u001B[0m", new String[]{
                 "1. Sort by Name",
                 "2. Sort by Age",
