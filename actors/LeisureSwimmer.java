@@ -1,6 +1,6 @@
 package actors;
 
-import utility.SingleTonUI;
+import utility.SingletonUI;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
  */
 public class LeisureSwimmer extends Member {
 
-    public LeisureSwimmer(SingleTonUI in) {
+    public LeisureSwimmer(SingletonUI in) {
         in.print("Please enter name: ");
         setName(in.readLine());
         in.print("Please enter phone number: ");

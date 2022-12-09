@@ -15,17 +15,17 @@ import java.util.*;
 * This class' purpose is to act as a sorting tool to filter and present qualified members and coaches based on specific
 * given parameters.
  */
-public class SingleTonSuperSorterThreeThousand {
+public class SingletonSuperSorterThreeThousand {
 
-    private static final utility.SingleTonSuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SingleTonSuperSorterThreeThousand();
+    private static final SingletonSuperSorterThreeThousand SingleTonSuperSorterThreeThousand = new SingletonSuperSorterThreeThousand();
 
 
     // Constructor -----------------------
-    private SingleTonSuperSorterThreeThousand() {
+    private SingletonSuperSorterThreeThousand() {
     }
 
     // Getter ----------------------------
-    public static utility.SingleTonSuperSorterThreeThousand getInstance() {
+    public static SingletonSuperSorterThreeThousand getInstance() {
         return SingleTonSuperSorterThreeThousand;
     }
 
@@ -112,7 +112,7 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method sorts based on distance, look inside ui.class to understand properties being presented
      */
-     ArrayList<SwimmingResult> setSortByDistance(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByDistance(SingletonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
          ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.setDistance()) {
             case 100 -> {
@@ -138,7 +138,7 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method sorts results based on competitiveness. True = Competition / False = Training session
      */
-     ArrayList<SwimmingResult> setSortByIsCompetitive(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByIsCompetitive(SingletonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
          ArrayList<SwimmingResult> sortedList = new ArrayList<>();
 
         if (!singleTonUi.setCompetitiveness()) {
@@ -157,7 +157,7 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method sorts results based on Rank. Read more in ui.class defining return values with info.
      */
-     ArrayList<SwimmingResult> setSortByRank(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByRank(SingletonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
          ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.setRank()) {
             case 3 -> {
@@ -183,7 +183,7 @@ public class SingleTonSuperSorterThreeThousand {
     /*
      * This method sorts results based on date attributes.
      */
-     ArrayList<SwimmingResult> setSortByDate(SingleTonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
+     ArrayList<SwimmingResult> setSortByDate(SingletonUI singleTonUi, ArrayList<SwimmingResult> swimmingResults) {
          ArrayList<SwimmingResult> sortedList = new ArrayList<>();
         switch (singleTonUi.chooseTimeFrame()) {
             case 1 -> {

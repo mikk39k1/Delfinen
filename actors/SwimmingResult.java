@@ -1,6 +1,6 @@
 package actors;
 
-import utility.SingleTonUI;
+import utility.SingletonUI;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ public class SwimmingResult {
 
 
     // Constructor --------------------------------------
-    public SwimmingResult(SingleTonUI singleTonUi) {
+    public SwimmingResult(SingletonUI singleTonUi) {
         singleTonUi.print("Please enter distance: ");
         this.distance = singleTonUi.setDistance();
 

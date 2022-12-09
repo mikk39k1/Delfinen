@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.SingleTonDatabase;
+import database.SingletonDatabase;
 
 import java.util.ArrayList;
 
@@ -37,21 +37,21 @@ public class SystemBoot {
      * - 10 Starts the menu selection
      */
     private void startSystem() {
-        SingleTonDatabase.getSingletonDatabase().setMemberList(SingleTonFileHandler.getInstance()
-                .loadMemberList(SingleTonDatabase.getSingletonDatabase().getMemberList()));                          // 1
-        SingleTonDatabase.getSingletonDatabase().setCoachList(SingleTonFileHandler.getInstance()
-                .loadCoachList(SingleTonDatabase.getSingletonDatabase().getCoachList()));                            // 2
-        Member.setID(SingleTonFileHandler.getInstance().loadID());                                          // 3
-        SingleTonDatabase.getSingletonDatabase().setSwimmersCoachAssociationList(SingleTonFileHandler.getInstance()
-                .loadSwimmerCoachAssociationList(SingleTonDatabase.getSingletonDatabase()));                         // 4
-        SingleTonFileHandler.getInstance().loadResultMethod(SingleTonDatabase.getSingletonDatabase()
-                .getSwimmersCoachAssociationList());                                                        // 5
+        SingletonDatabase.getSingletonDatabase().setMemberList(SingletonFileHandler.getInstance()
+                .loadMemberList(SingletonDatabase.getSingletonDatabase().getMemberList()));
+        SingletonDatabase.getSingletonDatabase().setCoachList(SingletonFileHandler.getInstance()
+                .loadCoachList(SingletonDatabase.getSingletonDatabase().getCoachList()));
+        Member.setID(SingletonFileHandler.getInstance().loadID());
+        SingletonDatabase.getSingletonDatabase().setSwimmersCoachAssociationList(SingletonFileHandler.getInstance()
+                .loadSwimmerCoachAssociationList(SingletonDatabase.getSingletonDatabase()));
+        SingletonFileHandler.getInstance().loadResultMethod(SingletonDatabase.getSingletonDatabase()
+                .getSwimmersCoachAssociationList());
 
-        SingleTonFileHandler.getInstance().loggingAction("Program started.");                               // 6
-        SingleTonFileHandler.getInstance().printWelcomeSharks();                                            // 7
-        loadStaff();                                                                                        // 8
-        //loading();                                                                                          // 9
-        loginSystem();                                                                                      // 10
+        SingletonFileHandler.getInstance().loggingAction("Program started.");
+        SingletonFileHandler.getInstance().printWelcomeSharks();
+        loadStaff();
+        //loading();
+        loginSystem();
 
 
 
@@ -70,26 +70,26 @@ public class SystemBoot {
                 "12. Check this years Club-Economy",
                 "0. Log out."
         });      // 6
-        startSystem.menuLooping(currentUser, SingleTonDatabase.getSingletonDatabase());
+        startSystem.menuLooping(currentUser, SingletonDatabase.getSingletonDatabase());
     } // End of method
 
 
     /*
      * This method follows the principle of "The Least Privilege" and ensure users cant do more than allowed by setting Role and Privilege level
      */
-    private void setRoleAndPrivilege(String username, SingleTonDatabase database) {
+    private void setRoleAndPrivilege(String username, SingletonDatabase database) {
         // Switch statement set role and privilege based on correct username
         enigmaUsers.forEach(
                 employee -> {
                     if (employee.getUsername().equals(username)) {
                         currentUser = employee;
-                        SingleTonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
+                        SingletonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                     } else {
                         database.getCoachList().forEach(
                                 coach -> {
                                     if (coach.getUsername().equals(username)) {
                                         currentUser = coach;
-                                        SingleTonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
+                                        SingletonFileHandler.getInstance().loggingAction(currentUser.getName() + " logged in.");
                                     } // End of inner if statement
                                 } // End of lambda predicate expression
                         ); // End of inner forEach ArrayList build-in method
@@ -108,7 +108,7 @@ public class SystemBoot {
         do {
             user = isLoggedIn();                // Temporary stores a username if prompted existing username
             if (!user.equals("0")) {
-                setRoleAndPrivilege(user,SingleTonDatabase.getSingletonDatabase());      // Sets authorization level of role / privileges
+                setRoleAndPrivilege(user, SingletonDatabase.getSingletonDatabase());      // Sets authorization level of role / privileges
             } // End of if statement
         } while (user.equals("0")); // End of do-while loop
     } // end of method
@@ -121,16 +121,16 @@ public class SystemBoot {
       This method checks through file and username / password method if inputs are authentic, to allow login
      */
     private String isLoggedIn() {
-        String username = SingleTonFileHandler.getInstance().checkUsername(getUsername());
+        String username = SingletonFileHandler.getInstance().checkUsername(getUsername());
         if (!username.equals("0")) {
             for (int i = 1; i < 4; i++) {
 
                 if (isPasswordCorrect(getPassword())) {
 
-                    System.out.println("You're signed in");
+                    SingletonUI.getInstance().printLn("You're signed in");
                     return username;
                 } else if (i != 3) {
-                    System.out.println("you have " + (3 - i) + ((3 - i > 1) ? " tries left\n" : " try left\n"));
+                    SingletonUI.getInstance().printLn("you have " + (3 - i) + ((3 - i > 1) ? " tries left\n" : " try left\n"));
                 } // End of inner else - if statement
             } // End of for loop
         } // End of outer if statement
@@ -142,8 +142,8 @@ public class SystemBoot {
     * This method requests username, and returns input
      */
     private String getUsername() {
-        System.out.print("Please enter your username: ");
-        return SingleTonUI.getInstance().readLine();
+        SingletonUI.getInstance().print("Please enter your username: ");
+        return SingletonUI.getInstance().readLine();
     } // End of method
 
 
@@ -151,15 +151,15 @@ public class SystemBoot {
     * This method requests password, and returns input
      */
     private String getPassword() {
-        System.out.print("Please enter your password: ");
-        return SingleTonUI.getInstance().readLine();
+        SingletonUI.getInstance().print("Please enter your password: ");
+        return SingletonUI.getInstance().readLine();
     } // End of method
 
     /*
     * This method checks if password is correct, and returns a boolean based on success / failure
      */
     private boolean isPasswordCorrect(String password) {
-        return !SingleTonFileHandler.getInstance().checkPassword(password).equals("0");
+        return !SingletonFileHandler.getInstance().checkPassword(password).equals("0");
 
     } // End of method
 
@@ -172,17 +172,17 @@ public class SystemBoot {
 
     private void loading() {
         try {
-            System.out.println("\n                                     Loading ");
+            SingletonUI.getInstance().printLn("\n                                     Loading ");
             String anim = "|/-\\";
             for (int x = 0; x <= 100; x++) {
                 String data = "\r                                     " + anim.charAt(x % anim.length()) + " " + x;
-                System.out.print(data + " of 100");
+                SingletonUI.getInstance().print(data + " of 100");
                 Thread.sleep(70);
 
             }
-            System.out.println("\nENIGMA SOLUTIONS" + (char)153 + " 2022. All rights reserved " + (char)174 +"\n");
+            SingletonUI.getInstance().printLn("\nENIGMA SOLUTIONS" + (char)153 + " 2022. All rights reserved " + (char)174 +"\n");
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            SingletonUI.getInstance().printLn(e.getMessage());
         }
     }
 } // End of class

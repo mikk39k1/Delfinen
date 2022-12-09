@@ -13,14 +13,14 @@ import java.util.Scanner;
  * fluently, user-friendly and usability oriented experience. We also increase availability and performances of the overall
  * software by using these pre configurated methods.
  */
-public class SingleTonUI {
-    private static final utility.SingleTonUI SingleTonUI = new SingleTonUI();
+public class SingletonUI {
+    private static final SingletonUI SingleTonUI = new SingletonUI();
 
 
-    private SingleTonUI() {
+    private SingletonUI() {
     }
 
-    public static utility.SingleTonUI getInstance() {
+    public static SingletonUI getInstance() {
         return SingleTonUI;
     }
 

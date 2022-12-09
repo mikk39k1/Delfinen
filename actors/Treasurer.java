@@ -1,9 +1,7 @@
 package actors;
 
-import database.SingleTonDatabase;
-import utility.SingleTonUI;
-
-import java.util.Objects;
+import database.SingletonDatabase;
+import utility.SingletonUI;
 
 /*
 * This class represents the treasurer, which is the accountant in the system.
@@ -30,7 +28,7 @@ public class Treasurer extends Employee {
 	/*
 	* This method checks all members within the Database memberList if they have arrears
 	 */
-	public void checkMemberArrears(SingleTonDatabase database) {
+	public void checkMemberArrears(SingletonDatabase database) {
 		System.out.printf("  %-19s %-10s %-12s %-7s %-4s%n", "[NAME]", "[STATE]","[TYPE]","[AGE]", "[AMOUNT TO PAY]");
 		for (Member member : database.getMemberList()){
 			if (!member.isHasPaid()) {
@@ -46,7 +44,7 @@ public class Treasurer extends Employee {
 	/*
 	* This method changes and sets the arrears status of a chosen member from Database memberList
 	 */
-	public void setMemberArrears(SingleTonDatabase database, SingleTonUI singleTonUi) {
+	public void setMemberArrears(SingletonDatabase database, SingletonUI singleTonUi) {
 		System.out.printf("%-6s %-30s %-10s %-12s %-20s %-10s%n", "[ID]", "[NAME]", "[STATE]","[TYPE]","[AGE]",
 				"[HAS PAID?]");
 		for (int i = 0; i < database.getMemberList().size(); i++) {
@@ -95,7 +93,7 @@ public class Treasurer extends Employee {
 	} // End of method
 
 
-	private int[][] gatherPaymentInfoForMembers(SingleTonDatabase database) {
+	private int[][] gatherPaymentInfoForMembers(SingletonDatabase database) {
 		int[][] multiArray = new int[8][2];								// Stores payment data
 		for (Member member : database.getMemberList()){
 			String[] arrAnalysis = memberAnalysis(member);				// Stores strings from the analysis
@@ -119,7 +117,7 @@ public class Treasurer extends Employee {
 		return multiArray;
 	}
 
-	public void printEconomyInfo(SingleTonDatabase database) {
+	public void printEconomyInfo(SingletonDatabase database) {
 		int[][] list =	gatherPaymentInfoForMembers(database); // Creates a 2d int-array to store Eco-Info
 		String[] names = {"Inactive","Child","Adult","Senior"};			   // Temporary name-array for name-looping
 		System.out.println("Members who have paid:");					   // TeXt

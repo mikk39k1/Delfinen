@@ -1,7 +1,7 @@
 package actors;
 
-import database.SingleTonDatabase;
-import utility.SingleTonUI;
+import database.SingletonDatabase;
+import utility.SingletonUI;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,7 +35,7 @@ public class Coach extends Employee {
 	/*
 	* This method looks up a swimmer from Database memberList
 	 */
-	public CompetitiveSwimmer lookupSwimmer(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
+	public CompetitiveSwimmer lookupSwimmer(SingletonUI singleTonUi, SingletonDatabase singleTonDatabase) {
 
 		//Finds member name
 		String swimmerName = findSwimmerByName(singleTonUi, singleTonDatabase); // Stores temporary swimmer name in a String
@@ -64,7 +64,7 @@ public class Coach extends Employee {
 	/*
 	* This method
 	 */
-	public CompetitiveSwimmer loadSwimmer(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
+	public CompetitiveSwimmer loadSwimmer(SingletonUI singleTonUi, SingletonDatabase singleTonDatabase) {
 		System.out.println("\nPlease enter ID on the member you wish to add result to: ");
 		int swimmerID = singleTonUi.readInt();
 		for (Member member : singleTonDatabase.getMemberList()) {
@@ -88,7 +88,7 @@ public class Coach extends Employee {
 	/*
 	* This method adds swimming results of a competitive swimmer, to the corresponding searched swimming discipline type
 	 */
-	public void addSwimResult(SingleTonUI singleTonUi, CompetitiveSwimmer competitiveSwimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
+	public void addSwimResult(SingletonUI singleTonUi, CompetitiveSwimmer competitiveSwimmer, SwimmingDiscipline.SwimmingDisciplineTypes disciplineType) {
 
 		if (competitiveSwimmer.getSwimmingDisciplineList().stream().filter(swimmingDiscipline ->
 				swimmingDiscipline.getSwimmingDisciplineType().equals(disciplineType)).count() == 1) {
@@ -128,7 +128,7 @@ public class Coach extends Employee {
 	/*
 	* This method verifies name of a competitive swimmer, by checking if it exists within the Database memberList
 	 */
-	private String findSwimmerByName(SingleTonUI singleTonUi, SingleTonDatabase singleTonDatabase) {
+	private String findSwimmerByName(SingletonUI singleTonUi, SingletonDatabase singleTonDatabase) {
 
 		singleTonUi.print("Please enter name of swimmer you wish lookup: ");
 		String swimmerName = singleTonUi.readLine();		// Stores temporary swimmerName we are searching for
@@ -147,7 +147,7 @@ public class Coach extends Employee {
 	/*
 	* This method finds and prints all members belonging to the coach logged in.
 	 */
-	public void findMembersOfCoach(SingleTonDatabase singleTonDatabase, Coach coach) {
+	public void findMembersOfCoach(SingletonDatabase singleTonDatabase, Coach coach) {
 		System.out.println("Coach " + this.getName() + ", has the following swimmers:");
 		for (Member key : singleTonDatabase.getSwimmersCoachAssociationList().keySet()) {
 			if (singleTonDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
@@ -171,10 +171,10 @@ public class Coach extends Employee {
 		} // End of for loop
 	} // End of method
 
-	public int getMemberAmountForCoach(SingleTonDatabase swimmerCoachSingleTonDatabase, Coach coach) {
+	public int getMemberAmountForCoach(SingletonDatabase swimmerCoachSingletonDatabase, Coach coach) {
         int memberAmount = 0;
-		for (Member key : swimmerCoachSingleTonDatabase.getSwimmersCoachAssociationList().keySet()) {
-			if (swimmerCoachSingleTonDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
+		for (Member key : swimmerCoachSingletonDatabase.getSwimmersCoachAssociationList().keySet()) {
+			if (swimmerCoachSingletonDatabase.getSwimmersCoachAssociationList().get(key).equals(coach)) {
                 memberAmount++;
 			} // End of if statement
 		} // End of for loop

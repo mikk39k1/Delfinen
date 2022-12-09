@@ -1,6 +1,6 @@
 package actors;
 
-import utility.SingleTonUI;
+import utility.SingletonUI;
 import java.util.ArrayList;
 
 
@@ -24,7 +24,7 @@ public class SwimmingDiscipline {
 
 
     // Constructor manual add method-------------------------------
-    public SwimmingDiscipline(SingleTonUI singleTonUi) {
+    public SwimmingDiscipline(SingletonUI singleTonUi) {
         this.swimmingDiscipline = singleTonUi.setSwimmingDisciplineType();
         singleTonUi.printLn("Swimming Discipline added");
     }

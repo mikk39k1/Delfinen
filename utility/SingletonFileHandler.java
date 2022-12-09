@@ -1,7 +1,7 @@
 package utility;
 
 import actors.*;
-import database.SingleTonDatabase;
+import database.SingletonDatabase;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -19,8 +19,8 @@ import java.util.Scanner;
 * We also use this class to read and compare data whenever a user is trying to log in, thus securing safety and avoiding breach
 * by securing no passwords, or usernames are available to be read directly from the code.
  */
-public class SingleTonFileHandler {
-    private static final utility.SingleTonFileHandler SingleTonFileHandler = new SingleTonFileHandler();
+public class SingletonFileHandler {
+    private static final SingletonFileHandler SingleTonFileHandler = new SingletonFileHandler();
     private final File memberArrayListFile = new File("files/fullMembersList.txt");
     private final File memberResultFile = new File("files/results.txt");
     private final File sharksPrint = new File("files/sharksPrint.txt");
@@ -33,12 +33,12 @@ public class SingleTonFileHandler {
     private PrintStream printToFile;
     private Scanner readFromFile;
 
-    private SingleTonFileHandler() {
+    private SingletonFileHandler() {
     }
 
     // Getter ----------------------------------------------------------------------
 
-    public static utility.SingleTonFileHandler getInstance() {
+    public static SingletonFileHandler getInstance() {
         return SingleTonFileHandler;
     }
 
@@ -350,7 +350,7 @@ public class SingleTonFileHandler {
     /*
      * This method loads SwimmerCoachAssociation based on result ID and coachList
      */
-    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(SingleTonDatabase singleTonDatabase) {
+    protected HashMap<Member, Coach> loadSwimmerCoachAssociationList(SingletonDatabase singleTonDatabase) {
 
         try {
             readFromFile = new Scanner(swimmerCoachAssociationList);
@@ -385,7 +385,7 @@ public class SingleTonFileHandler {
     /*
     * This method writes the association link between a member and coach whenever a competitive swimmer is added
      */
-    protected void writeToSwimmerCoachAssociationFile(SingleTonDatabase associationList) {
+    protected void writeToSwimmerCoachAssociationFile(SingletonDatabase associationList) {
         try {
             printToFile = new PrintStream(swimmerCoachAssociationList);
 
