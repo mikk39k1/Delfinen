@@ -14,3 +14,72 @@
 2022:12:09:10:22:30 Program started.
 2022:12:09:10:22:35 Administrator logged in.
 2022:12:09:10:23:10 Oliver is now swimming with DELFINEN.
+2022:12:09:11:01:33 Program started.
+2022:12:09:11:01:39 Administrator logged in.
+2022:12:09:11:01:47 Gordon is now swimming with DELFINEN.
+2022:12:09:11:07:57 Program started.
+2022:12:09:11:08:01 Administrator logged in.
+2022:12:09:11:08:03 Mike is now swimming with DELFINEN.
+2022:12:09:11:08:10 All members was viewed, sorted by Name.
+2022:12:09:11:09:35 Program started.
+2022:12:09:11:09:39 Administrator logged in.
+2022:12:09:11:09:40 Pippy is now swimming with DELFINEN.
+2022:12:09:11:09:45 All members was viewed, sorted by Age.
+2022:12:09:11:12:55 Program started.
+2022:12:09:11:12:59 Administrator logged in.
+2022:12:09:11:13:28 Program started.
+2022:12:09:11:13:32 Administrator logged in.
+2022:12:09:11:13:32 Bob is now swimming with DELFINEN.
+2022:12:09:11:13:35 Zoro is now swimming with DELFINEN.
+2022:12:09:11:13:37 Henrik is now swimming with DELFINEN.
+2022:12:09:11:13:44 All members was viewed, sorted by Name.
+2022:12:09:11:49:17 Program started.
+2022:12:09:11:49:24 Administrator logged in.
+2022:12:09:11:50:13 Program started.
+2022:12:09:11:50:18 Administrator logged in.
+2022:12:09:11:51:03 Program started.
+2022:12:09:11:51:14 Administrator logged in.
+2022:12:09:11:51:30 Top 5 athletes was printed.
+2022:12:09:11:52:09 All results of a certain swimmer was viewed.
+2022:12:09:11:52:09 A competitive swimmers results printed.
+2022:12:09:11:52:49 All results of a certain swimmer was viewed.
+2022:12:09:11:52:49 A competitive swimmers results printed.
+2022:12:09:11:54:40 Program started.
+2022:12:09:11:54:45 Administrator logged in.
+2022:12:09:11:56:22 Program started.
+2022:12:09:11:56:28 Administrator logged in.
+2022:12:09:11:56:35 Top 5 athletes was printed.
+2022:12:09:11:56:57 All results of a certain swimmer was viewed.
+2022:12:09:11:56:57 A competitive swimmers results printed.
+2022:12:09:12:11:24 Program started.
+2022:12:09:12:11:28 Administrator logged in.
+2022:12:09:12:11:29 Liam is now swimming with DELFINEN.
+2022:12:09:12:11:32 Patrick is now swimming with DELFINEN.
+2022:12:09:12:11:34 Gordon is now swimming with DELFINEN.
+2022:12:09:12:11:51 All members was viewed, sorted by ID.
+2022:12:09:12:12:38 Results on a certain distance for a swimmer was viewed.
+2022:12:09:12:12:38 A competitive swimmers results printed.
+2022:12:09:12:13:00 Swimmers with coach association viewed.
+2022:12:09:12:13:14 Swimmers with coach association viewed.
+2022:12:09:12:13:26 Economy details viewed.
+2022:12:09:12:13:26 Economy details viewed.
+2022:12:09:12:14:10 Members in arrear viewed.
+2022:12:09:12:14:40 All members was viewed, sorted by Age.
+2022:12:09:12:16:57 Program started.
+2022:12:09:12:17:10 Administrator logged in.
+2022:12:09:12:17:14 All members was viewed, sorted by Name.
+2022:12:09:12:17:43 Members in arrear viewed.
+2022:12:09:12:18:52 Program started.
+2022:12:09:12:19:03 Administrator logged in.
+2022:12:09:12:19:05 Members in arrear viewed.
+2022:12:09:12:22:21 Program started.
+2022:12:09:12:23:44 Administrator logged in.
+2022:12:09:12:24:07 A new coach added.
+2022:12:09:12:25:09 Program started.
+2022:12:09:12:25:21 Administrator logged in.
+2022:12:09:12:25:36 A new coach added.
+2022:12:09:12:25:59 Program started.
+2022:12:09:12:26:03 Administrator logged in.
+2022:12:09:12:26:40 Program started.
+2022:12:09:12:26:44 Administrator logged in.
+2022:12:09:12:27:08 Oliver Inger is no longer a DELFINEN coach.

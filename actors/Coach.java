@@ -3,7 +3,10 @@ package actors;
 import database.SingletonDatabase;
 import utility.SingletonUI;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
@@ -60,6 +63,48 @@ public class Coach extends Employee {
 		return null;
 	} // End of method
 
+
+
+	// This method is for TESTING PURPOSES TO CREATE 1000 + RESULTS FOR COMPETITIVE SWIMMERS
+	/*
+
+	public void add1000Results() {
+		Random random = new Random();
+		ArrayList<Member> competitiveSwimmers = new ArrayList<>(SingletonDatabase.getSingletonDatabase().getSwimmersCoachAssociationList().keySet());
+		for (int i = 0; i < competitiveSwimmers.size(); i++) {
+
+			for (int j = 0; j < random.nextInt(10) + 1; j++) {
+				int[] arrDistance = {100,200,500};
+				boolean[] arrBol = {true,false};
+				int randomYear = random.nextInt(10) + 2012;
+				int randomMonth = random.nextInt(12) + 1;
+				int randomDay = random.nextInt(28) + 1;
+				int randomRank = random.nextInt(10) + 1;
+				LocalDate randomDate = LocalDate.of(randomYear, randomMonth, randomDay);
+				int randomDistance = arrDistance[random.nextInt(3)];
+				int randomSwimTime = random.nextInt(400) + 30;
+				boolean randomIsCompetitive = arrBol[random.nextInt(2)];
+				if (randomIsCompetitive) {
+					((CompetitiveSwimmer)competitiveSwimmers.get(i))
+							.getSwimmingDisciplineList().get(0)
+							.getSwimmingDisciplineResults().add(new SwimmingResult(randomDistance, String.valueOf(randomSwimTime), randomDate, true, randomRank));
+					SingletonFileHandler.getInstance().appendResult(SingletonDatabase.getSingletonDatabase().getSwimmersCoachAssociationList(),
+							((CompetitiveSwimmer)competitiveSwimmers.get(i)),
+							((CompetitiveSwimmer)competitiveSwimmers.get(i)).getSwimmingDisciplineList().get(0).getSwimmingDisciplineType());
+				} else {
+					((CompetitiveSwimmer) competitiveSwimmers.get(i))
+							.getSwimmingDisciplineList().get(0)
+							.getSwimmingDisciplineResults().add(new SwimmingResult(randomDistance, String.valueOf(randomSwimTime), randomDate, false, 0));
+					SingletonFileHandler.getInstance().appendResult(SingletonDatabase.getSingletonDatabase().getSwimmersCoachAssociationList(),
+							((CompetitiveSwimmer)competitiveSwimmers.get(i)),
+							((CompetitiveSwimmer)competitiveSwimmers.get(i)).getSwimmingDisciplineList().get(0).getSwimmingDisciplineType());
+
+				}
+			}
+		}
+	}
+
+	 */
 
 	/*
 	* This method

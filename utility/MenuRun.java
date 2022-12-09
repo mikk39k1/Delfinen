@@ -67,10 +67,11 @@ public class MenuRun {
      */
     private void addMember(Employee employee, SingletonDatabase database) {
         try {
-            if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
 
+            if (employee.getPrivilege().equals(Employee.PrivilegeType.ADMINISTRATOR)) {
                 ((Chairman) employee).addMember(SingletonUI.getInstance(), ((Chairman) employee).createMember(SingletonUI.getInstance()),
                         database);
+
                 SingletonFileHandler.getInstance().writeToFullMembersList(database.getMemberList());
                 SingletonFileHandler.getInstance().writeToSwimmerCoachAssociationFile(database);
                 SingletonFileHandler.getInstance().loggingAction(database.getMemberList().get(database.

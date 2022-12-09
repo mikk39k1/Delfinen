@@ -1,9 +1,12 @@
 package actors;
 
 import database.SingletonDatabase;
+import utility.SingletonFileHandler;
 import utility.SingletonUI;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 /*
 * This class represents both the admin and chairman class. Being the highest valuable entity of all the operators within
@@ -29,6 +32,74 @@ public class Chairman extends Employee {
         singleTonUi.print("Type 1 - for exercising or 2 - for competing swimmer: ");
         return (singleTonUi.readInt()) == 1 ? new LeisureSwimmer(singleTonUi) : new CompetitiveSwimmer(singleTonUi); // Adds member based on int input
     } // End of method
+
+
+
+
+    // This CODE IS FOR GENERATING MULTIPLE USERS FOR TESTING PURPOSES
+    /*
+    public void create100CompetitiveMembers() {
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            SwimmingDiscipline.SwimmingDisciplineTypes[] arr =
+                    {SwimmingDiscipline.SwimmingDisciplineTypes.BACKCRAWL,
+                            SwimmingDiscipline.SwimmingDisciplineTypes.BREASTSTROKE,
+                            SwimmingDiscipline.SwimmingDisciplineTypes.BUTTERFLY,
+                            SwimmingDiscipline.SwimmingDisciplineTypes.CRAWL,
+                            SwimmingDiscipline.SwimmingDisciplineTypes.FREESTYLE
+                    };
+
+            String[] arrNames = {
+                    "Bob",
+                    "James",
+                    "Marry",
+                    "Henrik",
+                    "Mike",
+                    "Brim",
+                    "Zoro",
+                    "Jenifer",
+                    "Liam",
+                    "Pippy",
+                    "Oliver",
+                    "Patrick",
+                    "Gordon",
+                    "Jason",
+                    "Addison",
+                    "Allison",
+                    "Jenny"};
+
+            boolean[] arrBool = {true, false};
+
+            String randomNames = arrNames[random.nextInt(arrNames.length)];
+            int randomYear = random.nextInt(122) + 1900;
+            int randomMonth = random.nextInt(12) + 1;
+            int randomDay = random.nextInt(28) + 1;
+            SwimmingDiscipline.SwimmingDisciplineTypes randomDiscipline = arr[random.nextInt(5)];
+            int randomPhoneNumber = random.nextInt(99999999) + 11111111;
+            boolean randomBool = arrBool[random.nextInt(arrBool.length)];
+
+
+            CompetitiveSwimmer competitiveSwimmer = new CompetitiveSwimmer(
+                    randomNames,
+                    String.valueOf(randomPhoneNumber),
+                    LocalDate.of(randomYear, randomMonth, randomDay),
+                    randomBool,
+                    randomBool);
+
+            Coach randomCoach = SingletonDatabase.getSingletonDatabase().getCoachList().get(random.nextInt(
+                    SingletonDatabase.getSingletonDatabase().getCoachList().size()));
+
+            if(randomCoach.getMemberAmountForCoach(SingletonDatabase.getSingletonDatabase(), randomCoach) < 20) {
+
+                competitiveSwimmer.getSwimmingDisciplineList().add(new SwimmingDiscipline(String.valueOf(randomDiscipline)));
+                SingletonDatabase.getSingletonDatabase().getMemberList().add((competitiveSwimmer));
+                SingletonDatabase.getSingletonDatabase().getSwimmersCoachAssociationList().put(competitiveSwimmer, randomCoach);
+            }
+        }
+    }
+
+
+     */
 
 
 

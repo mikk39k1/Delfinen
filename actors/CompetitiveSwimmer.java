@@ -38,7 +38,14 @@ public class CompetitiveSwimmer extends Member {
         setDateOfBirth(birthday);
         setIsMembershipActive(isActive);
         setHasPaid(hasPaid);
+    }
 
+    public CompetitiveSwimmer(String name, String phonenumber, LocalDate birthday, boolean isActive, boolean hasPaid) {
+        setName(name);
+        setPhoneNumber(phonenumber);
+        setDateOfBirth(birthday);
+        setIsMembershipActive(isActive);
+        setHasPaid(hasPaid);
     }
 
     public ArrayList<SwimmingDiscipline> getSwimmingDisciplineList() {

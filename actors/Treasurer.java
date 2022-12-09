@@ -35,7 +35,7 @@ public class Treasurer extends Employee {
 				String[] arr;  					// Temporary array created
 				arr = memberAnalysis(member);	// Stores the result of memberAnalysis method inside String array arr
 				System.out.printf("- %-20s %-10s %-12s %-7s %s%n", member.getName(), arr[2],
-						(arr[3] == null ? "-" : arr[3]), arr[0], arr[1]);
+						(arr[3].equals("null") ? "-" : arr[3]), arr[0], arr[1]);
 			} // End of if statement
 		} // End of for loop
 	} // End of method
