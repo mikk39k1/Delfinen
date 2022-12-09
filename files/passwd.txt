@@ -1,5 +1,4 @@
 rootAdmin;Enigma123
 Acc001;OnePlusTwoIs3A
-ben123;ben123
-b;b
-alex123;alex123
+PA;pat
+HAAM;ham
